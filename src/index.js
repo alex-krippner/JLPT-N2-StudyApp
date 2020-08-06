@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
+import store from './redux/store';
+
 import App from './App';
 
-const title = 'REact with Webpack and Babel';
-
 ReactDOM.render(
-  <App title={title} />,
-  document.getElementById('app'),
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
 );
 
 module.hot.accept();
