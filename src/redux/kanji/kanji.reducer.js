@@ -43,7 +43,7 @@ const KANJI_DATA = [
     id: 6,
     reading: ['コウ', 'かお・り'],
     wordSample: ['香水', '香り'],
-    sentenceSample: ['香水をつける', '　バラの香りがする'],
+    sentenceSample: ['香水をつける', 'バラの香りがする'],
   },
 
   {
