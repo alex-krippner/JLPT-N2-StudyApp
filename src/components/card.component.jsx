@@ -17,10 +17,6 @@ const CardWrapper = styled.div`
   transform-style: preserve-3d;
   color: #708090;
   cursor: pointer;
-
-  .flip {
-    transform: rotateY(180deg);
-  }
 `;
 
 const CardSide = styled.div`
@@ -126,27 +122,30 @@ const BackBtm = styled.div`
   height: 40%;
 `;
 
-const Card = ({ front, backTop, backMid, backBtm, id }) => {
-  function flipCard() {
-    const card = document.getElementById(id);
-
-    if (!card.style.transform) {
-      card.style.transform = 'rotateY(180deg)';
-    } else if (card.style.transform) {
-      card.style.transform = '';
-    }
-  }
-
+const Card = ({ front, backTop, backMid, backBtm, id, flipCard }) => {
   return (
     <CardScene>
-      <CardWrapper className="cardWrapper" onClick={flipCard} id={id}>
+      <CardWrapper
+        className="cardWrapper"
+        onClick={() => flipCard(id)}
+        id={id}
+      >
         <CardSide front>
           <div className="front">{front}</div>
         </CardSide>
         <CardSide back>
           <BackTop>
             <div className="top">読み</div>
-            <div className="paragraph">{backTop}</div>
+            <div className="bottom">
+              <div className="sentenceWrapper">
+                {backTop.map((el) => (
+                  <div className="paragraph" key={uuidv4()}>
+                    <span className="dot">&nbsp;</span>
+                    <div>{el}</div>
+                  </div>
+                ))}
+              </div>
+            </div>{' '}
           </BackTop>
 
           <BackMid>
@@ -159,7 +158,7 @@ const Card = ({ front, backTop, backMid, backBtm, id }) => {
                     <div>{el}</div>
                   </div>
                 ))}
-              </div>{' '}
+              </div>
             </div>
           </BackMid>
           <BackBtm>

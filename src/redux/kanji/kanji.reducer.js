@@ -1,7 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import KanjiActionTypes from './kanji.actionTypes';
-
 const KANJI_DATA = [
   {
     kanji: '濯',
@@ -106,12 +104,6 @@ const INITIAL_STATE = {
 
 const kanjiReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case KanjiActionTypes.FLIP_CARD:
-      return {
-        ...state,
-        flipped: !state.flipped,
-      };
-
     default:
       return state;
   }
