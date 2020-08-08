@@ -1,7 +1,9 @@
 import React from 'react';
-import Card from './card.component';
+import { v4 as uuidv4 } from 'uuid';
 
-const Cards = ({ kanji }) =>
+import Card from '../card.component';
+
+const KanjiCards = ({ kanji }) =>
   kanji.map((k) => (
     <Card
       key={k.id}
@@ -9,7 +11,8 @@ const Cards = ({ kanji }) =>
       backTop={k.reading}
       backMid={k.wordSample}
       backBtm={k.sentenceSample}
+      id={uuidv4()}
     />
   ));
 
-export default Cards;
+export default KanjiCards;

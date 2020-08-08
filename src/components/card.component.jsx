@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import styled from 'styled-components';
 
@@ -16,7 +17,8 @@ const CardWrapper = styled.div`
   transform-style: preserve-3d;
   color: #708090;
   cursor: pointer;
-  &:hover {
+
+  .flip {
     transform: rotateY(180deg);
   }
 `;
@@ -124,47 +126,59 @@ const BackBtm = styled.div`
   height: 40%;
 `;
 
-const Card = ({ front, backTop, backMid, backBtm }) => (
-  <CardScene>
-    <CardWrapper>
-      <CardSide front>
-        <div className="front">{front}</div>
-      </CardSide>
-      <CardSide back>
-        <BackTop>
-          <div className="top">読み</div>
-          <div className="paragraph">{backTop}</div>
-        </BackTop>
+const Card = ({ front, backTop, backMid, backBtm, id }) => {
+  function flipCard() {
+    const card = document.getElementById(id);
 
-        <BackMid>
-          <div className="top">単語例</div>
-          <div className="bottom">
-            <div className="sentenceWrapper">
-              {backMid.map((el) => (
-                <div className="paragraph">
-                  <span className="dot">&nbsp;</span>
-                  <div>{el}</div>
-                </div>
-              ))}
-            </div>{' '}
-          </div>
-        </BackMid>
-        <BackBtm>
-          <div className="top">用例</div>
-          <div className="bottom">
-            <div className="sentenceWrapper">
-              {backBtm.map((el) => (
-                <div className="paragraph">
-                  <span className="dot">&nbsp;</span>
-                  <div>{el}</div>
-                </div>
-              ))}
+    if (!card.style.transform) {
+      card.style.transform = 'rotateY(180deg)';
+    } else if (card.style.transform) {
+      card.style.transform = '';
+    }
+  }
+
+  return (
+    <CardScene>
+      <CardWrapper className="cardWrapper" onClick={flipCard} id={id}>
+        <CardSide front>
+          <div className="front">{front}</div>
+        </CardSide>
+        <CardSide back>
+          <BackTop>
+            <div className="top">読み</div>
+            <div className="paragraph">{backTop}</div>
+          </BackTop>
+
+          <BackMid>
+            <div className="top">単語例</div>
+            <div className="bottom">
+              <div className="sentenceWrapper">
+                {backMid.map((el) => (
+                  <div className="paragraph" key={uuidv4()}>
+                    <span className="dot">&nbsp;</span>
+                    <div>{el}</div>
+                  </div>
+                ))}
+              </div>{' '}
             </div>
-          </div>
-        </BackBtm>
-      </CardSide>
-    </CardWrapper>
-  </CardScene>
-);
+          </BackMid>
+          <BackBtm>
+            <div className="top">用例</div>
+            <div className="bottom">
+              <div className="sentenceWrapper">
+                {backBtm.map((el) => (
+                  <div className="paragraph" key={uuidv4()}>
+                    <span className="dot">&nbsp;</span>
+                    <div>{el}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </BackBtm>
+        </CardSide>
+      </CardWrapper>
+    </CardScene>
+  );
+};
 
 export default Card;

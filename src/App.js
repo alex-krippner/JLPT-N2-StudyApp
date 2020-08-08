@@ -1,12 +1,12 @@
 import React from 'react';
 
 import GlobalStyle from './theme/globalStyle';
-import CardsContainer from './components/cardsContainer.component';
+import KanjiCardsContainer from './components/kanji/kanjiCardsContainer.component';
 
 const App = () => (
   <>
     <GlobalStyle />
-    <CardsContainer />
+    <KanjiCardsContainer />
   </>
 );
 
