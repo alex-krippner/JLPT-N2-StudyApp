@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import kanjiReducer from './kanji/kanji.reducer';
+import kanjiCollectionReducer from './kanjiCollection/kanjiCollection.reducer';
 
 const rootReducer = combineReducers({
-  kanji: kanjiReducer,
+  kanjiCollection: kanjiCollectionReducer,
 });
 
 export default rootReducer;

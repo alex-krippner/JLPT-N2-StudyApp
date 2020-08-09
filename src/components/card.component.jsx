@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import styled from 'styled-components';
 
+import Star from './star.component';
+
 const CardScene = styled.div`
   height: 35rem;
   perspective: 80rem;
@@ -16,7 +18,6 @@ const CardWrapper = styled.div`
   transition: transform 1s;
   transform-style: preserve-3d;
   color: #708090;
-  cursor: pointer;
 `;
 
 const CardSide = styled.div`
@@ -34,16 +35,9 @@ const CardSide = styled.div`
   background-color: #ffffff;
   border: solid 1px #708090;
   font-size: ${(props) => (props.front ? '15rem' : '2rem')};
-
   transform: ${(props) =>
     props.back ? ' rotateY(180deg)' : 'rotateY(0)'};
-
-  .front {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
+  cursor: ${(props) => (props.back ? 'pointer' : '')};
 
   .top {
     position: absolute;
@@ -69,6 +63,7 @@ const CardSide = styled.div`
       align-items: flex-start;
       height: 100%;
       margin: 0;
+      padding: 1rem;
       font-size: 1.75rem;
     }
 
@@ -88,6 +83,23 @@ const CardSide = styled.div`
     border: solid 1px #708090;
     background-color: #ffffff;
   }
+`;
+
+const Front = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+`;
+
+const Rating = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  border-top: solid 1px;
+  z-index: 99;
 `;
 
 const BackTop = styled.div`
@@ -122,18 +134,32 @@ const BackBtm = styled.div`
   height: 40%;
 `;
 
-const Card = ({ front, backTop, backMid, backBtm, id, flipCard }) => {
+const Card = ({
+  front,
+  backTop,
+  backMid,
+  backBtm,
+  id,
+  flipCard,
+  rating,
+  rateData,
+}) => {
   return (
     <CardScene>
-      <CardWrapper
-        className="cardWrapper"
-        onClick={() => flipCard(id)}
-        id={id}
-      >
+      <CardWrapper className="cardWrapper" id={id}>
         <CardSide front>
-          <div className="front">{front}</div>
+          <Front onClick={() => flipCard(id)}>{front}</Front>
+          <Rating>
+            {[...Array(3)].map((cur, i) => (
+              <Star
+                key={uuidv4()}
+                selected={i < rating}
+                onClick={() => rateData(front, i + 1)}
+              />
+            ))}
+          </Rating>
         </CardSide>
-        <CardSide back>
+        <CardSide back onClick={() => flipCard(id)}>
           <BackTop>
             <div className="top">読み</div>
             <div className="bottom">

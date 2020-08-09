@@ -5,10 +5,11 @@ import { createStructuredSelector } from 'reselect';
 
 import Card from '../card.component';
 
-import selectAllKanji from '../../redux/kanji/kanji.selectors';
-import { flipCard } from '../utils';
+import selectAllKanji from '../../redux/kanjiCollection/kanjiCollection.selectors';
+import { flipCard } from '../components.utils';
+import { rateKanji } from '../../redux/kanjiCollection/kanjiCollection.actionCreators';
 
-const KanjiCards = ({ kanji }) =>
+const KanjiCards = ({ kanji, rateKanjiDispatcher }) =>
   kanji.map((k) => (
     <Card
       key={k.id}
@@ -16,8 +17,10 @@ const KanjiCards = ({ kanji }) =>
       backTop={k.reading}
       backMid={k.wordSample}
       backBtm={k.sentenceSample}
+      rating={k.rating}
       id={uuidv4()}
       flipCard={flipCard}
+      rateData={rateKanjiDispatcher}
     />
   ));
 
@@ -25,4 +28,12 @@ const mapStateToProps = createStructuredSelector({
   kanji: selectAllKanji,
 });
 
-export default connect(mapStateToProps)(KanjiCards);
+const mapDispatchToProps = (dispatch) => ({
+  rateKanjiDispatcher: (kanji, rating) =>
+    dispatch(rateKanji(kanji, rating)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(KanjiCards);
