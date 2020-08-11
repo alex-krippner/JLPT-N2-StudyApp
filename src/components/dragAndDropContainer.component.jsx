@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -11,8 +12,7 @@ export default class Draggable extends React.Component {
       originalX: 0,
       originalY: 0,
 
-      translateX: 0,
-      translateY: 0,
+      translation: { x: 0, y: 0 },
 
       lastTranslateX: 0,
       lastTranslateY: 0,
@@ -42,63 +42,56 @@ export default class Draggable extends React.Component {
 
   handleMouseMove = ({ clientX, clientY }) => {
     const { isDragging } = this.state;
-    const { onDrag } = this.props;
-
+    const { onDrag, id } = this.props;
+    const translation = {
+      x: clientX - this.state.originalX,
+      y: clientY - this.state.originalY,
+    };
     if (!isDragging) {
       return;
     }
 
-    this.setState(
-      (prevState) => ({
-        translateX:
-          clientX - prevState.originalX + prevState.lastTranslateX,
-        translateY:
-          clientY - prevState.originalY + prevState.lastTranslateY,
-      }),
-      () => {
-        if (onDrag) {
-          onDrag({
-            translateX: this.state,
-            translateY: this.state,
-          });
-        }
-      },
-    );
+    this.setState((prevState) => ({
+      ...prevState,
+      translation,
+    }));
+
+    onDrag({ translation, id });
   };
 
   handleMouseUp = () => {
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseup', this.handleMouseUp);
+    const { onDragEnd } = this.props;
 
     this.setState(
-      (state) => {
+      () => {
         return {
           originalX: 0,
           originalY: 0,
-          lastTranslateX: state.translateX,
-          lastTranslateY: state.translateY,
+          translation: { x: 0, y: 0 },
 
           isDragging: false,
         };
       },
       () => {
-        const { onDragEnd } = this.props;
         if (onDragEnd) {
           onDragEnd();
         }
       },
     );
+
+    onDragEnd();
   };
 
   render() {
     const { children } = this.props;
-    const { translateX, translateY, isDragging } = this.state;
-
+    const { translation, isDragging } = this.state;
     return (
       <Container
         onMouseDown={this.handleMouseDown}
-        x={translateX}
-        y={translateY}
+        x={translation.x}
+        y={translation.y}
         isDragging={isDragging}
       >
         {children}
@@ -113,11 +106,14 @@ const Container = styled.div.attrs((props) => ({
   },
 }))`
   cursor: grab;
-
   ${({ isDragging }) =>
-    isDragging &&
-    css`
-      opacity: 0.8;
-      cursor: grabbing;
-    `};
+    isDragging
+      ? css`
+          opacity: 0.8;
+          z-index: 2;
+          cursor: grabbing;
+        `
+      : css`
+          transition: transform 0.5s;
+        `};
 `;

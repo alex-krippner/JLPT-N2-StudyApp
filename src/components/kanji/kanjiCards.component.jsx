@@ -13,7 +13,6 @@ import { rateKanji } from '../../redux/kanjiCollection/kanjiCollection.actionCre
 const KanjiCards = ({ kanji, rateKanjiDispatcher }) =>
   kanji.map((k) => (
     <Draggable key={k.id}>
-      {' '}
       <Card
         key={k.id}
         front={k.kanji}
