@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import Card from '../card.component';
+import Draggable from '../dragAndDropContainer.component';
 
 import selectAllKanji from '../../redux/kanjiCollection/kanjiCollection.selectors';
 import { flipCard } from '../components.utils';
@@ -11,17 +12,20 @@ import { rateKanji } from '../../redux/kanjiCollection/kanjiCollection.actionCre
 
 const KanjiCards = ({ kanji, rateKanjiDispatcher }) =>
   kanji.map((k) => (
-    <Card
-      key={k.id}
-      front={k.kanji}
-      backTop={k.reading}
-      backMid={k.wordSample}
-      backBtm={k.sentenceSample}
-      rating={k.rating}
-      id={uuidv4()}
-      flipCard={flipCard}
-      rateData={rateKanjiDispatcher}
-    />
+    <Draggable key={k.id}>
+      {' '}
+      <Card
+        key={k.id}
+        front={k.kanji}
+        backTop={k.reading}
+        backMid={k.wordSample}
+        backBtm={k.sentenceSample}
+        rating={k.rating}
+        id={uuidv4()}
+        flipCard={flipCard}
+        rateData={rateKanjiDispatcher}
+      />
+    </Draggable>
   ));
 
 const mapStateToProps = createStructuredSelector({

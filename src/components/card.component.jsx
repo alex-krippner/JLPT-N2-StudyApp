@@ -90,6 +90,9 @@ const Front = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+`;
+
+const FrontData = styled.div`
   cursor: pointer;
 `;
 
@@ -148,7 +151,11 @@ const Card = ({
     <CardScene>
       <CardWrapper className="cardWrapper" id={id}>
         <CardSide front>
-          <Front onClick={() => flipCard(id)}>{front}</Front>
+          <Front>
+            <FrontData onClick={() => flipCard(id)}>
+              {front}
+            </FrontData>
+          </Front>
           <Rating>
             {[...Array(3)].map((cur, i) => (
               <Star
