@@ -5,12 +5,21 @@ import styled from 'styled-components';
 
 import Star from './star.component';
 
-const CardScene = styled.div`
-  height: 35rem;
+const CardScene = styled.div.attrs((props) => ({
+  style: {
+    transition: props.isDragging ? 'none' : 'all 500ms',
+  },
+}))`
+  height: ${({ height }) => height}px;
   perspective: 80rem;
   -moz-perspective: 150rem;
-`;
+  width: 30rem;
+  user-select: none;
 
+  position: absolute;
+  top: ${({ top }) => 100 + top}px;
+  left: calc(50% - 150px);
+`;
 const CardWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -146,9 +155,12 @@ const Card = ({
   flipCard,
   rating,
   rateData,
+  isDragging,
+  top,
+  height,
 }) => {
   return (
-    <CardScene>
+    <CardScene isDragging={isDragging} height={height} top={top}>
       <CardWrapper className="cardWrapper" id={id}>
         <CardSide front>
           <Front>
