@@ -5,48 +5,25 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import Card from '../card.component';
-import Draggable from '../dragAndDropContainer.component';
 
 import selectAllKanji from '../../redux/kanjiCollection/kanjiCollection.selectors';
 import { flipCard } from '../components.utils';
 import { rateKanji } from '../../redux/kanjiCollection/kanjiCollection.actionCreators';
 
-const KanjiCards = ({
-  kanji,
-  rateKanjiDispatcher,
-  height,
-  draggedIndex,
-  dragOrder,
-  order,
-  handleDrag,
-  handleDragEnd,
-}) => {
-  return kanji.map((k, idx) => {
-    const isDragging = draggedIndex === idx;
-    const top = dragOrder.indexOf(idx) * (height + 20);
-    const draggedTop = order.indexOf(idx) * (height + 20);
+const KanjiCards = ({ kanji, rateKanjiDispatcher }) => {
+  return kanji.map((k) => {
     return (
-      <Draggable
+      <Card
         key={k.id}
-        id={idx}
-        onDrag={handleDrag}
-        onDragEnd={handleDragEnd}
-      >
-        <Card
-          key={k.id}
-          front={k.kanji}
-          backTop={k.reading}
-          backMid={k.wordSample}
-          backBtm={k.sentenceSample}
-          rating={k.rating}
-          id={uuidv4()}
-          flipCard={flipCard}
-          rateData={rateKanjiDispatcher}
-          isDragging={isDragging}
-          top={isDragging ? draggedTop : top}
-          height={height}
-        />
-      </Draggable>
+        front={k.kanji}
+        backTop={k.reading}
+        backMid={k.wordSample}
+        backBtm={k.sentenceSample}
+        rating={k.rating}
+        id={uuidv4()}
+        flipCard={flipCard}
+        rateData={rateKanjiDispatcher}
+      />
     );
   });
 };
