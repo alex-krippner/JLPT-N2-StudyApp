@@ -5,11 +5,14 @@ import { DragSource, DropTarget } from 'react-dnd';
 
 import Card from '../card.component';
 import Types from './constants';
+import { flipCard } from '../components.utils';
 
+// cardSource is 1/3 of required parameters for the DragSource Legacy Decorator API
 const cardSource = {
+  // Return the data describing the dragged item
   beginDrag(props) {
-    const { item, index } = props;
-    item.index = index;
+    const item = { ...props.cardData };
+    item.index = props.index;
     return item;
   },
 };
@@ -21,10 +24,8 @@ const cardTarget = {
     // node = HTML Div element from imperative API
     const node = component.getNode();
     if (!node) return null;
-
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
-
     // Don't replace items with themselves
     if (dragIndex === hoverIndex) return;
 
@@ -63,22 +64,44 @@ function collect(connect, monitor) {
   };
 }
 
-const DragItem = React.forwardRef(
-  ({ card, getItem, connectDragSource, connectDropTarget }, ref) => {
+const DragCard = React.forwardRef(
+  (
+    { cardData, getItem, connectDragSource, connectDropTarget },
+    ref,
+  ) => {
     const elementRef = useRef(null);
     connectDragSource(elementRef);
     connectDropTarget(elementRef);
     let draggedId = null;
     if (getItem !== null) draggedId = getItem.id;
 
-    const dragClass = draggedId === card.id ? 'draggedItem' : '';
+    const dragClass = draggedId === cardData.id ? 'draggedItem' : '';
 
     useImperativeHandle(ref, () => ({
       getNode: () => elementRef.current,
     }));
+
+    const {
+      kanji,
+      reading,
+      wordSample,
+      sentenceSample,
+      rating,
+      id,
+    } = cardData;
+
     return (
       <div ref={elementRef} className={dragClass}>
-        <Card />
+        <Card
+          item={cardData}
+          front={kanji}
+          backTop={reading}
+          backMid={wordSample}
+          backBtm={sentenceSample}
+          rating={rating}
+          id={id}
+          flipCard={flipCard}
+        />
       </div>
     );
   },
@@ -88,10 +111,10 @@ export default DropTarget(
   Types.CARDS,
   cardTarget,
   (connect, monitor) => ({
-    connectDropTarget: connect.DropTarget(),
+    connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
     isOverCurrent: monitor.isOver({ shallow: true }),
     canDrop: monitor.canDrop(),
     itemType: monitor.getItemType(),
   }),
-)(DragSource(Types.CARDS, cardSource, collect)(DragItem));
+)(DragSource(Types.CARDS, cardSource, collect)(DragCard));
