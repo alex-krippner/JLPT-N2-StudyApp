@@ -10,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
 }
 
+
+
 html {
     font-size: 62.5%; 
 }
