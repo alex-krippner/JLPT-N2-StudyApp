@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import hero from '../img/hero.svg';
 
 const GlobalStyle = createGlobalStyle`
 *,
@@ -23,6 +24,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url(${hero})
+}
+
+#root{
+
+  display: flex;
+  justify-content: center;
 }
  
   code {

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const CardsContainerStyled = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 22%);
-  justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   grid-gap: 30px;
-  height: 100vh;
-  width: 100wh;
+  height: 100%;
+  width: 100%;
+  padding: 3rem;
 `;
 
 export default CardsContainerStyled;

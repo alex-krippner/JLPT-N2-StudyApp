@@ -6,10 +6,10 @@ import styled from 'styled-components';
 import Star from './star.component';
 
 const CardScene = styled.div`
-  height: 35rem;
+  height: 40rem;
   perspective: 80rem;
   -moz-perspective: 150rem;
-  width: 20rem;
+  width: 25rem;
   user-select: none;
 `;
 const CardWrapper = styled.div`
@@ -35,6 +35,8 @@ const CardSide = styled.div`
   transition: all 0.8s ease;
   background-color: #ffffff;
   border: solid 1px #708090;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+
   font-size: ${(props) => (props.front ? '15rem' : '2rem')};
   transform: ${(props) =>
     props.back ? ' rotateY(180deg)' : 'rotateY(0)'};
@@ -123,7 +125,7 @@ const BackMid = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 30%;
+  height: 25%;
   border-bottom: solid 1px;
   font-size: 3rem;
 `;
@@ -135,7 +137,7 @@ const BackBtm = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 40%;
+  height: 45%;
 `;
 
 const Card = ({

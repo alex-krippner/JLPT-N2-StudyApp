@@ -156,7 +156,6 @@ class CardProject extends Component {
           {kanjiData.map((kanji, index) => (
             <Flipped key={kanji.id} flipId={kanji.id}>
               <div>
-                {' '}
                 <DragCard
                   cardData={kanji}
                   key={kanji.id}
