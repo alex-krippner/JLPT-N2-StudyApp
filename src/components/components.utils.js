@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export const flipCard = (cardId) => {
   const card = document.getElementById(cardId);
 
@@ -7,5 +8,3 @@ export const flipCard = (cardId) => {
     card.style.transform = '';
   }
 };
-
-export const emptyFunction = () => {};

@@ -51,15 +51,12 @@ const cardTarget = {
   },
 };
 
-// Specify which props to inject into the component
-// https://react-dnd.github.io/react-dnd/docs/api/drag-source#the-collecting-function
-
-function collect(connect, monitor) {
+function collectSource(connect, monitor) {
   return {
     // Call this function inside render() to let React DnD handle the drag events:
     connectDragSource: connect.dragSource(),
     // You can ask the monitor about the current drag state:
-    isDraggin: monitor.isDragging(),
+    isDragging: monitor.isDragging(),
     getItem: monitor.getItem(),
   };
 }
@@ -117,4 +114,4 @@ export default DropTarget(
     canDrop: monitor.canDrop(),
     itemType: monitor.getItemType(),
   }),
-)(DragSource(Types.CARDS, cardSource, collect)(DragCard));
+)(DragSource(Types.CARDS, cardSource, collectSource)(DragCard));
