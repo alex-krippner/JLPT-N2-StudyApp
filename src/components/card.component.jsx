@@ -9,7 +9,7 @@ const CardScene = styled.div`
   height: 40rem;
   perspective: 80rem;
   -moz-perspective: 150rem;
-  width: 25rem;
+  width: 30rem;
   user-select: none;
 `;
 const CardWrapper = styled.div`
@@ -148,7 +148,7 @@ const Card = ({
   id,
   flipCard,
   rating,
-  rateData,
+  onRate,
 }) => {
   return (
     <CardScene>
@@ -164,7 +164,7 @@ const Card = ({
               <Star
                 key={uuidv4()}
                 selected={i < rating}
-                onClick={() => rateData(front, i + 1)}
+                onClick={() => onRate(front, i + 1)}
               />
             ))}
           </Rating>

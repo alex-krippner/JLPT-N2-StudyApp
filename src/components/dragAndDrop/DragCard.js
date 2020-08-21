@@ -63,7 +63,13 @@ function collectSource(connect, monitor) {
 
 const DragCard = React.forwardRef(
   (
-    { cardData, getItem, connectDragSource, connectDropTarget },
+    {
+      cardData,
+      getItem,
+      connectDragSource,
+      connectDropTarget,
+      onRate,
+    },
     ref,
   ) => {
     const elementRef = useRef(null);
@@ -98,6 +104,7 @@ const DragCard = React.forwardRef(
           rating={rating}
           id={id}
           flipCard={flipCard}
+          onRate={onRate}
         />
       </div>
     );

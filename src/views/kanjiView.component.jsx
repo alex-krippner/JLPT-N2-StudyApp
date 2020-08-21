@@ -7,6 +7,7 @@ import { DndProvider } from 'react-dnd-multi-backend';
 import styled from 'styled-components';
 
 import CardContainer from '../components/dragAndDrop/CardContainer.component';
+import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import selectAllKanji from '../redux/kanjiCollection/kanjiCollection.selectors';
 
 const Wrapper = styled.div`
@@ -14,10 +15,10 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const KanjiView = ({ kanji }) => (
+const KanjiView = ({ kanji, rateKanjiDispatcher }) => (
   <Wrapper>
     <DndProvider options={HTML5toTouch}>
-      <CardContainer data={kanji} />
+      <CardContainer data={kanji} onRate={rateKanjiDispatcher} />
     </DndProvider>
   </Wrapper>
 );
@@ -26,4 +27,12 @@ const mapStateToProps = createStructuredSelector({
   kanji: selectAllKanji,
 });
 
-export default connect(mapStateToProps)(KanjiView);
+const mapDispatchToProps = (dispatch) => ({
+  rateKanjiDispatcher: (kanji, rating) =>
+    dispatch(rateKanji(kanji, rating)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(KanjiView);

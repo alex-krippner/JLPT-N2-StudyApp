@@ -31,7 +31,11 @@ const StarStyled = styled.div`
 `;
 
 const Star = ({ selected = false, onClick = (f) => f }) => (
-  <StarStyled selected={selected} onClick={onClick} />
+  <StarStyled
+    selected={selected}
+    onClick={onClick}
+    className="star"
+  />
 );
 
 export default Star;
