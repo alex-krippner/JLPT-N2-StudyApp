@@ -1,23 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import Input from '@material-ui/core/Input';
+import Grid from '@material-ui/core/Grid';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import IconButton from '@material-ui/core/IconButton';
 
-import FormList from './list.component';
+import Table from './table.component';
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1,
-    width: '100%',
-    height: '100%',
+    '&.MuiAppBar-colorDefault': {
+      backgroundColor: 'white',
+    },
+
+    '&.MuiPaper-elevation4': {
+      boxShadow: 'none',
+    },
+
+    '& .MuiBox-root': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      padding: 0,
+      width: '80%',
+    },
   },
 
   box: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
     height: '85%',
     width: '100%',
   },
@@ -26,6 +42,20 @@ const useStyles = makeStyles({
     fontSize: '2rem',
     minWidth: 'auto',
     margin: '0 5px',
+  },
+
+  inputContainer: {
+    fontSize: '1.5rem',
+    justifyContent: 'center',
+  },
+
+  input: {
+    fontSize: '1.5rem',
+  },
+
+  form: {
+    display: 'flex',
+    alignItems: 'center',
   },
 });
 
@@ -38,7 +68,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
-      className={classes.box}
+      className={`${classes.root} ${classes.box} `}
     >
       {value === index && <Box p={3}>{children}</Box>}
     </div>
@@ -46,18 +76,43 @@ function TabPanel(props) {
 }
 
 export default function FullWidthTabs() {
+  const [entry, setEntry] = useState({
+    newEntry: '',
+    読み: [],
+    単語例: [],
+    用例: [],
+  });
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [tabValue, setTabValue] = useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
 
+  const handleEntry = (event) => {
+    const { value } = event.target;
+
+    setEntry({ ...entry, newEntry: value });
+  };
+
+  const handleSubmit = (entryKey, event) => {
+    event.preventDefault();
+    const { newEntry } = entry;
+    setEntry({
+      ...entry,
+      [entryKey]: [...entry[entryKey], newEntry],
+    });
+  };
   return (
     <>
-      <AppBar position="static" color="default">
+      <AppBar
+        position="static"
+        color="default"
+        className={classes.root}
+      >
         <Tabs
-          value={value}
+          value={tabValue}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -70,13 +125,42 @@ export default function FullWidthTabs() {
         </Tabs>
       </AppBar>
 
-      <TabPanel value={value} index={0}>
-        <FormList />
+      <TabPanel value={tabValue} index={0}>
+        <Grid
+          container
+          spacing={1}
+          alignItems="center"
+          className={classes.inputContainer}
+        >
+          <form
+            className={classes.form}
+            onSubmit={(event) => handleSubmit('読み', event)}
+          >
+            <Grid item>
+              <Input
+                name="読み"
+                value={entry.newEntry}
+                className={classes.input}
+                onChange={handleEntry}
+              />
+            </Grid>
+            <Grid item>
+              <IconButton
+                id="読み"
+                onClick={(event) => handleSubmit('読み', event)}
+              >
+                <AddCircleOutlineIcon fontSize="large" />
+              </IconButton>
+            </Grid>
+          </form>
+        </Grid>
+
+        <Table data={entry.読み} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tabValue} index={1}>
         Item Two
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={tabValue} index={2}>
         Item Three
       </TabPanel>
     </>

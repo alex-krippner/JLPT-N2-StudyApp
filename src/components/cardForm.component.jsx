@@ -39,7 +39,7 @@ const CardFormStyled = styled.div`
       height: 5rem;
       width: 50%;
       border-radius: 0 2rem 0 2rem;
-      background-color: #1e90ff;
+      background-color: #00ced1;
       box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
       font-weight: 400;
       font-size: 2rem;
@@ -58,15 +58,17 @@ const CardFormStyled = styled.div`
 `;
 
 const useStyles = makeStyles({
+  root: {
+    '& .MuiFormLabel-root': {
+      fontSize: '1.5rem',
+    },
+  },
   container: {
     height: '70%',
   },
 
   textfield: {
     marginTop: '2.5rem',
-  },
-  label: {
-    fontSize: '1.5rem',
   },
 });
 
@@ -81,12 +83,7 @@ const CardForm = () => {
           id="outlined-basic"
           label="漢字"
           variant="outlined"
-          className={classes.textfield}
-          InputProps={{
-            classes: {
-              input: classes.label,
-            },
-          }}
+          className={`${classes.root} ${classes.textfield}`}
         />
       </header>
       <Grid container className={classes.container}>
