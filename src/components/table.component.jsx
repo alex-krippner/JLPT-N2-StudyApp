@@ -11,6 +11,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import DoneIcon from '@material-ui/icons/Done';
+import { Input } from '@material-ui/core';
 
 const useStyles = makeStyles({
   container: {
@@ -25,29 +28,96 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ data }) => {
+const row = (
+  entry,
+  entryIdx,
+  entryKey,
+  handleEdit,
+  startEdit,
+  endEdit,
+  editIdx,
+  classes,
+  getRef,
+) => {
+  const currentlyEditing = entryIdx === editIdx;
+
+  return (
+    <TableRow key={uuidv4()}>
+      {currentlyEditing ? (
+        <TableCell
+          align="center"
+          size="small"
+          className={classes.tablecell}
+        >
+          <Input
+            name={entry}
+            onChange={
+              (event) => handleEdit(event, entryIdx, entryKey)
+              // eslint-disable-next-line react/jsx-curly-newline
+            }
+            value={entry}
+            ref={getRef}
+          />
+        </TableCell>
+      ) : (
+        <TableCell
+          align="center"
+          size="small"
+          className={classes.tablecell}
+        >
+          {entry}
+        </TableCell>
+      )}
+      {currentlyEditing ? (
+        <TableCell align="right" size="small">
+          <IconButton edge="end" onClick={() => endEdit()}>
+            <DoneIcon fontSize="large" />
+          </IconButton>
+        </TableCell>
+      ) : (
+        <TableCell align="right" size="small">
+          <IconButton edge="end" onClick={() => startEdit(entryIdx)}>
+            <EditIcon fontSize="large" />
+          </IconButton>
+        </TableCell>
+      )}
+
+      <TableCell align="right" size="small">
+        <IconButton edge="end">
+          <DeleteIcon fontSize="large" />
+        </IconButton>
+      </TableCell>
+    </TableRow>
+  );
+};
+
+export default ({
+  entries,
+  entryKey,
+  handleEdit,
+  startEdit,
+  endEdit,
+  editIdx,
+  getRef,
+}) => {
   const classes = useStyles();
   return (
     <TableContainer component={Paper} className={classes.container}>
       <Table className={classes.table}>
         <TableBody>
-          {data.map((el) => (
-            <TableRow key={uuidv4()}>
-              <TableCell
-                align="center"
-                padding="5px"
-                size="small"
-                className={classes.tablecell}
-              >
-                {el}
-              </TableCell>
-              <TableCell align="right" padding="5px" size="small">
-                <IconButton edge="end">
-                  <DeleteIcon fontSize="large" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
+          {entries.map((entry, entryIdx) =>
+            row(
+              entry,
+              entryIdx,
+              entryKey,
+              handleEdit,
+              startEdit,
+              endEdit,
+              editIdx,
+              classes,
+              getRef,
+            ),
+          )}
         </TableBody>
       </Table>
     </TableContainer>

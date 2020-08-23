@@ -76,12 +76,18 @@ function TabPanel(props) {
 }
 
 export default function FullWidthTabs() {
-  const [entry, setEntry] = useState({
+  const [entries, setEntry] = useState({
     newEntry: '',
     読み: [],
     単語例: [],
     用例: [],
+    editIdx: -1,
   });
+
+  const getRef = (node) => {
+    if (!node) return;
+    node.firstElementChild.focus();
+  };
 
   const classes = useStyles();
   const [tabValue, setTabValue] = useState(0);
@@ -93,17 +99,44 @@ export default function FullWidthTabs() {
   const handleEntry = (event) => {
     const { value } = event.target;
 
-    setEntry({ ...entry, newEntry: value });
+    setEntry({ ...entries, newEntry: value });
+  };
+
+  const handleEdit = (event, entryIdx, entryKey) => {
+    const { value } = event.target;
+    setEntry({
+      ...entries,
+      [entryKey]: entries[entryKey].map((el, idx) =>
+        idx === entryIdx ? value : el,
+      ),
+    });
+  };
+
+  const startEdit = (entryIdx) => {
+    setEntry({
+      ...entries,
+      editIdx: entryIdx,
+    });
+  };
+
+  const endEdit = () => {
+    setEntry({
+      ...entries,
+      editIdx: -1,
+    });
   };
 
   const handleSubmit = (entryKey, event) => {
     event.preventDefault();
-    const { newEntry } = entry;
+    const { newEntry } = entries;
     setEntry({
-      ...entry,
-      [entryKey]: [...entry[entryKey], newEntry],
+      ...entries,
+      [entryKey]: [...entries[entryKey], newEntry],
+      newEntry: '',
     });
   };
+
+  console.log(entries);
   return (
     <>
       <AppBar
@@ -139,9 +172,10 @@ export default function FullWidthTabs() {
             <Grid item>
               <Input
                 name="読み"
-                value={entry.newEntry}
+                value={entries.newEntry}
                 className={classes.input}
                 onChange={handleEntry}
+                required="true"
               />
             </Grid>
             <Grid item>
@@ -155,7 +189,15 @@ export default function FullWidthTabs() {
           </form>
         </Grid>
 
-        <Table data={entry.読み} />
+        <Table
+          entries={entries.読み}
+          entryKey="読み"
+          handleEdit={handleEdit}
+          startEdit={startEdit}
+          endEdit={endEdit}
+          editIdx={entries.editIdx}
+          getRef={getRef}
+        />
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
         Item Two
