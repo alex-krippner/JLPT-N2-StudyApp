@@ -52,12 +52,12 @@ class CardContainer extends Component {
   render() {
     let flipId = '';
     const { data } = this.state;
-
+    const { label, inputValue } = this.props;
     flipId += data.map((x) => x.id).join('');
     return (
       <Flipper flipKey={flipId} spring="stiff">
         <CardsContainerStyled>
-          <CardForm />
+          <CardForm label={label} inputValue={inputValue} />
           {data.map((el, index) => (
             <Flipped key={el.id} flipId={el.id}>
               <div>

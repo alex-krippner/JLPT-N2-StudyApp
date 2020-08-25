@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -10,6 +10,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
 
 import Table from './table.component';
+import KanjiFormContext from '../context/context';
 
 const useStyles = makeStyles({
   root: {
@@ -76,67 +77,96 @@ function TabPanel(props) {
 }
 
 export default function FullWidthTabs() {
-  const [entries, setEntry] = useState({
-    newEntry: '',
-    読み: [],
-    単語例: [],
-    用例: [],
-    editIdx: -1,
-  });
-
-  const getRef = (node) => {
-    if (!node) return;
-    node.firstElementChild.focus();
-  };
-
   const classes = useStyles();
+  const [entry, setEntry] = useState('');
+  const { KanjiFormData, dispatchKanjiFormAction } = useContext(
+    KanjiFormContext,
+  );
+
   const [tabValue, setTabValue] = useState(0);
+
+  // const [entries, setEntry] = useState({
+  //   kanji: '',
+  //   読み: [],
+  //   単語例: [],
+  //   用例: [],
+  //   newEntry: '',
+  //   editIdx: -1,
+  // });
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
 
-  const handleEntry = (event) => {
-    const { value } = event.target;
+  // const handleEntry = (event, key) => {
+  //   const { value } = event.target;
 
-    setEntry({ ...entries, newEntry: value });
-  };
+  //   setEntry((state) => ({ ...state, [key]: value }));
+  // };
 
-  const handleEdit = (event, entryIdx, entryKey) => {
-    const { value } = event.target;
-    setEntry({
-      ...entries,
-      [entryKey]: entries[entryKey].map((el, idx) =>
-        idx === entryIdx ? value : el,
-      ),
-    });
-  };
+  const handleEntry = (event) => setEntry(event.target.value);
 
-  const startEdit = (entryIdx) => {
-    setEntry({
-      ...entries,
-      editIdx: entryIdx,
-    });
-  };
-
-  const endEdit = () => {
-    setEntry({
-      ...entries,
-      editIdx: -1,
-    });
-  };
+  // const handleSubmit = (entryKey, event) => {
+  //   event.preventDefault();
+  //   const { newEntry } = entries;
+  //   setEntry((state) => ({
+  //     ...state,
+  //     [entryKey]: [...state[entryKey], newEntry],
+  //     newEntry: '',
+  //   }));
+  // };
 
   const handleSubmit = (entryKey, event) => {
     event.preventDefault();
-    const { newEntry } = entries;
-    setEntry({
-      ...entries,
-      [entryKey]: [...entries[entryKey], newEntry],
-      newEntry: '',
-    });
+
+    // conditional dispatch methods
+    if (
+      entryKey === '読み' ||
+      entryKey === '単語例' ||
+      entryKey === '用例'
+    )
+      // dispatch to kanji form reducer
+      dispatchKanjiFormAction({
+        type: 'ADD_ENTRY',
+        entryKey,
+        entry,
+      });
   };
 
-  console.log(entries);
+  // const handleEdit = (event, entryIdx, entryKey) => {
+  //   const { value } = event.target;
+  //   setEntry((state) => ({
+  //     ...state,
+  //     [entryKey]: state[entryKey].map((el, idx) =>
+  //       idx === entryIdx ? value : el,
+  //     ),
+  //   }));
+  // };
+
+  // const startEdit = (entryIdx) => {
+  //   setEntry((state) => ({
+  //     ...state,
+  //     editIdx: entryIdx,
+  //   }));
+  // };
+
+  // const endEdit = () => {
+  //   setEntry((state) => ({
+  //     ...state,
+  //     editIdx: -1,
+  //   }));
+  // };
+
+  // const handleRemove = (entryKey, entryIdx) => {
+  //   setEntry((state) => ({
+  //     ...state,
+  //     [entryKey]: state[entryKey].filter(
+  //       (el, idx) => idx !== entryIdx,
+  //     ),
+  //   }));
+  // };
+
+  console.log(KanjiFormData);
   return (
     <>
       <AppBar
@@ -172,10 +202,9 @@ export default function FullWidthTabs() {
             <Grid item>
               <Input
                 name="読み"
-                value={entries.newEntry}
+                value={entry}
                 className={classes.input}
-                onChange={handleEntry}
-                required="true"
+                onChange={(event) => handleEntry(event)}
               />
             </Grid>
             <Grid item>
@@ -189,15 +218,7 @@ export default function FullWidthTabs() {
           </form>
         </Grid>
 
-        <Table
-          entries={entries.読み}
-          entryKey="読み"
-          handleEdit={handleEdit}
-          startEdit={startEdit}
-          endEdit={endEdit}
-          editIdx={entries.editIdx}
-          getRef={getRef}
-        />
+        <Table entries={KanjiFormData.読み} entryKey="読み" />
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
         Item Two

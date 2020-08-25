@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,6 +14,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 import { Input } from '@material-ui/core';
+
+import KanjiFormContext from '../context/context';
 
 const useStyles = makeStyles({
   container: {
@@ -38,6 +40,7 @@ const row = (
   editIdx,
   classes,
   getRef,
+  handleRemove,
 ) => {
   const currentlyEditing = entryIdx === editIdx;
 
@@ -83,7 +86,10 @@ const row = (
       )}
 
       <TableCell align="right" size="small">
-        <IconButton edge="end">
+        <IconButton
+          edge="end"
+          onClick={() => handleRemove(entryKey, entryIdx)}
+        >
           <DeleteIcon fontSize="large" />
         </IconButton>
       </TableCell>
@@ -91,16 +97,37 @@ const row = (
   );
 };
 
-export default ({
-  entries,
-  entryKey,
-  handleEdit,
-  startEdit,
-  endEdit,
-  editIdx,
-  getRef,
-}) => {
+export default ({ entries, entryKey }) => {
   const classes = useStyles();
+  const [editIdx, setEditIdx] = useState(-1);
+  const { dispatchKanjiFormAction } = useContext(KanjiFormContext);
+  const getRef = (node) => {
+    if (!node) return;
+    node.firstElementChild.focus();
+  };
+
+  const handleEdit = (event, entryIdx, key) => {
+    const { value } = event.target;
+    dispatchKanjiFormAction({
+      type: 'EDIT_ENTRY',
+      value,
+      key,
+      entryIdx,
+    });
+  };
+
+  const handleRemove = (key, entryIdx) => {
+    dispatchKanjiFormAction({
+      type: 'REMOVE_ENTRY',
+      key,
+      entryIdx,
+    });
+  };
+
+  const startEdit = (entryIdx) => setEditIdx(entryIdx);
+
+  const endEdit = () => setEditIdx(-1);
+
   return (
     <TableContainer component={Paper} className={classes.container}>
       <Table className={classes.table}>
@@ -116,6 +143,7 @@ export default ({
               editIdx,
               classes,
               getRef,
+              handleRemove,
             ),
           )}
         </TableBody>

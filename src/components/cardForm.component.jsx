@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 import FullWidthTabs from './tabs.component';
+
+import KanjiFormContext from '../context/context';
 
 const CardFormStyled = styled.div`
   display: flex;
@@ -72,8 +74,20 @@ const useStyles = makeStyles({
   },
 });
 
-const CardForm = () => {
+const CardForm = (props) => {
+  const { label, inputValue } = props;
   const classes = useStyles();
+  const { dispatchKanjiFormAction } = useContext(KanjiFormContext);
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+
+    if (label === '漢字')
+      dispatchKanjiFormAction({
+        type: 'INPUT_KANJI',
+        value,
+      });
+  };
 
   return (
     <CardFormStyled>
@@ -81,9 +95,11 @@ const CardForm = () => {
         <h2 className="card-title">Create Card</h2>
         <TextField
           id="outlined-basic"
-          label="漢字"
+          label={label}
+          value={inputValue}
           variant="outlined"
           className={`${classes.root} ${classes.textfield}`}
+          onChange={(event) => handleChange(event)}
         />
       </header>
       <Grid container className={classes.container}>
