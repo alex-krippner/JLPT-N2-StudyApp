@@ -47,6 +47,7 @@
     "react-flip-toolkit": "^7.0.12",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
+    "react-swipeable-views": "^0.13.9",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",

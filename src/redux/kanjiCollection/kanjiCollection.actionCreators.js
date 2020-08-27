@@ -7,4 +7,9 @@ export const rateKanji = (kanji, rating) => {
   };
 };
 
-export const emptyFunctions = () => {};
+export const addKanji = (kanjiData) => {
+  return {
+    type: KanjiCollectionActionTypes.ADD_KANJI,
+    payload: { kanjiData },
+  };
+};

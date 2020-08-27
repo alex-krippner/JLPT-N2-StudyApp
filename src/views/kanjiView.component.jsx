@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
@@ -7,7 +7,10 @@ import { DndProvider } from 'react-dnd-multi-backend';
 import styled from 'styled-components';
 
 import CardContainer from '../components/dragAndDrop/CardContainer.component';
-import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
+import {
+  rateKanji,
+  addKanji,
+} from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import selectAllKanji from '../redux/kanjiCollection/kanjiCollection.selectors';
 import KanjiFormContext from '../context/context';
 
@@ -15,6 +18,8 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+const tabLabels = ['読み', '単語例', '用例'];
 
 const INITIAL_FORM = {
   kanji: '',
@@ -33,7 +38,7 @@ const kanjiFormReducer = (state, action) => {
     case 'ADD_ENTRY':
       return {
         ...state,
-        [action.entryKey]: [...state[action.entryKey], action.entry],
+        [action.entryKey]: [...state[action.entryKey], action.value],
       };
     case 'EDIT_ENTRY':
       return {
@@ -55,16 +60,36 @@ const kanjiFormReducer = (state, action) => {
   }
 };
 
-const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
+const KanjiView = ({
+  kanji,
+  rateKanjiDispatcher,
+  addKanjiDispatcher,
+}) => {
   const [KanjiFormData, dispatchKanjiFormAction] = useReducer(
     kanjiFormReducer,
     INITIAL_FORM,
   );
 
+  const [editIdx, setEditIdx] = useState(-1);
+  const startEdit = (entryIdx) => setEditIdx(entryIdx);
+  const endEdit = () => setEditIdx(-1);
+
+  const createKanjiCard = () => {
+    addKanjiDispatcher(KanjiFormData);
+  };
+
   return (
     <Wrapper>
       <KanjiFormContext.Provider
-        value={{ KanjiFormData, dispatchKanjiFormAction }}
+        value={{
+          KanjiFormData,
+          dispatchKanjiFormAction,
+          editIdx,
+          startEdit,
+          endEdit,
+
+          createKanjiCard,
+        }}
       >
         <DndProvider options={HTML5toTouch}>
           <CardContainer
@@ -72,6 +97,7 @@ const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
             label="漢字"
             inputValue={KanjiFormData.kanji}
             onRate={rateKanjiDispatcher}
+            tabLabels={tabLabels}
           />
         </DndProvider>
       </KanjiFormContext.Provider>
@@ -86,6 +112,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   rateKanjiDispatcher: (kanji, rating) =>
     dispatch(rateKanji(kanji, rating)),
+  addKanjiDispatcher: (KanjiFormData) =>
+    dispatch(addKanji(KanjiFormData)),
 });
 
 export default connect(

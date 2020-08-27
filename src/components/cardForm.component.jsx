@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
@@ -13,7 +15,7 @@ const CardFormStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 40rem;
+  height: 45rem;
   width: 30rem;
   background-color: #ffffff;
   border: solid 1px #708090;
@@ -64,20 +66,39 @@ const useStyles = makeStyles({
     '& .MuiFormLabel-root': {
       fontSize: '1.5rem',
     },
+    '& .MuiInputBase-input': {
+      fontSize: '1.5rem',
+    },
   },
   container: {
     height: '70%',
+    justifyContent: 'center',
   },
 
   textfield: {
     marginTop: '2.5rem',
   },
+
+  textfieldLabel: {
+    fontSize: '1.5rem',
+  },
+
+  footer: {
+    justifyContent: 'center',
+    margin: '1rem 0',
+  },
+
+  submitButton: {
+    fontSize: '1.5rem',
+  },
 });
 
 const CardForm = (props) => {
-  const { label, inputValue } = props;
+  const { label, inputValue, tabLabels } = props;
   const classes = useStyles();
-  const { dispatchKanjiFormAction } = useContext(KanjiFormContext);
+  const { dispatchKanjiFormAction, createKanjiCard } = useContext(
+    KanjiFormContext,
+  );
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -89,10 +110,14 @@ const CardForm = (props) => {
       });
   };
 
+  const handleCreateCard = () => {
+    if (label === '漢字') createKanjiCard();
+  };
+
   return (
     <CardFormStyled>
       <header className="header">
-        <h2 className="card-title">Create Card</h2>
+        <h2 className="card-title">New Card</h2>
         <TextField
           id="outlined-basic"
           label={label}
@@ -103,7 +128,21 @@ const CardForm = (props) => {
         />
       </header>
       <Grid container className={classes.container}>
-        <FullWidthTabs />
+        <FullWidthTabs tabLabels={tabLabels} />
+      </Grid>
+      <Grid container className={classes.footer}>
+        <form>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            classes={{ label: classes.submitButton }}
+            onClick={handleCreateCard}
+            type="submit"
+          >
+            Create Card
+          </Button>
+        </form>
       </Grid>
     </CardFormStyled>
   );

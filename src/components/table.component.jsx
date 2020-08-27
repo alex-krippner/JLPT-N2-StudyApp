@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,6 +20,8 @@ import KanjiFormContext from '../context/context';
 const useStyles = makeStyles({
   container: {
     height: '15rem',
+    boxShadow: 'none',
+    border: 'solid 1px rgba(65,105,225, 0.5)',
   },
   table: {
     minWidth: 'auto',
@@ -39,19 +41,17 @@ const row = (
   endEdit,
   editIdx,
   classes,
-  getRef,
   handleRemove,
 ) => {
   const currentlyEditing = entryIdx === editIdx;
-
   return (
     <TableRow key={uuidv4()}>
-      {currentlyEditing ? (
-        <TableCell
-          align="center"
-          size="small"
-          className={classes.tablecell}
-        >
+      <TableCell
+        align="center"
+        size="small"
+        className={classes.tablecell}
+      >
+        {currentlyEditing ? (
           <Input
             name={entry}
             onChange={
@@ -59,18 +59,12 @@ const row = (
               // eslint-disable-next-line react/jsx-curly-newline
             }
             value={entry}
-            ref={getRef}
+            id="table-input"
           />
-        </TableCell>
-      ) : (
-        <TableCell
-          align="center"
-          size="small"
-          className={classes.tablecell}
-        >
-          {entry}
-        </TableCell>
-      )}
+        ) : (
+          entry
+        )}
+      </TableCell>
       {currentlyEditing ? (
         <TableCell align="right" size="small">
           <IconButton edge="end" onClick={() => endEdit()}>
@@ -99,12 +93,19 @@ const row = (
 
 export default ({ entries, entryKey }) => {
   const classes = useStyles();
-  const [editIdx, setEditIdx] = useState(-1);
-  const { dispatchKanjiFormAction } = useContext(KanjiFormContext);
-  const getRef = (node) => {
-    if (!node) return;
-    node.firstElementChild.focus();
-  };
+  const {
+    dispatchKanjiFormAction,
+    editIdx,
+    startEdit,
+    endEdit,
+  } = useContext(KanjiFormContext);
+
+  useEffect(() => {
+    const tableInput = document.getElementById('table-input');
+    if (!tableInput) return;
+
+    if (editIdx > -1) tableInput.focus();
+  });
 
   const handleEdit = (event, entryIdx, key) => {
     const { value } = event.target;
@@ -124,10 +125,6 @@ export default ({ entries, entryKey }) => {
     });
   };
 
-  const startEdit = (entryIdx) => setEditIdx(entryIdx);
-
-  const endEdit = () => setEditIdx(-1);
-
   return (
     <TableContainer component={Paper} className={classes.container}>
       <Table className={classes.table}>
@@ -142,7 +139,6 @@ export default ({ entries, entryKey }) => {
               endEdit,
               editIdx,
               classes,
-              getRef,
               handleRemove,
             ),
           )}
