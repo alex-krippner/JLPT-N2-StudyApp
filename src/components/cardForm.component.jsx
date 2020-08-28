@@ -18,7 +18,7 @@ const CardFormStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   height: 45rem;
-  width: 30rem;
+  width: 32em;
   background-color: #ffffff;
   border: solid 1px #708090;
   border-radius: 1rem;
@@ -94,13 +94,18 @@ const useStyles = makeStyles({
     textTransform: 'capitalize',
     backgroundColor: '#4169E1',
     fontSize: '1.5rem',
+
+    '&:hover': {
+      backgroundColor: '#000080',
+    },
   },
+
+  buttonLabel: { textTransform: 'capitalize', fontSize: '1.5rem' },
 });
 
 const CardForm = (props) => {
   const { label, inputValue, tabLabels, addKanjiDispatcher } = props;
   const classes = useStyles();
-  // const { createKanjiCard } = useContext(KanjiFormContext);
 
   const { cardFormData, formDispatcher } = useContext(
     CardFormContext,
@@ -114,10 +119,6 @@ const CardForm = (props) => {
         type: 'INPUT_KANJI',
         value,
       });
-    // dispatchKanjiFormAction({
-    //   type: 'INPUT_KANJI',
-    //   value,
-    // });
   };
 
   const handleCreateCard = () => {
@@ -151,8 +152,8 @@ const CardForm = (props) => {
             color="primary"
             size="large"
             classes={{
-              label: classes.submitButton,
-              containedPrimary: classes.submitButton,
+              label: classes.buttonLabel,
+              root: classes.submitButton,
             }}
             onClick={handleCreateCard}
             type="submit"

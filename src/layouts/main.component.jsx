@@ -55,7 +55,7 @@ const Main = () => (
     <Switch>
       <Route exact path="/" component={homeView} />
       <Route path="/kanji" component={KanjiView} />
-      <Route path="/vocabulary" component={VocabView} />
+      <Route path="/vocab" component={VocabView} />
       <Route path="/grammar" component={GrammarView} />
       <Route path="/reading" component={ReadingView} />
     </Switch>

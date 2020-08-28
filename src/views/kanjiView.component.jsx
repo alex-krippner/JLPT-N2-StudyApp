@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import CardContainer from '../components/dragAndDrop/CardContainer.component';
 import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import selectAllKanji from '../redux/kanjiCollection/kanjiCollection.selectors';
-import KanjiFormContext from '../context/context';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -65,24 +64,17 @@ const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
 
   return (
     <Wrapper>
-      <KanjiFormContext.Provider
-        value={{
-          KanjiFormData,
-          dispatchKanjiFormAction,
-        }}
-      >
-        <DndProvider options={HTML5toTouch}>
-          <CardContainer
-            data={kanji}
-            label="漢字"
-            inputValue={KanjiFormData.kanji}
-            onRate={rateKanjiDispatcher}
-            tabLabels={tabLabels}
-            cardFormData={KanjiFormData}
-            formDispatcher={dispatchKanjiFormAction}
-          />
-        </DndProvider>
-      </KanjiFormContext.Provider>
+      <DndProvider options={HTML5toTouch}>
+        <CardContainer
+          data={kanji}
+          label="漢字"
+          inputValue={KanjiFormData.kanji}
+          onRate={rateKanjiDispatcher}
+          tabLabels={tabLabels}
+          cardFormData={KanjiFormData}
+          formDispatcher={dispatchKanjiFormAction}
+        />
+      </DndProvider>
     </Wrapper>
   );
 };
