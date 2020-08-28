@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
+// MATERIAL UI IMPORTS
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 import { makeStyles } from '@material-ui/core/styles';
 
+// LOCAL IMPORTS
 import FullWidthTabs from './tabs.component';
-
-import KanjiFormContext from '../context/context';
+import { CardFormContext } from '../context/context';
+import { addKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 
 const CardFormStyled = styled.div`
   display: flex;
@@ -89,29 +91,37 @@ const useStyles = makeStyles({
   },
 
   submitButton: {
+    textTransform: 'capitalize',
+    backgroundColor: '#4169E1',
     fontSize: '1.5rem',
   },
 });
 
 const CardForm = (props) => {
-  const { label, inputValue, tabLabels } = props;
+  const { label, inputValue, tabLabels, addKanjiDispatcher } = props;
   const classes = useStyles();
-  const { dispatchKanjiFormAction, createKanjiCard } = useContext(
-    KanjiFormContext,
+  // const { createKanjiCard } = useContext(KanjiFormContext);
+
+  const { cardFormData, formDispatcher } = useContext(
+    CardFormContext,
   );
 
   const handleChange = (event) => {
     const { value } = event.target;
 
     if (label === '漢字')
-      dispatchKanjiFormAction({
+      formDispatcher({
         type: 'INPUT_KANJI',
         value,
       });
+    // dispatchKanjiFormAction({
+    //   type: 'INPUT_KANJI',
+    //   value,
+    // });
   };
 
   const handleCreateCard = () => {
-    if (label === '漢字') createKanjiCard();
+    if (label === '漢字') addKanjiDispatcher(cardFormData);
   };
 
   return (
@@ -127,7 +137,11 @@ const CardForm = (props) => {
           onChange={(event) => handleChange(event)}
         />
       </header>
-      <Grid container className={classes.container}>
+      <Grid
+        container
+        className={classes.container}
+        id="form-container"
+      >
         <FullWidthTabs tabLabels={tabLabels} />
       </Grid>
       <Grid container className={classes.footer}>
@@ -136,7 +150,10 @@ const CardForm = (props) => {
             variant="contained"
             color="primary"
             size="large"
-            classes={{ label: classes.submitButton }}
+            classes={{
+              label: classes.submitButton,
+              containedPrimary: classes.submitButton,
+            }}
             onClick={handleCreateCard}
             type="submit"
           >
@@ -148,4 +165,9 @@ const CardForm = (props) => {
   );
 };
 
-export default CardForm;
+const mapDispatchToProps = (dispatch) => ({
+  addKanjiDispatcher: (cardFormData) =>
+    dispatch(addKanji(cardFormData)),
+});
+
+export default connect(null, mapDispatchToProps)(CardForm);

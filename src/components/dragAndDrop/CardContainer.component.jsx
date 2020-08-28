@@ -9,11 +9,14 @@ import produce from 'immer';
 import CardsContainerStyled from '../cardsContainer.component';
 import CardForm from '../cardForm.component';
 import DragCard from './DragCard';
+import { CardFormContext } from '../../context/context';
 
 class CardContainer extends Component {
   constructor(props) {
     super(props);
 
+    // collection data (ie. kanji/vocab/grammar collection)
+    // copied from redux store  to create draggable cards
     const { data } = this.props;
 
     this.state = { data: [...data] };
@@ -52,16 +55,27 @@ class CardContainer extends Component {
   render() {
     let flipId = '';
     const { data } = this.state;
-    const { label, inputValue, tabLabels } = this.props;
+    const {
+      label,
+      inputValue,
+      tabLabels,
+      cardFormData,
+      formDispatcher,
+    } = this.props;
     flipId += data.map((x) => x.id).join('');
     return (
       <Flipper flipKey={flipId} spring="stiff">
         <CardsContainerStyled>
-          <CardForm
-            label={label}
-            inputValue={inputValue}
-            tabLabels={tabLabels}
-          />
+          <CardFormContext.Provider
+            value={{ cardFormData, formDispatcher }}
+          >
+            <CardForm
+              label={label}
+              inputValue={inputValue}
+              tabLabels={tabLabels}
+            />
+          </CardFormContext.Provider>
+
           {data.map((el, index) => (
             <Flipped key={el.id} flipId={el.id}>
               <div>

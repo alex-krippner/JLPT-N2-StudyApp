@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
@@ -7,10 +7,7 @@ import { DndProvider } from 'react-dnd-multi-backend';
 import styled from 'styled-components';
 
 import CardContainer from '../components/dragAndDrop/CardContainer.component';
-import {
-  rateKanji,
-  addKanji,
-} from '../redux/kanjiCollection/kanjiCollection.actionCreators';
+import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import selectAllKanji from '../redux/kanjiCollection/kanjiCollection.selectors';
 import KanjiFormContext from '../context/context';
 
@@ -60,23 +57,11 @@ const kanjiFormReducer = (state, action) => {
   }
 };
 
-const KanjiView = ({
-  kanji,
-  rateKanjiDispatcher,
-  addKanjiDispatcher,
-}) => {
+const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
   const [KanjiFormData, dispatchKanjiFormAction] = useReducer(
     kanjiFormReducer,
     INITIAL_FORM,
   );
-
-  const [editIdx, setEditIdx] = useState(-1);
-  const startEdit = (entryIdx) => setEditIdx(entryIdx);
-  const endEdit = () => setEditIdx(-1);
-
-  const createKanjiCard = () => {
-    addKanjiDispatcher(KanjiFormData);
-  };
 
   return (
     <Wrapper>
@@ -84,11 +69,6 @@ const KanjiView = ({
         value={{
           KanjiFormData,
           dispatchKanjiFormAction,
-          editIdx,
-          startEdit,
-          endEdit,
-
-          createKanjiCard,
         }}
       >
         <DndProvider options={HTML5toTouch}>
@@ -98,6 +78,8 @@ const KanjiView = ({
             inputValue={KanjiFormData.kanji}
             onRate={rateKanjiDispatcher}
             tabLabels={tabLabels}
+            cardFormData={KanjiFormData}
+            formDispatcher={dispatchKanjiFormAction}
           />
         </DndProvider>
       </KanjiFormContext.Provider>
@@ -112,8 +94,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   rateKanjiDispatcher: (kanji, rating) =>
     dispatch(rateKanji(kanji, rating)),
-  addKanjiDispatcher: (KanjiFormData) =>
-    dispatch(addKanji(KanjiFormData)),
 });
 
 export default connect(

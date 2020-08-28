@@ -12,7 +12,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
 
 import Table from './table.component';
-import KanjiFormContext from '../context/context';
+import { CardFormContext } from '../context/context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
   swipe: {
     overflow: 'inherit',
+    width: '90%',
   },
 }));
 
@@ -77,9 +78,16 @@ function TabPanel(props) {
 export default function FullWidthTabs(props) {
   const { tabLabels } = props;
   const classes = useStyles();
-  const { KanjiFormData, dispatchKanjiFormAction } = useContext(
-    KanjiFormContext,
+  const { cardFormData, formDispatcher } = useContext(
+    CardFormContext,
   );
+
+  /*
+   ********************************************
+   */
+
+  // LOCAL STATE
+
   const [tabValue, setTabValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -87,30 +95,24 @@ export default function FullWidthTabs(props) {
   };
 
   const [entryKey, setEntryKey] = useState(tabLabels[0]);
-
-  const handleLabelChange = (curKey) => setEntryKey(curKey);
-
   const [entry, setEntry] = useState({
     value: '',
-    // active: false,
   });
 
+  const handlePlaceholder = (curKey) => setEntryKey(curKey);
   const handleEntry = (event) => {
     setEntry({
       value: event.target.value,
-      // active: true,
     });
   };
 
-  // useEffect(() => {
-  //   const entryInput = document.getElementById('entry-input');
-  //   if (entry.active) entryInput.focus();
-  // });
+  /*
+   ********************************************
+   */
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const { value } = entry;
-    console.log(entryKey, value);
 
     // conditional dispatch methods
     if (
@@ -119,7 +121,7 @@ export default function FullWidthTabs(props) {
       entryKey === '用例'
     )
       // dispatch to kanji form reducer
-      dispatchKanjiFormAction({
+      formDispatcher({
         type: 'ADD_ENTRY',
         entryKey,
         value,
@@ -127,10 +129,8 @@ export default function FullWidthTabs(props) {
 
     setEntry({
       value: '',
-      // active: false,
     });
   };
-  console.log(entryKey, entry, KanjiFormData);
   return (
     <>
       <AppBar
@@ -151,12 +151,11 @@ export default function FullWidthTabs(props) {
               label={tabLabel}
               classes={{ root: classes.tab }}
               key={uuidv4()}
-              onClick={() => handleLabelChange(tabLabel)}
+              onClick={() => handlePlaceholder(tabLabel)}
             />
           ))}
         </Tabs>
       </AppBar>
-
       <Grid
         container
         spacing={1}
@@ -168,11 +167,16 @@ export default function FullWidthTabs(props) {
             value={entry.value}
             className={classes.input}
             onChange={(event) => handleEntry(event)}
+            placeholder={entryKey}
             id="entry-input"
           />
         </Grid>
         <Grid item>
-          <IconButton onClick={(event) => handleSubmit(event)}>
+          <IconButton
+            onClick={(event) => {
+              handleSubmit(event);
+            }}
+          >
             <AddCircleOutlineIcon fontSize="large" />
           </IconButton>
         </Grid>
@@ -185,15 +189,10 @@ export default function FullWidthTabs(props) {
           key={uuidv4()}
           style={{ overflow: 'inheret' }}
         >
-          <form
-            className={classes.form}
-            onSubmit={(event) => handleSubmit(tabLabel, event)}
-          >
-            <Table
-              entries={KanjiFormData[tabLabel]}
-              entryKey={tabLabel}
-            />
-          </form>
+          <Table
+            entries={cardFormData[tabLabel]}
+            entryKey={tabLabel}
+          />
         </TabPanel>
       ))}
     </>

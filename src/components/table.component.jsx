@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 import { Input } from '@material-ui/core';
 
-import KanjiFormContext from '../context/context';
+import { CardFormContext } from '../context/context';
 
 const useStyles = makeStyles({
   container: {
@@ -32,116 +32,94 @@ const useStyles = makeStyles({
   },
 });
 
-const row = (
-  entry,
-  entryIdx,
-  entryKey,
-  handleEdit,
-  startEdit,
-  endEdit,
-  editIdx,
-  classes,
-  handleRemove,
-) => {
-  const currentlyEditing = entryIdx === editIdx;
-  return (
-    <TableRow key={uuidv4()}>
-      <TableCell
-        align="center"
-        size="small"
-        className={classes.tablecell}
-      >
-        {currentlyEditing ? (
-          <Input
-            name={entry}
-            onChange={
-              (event) => handleEdit(event, entryIdx, entryKey)
-              // eslint-disable-next-line react/jsx-curly-newline
-            }
-            value={entry}
-            id="table-input"
-          />
-        ) : (
-          entry
-        )}
-      </TableCell>
-      {currentlyEditing ? (
-        <TableCell align="right" size="small">
-          <IconButton edge="end" onClick={() => endEdit()}>
-            <DoneIcon fontSize="large" />
-          </IconButton>
-        </TableCell>
-      ) : (
-        <TableCell align="right" size="small">
-          <IconButton edge="end" onClick={() => startEdit(entryIdx)}>
-            <EditIcon fontSize="large" />
-          </IconButton>
-        </TableCell>
-      )}
-
-      <TableCell align="right" size="small">
-        <IconButton
-          edge="end"
-          onClick={() => handleRemove(entryKey, entryIdx)}
-        >
-          <DeleteIcon fontSize="large" />
-        </IconButton>
-      </TableCell>
-    </TableRow>
-  );
-};
-
 export default ({ entries, entryKey }) => {
   const classes = useStyles();
-  const {
-    dispatchKanjiFormAction,
-    editIdx,
-    startEdit,
-    endEdit,
-  } = useContext(KanjiFormContext);
 
-  useEffect(() => {
-    const tableInput = document.getElementById('table-input');
-    if (!tableInput) return;
+  // CARD FORM STATE
+  const { formDispatcher } = useContext(CardFormContext);
 
-    if (editIdx > -1) tableInput.focus();
-  });
-
-  const handleEdit = (event, entryIdx, key) => {
-    const { value } = event.target;
-    dispatchKanjiFormAction({
-      type: 'EDIT_ENTRY',
-      value,
-      key,
-      entryIdx,
-    });
-  };
+  // LOCAL STATE
+  const [editIdx, setEditIdx] = useState(-1);
 
   const handleRemove = (key, entryIdx) => {
-    dispatchKanjiFormAction({
+    formDispatcher({
       type: 'REMOVE_ENTRY',
       key,
       entryIdx,
     });
   };
 
+  const startEdit = (entryIndex) => {
+    setEditIdx(entryIndex);
+    console.log('click');
+  };
+  const endEdit = () => {
+    setEditIdx(-1);
+  };
+
+  const submitEdit = (key, entryIdx) => {
+    const { value } = document.getElementById('table-input');
+    console.log(value);
+    formDispatcher({
+      type: 'EDIT_ENTRY',
+      value,
+      key,
+      entryIdx,
+    });
+  };
   return (
     <TableContainer component={Paper} className={classes.container}>
       <Table className={classes.table}>
         <TableBody>
-          {entries.map((entry, entryIdx) =>
-            row(
-              entry,
-              entryIdx,
-              entryKey,
-              handleEdit,
-              startEdit,
-              endEdit,
-              editIdx,
-              classes,
-              handleRemove,
-            ),
-          )}
+          {entries.map((entry, entryIdx) => {
+            const currentlyEditing = entryIdx === editIdx;
+            return (
+              <TableRow key={uuidv4()}>
+                <TableCell
+                  align="center"
+                  size="small"
+                  className={classes.tablecell}
+                >
+                  {currentlyEditing ? (
+                    <Input id="table-input" />
+                  ) : (
+                    entry
+                  )}
+                </TableCell>
+                {currentlyEditing ? (
+                  <TableCell align="right" size="small">
+                    <IconButton
+                      edge="end"
+                      onClick={() => {
+                        submitEdit(entryKey, entryIdx);
+                        endEdit();
+                      }}
+                    >
+                      <DoneIcon fontSize="large" />
+                    </IconButton>
+                  </TableCell>
+                ) : (
+                  <TableCell align="right" size="small">
+                    <IconButton
+                      edge="end"
+                      onClick={() => startEdit(entryIdx)}
+                    >
+                      <EditIcon fontSize="large" />
+                    </IconButton>
+                  </TableCell>
+                )}
+
+                <TableCell align="right" size="small">
+                  <IconButton
+                    edge="end"
+                    onClick={() => handleRemove(entryKey, entryIdx)}
+                  >
+                    <DeleteIcon fontSize="large" />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
