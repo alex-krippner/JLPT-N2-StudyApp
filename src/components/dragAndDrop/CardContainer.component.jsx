@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import arrayMove from 'array-move';
 import produce from 'immer';
+import { v4 as uuidv4 } from 'uuid';
 
 import CardsContainerStyled from '../cardsContainer.component';
 import CardForm from '../cardForm.component';
@@ -55,6 +56,7 @@ class CardContainer extends Component {
   render() {
     let flipId = '';
     const { data } = this.state;
+    console.log(data);
     const {
       label,
       inputValue,
@@ -77,11 +79,11 @@ class CardContainer extends Component {
           </CardFormContext.Provider>
 
           {data.map((el, index) => (
-            <Flipped key={el.id} flipId={el.id}>
+            <Flipped key={uuidv4()} flipId={el.id}>
               <div>
                 <DragCard
                   cardData={el}
-                  key={el.id}
+                  key={uuidv4()}
                   index={index}
                   moveCard={this.moveCard}
                   rating={el.rating}

@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -21,7 +23,9 @@ const CardWrapper = styled.div`
   color: #708090;
 `;
 
-const CardSide = styled.div`
+const CardSide = styled.div.attrs((props) => ({
+  fontSize: props.cardType === 'vocab' ? '3rem' : '15rem',
+}))`
   position: absolute;
   top: 0;
   left: 0;
@@ -37,7 +41,7 @@ const CardSide = styled.div`
   border: solid 1px #708090;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 
-  font-size: ${(props) => (props.front ? '15rem' : '2rem')};
+  font-size: ${(props) => (props.front ? props.fontSize : '2rem')};
   transform: ${(props) =>
     props.back ? ' rotateY(180deg)' : 'rotateY(0)'};
   cursor: ${(props) => (props.back ? 'pointer' : '')};
@@ -108,108 +112,108 @@ const Rating = styled.div`
   z-index: 99;
 `;
 
-const BackTop = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 30%;
-  border-bottom: solid 1px;
-  font-size: 2.5rem;
-`;
+// const BackTop = styled.div`
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   height: 30%;
+//   border-bottom: solid 1px;
+//   font-size: 2.5rem;
+// `;
 
-const BackMid = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 25%;
-  border-bottom: solid 1px;
-  font-size: 3rem;
-`;
+// const BackMid = styled.div`
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   height: 25%;
+//   border-bottom: solid 1px;
+//   font-size: 3rem;
+// `;
 
-const BackBtm = styled.div`
-  position: relative;
+// const BackBtm = styled.div`
+//   position: relative;
 
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: flex-start;
+//   height: 45%;
+// `;
+
+const BackSection = styled.section.attrs((props) => ({
+  height: props.section < 2 ? '20%' : '60%',
+
+  borderBottom: () => {
+    if (props.section === 0 || props.section === 1)
+      return 'solid 1px';
+  },
+}))`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 45%;
+  font-size: 2.5rem;
+  border-bottom: ${(props) => props.borderBottom};
+  height: ${(props) => props.height};
 `;
 
-const Card = ({
-  front,
-  backTop,
-  backMid,
-  backBtm,
-  id,
-  flipCard,
-  rating,
-  onRate,
-}) => {
+const FrontContent = ({ cardData }) => {
+  if (cardData.cardType === 'kanji') return cardData.kanji;
+  if (cardData.cardType === 'vocab')
+    return (
+      <div>
+        <div>{cardData.kana}</div>
+        <div>{cardData.kanji}</div>
+      </div>
+    );
+};
+
+const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
+  const front =
+    cardData.cardType === 'kanji' ? cardData.kanji : cardData.kana;
+
   return (
     <CardScene>
-      <CardWrapper className="cardWrapper" id={id}>
-        <CardSide front>
+      <CardWrapper className="cardWrapper" id={cardData.id}>
+        <CardSide front cardType={cardData.cardType}>
           <Front>
-            <FrontData onClick={() => flipCard(id)}>
-              {front}
+            <FrontData onClick={() => flipCard(cardData.id)}>
+              <FrontContent cardData={cardData} />
             </FrontData>
           </Front>
           <Rating>
             {[...Array(3)].map((cur, i) => (
               <Star
                 key={uuidv4()}
-                selected={i < rating}
+                selected={i < cardData.rating}
                 onClick={() => onRate(front, i + 1)}
               />
             ))}
           </Rating>
         </CardSide>
-        <CardSide back onClick={() => flipCard(id)}>
-          <BackTop>
-            <div className="top">読み</div>
-            <div className="bottom">
-              <div className="sentenceWrapper">
-                {backTop.map((el) => (
-                  <div className="paragraph" key={uuidv4()}>
-                    <span className="dot">&nbsp;</span>
-                    <div>{el}</div>
+        <CardSide back onClick={() => flipCard(cardData.id)}>
+          {tabLabels.map((tabLabel, idx) => {
+            return (
+              <BackSection key={uuidv4()} section={idx}>
+                <div className="top">{tabLabel}</div>
+                <div className="bottom">
+                  <div className="sentenceWrapper">
+                    {cardData[tabLabel].map((el) => (
+                      <div className="paragraph" key={uuidv4()}>
+                        <span className="dot">&nbsp;</span>
+                        <div>{el}</div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>{' '}
-          </BackTop>
-
-          <BackMid>
-            <div className="top">単語例</div>
-            <div className="bottom">
-              <div className="sentenceWrapper">
-                {backMid.map((el) => (
-                  <div className="paragraph" key={uuidv4()}>
-                    <span className="dot">&nbsp;</span>
-                    <div>{el}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </BackMid>
-          <BackBtm>
-            <div className="top">用例</div>
-            <div className="bottom">
-              <div className="sentenceWrapper">
-                {backBtm.map((el) => (
-                  <div className="paragraph" key={uuidv4()}>
-                    <span className="dot">&nbsp;</span>
-                    <div>{el}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </BackBtm>
+                </div>
+              </BackSection>
+            );
+          })}
         </CardSide>
       </CardWrapper>
     </CardScene>

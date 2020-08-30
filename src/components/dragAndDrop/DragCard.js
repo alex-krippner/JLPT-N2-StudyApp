@@ -69,6 +69,7 @@ const DragCard = React.forwardRef(
       connectDragSource,
       connectDropTarget,
       onRate,
+      tabLabels,
     },
     ref,
   ) => {
@@ -84,27 +85,13 @@ const DragCard = React.forwardRef(
       getNode: () => elementRef.current,
     }));
 
-    const {
-      kanji,
-      reading,
-      wordSample,
-      sentenceSample,
-      rating,
-      id,
-    } = cardData;
-
     return (
       <div ref={elementRef} className={dragClass}>
         <Card
-          item={cardData}
-          front={kanji}
-          backTop={reading}
-          backMid={wordSample}
-          backBtm={sentenceSample}
-          rating={rating}
-          id={id}
+          cardData={cardData}
           flipCard={flipCard}
           onRate={onRate}
+          tabLabels={tabLabels}
         />
       </div>
     );
