@@ -33,11 +33,26 @@ class CardContainer extends Component {
     );
   };
 
-  rateCard = (kanji, rating) => {
+  rateCard = (cardContent, cardType, rating) => {
     const { onRate } = this.props;
+
+    // update rating of local cardData copy
+
     this.setState((state) => {
-      const data = state.data.map((k) => {
-        return k.kanji !== kanji
+      let data;
+      if (cardType === 'kanji')
+        data = state.data.map((k) => {
+          return k.kanji !== cardContent
+            ? k
+            : {
+                ...k,
+                rating: k.rating === rating ? rating - 1 : rating,
+              };
+        });
+
+      if (cardType === 'vocab');
+      data = state.data.map((k) => {
+        return k.kana !== cardContent
           ? k
           : {
               ...k,
@@ -49,14 +64,13 @@ class CardContainer extends Component {
         data,
       };
     });
-
-    onRate(kanji, rating);
+    // dispatch rating to redux store
+    onRate(cardContent, rating);
   };
 
   render() {
     let flipId = '';
     const { data } = this.state;
-    console.log(data);
     const {
       label,
       inputValue,

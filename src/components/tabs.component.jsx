@@ -115,17 +115,13 @@ export default function FullWidthTabs(props) {
     const { value } = entry;
 
     // conditional dispatch methods
-    if (
-      entryKey === '読み' ||
-      entryKey === '単語例' ||
-      entryKey === '用例'
-    )
-      // dispatch to kanji form reducer
-      formDispatcher({
-        type: 'ADD_ENTRY',
-        entryKey,
-        value,
-      });
+
+    // dispatch to kanji form reducer
+    formDispatcher({
+      type: 'ADD_ENTRY',
+      entryKey,
+      value,
+    });
 
     setEntry({
       value: '',

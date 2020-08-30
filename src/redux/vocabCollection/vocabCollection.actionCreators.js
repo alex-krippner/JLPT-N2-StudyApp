@@ -1,9 +1,9 @@
 import VocabCollectionActionTypes from './vocabCollection.actionTypes';
 
-export const rateVocab = (vocab, rating) => {
+export const rateVocab = (kana, rating) => {
   return {
     type: VocabCollectionActionTypes.RATE_VOCAB,
-    payload: { vocab, rating },
+    payload: { kana, rating },
   };
 };
 

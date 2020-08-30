@@ -7,11 +7,14 @@ import styled from 'styled-components';
 
 import Star from './star.component';
 
-const CardScene = styled.div`
-  height: 40rem;
+const CardScene = styled.div.attrs((props) => ({
+  height: props.cardType === 'vocab' ? '45rem' : '40rem',
+  width: props.cardType === 'vocab' ? '35rem' : '30rem',
+}))`
+  height: ${(props) => props.height};
   perspective: 80rem;
   -moz-perspective: 150rem;
-  width: 30rem;
+  width: ${(props) => props.width};
   user-select: none;
 `;
 const CardWrapper = styled.div`
@@ -24,7 +27,7 @@ const CardWrapper = styled.div`
 `;
 
 const CardSide = styled.div.attrs((props) => ({
-  fontSize: props.cardType === 'vocab' ? '3rem' : '15rem',
+  fontSize: props.cardType === 'vocab' ? '4rem' : '15rem',
 }))`
   position: absolute;
   top: 0;
@@ -101,6 +104,7 @@ const Front = styled.div`
 
 const FrontData = styled.div`
   cursor: pointer;
+  text-align: center;
 `;
 
 const Rating = styled.div`
@@ -145,7 +149,7 @@ const Rating = styled.div`
 // `;
 
 const BackSection = styled.section.attrs((props) => ({
-  height: props.section < 2 ? '20%' : '60%',
+  height: props.section === 0 ? '20%' : '40%',
 
   borderBottom: () => {
     if (props.section === 0 || props.section === 1)
@@ -178,7 +182,7 @@ const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
     cardData.cardType === 'kanji' ? cardData.kanji : cardData.kana;
 
   return (
-    <CardScene>
+    <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>
         <CardSide front cardType={cardData.cardType}>
           <Front>
@@ -191,7 +195,10 @@ const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
               <Star
                 key={uuidv4()}
                 selected={i < cardData.rating}
-                onClick={() => onRate(front, i + 1)}
+                onClick={
+                  () => onRate(front, cardData.cardType, i + 1)
+                  // eslint-disable-next-line react/jsx-curly-newline
+                }
               />
             ))}
           </Rating>

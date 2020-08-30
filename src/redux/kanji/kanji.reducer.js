@@ -14,6 +14,7 @@ const kanjiReducer = (state = INITIAL_STATE, action) => {
       };
     case 'ADD_KANJI':
       return {
+        cardType: 'kanji',
         kanji: action.payload.kanjiData.kanji,
         id: uuidv4(),
         読み: [...action.payload.kanjiData.読み],

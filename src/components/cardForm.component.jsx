@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FullWidthTabs from './tabs.component';
 import { CardFormContext } from '../context/context';
 import { addKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
+import { addVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
 
 const CardFormStyled = styled.div`
   display: flex;
@@ -104,7 +105,13 @@ const useStyles = makeStyles({
 });
 
 const CardForm = (props) => {
-  const { label, inputValue, tabLabels, addKanjiDispatcher } = props;
+  const {
+    label,
+    inputValue,
+    tabLabels,
+    addKanjiDispatcher,
+    addVocabDispatcher,
+  } = props;
   const classes = useStyles();
 
   const { cardFormData, formDispatcher } = useContext(
@@ -119,10 +126,18 @@ const CardForm = (props) => {
         type: 'INPUT_KANJI',
         value,
       });
+
+    if (label === '語彙')
+      formDispatcher({
+        type: 'INPUT_VOCAB',
+        value,
+      });
   };
 
-  const handleCreateCard = () => {
+  const handleCreateCard = (event) => {
+    event.preventDefault();
     if (label === '漢字') addKanjiDispatcher(cardFormData);
+    if (label === '語彙') addVocabDispatcher(cardFormData);
   };
 
   return (
@@ -155,7 +170,7 @@ const CardForm = (props) => {
               label: classes.buttonLabel,
               root: classes.submitButton,
             }}
-            onClick={handleCreateCard}
+            onClick={(event) => handleCreateCard(event)}
             type="submit"
           >
             Create Card
@@ -169,6 +184,8 @@ const CardForm = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   addKanjiDispatcher: (cardFormData) =>
     dispatch(addKanji(cardFormData)),
+  addVocabDispatcher: (cardFormData) =>
+    dispatch(addVocab(cardFormData)),
 });
 
 export default connect(null, mapDispatchToProps)(CardForm);

@@ -37,7 +37,7 @@ const VOCAB_DATA = {
   あいかわらず: {
     cardType: 'vocab',
     id: uuidv4(),
-    kana: '	あいかわらず',
+    kana: 'あいかわらず',
     kanji: '相変わらず',
     語類: ['adv,adj-no'],
     定義: ['as ever', 'as usual', 'the same'],
@@ -104,19 +104,20 @@ const VOCAB_DATA = {
 
 const INITITAL_STATE = { ...VOCAB_DATA };
 const vocabCollectionReducer = (state = INITITAL_STATE, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case VocabCollectionActionTypes.RATE_VOCAB:
       return {
         ...state,
-        [action.payload.kana]: vocabReducer(
-          ...[state[action.payload.kana]],
+        [action.payload.vocab]: vocabReducer(
+          ...[state[action.payload.vocab]],
           action,
         ),
       };
     case VocabCollectionActionTypes.ADD_VOCAB:
       return {
         ...state,
-        [action.payload.kana]: vocabReducer({}, action),
+        [action.payload.vocab]: vocabReducer({}, action),
       };
     default:
       return state;

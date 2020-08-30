@@ -14,12 +14,13 @@ const vocabReducer = (state = INITIAL_STATE, action) => {
       };
     case 'ADD_VOCAB':
       return {
+        cardType: 'vocab',
         id: uuidv4(),
-        kana: action.payload.kana,
-        kanji: action.payload.kanji,
-        parts_of_speech: action.payload.parts_of_speech,
-        definitions: action.payload.definitions,
-        sentenceSample: action.payload.sentenceSample,
+        kana: action.payload.vocab,
+        kanji: action.payload.kanji || '',
+        語類: [...action.payload.語類],
+        定義: [...action.payload.定義],
+        用例: [...action.payload.用例],
         rating: 0,
       };
     default:
