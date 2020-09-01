@@ -130,38 +130,6 @@ const Rating = styled.div`
   z-index: 99;
 `;
 
-// const BackTop = styled.div`
-//   position: relative;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   height: 30%;
-//   border-bottom: solid 1px;
-//   font-size: 2.5rem;
-// `;
-
-// const BackMid = styled.div`
-//   position: relative;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   height: 25%;
-//   border-bottom: solid 1px;
-//   font-size: 3rem;
-// `;
-
-// const BackBtm = styled.div`
-//   position: relative;
-
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: flex-start;
-//   height: 45%;
-// `;
-
 const BackSection = styled.section.attrs((props) => ({
   height: props.section === 0 ? '25%' : '35%',
 

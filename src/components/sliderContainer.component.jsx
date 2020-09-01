@@ -4,22 +4,117 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import 'swiper/swiper.scss';
 
+import Popover from '@material-ui/core/Popover';
+import IconButton from '@material-ui/core/IconButton';
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Card from './card.component';
 import { flipCard } from './components.utils';
 
-// import { CardFormContext } from '../context/context';
+import { CardFormContext } from '../context/context';
 
-// import CardForm from './cardForm.component';
+import CardForm from './cardForm.component';
 
 const SliderContainerStyled = styled.div`
   display: flex;
   justify-content: space-around;
   height: 100%;
   width: 100%;
-  padding: 3rem;
+  padding: 0 6rem;
 `;
 
-const SliderContainer = ({ data, onRate, tabLabels }) => {
+const useStyles = makeStyles({
+  button: {
+    position: 'absolute',
+    top: '1rem',
+    left: '1rem',
+    zIndex: 1,
+
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+
+  addIcon: {
+    fontSize: '3.5rem',
+
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+});
+
+function SimplePopover({
+  tabLabels,
+  cardFormData,
+  formDispatcher,
+  label,
+  inputValue,
+}) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = () => {
+    setAnchorEl(document.getElementById('main'));
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  return (
+    <div>
+      <IconButton
+        variant="contained"
+        color="primary"
+        size="large"
+        className={classes.button}
+        onClick={(event) => handleClick(event)}
+      >
+        <AddToPhotosIcon className={classes.addIcon} />
+      </IconButton>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+      >
+        <CardFormContext.Provider
+          value={{ cardFormData, formDispatcher }}
+        >
+          <CardForm
+            label={label}
+            inputValue={inputValue}
+            tabLabels={tabLabels}
+            cardType="grammar"
+          />
+        </CardFormContext.Provider>
+      </Popover>
+    </div>
+  );
+}
+
+const SliderContainer = ({
+  data,
+  onRate,
+  tabLabels,
+  cardFormData,
+  formDispatcher,
+  label,
+  inputValue,
+}) => {
   const slides = data.map((el, index) => (
     <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
       <Card
@@ -36,18 +131,20 @@ const SliderContainer = ({ data, onRate, tabLabels }) => {
 
   return (
     <SliderContainerStyled>
+      <SimplePopover
+        tabLabels={tabLabels}
+        cardFormData={cardFormData}
+        formDispatcher={formDispatcher}
+        label={label}
+        inputValue={inputValue}
+      />
+
       <Swiper
         id="main"
-        spaceBetween={0}
+        grabCursor="true"
+        spaceBetween={3}
         slidesPerView={1}
-        onInit={
-          (swiper) => console.log('Swiper initialized!', swiper)
-          // eslint-disable-next-line react/jsx-curly-newline
-        }
-        onSlideChange={(swiper) => {
-          console.log('Slide index changed to: ', swiper.activeIndex);
-        }}
-        onReachEnd={() => console.log('Swiper end reached')}
+        onClick={(swiper) => swiper.setGrabCursor()}
       >
         {slides}{' '}
       </Swiper>
@@ -56,13 +153,3 @@ const SliderContainer = ({ data, onRate, tabLabels }) => {
 };
 
 export default SliderContainer;
-
-// <CardFormContext.Provider
-// value={{ cardFormData, formDispatcher }}
-// >
-// <CardForm
-//   label={label}
-//   inputValue={inputValue}
-//   tabLabels={tabLabels}
-// />
-// </CardFormContext.Provider>

@@ -72,7 +72,6 @@ class CardContainer extends Component {
         // console.log(data);
       }
 
-      console.log(data);
       return {
         data,
       };

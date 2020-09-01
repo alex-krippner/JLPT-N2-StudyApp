@@ -14,12 +14,15 @@ import { CardFormContext } from '../context/context';
 import { addKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import { addVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
 
-const CardFormStyled = styled.div`
+const CardFormStyled = styled.div.attrs((props) => ({
+  height: props.cardType === 'grammar' ? '50rem' : '45rem',
+  width: props.cardType === 'grammar' ? '70rem' : '32rem',
+}))`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 45rem;
-  width: 32em;
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
   background-color: #ffffff;
   border: solid 1px #708090;
   border-radius: 1rem;
@@ -111,6 +114,7 @@ const CardForm = (props) => {
     tabLabels,
     addKanjiDispatcher,
     addVocabDispatcher,
+    cardType,
   } = props;
   const classes = useStyles();
 
@@ -127,8 +131,6 @@ const CardForm = (props) => {
         value,
       });
     } else if (label === '語彙') {
-      console.log(cardFormData, label);
-
       formDispatcher({
         type: 'INPUT_VOCAB',
         value,
@@ -141,9 +143,15 @@ const CardForm = (props) => {
   };
 
   return (
-    <CardFormStyled>
+    <CardFormStyled cardType={cardType}>
       <header className="header">
-        <h2 className="card-title">New Card</h2>
+        {cardType ? (
+          ''
+        ) : (
+          <h2 className="card-title" cardType={cardType}>
+            New Card
+          </h2>
+        )}
         <TextField
           id="outlined-basic"
           label={label}
