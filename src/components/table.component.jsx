@@ -51,7 +51,6 @@ export default ({ entries, entryKey }) => {
 
   const startEdit = (entryIndex) => {
     setEditIdx(entryIndex);
-    console.log('click');
   };
   const endEdit = () => {
     setEditIdx(-1);
@@ -59,7 +58,6 @@ export default ({ entries, entryKey }) => {
 
   const submitEdit = (key, entryIdx) => {
     const { value } = document.getElementById('table-input');
-    console.log(value);
     formDispatcher({
       type: 'EDIT_ENTRY',
       value,

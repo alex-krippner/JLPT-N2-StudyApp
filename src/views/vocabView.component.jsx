@@ -14,10 +14,11 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const tabLabels = ['語類', '定義', '用例'];
+const tabLabels = ['漢字', '語類', '定義', '用例'];
 
 const INITIAL_FORM = {
-  vocab: '',
+  kana: '',
+  漢字: [],
   語類: [],
   定義: [],
   用例: [],
@@ -28,7 +29,7 @@ const vocabFormReducer = (state, action) => {
     case 'INPUT_VOCAB':
       return {
         ...state,
-        vocab: action.value,
+        kana: action.value,
       };
     case 'ADD_ENTRY':
       return {
@@ -82,8 +83,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  rateVocabDispatcher: (vocab, rating) =>
-    dispatch(rateVocab(vocab, rating)),
+  rateVocabDispatcher: (vocab, cardType, rating) =>
+    dispatch(rateVocab(vocab, cardType, rating)),
 });
 export default connect(
   mapStateToProps,

@@ -16,8 +16,8 @@ const vocabReducer = (state = INITIAL_STATE, action) => {
       return {
         cardType: 'vocab',
         id: uuidv4(),
-        kana: action.payload.vocab,
-        kanji: action.payload.kanji || '',
+        kana: action.payload.kana,
+        漢字: action.payload.漢字 || [],
         語類: [...action.payload.語類],
         定義: [...action.payload.定義],
         用例: [...action.payload.用例],

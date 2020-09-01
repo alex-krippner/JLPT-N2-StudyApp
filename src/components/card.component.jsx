@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable consistent-return */
 
 import React from 'react';
@@ -8,11 +9,21 @@ import styled from 'styled-components';
 import Star from './star.component';
 
 const CardScene = styled.div.attrs((props) => ({
-  height: props.cardType === 'vocab' ? '45rem' : '40rem',
-  width: props.cardType === 'vocab' ? '35rem' : '30rem',
+  height:
+    props.cardType === 'vocab'
+      ? '45rem'
+      : props.cardType === 'kanji'
+      ? '40rem'
+      : '55rem',
+  width:
+    props.cardType === 'vocab'
+      ? '35rem'
+      : props.cardType === 'kanji'
+      ? '30rem'
+      : '75rem',
 }))`
   height: ${(props) => props.height};
-  perspective: 80rem;
+  perspective: 200rem;
   -moz-perspective: 150rem;
   width: ${(props) => props.width};
   user-select: none;
@@ -27,7 +38,10 @@ const CardWrapper = styled.div`
 `;
 
 const CardSide = styled.div.attrs((props) => ({
-  fontSize: props.cardType === 'vocab' ? '4rem' : '15rem',
+  fontSize:
+    props.cardType === 'vocab' || props.cardType === 'grammar'
+      ? '4rem'
+      : '15rem',
 }))`
   position: absolute;
   top: 0;
@@ -149,11 +163,10 @@ const Rating = styled.div`
 // `;
 
 const BackSection = styled.section.attrs((props) => ({
-  height: props.section === 0 ? '20%' : '40%',
+  height: props.section === 0 ? '25%' : '35%',
 
   borderBottom: () => {
-    if (props.section === 0 || props.section === 1)
-      return 'solid 1px';
+    if (props.section < 3) return 'solid 1px';
   },
 }))`
   position: relative;
@@ -175,12 +188,16 @@ const FrontContent = ({ cardData }) => {
         <div>{cardData.kanji}</div>
       </div>
     );
+  if (cardData.cardType === 'grammar') return cardData.grammar;
 };
 
 const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
   const front =
-    cardData.cardType === 'kanji' ? cardData.kanji : cardData.kana;
-
+    cardData.cardType === 'kanji'
+      ? cardData.kanji
+      : cardData.cardType === 'vocab'
+      ? cardData.kana
+      : cardData.grammar;
   return (
     <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>

@@ -84,8 +84,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  rateKanjiDispatcher: (kanji, rating) =>
-    dispatch(rateKanji(kanji, rating)),
+  rateKanjiDispatcher: (kanji, cardType, rating) =>
+    dispatch(rateKanji(kanji, cardType, rating)),
 });
 
 export default connect(

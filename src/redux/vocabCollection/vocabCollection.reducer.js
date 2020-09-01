@@ -8,7 +8,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あっ',
-    kanji: '',
+    漢字: [''],
     語類: ['int'],
     定義: ['ah', 'oh'],
     用例: ['あ！まずい！ガソリンが切れてきた'],
@@ -18,7 +18,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'ああ',
-    kanji: '',
+    漢字: [''],
     語類: ['adv'],
     定義: ['like that', 'that way'],
     用例: ['ある人はこうだと言い、またある人はああだと言う'],
@@ -28,7 +28,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あい',
-    kanji: '愛',
+    漢字: ['愛'],
     語類: ['n,n-suf'],
     定義: ['love', 'affection', 'care'],
     用例: ['愛の動きは不可解'],
@@ -38,7 +38,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あいかわらず',
-    kanji: '相変わらず',
+    漢字: ['相変わらず'],
     語類: ['adv,adj-no'],
     定義: ['as ever', 'as usual', 'the same'],
     用例: ['君は相変わらず健康そうに見える'],
@@ -48,7 +48,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あいさつ',
-    kanji: '挨拶',
+    漢字: ['挨拶'],
     語類: ['n,vs,adj-no'],
     定義: [
       'greeting',
@@ -64,7 +64,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あいじょう',
-    kanji: '愛情',
+    漢字: ['愛情'],
     語類: ['n,adj-no'],
     定義: ['love', 'affection'],
     用例: ['とりわけ子供たちは愛情を必要とする。'],
@@ -74,7 +74,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あいず',
-    kanji: '合図',
+    漢字: ['合図'],
     語類: ['n,vs'],
     定義: ['sign', 'signal'],
     用例: ['すぐにゴーの合図をしてください。'],
@@ -84,7 +84,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あいする',
-    kanji: '愛する',
+    漢字: ['愛する'],
     語類: ['vs-s,vt'],
     定義: ['to love'],
     用例: ['ロメオはジュリエットが愛している男だ'],
@@ -94,7 +94,7 @@ const VOCAB_DATA = {
     cardType: 'vocab',
     id: uuidv4(),
     kana: 'あいだ',
-    kanji: '間',
+    漢字: ['間'],
     語類: ['n-adv,n'],
     定義: ['space; gap', 'time; pause', 'span (temporal or spatial)'],
     用例: ['あなたはメグと私の間に座ることになっています。'],
@@ -104,13 +104,12 @@ const VOCAB_DATA = {
 
 const INITITAL_STATE = { ...VOCAB_DATA };
 const vocabCollectionReducer = (state = INITITAL_STATE, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case VocabCollectionActionTypes.RATE_VOCAB:
       return {
         ...state,
-        [action.payload.vocab]: vocabReducer(
-          ...[state[action.payload.vocab]],
+        [action.payload.kana]: vocabReducer(
+          ...[state[action.payload.kana]],
           action,
         ),
       };

@@ -6,11 +6,21 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 import arrayMove from 'array-move';
 import produce from 'immer';
 import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
 
-import CardsContainerStyled from '../cardsContainer.component';
 import CardForm from '../cardForm.component';
 import DragCard from './DragCard';
 import { CardFormContext } from '../../context/context';
+
+const CardsContainerStyled = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  grid-gap: 30px;
+  height: 100%;
+  width: 100%;
+  padding: 3rem;
+`;
 
 class CardContainer extends Component {
   constructor(props) {
@@ -40,7 +50,17 @@ class CardContainer extends Component {
 
     this.setState((state) => {
       let data;
-      if (cardType === 'kanji')
+
+      if (cardType === 'vocab') {
+        data = state.data.map((k) => {
+          return k.kana !== cardContent
+            ? k
+            : {
+                ...k,
+                rating: k.rating === rating ? rating - 1 : rating,
+              };
+        });
+      } else if (cardType === 'kanji') {
         data = state.data.map((k) => {
           return k.kanji !== cardContent
             ? k
@@ -49,23 +69,16 @@ class CardContainer extends Component {
                 rating: k.rating === rating ? rating - 1 : rating,
               };
         });
+        // console.log(data);
+      }
 
-      if (cardType === 'vocab');
-      data = state.data.map((k) => {
-        return k.kana !== cardContent
-          ? k
-          : {
-              ...k,
-              rating: k.rating === rating ? rating - 1 : rating,
-            };
-      });
-
+      console.log(data);
       return {
         data,
       };
     });
     // dispatch rating to redux store
-    onRate(cardContent, rating);
+    onRate(cardContent, cardType, rating);
   };
 
   render() {

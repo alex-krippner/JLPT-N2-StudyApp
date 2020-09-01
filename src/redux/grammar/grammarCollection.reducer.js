@@ -7,6 +7,7 @@ const GRAMMAR_DATA = {
   としたら: {
     cardType: 'grammar',
     id: uuidv4(),
+    grammar: 'としたら',
     variations: [
       '～とすれば',
       '～とすると',
@@ -28,6 +29,7 @@ const GRAMMAR_DATA = {
   ものなら: {
     cardType: 'grammar',
     id: uuidv4(),
+    grammar: 'ものなら',
     variations: [''],
     意味: ['もし～できるなら、そうしたい・そうしてほしい'],
     接続: ['動辞書形　＋　ものなら'],
@@ -40,6 +42,8 @@ const GRAMMAR_DATA = {
   ようものなら: {
     cardType: 'grammar',
     id: uuidv4(),
+    grammar: 'ようものなら',
+
     variations: [''],
     意味: ['もし～たら、大変なことになる'],
     接続: ['動う・よう形　＋　ものなら'],
@@ -52,6 +56,8 @@ const GRAMMAR_DATA = {
   ないことには: {
     cardType: 'grammar',
     id: uuidv4(),
+    grammar: 'ないことには',
+
     variations: [''],
     意味: ['～なければ、あることが実現しない'],
     接続: [
@@ -66,6 +72,8 @@ const GRAMMAR_DATA = {
   を抜きにしては: {
     cardType: 'grammar',
     id: uuidv4(),
+    grammar: 'を抜きにしては',
+
     variations: [''],
     意味: [
       '～がなければ・～を考えに入れない状態では、あることが実現しない',
@@ -82,6 +90,8 @@ const GRAMMAR_DATA = {
   としても: {
     cardType: 'grammar',
     id: uuidv4(),
+    grammar: 'としても',
+
     variations: ['～にしても', '～にしろ', '～にせよ'],
     意味: [
       'たとえ～ということが事実でも、話者の気持ちはそれに影響されない',
@@ -104,6 +114,7 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GrammarCollectionActionTypes.RATE_GRAMMAR:
       return {
+        ...state,
         [action.payload.grammar]: grammarReducer(
           ...[state[action.payload.grammar]],
           action,

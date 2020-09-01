@@ -19,6 +19,7 @@ const Sidebar = () => (
     <Link to="/">Home</Link>
     <Link to="/kanji">Kanji</Link>
     <Link to="/vocab">Vocabulary</Link>
+    <Link to="/grammar">Grammar</Link>
   </Wrapper>
 );
 export default Sidebar;

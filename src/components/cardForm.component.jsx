@@ -121,21 +121,21 @@ const CardForm = (props) => {
   const handleChange = (event) => {
     const { value } = event.target;
 
-    if (label === '漢字')
+    if (label === '漢字') {
       formDispatcher({
         type: 'INPUT_KANJI',
         value,
       });
+    } else if (label === '語彙') {
+      console.log(cardFormData, label);
 
-    if (label === '語彙')
       formDispatcher({
         type: 'INPUT_VOCAB',
         value,
       });
+    }
   };
-
-  const handleCreateCard = (event) => {
-    event.preventDefault();
+  const handleCreateCard = () => {
     if (label === '漢字') addKanjiDispatcher(cardFormData);
     if (label === '語彙') addVocabDispatcher(cardFormData);
   };
@@ -170,7 +170,7 @@ const CardForm = (props) => {
               label: classes.buttonLabel,
               root: classes.submitButton,
             }}
-            onClick={(event) => handleCreateCard(event)}
+            onClick={handleCreateCard}
             type="submit"
           >
             Create Card

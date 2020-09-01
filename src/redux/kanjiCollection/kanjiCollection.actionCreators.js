@@ -1,9 +1,9 @@
 import KanjiCollectionActionTypes from './kanjiCollection.actionTypes';
 
-export const rateKanji = (kanji, rating) => {
+export const rateKanji = (kanji, cardType, rating) => {
   return {
     type: KanjiCollectionActionTypes.RATE_KANJI,
-    payload: { kanji, rating },
+    payload: { kanji, cardType, rating },
   };
 };
 

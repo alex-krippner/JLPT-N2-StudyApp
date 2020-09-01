@@ -1,9 +1,9 @@
 import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
 
-export const rateGrammar = (grammar, rating) => {
+export const rateGrammar = (grammar, cardType, rating) => {
   return {
     type: GrammarCollectionActionTypes.RATE_GRAMMAR,
-    payload: { grammar, rating },
+    payload: { grammar, cardType, rating },
   };
 };
 
