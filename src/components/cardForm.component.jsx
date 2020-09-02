@@ -17,6 +17,8 @@ import { addVocab } from '../redux/vocabCollection/vocabCollection.actionCreator
 const CardFormStyled = styled.div.attrs((props) => ({
   height: props.cardType === 'grammar' ? '50rem' : '45rem',
   width: props.cardType === 'grammar' ? '70rem' : '32rem',
+  cardTitlePosition: props.cardType === 'grammar' ? '5px' : '-2rem',
+  cardTitleWidth: props.cardType === 'grammar' ? '25%' : '50%',
 }))`
   display: flex;
   flex-direction: column;
@@ -35,19 +37,21 @@ const CardFormStyled = styled.div.attrs((props) => ({
     align-items: center;
     flex: 0 1 30%;
     width: 100%;
+    margin-bottom: 2rem;
+
     border-radius: 0 0 2rem 2rem;
 
     .card-title {
       position: absolute;
-      top: -2rem;
-      left: -2rem;
+      top: ${(props) => props.cardTitlePosition};
+      left: ${(props) => props.cardTitlePosition};
       z-index: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-left: 3rem;
+      margin-left: ${(props) => props.cardTitlePosition};
       height: 5rem;
-      width: 50%;
+      width: ${(props) => props.cardTitleWidth};
       border-radius: 0 2rem 0 2rem;
       background-color: #00ced1;
       box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
@@ -145,13 +149,10 @@ const CardForm = (props) => {
   return (
     <CardFormStyled cardType={cardType}>
       <header className="header">
-        {cardType ? (
-          ''
-        ) : (
-          <h2 className="card-title" cardType={cardType}>
-            New Card
-          </h2>
-        )}
+        <h2 className="card-title" cardType={cardType}>
+          New Card
+        </h2>
+
         <TextField
           id="outlined-basic"
           label={label}

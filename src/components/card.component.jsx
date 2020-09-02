@@ -169,7 +169,11 @@ const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
   return (
     <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>
-        <CardSide front cardType={cardData.cardType}>
+        <CardSide
+          front
+          cardType={cardData.cardType}
+          className="card-side"
+        >
           <Front>
             <FrontData onClick={() => flipCard(cardData.id)}>
               <FrontContent cardData={cardData} />

@@ -25,6 +25,11 @@ const SliderContainerStyled = styled.div`
 `;
 
 const useStyles = makeStyles({
+  root: {
+    '& .MuiPaper-root': {
+      borderRadius: '1rem',
+    },
+  },
   button: {
     position: 'absolute',
     top: '1rem',
@@ -57,10 +62,16 @@ function SimplePopover({
 
   const handleClick = () => {
     setAnchorEl(document.getElementById('main'));
+    [...document.getElementsByClassName('card-side')].forEach((el) =>
+      el.setAttribute('style', 'background: rgba(0,0,0,0.4)'),
+    );
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    [...document.getElementsByClassName('card-side')].forEach((el) =>
+      el.setAttribute('style', 'background: inheret'),
+    );
   };
 
   const open = Boolean(anchorEl);
@@ -71,7 +82,6 @@ function SimplePopover({
       <IconButton
         variant="contained"
         color="primary"
-        size="large"
         className={classes.button}
         onClick={(event) => handleClick(event)}
       >
@@ -90,6 +100,7 @@ function SimplePopover({
           vertical: 'center',
           horizontal: 'center',
         }}
+        className={classes.root}
       >
         <CardFormContext.Provider
           value={{ cardFormData, formDispatcher }}
