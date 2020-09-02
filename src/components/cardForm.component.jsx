@@ -13,6 +13,7 @@ import FullWidthTabs from './tabs.component';
 import { CardFormContext } from '../context/context';
 import { addKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import { addVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
+import { addGrammar } from '../redux/grammar/grammarCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
   height: props.cardType === 'grammar' ? '50rem' : '45rem',
@@ -118,6 +119,7 @@ const CardForm = (props) => {
     tabLabels,
     addKanjiDispatcher,
     addVocabDispatcher,
+    addGrammarDispatcher,
     cardType,
   } = props;
   const classes = useStyles();
@@ -128,7 +130,6 @@ const CardForm = (props) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-
     if (label === '漢字') {
       formDispatcher({
         type: 'INPUT_KANJI',
@@ -139,19 +140,23 @@ const CardForm = (props) => {
         type: 'INPUT_VOCAB',
         value,
       });
+    } else if (label === '文法') {
+      formDispatcher({
+        type: 'INPUT_GRAMMAR',
+        value,
+      });
     }
   };
   const handleCreateCard = () => {
     if (label === '漢字') addKanjiDispatcher(cardFormData);
     if (label === '語彙') addVocabDispatcher(cardFormData);
+    if (label === '文法') addGrammarDispatcher(cardFormData);
   };
 
   return (
     <CardFormStyled cardType={cardType}>
       <header className="header">
-        <h2 className="card-title" cardType={cardType}>
-          New Card
-        </h2>
+        <h2 className="card-title">New Card</h2>
 
         <TextField
           id="outlined-basic"
@@ -179,7 +184,7 @@ const CardForm = (props) => {
               label: classes.buttonLabel,
               root: classes.submitButton,
             }}
-            onClick={handleCreateCard}
+            onClick={(event) => handleCreateCard(event)}
             type="submit"
           >
             Create Card
@@ -195,6 +200,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addKanji(cardFormData)),
   addVocabDispatcher: (cardFormData) =>
     dispatch(addVocab(cardFormData)),
+  addGrammarDispatcher: (cardFormData) =>
+    dispatch(addGrammar(cardFormData)),
 });
 
 export default connect(null, mapDispatchToProps)(CardForm);

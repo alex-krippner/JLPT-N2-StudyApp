@@ -9,7 +9,11 @@ import grammarCollectionReducer from './grammar/grammarCollection.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['kanjiCollection', 'vocabCollection'],
+  whitelist: [
+    'kanjiCollection',
+    'vocabCollection',
+    'grammarCollection',
+  ],
 };
 
 const rootReducer = combineReducers({

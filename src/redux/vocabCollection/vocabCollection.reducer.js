@@ -116,7 +116,7 @@ const vocabCollectionReducer = (state = INITITAL_STATE, action) => {
     case VocabCollectionActionTypes.ADD_VOCAB:
       return {
         ...state,
-        [action.payload.vocab]: vocabReducer({}, action),
+        [action.payload.kana]: vocabReducer({}, action),
       };
     default:
       return state;

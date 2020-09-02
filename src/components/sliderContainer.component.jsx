@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
+import SwiperCore, { Pagination } from 'swiper';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import 'swiper/swiper.scss';
+import 'swiper/components/pagination/pagination.scss';
 
 import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
@@ -58,20 +61,34 @@ function SimplePopover({
   inputValue,
 }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [status, setStatus] = useState(false);
+
+  const changeBg = (stat) => {
+    if (stat) {
+      [
+        ...document.getElementsByClassName('card-side'),
+      ].forEach((el) =>
+        el.setAttribute('style', 'background: rgba(0,0,0, 0.4);'),
+      );
+    } else {
+      [
+        ...document.getElementsByClassName('card-side'),
+      ].forEach((el) =>
+        el.setAttribute('style', 'background: inheret; '),
+      );
+    }
+  };
+  useLayoutEffect(() => changeBg(status));
 
   const handleClick = () => {
     setAnchorEl(document.getElementById('main'));
-    [...document.getElementsByClassName('card-side')].forEach((el) =>
-      el.setAttribute('style', 'background: rgba(0,0,0,0.4)'),
-    );
+    setStatus(!status);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    [...document.getElementsByClassName('card-side')].forEach((el) =>
-      el.setAttribute('style', 'background: inheret'),
-    );
+    setStatus(!status);
   };
 
   const open = Boolean(anchorEl);
@@ -117,6 +134,8 @@ function SimplePopover({
   );
 }
 
+SwiperCore.use([Pagination]);
+
 const SliderContainer = ({
   data,
   onRate,
@@ -153,10 +172,12 @@ const SliderContainer = ({
       <Swiper
         id="main"
         grabCursor="true"
+        pagination={{ clickable: true }}
         spaceBetween={3}
         slidesPerView={1}
         onClick={(swiper) => swiper.setGrabCursor()}
       >
+        <div className="swiper-pagination" />
         {slides}{' '}
       </Swiper>
     </SliderContainerStyled>

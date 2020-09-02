@@ -91,15 +91,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(GrammarView);
-
-// <DndProvider options={HTML5toTouch}>
-// <CardContainer
-//   data={grammar}
-//   label="文法"
-//   inputValue={GrammarFormData.grammar}
-//   onRate={rateGrammarDispatcher}
-//   tabLabels={tabLabels}
-//   cardFormData={GrammarFormData}
-//   formDispatcher={dispatchGrammarFormAction}
-// />
-// </DndProvider>

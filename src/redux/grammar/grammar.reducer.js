@@ -16,6 +16,7 @@ const grammarReducer = (state = INITIAL_STATE, action) => {
       return {
         cardType: 'grammar',
         id: uuidv4(),
+        grammar: action.payload.grammarData.grammar,
         variations: [...action.payload.grammarData.variations],
         意味: [...action.payload.grammarData.意味],
         接続: [...action.payload.grammarData.接続],

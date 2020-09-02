@@ -53,7 +53,7 @@ const CardSide = styled.div.attrs((props) => ({
 
   backface-visibility: hidden;
   border-radius: 1rem;
-  transition: all 0.8s ease;
+  transition: transform 0.8s ease, background 0.8s ease;
   background-color: #ffffff;
   border: solid 1px #708090;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
@@ -131,10 +131,10 @@ const Rating = styled.div`
 `;
 
 const BackSection = styled.section.attrs((props) => ({
-  height: props.section === 0 ? '25%' : '35%',
+  height: props.section === 0 ? '15%' : '45%',
 
   borderBottom: () => {
-    if (props.section < 3) return 'solid 1px';
+    if (props.section < props.labelNum - 1) return 'solid 1px';
   },
 }))`
   position: relative;
@@ -192,10 +192,18 @@ const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
             ))}
           </Rating>
         </CardSide>
-        <CardSide back onClick={() => flipCard(cardData.id)}>
+        <CardSide
+          back
+          onClick={() => flipCard(cardData.id)}
+          className="card-side"
+        >
           {tabLabels.map((tabLabel, idx) => {
             return (
-              <BackSection key={uuidv4()} section={idx}>
+              <BackSection
+                key={uuidv4()}
+                section={idx}
+                labelNum={tabLabels.length}
+              >
                 <div className="top">{tabLabel}</div>
                 <div className="bottom">
                   <div className="sentenceWrapper">

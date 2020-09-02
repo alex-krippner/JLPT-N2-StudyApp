@@ -123,7 +123,11 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
 
     case GrammarCollectionActionTypes.ADD_GRAMMAR:
       return {
-        [action.payload.grammar]: grammarReducer({}, action),
+        ...state,
+        [action.payload.grammarData.grammar]: grammarReducer(
+          {},
+          action,
+        ),
       };
     default:
       return state;
