@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import KanjiCollectionActionTypes from './kanjiCollection.actionTypes';
 import kanjiReducer from '../kanji/kanji.reducer';
+import deleteCard from '../utils';
 
 const KANJI_DATA = {
   濯: {
@@ -137,6 +138,8 @@ const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         [action.payload.kanjiData.kanji]: kanjiReducer({}, action),
       };
+    case 'DELETE_CARD':
+      return deleteCard(state, action.payload.card);
     default:
       return state;
   }

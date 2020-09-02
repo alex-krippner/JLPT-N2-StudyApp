@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
 import grammarReducer from './grammar.reducer';
+import deleteCard from '../utils';
 
 const GRAMMAR_DATA = {
   としたら: {
@@ -129,6 +130,8 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
           action,
         ),
       };
+    case 'DELETE_CARD':
+      return deleteCard(state, action.payload.card);
     default:
       return state;
   }

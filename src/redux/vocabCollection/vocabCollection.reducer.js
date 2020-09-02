@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import VocabCollectionActionTypes from './vocabCollection.actionTypes';
 import vocabReducer from '../vocab/vocab.reducer';
+import deleteCard from '../utils';
 
 const VOCAB_DATA = {
   あっ: {
@@ -118,6 +119,9 @@ const vocabCollectionReducer = (state = INITITAL_STATE, action) => {
         ...state,
         [action.payload.kana]: vocabReducer({}, action),
       };
+    case 'DELETE_CARD':
+      return deleteCard(state, action.payload.card);
+
     default:
       return state;
   }

@@ -3,10 +3,19 @@
 
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import { makeStyles } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import Star from './star.component';
+import { deleteCard } from '../redux/utils.actionCreator';
 
 const CardScene = styled.div.attrs((props) => ({
   height:
@@ -110,10 +119,17 @@ const CardSide = styled.div.attrs((props) => ({
 `;
 
 const Front = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+
+  .menu-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
 `;
 
 const FrontData = styled.div`
@@ -147,6 +163,24 @@ const BackSection = styled.section.attrs((props) => ({
   height: ${(props) => props.height};
 `;
 
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+
+  menuButton: {
+    position: 'absolute',
+    top: '1rem',
+    right: '1rem',
+  },
+
+  icon: {
+    fontSize: '2rem',
+    cursor: 'pointer',
+  },
+});
+
 const FrontContent = ({ cardData }) => {
   if (cardData.cardType === 'kanji') return cardData.kanji;
   if (cardData.cardType === 'vocab')
@@ -159,7 +193,13 @@ const FrontContent = ({ cardData }) => {
   if (cardData.cardType === 'grammar') return cardData.grammar;
 };
 
-const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
+const Card = ({
+  cardData,
+  flipCard,
+  onRate,
+  tabLabels,
+  deleteCardDispatcher,
+}) => {
   const front =
     cardData.cardType === 'kanji'
       ? cardData.kanji
@@ -175,6 +215,12 @@ const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
           className="card-side"
         >
           <Front>
+            <LongMenu
+              front={front}
+              handleDelete={deleteCardDispatcher}
+              cardId={cardData.id}
+            />
+
             <FrontData onClick={() => flipCard(cardData.id)}>
               <FrontContent cardData={cardData} />
             </FrontData>
@@ -224,4 +270,110 @@ const Card = ({ cardData, flipCard, onRate, tabLabels }) => {
   );
 };
 
-export default Card;
+function LongMenu({ front, handleDelete, cardId }) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleEdit = (event, f) => {
+    if ([...event.currentTarget.classList].includes('edit'))
+      console.log('editing', f, event.currentTarget.classList);
+  };
+
+  // const handleDelete = (event, f) => {
+  //   if ([...event.currentTarget.classList].includes('delete'))
+  //     console.log('deleting', f, event.currentTarget.classList);
+  // };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // const options = [
+  //   <IconButton variant="contained" color="primary" className="edit">
+  //     <EditIcon className={classes.icon} />
+  //   </IconButton>,
+  //   <IconButton
+  //     variant="contained"
+  //     color="secondary"
+  //     edge="end"
+  //     className="bin"
+  //   >
+  //     <DeleteIcon className={classes.icon} />
+  //   </IconButton>,
+  // ];
+
+  return (
+    <div>
+      <IconButton
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+        className={classes.menuButton}
+      >
+        <MoreVertIcon className={classes.icon} />
+      </IconButton>
+      <Menu
+        className={classes.root}
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            display: 'flex',
+            justifyContent: 'center',
+            width: '10ch',
+          },
+        }}
+      >
+        <MenuItem
+          key={uuidv4()}
+          className="edit"
+          onClick={(e) => {
+            handleClose();
+            handleEdit(e, front);
+          }}
+        >
+          <IconButton
+            variant="contained"
+            color="primary"
+            className="edit"
+          >
+            <EditIcon className={classes.icon} />
+          </IconButton>
+        </MenuItem>
+
+        <MenuItem
+          key={uuidv4()}
+          className="delete"
+          onClick={() => {
+            handleClose();
+            handleDelete(front, cardId);
+          }}
+        >
+          <IconButton
+            variant="contained"
+            color="secondary"
+            edge="end"
+            className="bin"
+          >
+            <DeleteIcon className={classes.icon} />
+          </IconButton>
+        </MenuItem>
+      </Menu>
+    </div>
+  );
+}
+const mapDispatchToProps = (dispatch) => ({
+  deleteCardDispatcher: (card, cardId) =>
+    dispatch(deleteCard(card, cardId)),
+});
+
+export default connect(null, mapDispatchToProps)(Card);
