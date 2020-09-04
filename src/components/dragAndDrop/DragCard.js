@@ -26,7 +26,6 @@ const cardTarget = {
     if (!node) return null;
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
-    console.log(dragIndex, hoverIndex);
     // Don't replace items with themselves
     if (dragIndex === hoverIndex) return;
 
@@ -71,6 +70,11 @@ const DragCard = React.forwardRef(
       connectDropTarget,
       onRate,
       tabLabels,
+      deleteCard,
+      cardFormData,
+      formDispatcher,
+      label,
+      inputValue,
     },
     ref,
   ) => {
@@ -93,6 +97,11 @@ const DragCard = React.forwardRef(
           flipCard={flipCard}
           onRate={onRate}
           tabLabels={tabLabels}
+          deleteCard={deleteCard}
+          cardFormData={cardFormData}
+          formDispatcher={formDispatcher}
+          label={label}
+          inputValue={inputValue}
         />
       </div>
     );

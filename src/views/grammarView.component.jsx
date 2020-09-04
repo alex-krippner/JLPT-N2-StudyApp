@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const tabLabels = ['意味', '接続', '用例'];
+const tabLabels = ['variations', '意味', '接続', '用例'];
 
 const INITIAL_FORM = {
   grammar: '',

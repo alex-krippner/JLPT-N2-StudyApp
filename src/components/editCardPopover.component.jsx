@@ -1,31 +1,11 @@
 import React, { useState, useLayoutEffect } from 'react';
-import styled from 'styled-components';
-import SwiperCore, { Pagination } from 'swiper';
-import { connect } from 'react-redux';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { v4 as uuidv4 } from 'uuid';
-import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.scss';
 
 import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
-import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
-
-import Card from './card.component';
 import CardForm from './cardForm.component';
-import { flipCard } from './components.utils';
-import { deleteCard } from '../redux/utils.actionCreator';
-
 import { CardFormContext } from '../context/context';
-
-const SliderContainerStyled = styled.div`
-  display: flex;
-  justify-content: space-around;
-  height: 100%;
-  width: 100%;
-  padding: 0 6rem;
-`;
 
 const useStyles = makeStyles({
   root: {
@@ -53,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SimplePopover({
+function EditCardPopover({
   tabLabels,
   cardFormData,
   formDispatcher,
@@ -102,7 +82,7 @@ function SimplePopover({
         className={classes.button}
         onClick={(event) => handleClick(event)}
       >
-        <AddToPhotosIcon className={classes.addIcon} />
+        <EditIcon className={classes.addIcon} />
       </IconButton>
       <Popover
         id={id}
@@ -134,59 +114,4 @@ function SimplePopover({
   );
 }
 
-SwiperCore.use([Pagination]);
-
-const SliderContainer = ({
-  data,
-  onRate,
-  tabLabels,
-  cardFormData,
-  formDispatcher,
-  label,
-  inputValue,
-  deleteCardDispatcher,
-}) => {
-  const slides = data.map((el, index) => (
-    <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
-      <Card
-        cardData={el}
-        key={uuidv4()}
-        index={index}
-        rating={el.rating}
-        onRate={onRate}
-        tabLabels={tabLabels}
-        flipCard={flipCard}
-        deleteCard={deleteCardDispatcher}
-      />
-    </SwiperSlide>
-  ));
-
-  return (
-    <SliderContainerStyled>
-      <SimplePopover
-        tabLabels={tabLabels}
-        cardFormData={cardFormData}
-        formDispatcher={formDispatcher}
-        label={label}
-        inputValue={inputValue}
-      />
-
-      <Swiper
-        id="main"
-        grabCursor="true"
-        pagination={{ clickable: true }}
-        spaceBetween={3}
-        slidesPerView={1}
-        onClick={(swiper) => swiper.setGrabCursor()}
-      >
-        <div className="swiper-pagination" />
-        {slides}{' '}
-      </Swiper>
-    </SliderContainerStyled>
-  );
-};
-const mapDispatchToProps = (dispatch) => ({
-  deleteCardDispatcher: (card, cardId) =>
-    dispatch(deleteCard(card, cardId)),
-});
-export default connect(null, mapDispatchToProps)(SliderContainer);
+export default EditCardPopover;

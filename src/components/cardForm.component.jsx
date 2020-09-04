@@ -121,6 +121,7 @@ const CardForm = (props) => {
     addVocabDispatcher,
     addGrammarDispatcher,
     cardType,
+    editing,
   } = props;
   const classes = useStyles();
 
@@ -156,7 +157,7 @@ const CardForm = (props) => {
   return (
     <CardFormStyled cardType={cardType}>
       <header className="header">
-        <h2 className="card-title">New Card</h2>
+        {editing ? '' : <h2 className="card-title">New Card</h2>}
 
         <TextField
           id="outlined-basic"

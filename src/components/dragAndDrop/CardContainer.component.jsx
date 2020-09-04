@@ -2,6 +2,8 @@
 /* eslint-disable no-else-return */
 /* eslint-disable consistent-return */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import arrayMove from 'array-move';
 import produce from 'immer';
@@ -11,6 +13,7 @@ import styled from 'styled-components';
 import CardForm from '../cardForm.component';
 import DragCard from './DragCard';
 import { CardFormContext } from '../../context/context';
+import { deleteCard } from '../../redux/utils.actionCreator';
 
 const CardsContainerStyled = styled.div`
   display: flex;
@@ -71,13 +74,22 @@ class CardContainer extends Component {
         });
         // console.log(data);
       }
-
       return {
         data,
       };
     });
     // dispatch rating to redux store
     onRate(cardContent, cardType, rating);
+  };
+
+  deleteCard = (card, cardId) => {
+    const { deleteCardDispatcher } = this.props;
+    this.setState((state) => {
+      return {
+        data: state.data.filter((el) => el.id !== cardId),
+      };
+    });
+    deleteCardDispatcher(card);
   };
 
   render() {
@@ -115,6 +127,11 @@ class CardContainer extends Component {
                   rating={el.rating}
                   onRate={this.rateCard}
                   tabLabels={tabLabels}
+                  deleteCard={this.deleteCard}
+                  cardFormData={cardFormData}
+                  formDispatcher={formDispatcher}
+                  label={label}
+                  inputValue={inputValue}
                 />
               </div>
             </Flipped>
@@ -124,4 +141,9 @@ class CardContainer extends Component {
     );
   }
 }
-export default CardContainer;
+
+const mapDispatchToProps = (dispatch) => ({
+  deleteCardDispatcher: (card, cardId) =>
+    dispatch(deleteCard(card, cardId)),
+});
+export default connect(null, mapDispatchToProps)(CardContainer);
