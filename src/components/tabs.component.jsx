@@ -78,7 +78,7 @@ function TabPanel(props) {
 export default function FullWidthTabs(props) {
   const { tabLabels } = props;
   const classes = useStyles();
-  const { cardFormData, formDispatcher } = useContext(
+  const { cardFormData, dispatchFormAction } = useContext(
     CardFormContext,
   );
 
@@ -90,16 +90,16 @@ export default function FullWidthTabs(props) {
 
   const [tabValue, setTabValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const changeTab = (event, newValue) => {
     setTabValue(newValue);
   };
 
-  const [entryKey, setEntryKey] = useState(tabLabels[0]);
+  const [placeholder, setPlaceholder] = useState(tabLabels[0]);
   const [entry, setEntry] = useState({
     value: '',
   });
 
-  const handlePlaceholder = (curKey) => setEntryKey(curKey);
+  const handlePlaceholder = (curKey) => setPlaceholder(curKey);
   const handleEntry = (event) => {
     setEntry({
       value: event.target.value,
@@ -110,16 +110,18 @@ export default function FullWidthTabs(props) {
    ********************************************
    */
 
-  const handleSubmit = (event) => {
+  // FORM REDUCER HANDLERS
+
+  const handleAddEntry = (event) => {
     event.preventDefault();
     const { value } = entry;
 
     // conditional dispatch methods
 
     // dispatch to kanji form reducer
-    formDispatcher({
+    dispatchFormAction({
       type: 'ADD_ENTRY',
-      entryKey,
+      placeholder,
       value,
     });
 
@@ -136,7 +138,7 @@ export default function FullWidthTabs(props) {
       >
         <Tabs
           value={tabValue}
-          onChange={handleChange}
+          onChange={changeTab}
           indicatorColor="primary"
           textColor="primary"
           aria-label="full width tabs"
@@ -163,14 +165,14 @@ export default function FullWidthTabs(props) {
             value={entry.value}
             className={classes.input}
             onChange={(event) => handleEntry(event)}
-            placeholder={entryKey}
+            placeholder={placeholder}
             id="entry-input"
           />
         </Grid>
         <Grid item>
           <IconButton
             onClick={(event) => {
-              handleSubmit(event);
+              handleAddEntry(event);
             }}
           >
             <AddCircleOutlineIcon fontSize="large" />

@@ -39,6 +39,7 @@ function EditCardPopover({
   formDispatcher,
   label,
   inputValue,
+  openPop,
 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -86,7 +87,7 @@ function EditCardPopover({
       </IconButton>
       <Popover
         id={id}
-        open={open}
+        open={openPop}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{

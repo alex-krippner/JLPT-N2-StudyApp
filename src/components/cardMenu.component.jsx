@@ -141,6 +141,7 @@ const CardMenu = ({
               tabLabels={tabLabels}
               cardType={cardData.cardType}
               editing={openPop}
+              cardId={cardId}
             />
           </CardFormContext.Provider>
         </Popover>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useReducer } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -112,41 +112,91 @@ const useStyles = makeStyles({
   buttonLabel: { textTransform: 'capitalize', fontSize: '1.5rem' },
 });
 
+const FormReducer = (state, action) => {
+  switch (action.type) {
+    case 'INPUT_MAIN':
+      return {
+        ...state,
+        main: action.value,
+      };
+    case 'ADD_ENTRY':
+      return {
+        ...state,
+        [action.entryKey]: [...state[action.entryKey], action.value],
+      };
+    case 'EDIT_ENTRY':
+      return {
+        ...state,
+        [action.key]: state[action.key].map((el, idx) =>
+          idx === action.entryIdx ? action.value : el,
+        ),
+      };
+    case 'REMOVE_ENTRY':
+      return {
+        ...state,
+        [action.key]: state[action.key].filter(
+          (el, idx) => idx !== action.entryIdx,
+        ),
+      };
+
+    default:
+      return state;
+  }
+};
+
 const CardForm = (props) => {
   const {
     label,
-    inputValue,
     tabLabels,
     addKanjiDispatcher,
     addVocabDispatcher,
     addGrammarDispatcher,
     cardType,
     editing,
+    cardData,
+    cardId,
   } = props;
   const classes = useStyles();
 
-  const { cardFormData, formDispatcher } = useContext(
-    CardFormContext,
+  const initCardForm = () => {
+    console.log('data inside initCardForm function: ', cardData);
+    let initState;
+    // RETURN CARD DATA OF CURRENTLY EDITING CARD
+    if (editing)
+      initState = { ...cardData.filter((el) => el.id === cardId) };
+    // create an object with only the keys of the data object and empty arrays as the value
+
+    if (!editing)
+      initState = Object.keys(cardData[0]).reduce((d, key) => {
+        if (key === 'rating') {
+          return {
+            ...d,
+            rating: 0,
+          };
+        }
+        return {
+          ...d,
+          [key]: [],
+        };
+      }, {});
+    console.log(initState);
+    return initState;
+  };
+  console.log('cardData from props: ', cardData);
+  const [cardFormData, dispatchFormAction] = useReducer(
+    FormReducer,
+    cardData,
+    initCardForm,
   );
+
+  console.log('INITIAL_FORM', cardFormData);
 
   const handleChange = (event) => {
     const { value } = event.target;
-    if (label === '漢字') {
-      formDispatcher({
-        type: 'INPUT_KANJI',
-        value,
-      });
-    } else if (label === '語彙') {
-      formDispatcher({
-        type: 'INPUT_VOCAB',
-        value,
-      });
-    } else if (label === '文法') {
-      formDispatcher({
-        type: 'INPUT_GRAMMAR',
-        value,
-      });
-    }
+    dispatchFormAction({
+      type: 'INPUT_MAIN',
+      value,
+    });
   };
   const handleCreateCard = () => {
     if (label === '漢字') addKanjiDispatcher(cardFormData);
@@ -162,7 +212,7 @@ const CardForm = (props) => {
         <TextField
           id="outlined-basic"
           label={label}
-          value={inputValue}
+          value={FormData.main}
           variant="outlined"
           className={`${classes.root} ${classes.textfield}`}
           onChange={(event) => handleChange(event)}
@@ -173,7 +223,11 @@ const CardForm = (props) => {
         className={classes.container}
         id="form-container"
       >
-        <FullWidthTabs tabLabels={tabLabels} />
+        <CardFormContext.Provider
+          value={{ cardFormData, dispatchFormAction }}
+        >
+          <FullWidthTabs tabLabels={tabLabels} />
+        </CardFormContext.Provider>
       </Grid>
       <Grid container className={classes.footer}>
         <form>

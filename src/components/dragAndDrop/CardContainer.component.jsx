@@ -113,6 +113,7 @@ class CardContainer extends Component {
               label={label}
               inputValue={inputValue}
               tabLabels={tabLabels}
+              cardData={data}
             />
           </CardFormContext.Provider>
 

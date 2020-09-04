@@ -36,13 +36,13 @@ export default ({ entries, entryKey }) => {
   const classes = useStyles();
 
   // CARD FORM STATE
-  const { formDispatcher } = useContext(CardFormContext);
+  const { dispatchFormAction } = useContext(CardFormContext);
 
   // LOCAL STATE
   const [editIdx, setEditIdx] = useState(-1);
 
   const handleRemove = (key, entryIdx) => {
-    formDispatcher({
+    dispatchFormAction({
       type: 'REMOVE_ENTRY',
       key,
       entryIdx,
@@ -58,7 +58,7 @@ export default ({ entries, entryKey }) => {
 
   const submitEdit = (key, entryIdx) => {
     const { value } = document.getElementById('table-input');
-    formDispatcher({
+    dispatchFormAction({
       type: 'EDIT_ENTRY',
       value,
       key,
