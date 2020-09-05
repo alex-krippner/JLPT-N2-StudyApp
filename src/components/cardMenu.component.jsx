@@ -19,6 +19,10 @@ import { CardFormContext } from '../context/context';
 const useStyles = makeStyles({
   root: {
     background: 'rgba(0,0,0,0.4)',
+
+    '& .MuiPopover-paper': {
+      overflow: 'visible',
+    },
   },
 
   menuButton: {
@@ -40,7 +44,6 @@ const CardMenu = ({
   cardFormData,
   formDispatcher,
   label,
-  inputValue,
   tabLabels,
   cardData,
 }) => {
@@ -49,16 +52,6 @@ const CardMenu = ({
   const [anchorPop, setAnchorPop] = useState(null);
   const openPop = Boolean(anchorPop);
   const open = Boolean(anchorEl);
-
-  const handleEdit = (event, f) => {
-    if ([...event.currentTarget.classList].includes('edit'))
-      console.log('editing', f, event.currentTarget.classList);
-  };
-
-  // const deleteCard = (event, f) => {
-  //   if ([...event.currentTarget.classList].includes('delete'))
-  //     console.log('deleting', f, event.currentTarget.classList);
-  // };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,7 +80,6 @@ const CardMenu = ({
         <MoreVertIcon className={classes.icon} />
       </IconButton>
       <Menu
-        // className={classes.root}
         id="long-menu"
         anchorEl={anchorEl}
         keepMounted
@@ -104,9 +96,8 @@ const CardMenu = ({
         <MenuItem
           key={uuidv4()}
           className="edit"
-          onClick={(e) => {
+          onClick={() => {
             handleClose();
-            handleEdit(e, front);
             handlePopover();
           }}
         >
@@ -137,11 +128,11 @@ const CardMenu = ({
           >
             <CardForm
               label={label}
-              inputValue={inputValue}
               tabLabels={tabLabels}
               cardType={cardData.cardType}
               editing={openPop}
               cardId={cardId}
+              cardData={cardData}
             />
           </CardFormContext.Provider>
         </Popover>

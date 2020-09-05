@@ -11,7 +11,10 @@ import { makeStyles } from '@material-ui/core/styles';
 // LOCAL IMPORTS
 import FullWidthTabs from './tabs.component';
 import { CardFormContext } from '../context/context';
-import { addKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
+import {
+  addKanji,
+  editKanji,
+} from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import { addVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
 import { addGrammar } from '../redux/grammar/grammarCollection.actionCreators';
 
@@ -54,11 +57,17 @@ const CardFormStyled = styled.div.attrs((props) => ({
       height: 5rem;
       width: ${(props) => props.cardTitleWidth};
       border-radius: 0 2rem 0 2rem;
-      background-color: #00ced1;
+      background-color: #66cdaa;
       box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
       font-weight: 400;
       font-size: 2rem;
       color: #f5f5f5;
+    }
+
+    .card-front {
+      align-self: flex-end;
+      font-size: 4rem;
+      color: #5f9ea0;
     }
   }
 
@@ -120,7 +129,6 @@ const FormReducer = (state, action) => {
         [action.label]: action.value,
       };
     case 'ADD_ENTRY':
-      console.log(state, action);
       return {
         ...state,
         [action.placeholder]: [
@@ -155,21 +163,19 @@ const CardForm = (props) => {
     addKanjiDispatcher,
     addVocabDispatcher,
     addGrammarDispatcher,
+    editKanjiDispatcher,
     cardType,
     editing,
     cardData,
-    cardId,
   } = props;
   const classes = useStyles();
 
   // SETUP INITITIAL CARD FORM REDUCER STATE
   const initCardForm = () => {
-    console.log('data inside initCardForm function: ', cardData);
     let initState;
 
     // CREATE CARD FORM OBJECT WITH CARD DATA OF CURRENTLY EDITING CARD
-    if (editing)
-      initState = { ...cardData.filter((el) => el.id === cardId) };
+    if (editing) initState = cardData;
 
     // CREATE AN CARD FORM OBJECT WITH EMPTY DEFAULT VALUES
     // THE FIRST ELEMENT OF THE cardData IS USED AS A TEMPLATE
@@ -204,17 +210,13 @@ const CardForm = (props) => {
           [key]: [],
         };
       }, {});
-    console.log(initState);
     return initState;
   };
-  console.log('cardData from props: ', cardData);
   const [cardFormData, dispatchFormAction] = useReducer(
     FormReducer,
     cardData,
     initCardForm,
   );
-
-  console.log('INITIAL_FORM', cardFormData);
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -230,19 +232,38 @@ const CardForm = (props) => {
     if (label === '文法') addGrammarDispatcher(cardFormData);
   };
 
+  const handleEditCard = () => {
+    if (label === '漢字') editKanjiDispatcher(cardFormData);
+  };
+
   return (
     <CardFormStyled cardType={cardType}>
       <header className="header">
-        {editing ? '' : <h2 className="card-title">New Card</h2>}
-
-        <TextField
-          id="outlined-basic"
-          label={label}
-          value={FormData.main}
-          variant="outlined"
-          className={`${classes.root} ${classes.textfield}`}
-          onChange={(event) => handleChange(event)}
-        />
+        {editing ? (
+          <>
+            <h2
+              style={{
+                background: 'rgba(255,160,150)',
+              }}
+              className="card-title"
+            >
+              Edit Card
+            </h2>
+            <h2 className="card-front">{cardFormData[label]} </h2>
+          </>
+        ) : (
+          <>
+            <h2 className="card-title">New Card</h2>
+            <TextField
+              id="outlined-basic"
+              label={label}
+              value={cardFormData[label]}
+              variant="outlined"
+              className={`${classes.root} ${classes.textfield}`}
+              onChange={(event) => handleChange(event)}
+            />
+          </>
+        )}
       </header>
       <Grid
         container
@@ -257,19 +278,35 @@ const CardForm = (props) => {
       </Grid>
       <Grid container className={classes.footer}>
         <form>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            classes={{
-              label: classes.buttonLabel,
-              root: classes.submitButton,
-            }}
-            onClick={(event) => handleCreateCard(event)}
-            type="submit"
-          >
-            Create Card
-          </Button>
+          {editing ? (
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              classes={{
+                label: classes.buttonLabel,
+                root: classes.submitButton,
+              }}
+              onClick={(event) => handleEditCard(event)}
+              type="submit"
+            >
+              Make Changes
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              classes={{
+                label: classes.buttonLabel,
+                root: classes.submitButton,
+              }}
+              onClick={(event) => handleCreateCard(event)}
+              type="submit"
+            >
+              Create Card
+            </Button>
+          )}
         </form>
       </Grid>
     </CardFormStyled>
@@ -277,6 +314,8 @@ const CardForm = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  editKanjiDispatcher: (cardFormData) =>
+    dispatch(editKanji(cardFormData)),
   addKanjiDispatcher: (cardFormData) =>
     dispatch(addKanji(cardFormData)),
   addVocabDispatcher: (cardFormData) =>

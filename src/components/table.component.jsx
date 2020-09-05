@@ -35,12 +35,13 @@ const useStyles = makeStyles({
 export default ({ entries, entryKey }) => {
   const classes = useStyles();
 
-  // CARD FORM STATE
-  const { dispatchFormAction } = useContext(CardFormContext);
-
   // LOCAL STATE
   const [editIdx, setEditIdx] = useState(-1);
 
+  // CARD FORM REDUCER
+  const { dispatchFormAction } = useContext(CardFormContext);
+
+  // remove entry input from table
   const handleRemove = (key, entryIdx) => {
     dispatchFormAction({
       type: 'REMOVE_ENTRY',
@@ -49,12 +50,19 @@ export default ({ entries, entryKey }) => {
     });
   };
 
+  // initiate edit for targeted entry input / table row
+  // by setting the editIdx to the entry's array index
+
   const startEdit = (entryIndex) => {
     setEditIdx(entryIndex);
   };
+
+  // reset editIdx when finished editing entry input / table row
   const endEdit = () => {
     setEditIdx(-1);
   };
+
+  // submit/dispatch edited entry input / table row to card form reducer
 
   const submitEdit = (key, entryIdx) => {
     const { value } = document.getElementById('table-input');

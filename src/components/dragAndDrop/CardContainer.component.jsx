@@ -47,7 +47,7 @@ class CardContainer extends Component {
   };
 
   rateCard = (cardContent, cardType, rating) => {
-    // const { onRate } = this.props;
+    const { onRate } = this.props;
 
     // update rating of local cardData copy
     this.setState((state) => {
@@ -78,7 +78,7 @@ class CardContainer extends Component {
       };
     });
     // dispatch rating to redux store
-    // onRate(cardContent, cardType, rating);
+    onRate(cardContent, cardType, rating);
   };
 
   deleteCard = (card, cardId) => {

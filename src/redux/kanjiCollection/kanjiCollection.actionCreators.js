@@ -13,3 +13,10 @@ export const addKanji = (kanjiData) => {
     payload: { kanjiData },
   };
 };
+
+export const editKanji = (kanjiData) => {
+  return {
+    type: KanjiCollectionActionTypes.EDIT_KANJI,
+    payload: { kanjiData },
+  };
+};

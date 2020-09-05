@@ -128,7 +128,7 @@ const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
     case KanjiCollectionActionTypes.RATE_KANJI:
       return {
         ...state,
-        [action.payload.漢字]: kanjiReducer(
+        [action.payload.kanji]: kanjiReducer(
           ...[state[action.payload.kanji]],
           action,
         ),
@@ -137,6 +137,14 @@ const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [action.payload.kanjiData.漢字]: kanjiReducer({}, action),
+      };
+    case KanjiCollectionActionTypes.EDIT_KANJI:
+      return {
+        ...state,
+        [action.payload.kanjiData.漢字]: kanjiReducer(
+          state[action.payload.kanjiData.漢字],
+          action,
+        ),
       };
     case 'DELETE_CARD':
       return deleteCard(state, action.payload.card);

@@ -86,7 +86,7 @@ export default function FullWidthTabs(props) {
    ********************************************
    */
 
-  // LOCAL STATE
+  // COMPONENT LOCAL STATE
 
   const [tabValue, setTabValue] = useState(0);
 
@@ -99,8 +99,9 @@ export default function FullWidthTabs(props) {
     value: '',
   });
 
+  // CHANGE THE ENTRY INPUT PLACEHOLDER TO THE CORRESPONDING ENTRY KEY AS YOU CLICK ON THE TABS
   const handlePlaceholder = (curKey) => setPlaceholder(curKey);
-  const handleEntry = (event) => {
+  const handleEntryInput = (event) => {
     setEntry({
       value: event.target.value,
     });
@@ -110,15 +111,13 @@ export default function FullWidthTabs(props) {
    ********************************************
    */
 
-  // FORM REDUCER HANDLERS
+  // CARD FORM REDUCER HANDLER
 
-  const handleAddEntry = (event) => {
+  const handleAddEntryBtn = (event) => {
     event.preventDefault();
     const { value } = entry;
 
-    // conditional dispatch methods
-
-    // dispatch to kanji form reducer
+    // dispatch to form reducer
     dispatchFormAction({
       type: 'ADD_ENTRY',
       placeholder,
@@ -164,7 +163,7 @@ export default function FullWidthTabs(props) {
           <Input
             value={entry.value}
             className={classes.input}
-            onChange={(event) => handleEntry(event)}
+            onChange={(event) => handleEntryInput(event)}
             placeholder={placeholder}
             id="entry-input"
           />
@@ -172,7 +171,7 @@ export default function FullWidthTabs(props) {
         <Grid item>
           <IconButton
             onClick={(event) => {
-              handleAddEntry(event);
+              handleAddEntryBtn(event);
             }}
           >
             <AddCircleOutlineIcon fontSize="large" />

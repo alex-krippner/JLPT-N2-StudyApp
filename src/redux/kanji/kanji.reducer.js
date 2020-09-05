@@ -22,6 +22,8 @@ const kanjiReducer = (state = INITIAL_STATE, action) => {
         用例: [...action.payload.kanjiData.用例],
         rating: 0,
       };
+    case 'EDIT_KANJI':
+      return { ...action.payload.kanjiData };
 
     default:
       return state;
