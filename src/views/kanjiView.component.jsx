@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
@@ -17,62 +17,15 @@ const Wrapper = styled.div`
 
 const tabLabels = ['読み', '単語例', '用例'];
 
-const INITIAL_FORM = {
-  kanji: '',
-  読み: [],
-  単語例: [],
-  用例: [],
-};
-
-const kanjiFormReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_KANJI':
-      return {
-        ...state,
-        kanji: action.value,
-      };
-    case 'ADD_ENTRY':
-      return {
-        ...state,
-        [action.entryKey]: [...state[action.entryKey], action.value],
-      };
-    case 'EDIT_ENTRY':
-      return {
-        ...state,
-        [action.key]: state[action.key].map((el, idx) =>
-          idx === action.entryIdx ? action.value : el,
-        ),
-      };
-    case 'REMOVE_ENTRY':
-      return {
-        ...state,
-        [action.key]: state[action.key].filter(
-          (el, idx) => idx !== action.entryIdx,
-        ),
-      };
-
-    default:
-      return state;
-  }
-};
-
 const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
-  const [KanjiFormData, dispatchKanjiFormAction] = useReducer(
-    kanjiFormReducer,
-    INITIAL_FORM,
-  );
-
   return (
     <Wrapper>
       <DndProvider options={HTML5toTouch}>
         <CardContainer
           data={kanji}
           label="漢字"
-          inputValue={KanjiFormData.kanji}
           onRate={rateKanjiDispatcher}
           tabLabels={tabLabels}
-          cardFormData={KanjiFormData}
-          formDispatcher={dispatchKanjiFormAction}
         />
       </DndProvider>
     </Wrapper>

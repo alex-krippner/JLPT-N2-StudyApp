@@ -47,10 +47,9 @@ class CardContainer extends Component {
   };
 
   rateCard = (cardContent, cardType, rating) => {
-    const { onRate } = this.props;
+    // const { onRate } = this.props;
 
     // update rating of local cardData copy
-
     this.setState((state) => {
       let data;
 
@@ -65,21 +64,21 @@ class CardContainer extends Component {
         });
       } else if (cardType === 'kanji') {
         data = state.data.map((k) => {
-          return k.kanji !== cardContent
+          return k.漢字 !== cardContent
             ? k
             : {
                 ...k,
                 rating: k.rating === rating ? rating - 1 : rating,
               };
         });
-        // console.log(data);
       }
+
       return {
         data,
       };
     });
     // dispatch rating to redux store
-    onRate(cardContent, cardType, rating);
+    // onRate(cardContent, cardType, rating);
   };
 
   deleteCard = (card, cardId) => {

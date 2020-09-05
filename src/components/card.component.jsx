@@ -155,7 +155,7 @@ const BackSection = styled.section.attrs((props) => ({
 `;
 
 const FrontContent = ({ cardData }) => {
-  if (cardData.cardType === 'kanji') return cardData.kanji;
+  if (cardData.cardType === 'kanji') return cardData.漢字;
   if (cardData.cardType === 'grammar') return cardData.grammar;
   if (cardData.cardType === 'vocab')
     return (
@@ -177,12 +177,6 @@ const Card = ({
   label,
   inputValue,
 }) => {
-  const front =
-    cardData.cardType === 'kanji'
-      ? cardData.kanji
-      : cardData.cardType === 'vocab'
-      ? cardData.kana
-      : cardData.grammar;
   return (
     <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>
@@ -193,7 +187,7 @@ const Card = ({
         >
           <Front>
             <CardMenu
-              front={front}
+              front={cardData[label]}
               deleteCard={deleteCard}
               cardId={cardData.id}
               cardFormData={cardFormData}
@@ -214,7 +208,8 @@ const Card = ({
                 key={uuidv4()}
                 selected={i < cardData.rating}
                 onClick={
-                  () => onRate(front, cardData.cardType, i + 1)
+                  () =>
+                    onRate(cardData[label], cardData.cardType, i + 1)
                   // eslint-disable-next-line react/jsx-curly-newline
                 }
               />

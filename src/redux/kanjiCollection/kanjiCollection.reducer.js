@@ -7,7 +7,7 @@ import deleteCard from '../utils';
 const KANJI_DATA = {
   濯: {
     cardType: 'kanji',
-    kanji: '濯',
+    漢字: '濯',
     id: uuidv4(),
     読み: ['タク'],
     単語例: ['洗濯'],
@@ -16,7 +16,7 @@ const KANJI_DATA = {
   },
   燥: {
     cardType: 'kanji',
-    kanji: '燥',
+    漢字: '燥',
     id: uuidv4(),
     読み: ['ソウ'],
     単語例: ['乾燥'],
@@ -26,7 +26,7 @@ const KANJI_DATA = {
 
   司: {
     cardType: 'kanji',
-    kanji: '司',
+    漢字: '司',
     id: uuidv4(),
     読み: [' シ'],
     単語例: ['司会'],
@@ -36,7 +36,7 @@ const KANJI_DATA = {
 
   紹: {
     cardType: 'kanji',
-    kanji: '紹',
+    漢字: '紹',
     id: uuidv4(),
     読み: ['ショウ'],
     単語例: ['紹介'],
@@ -46,7 +46,7 @@ const KANJI_DATA = {
 
   独: {
     cardType: 'kanji',
-    kanji: '独',
+    漢字: '独',
     id: uuidv4(),
     読み: ['ドク', 'ひと・り'],
     単語例: ['独立', '独身', '独り言'],
@@ -56,7 +56,7 @@ const KANJI_DATA = {
 
   香: {
     cardType: 'kanji',
-    kanji: '香',
+    漢字: '香',
     id: uuidv4(),
     読み: ['コウ', 'かお・り'],
     単語例: ['香水', '香り'],
@@ -66,7 +66,7 @@ const KANJI_DATA = {
 
   貯: {
     cardType: 'kanji',
-    kanji: '貯',
+    漢字: '貯',
     id: uuidv4(),
     読み: ['チョ'],
     単語例: ['貯金', '貯蔵'],
@@ -76,7 +76,7 @@ const KANJI_DATA = {
 
   価: {
     cardType: 'kanji',
-    kanji: '価',
+    漢字: '価',
     id: uuidv4(),
     読み: ['カ'],
     単語例: ['価値', '価格', '物価'],
@@ -86,7 +86,7 @@ const KANJI_DATA = {
 
   看: {
     cardType: 'kanji',
-    kanji: '看',
+    漢字: '看',
     id: uuidv4(),
     読み: ['カン'],
     単語例: ['看病', '看板'],
@@ -95,7 +95,7 @@ const KANJI_DATA = {
   },
   吹: {
     cardType: 'kanji',
-    kanji: '吹',
+    漢字: '吹',
     id: uuidv4(),
     読み: ['ふ・く'],
     単語例: ['吹く'],
@@ -104,7 +104,7 @@ const KANJI_DATA = {
   },
   液: {
     cardType: 'kanji',
-    kanji: '液',
+    漢字: '液',
     id: uuidv4(),
     読み: ['エキ'],
     単語例: ['血液', '液体'],
@@ -113,7 +113,7 @@ const KANJI_DATA = {
   },
   傾: {
     cardType: 'kanji',
-    kanji: '傾',
+    漢字: '傾',
     id: uuidv4(),
     読み: ['ケイ', 'かたむ・く'],
     単語例: ['傾向', '傾く'],
@@ -128,7 +128,7 @@ const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
     case KanjiCollectionActionTypes.RATE_KANJI:
       return {
         ...state,
-        [action.payload.kanji]: kanjiReducer(
+        [action.payload.漢字]: kanjiReducer(
           ...[state[action.payload.kanji]],
           action,
         ),
@@ -136,7 +136,7 @@ const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
     case KanjiCollectionActionTypes.ADD_KANJI:
       return {
         ...state,
-        [action.payload.kanjiData.kanji]: kanjiReducer({}, action),
+        [action.payload.kanjiData.漢字]: kanjiReducer({}, action),
       };
     case 'DELETE_CARD':
       return deleteCard(state, action.payload.card);

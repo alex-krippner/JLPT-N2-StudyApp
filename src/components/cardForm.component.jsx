@@ -117,12 +117,16 @@ const FormReducer = (state, action) => {
     case 'INPUT_MAIN':
       return {
         ...state,
-        main: action.value,
+        [action.label]: action.value,
       };
     case 'ADD_ENTRY':
+      console.log(state, action);
       return {
         ...state,
-        [action.entryKey]: [...state[action.entryKey], action.value],
+        [action.placeholder]: [
+          ...state[action.placeholder],
+          action.value,
+        ],
       };
     case 'EDIT_ENTRY':
       return {
@@ -158,20 +162,41 @@ const CardForm = (props) => {
   } = props;
   const classes = useStyles();
 
+  // SETUP INITITIAL CARD FORM REDUCER STATE
   const initCardForm = () => {
     console.log('data inside initCardForm function: ', cardData);
     let initState;
-    // RETURN CARD DATA OF CURRENTLY EDITING CARD
+
+    // CREATE CARD FORM OBJECT WITH CARD DATA OF CURRENTLY EDITING CARD
     if (editing)
       initState = { ...cardData.filter((el) => el.id === cardId) };
-    // create an object with only the keys of the data object and empty arrays as the value
 
+    // CREATE AN CARD FORM OBJECT WITH EMPTY DEFAULT VALUES
+    // THE FIRST ELEMENT OF THE cardData IS USED AS A TEMPLATE
     if (!editing)
       initState = Object.keys(cardData[0]).reduce((d, key) => {
         if (key === 'rating') {
           return {
             ...d,
             rating: 0,
+          };
+        }
+        if (key === 'id') {
+          return {
+            ...d,
+            id: '',
+          };
+        }
+        if (key === label) {
+          return {
+            ...d,
+            [label]: '',
+          };
+        }
+        if (key === 'cardType') {
+          return {
+            ...d,
+            cardType: '',
           };
         }
         return {
@@ -196,6 +221,7 @@ const CardForm = (props) => {
     dispatchFormAction({
       type: 'INPUT_MAIN',
       value,
+      label,
     });
   };
   const handleCreateCard = () => {
