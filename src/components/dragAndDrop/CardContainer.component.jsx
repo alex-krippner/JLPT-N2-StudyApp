@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 import Card from '../card.component';
 import CardForm from '../cardForm.component';
-import { CardFormContext } from '../../context/context';
 
 import { flipCard } from '../components.utils';
 
@@ -25,30 +24,18 @@ const CardsContainerStyled = styled.div`
 
 const CardContainer = (props) => {
   let flipId = '';
-  const {
-    data,
-    label,
-    inputValue,
-    tabLabels,
-    cardFormData,
-    formDispatcher,
-    onRate,
-  } = props;
+  const { data, label, inputValue, tabLabels, onRate } = props;
   flipId += data.map((x) => x.id).join('');
 
   return (
     <Flipper flipKey={flipId} spring="stiff">
       <CardsContainerStyled>
-        <CardFormContext.Provider
-          value={{ cardFormData, formDispatcher }}
-        >
-          <CardForm
-            label={label}
-            inputValue={inputValue}
-            tabLabels={tabLabels}
-            cardData={data}
-          />
-        </CardFormContext.Provider>
+        <CardForm
+          label={label}
+          inputValue={inputValue}
+          tabLabels={tabLabels}
+          cardData={data}
+        />
 
         {data.map((el) => (
           <Flipped key={uuidv4()} flipId={el.id}>
@@ -57,8 +44,6 @@ const CardContainer = (props) => {
                 cardData={el}
                 flipCard={flipCard}
                 tabLabels={tabLabels}
-                cardFormData={cardFormData}
-                formDispatcher={formDispatcher}
                 label={label}
                 inputValue={inputValue}
                 onRate={onRate}

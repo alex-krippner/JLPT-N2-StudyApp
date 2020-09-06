@@ -17,8 +17,6 @@ import CardForm from './cardForm.component';
 import { flipCard } from './components.utils';
 import { deleteCard } from '../redux/utils.actionCreator';
 
-import { CardFormContext } from '../context/context';
-
 const SliderContainerStyled = styled.div`
   display: flex;
   justify-content: space-around;
@@ -53,13 +51,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SimplePopover({
-  tabLabels,
-  cardFormData,
-  formDispatcher,
-  label,
-  inputValue,
-}) {
+function SimplePopover({ tabLabels, label, inputValue, cardData }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [status, setStatus] = useState(false);
@@ -119,16 +111,13 @@ function SimplePopover({
         }}
         className={classes.root}
       >
-        <CardFormContext.Provider
-          value={{ cardFormData, formDispatcher }}
-        >
-          <CardForm
-            label={label}
-            inputValue={inputValue}
-            tabLabels={tabLabels}
-            cardType="grammar"
-          />
-        </CardFormContext.Provider>
+        <CardForm
+          label={label}
+          inputValue={inputValue}
+          tabLabels={tabLabels}
+          cardData={cardData}
+          cardType="grammar"
+        />
       </Popover>
     </div>
   );
@@ -140,11 +129,8 @@ const SliderContainer = ({
   data,
   onRate,
   tabLabels,
-  cardFormData,
-  formDispatcher,
   label,
   inputValue,
-  deleteCardDispatcher,
 }) => {
   const slides = data.map((el, index) => (
     <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
@@ -156,7 +142,7 @@ const SliderContainer = ({
         onRate={onRate}
         tabLabels={tabLabels}
         flipCard={flipCard}
-        deleteCard={deleteCardDispatcher}
+        label={label}
       />
     </SwiperSlide>
   ));
@@ -165,8 +151,7 @@ const SliderContainer = ({
     <SliderContainerStyled>
       <SimplePopover
         tabLabels={tabLabels}
-        cardFormData={cardFormData}
-        formDispatcher={formDispatcher}
+        cardData={data}
         label={label}
         inputValue={inputValue}
       />
@@ -180,7 +165,7 @@ const SliderContainer = ({
         onClick={(swiper) => swiper.setGrabCursor()}
       >
         <div className="swiper-pagination" />
-        {slides}{' '}
+        {slides}
       </Swiper>
     </SliderContainerStyled>
   );

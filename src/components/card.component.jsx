@@ -156,7 +156,7 @@ const BackSection = styled.section.attrs((props) => ({
 
 const FrontContent = ({ cardData }) => {
   if (cardData.cardType === 'kanji') return cardData.漢字;
-  if (cardData.cardType === 'grammar') return cardData.grammar;
+  if (cardData.cardType === 'grammar') return cardData.文法;
   if (cardData.cardType === 'vocab') return cardData.語彙;
 };
 
@@ -165,7 +165,6 @@ const Card = ({
   flipCard,
   onRate,
   tabLabels,
-  deleteCard,
   cardFormData,
   formDispatcher,
   label,
@@ -182,7 +181,6 @@ const Card = ({
           <Front>
             <CardMenu
               front={cardData[label]}
-              deleteCard={deleteCard}
               cardId={cardData.id}
               cardFormData={cardFormData}
               formDispatcher={formDispatcher}

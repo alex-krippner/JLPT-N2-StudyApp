@@ -1,5 +1,11 @@
+/* Swiper component from sliderContainer.component */
+
 .swiper-slide {
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+.swiper-container {
+  overflow-y: auto;
 }

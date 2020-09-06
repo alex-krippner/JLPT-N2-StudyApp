@@ -8,7 +8,7 @@ const GRAMMAR_DATA = {
   としたら: {
     cardType: 'grammar',
     id: uuidv4(),
-    grammar: 'としたら',
+    文法: 'としたら',
     variations: [
       '～とすれば',
       '～とすると',
@@ -30,7 +30,7 @@ const GRAMMAR_DATA = {
   ものなら: {
     cardType: 'grammar',
     id: uuidv4(),
-    grammar: 'ものなら',
+    文法: 'ものなら',
     variations: [''],
     意味: ['もし～できるなら、そうしたい・そうしてほしい'],
     接続: ['動辞書形　＋　ものなら'],
@@ -43,7 +43,7 @@ const GRAMMAR_DATA = {
   ようものなら: {
     cardType: 'grammar',
     id: uuidv4(),
-    grammar: 'ようものなら',
+    文法: 'ようものなら',
 
     variations: [''],
     意味: ['もし～たら、大変なことになる'],
@@ -57,7 +57,7 @@ const GRAMMAR_DATA = {
   ないことには: {
     cardType: 'grammar',
     id: uuidv4(),
-    grammar: 'ないことには',
+    文法: 'ないことには',
 
     variations: [''],
     意味: ['～なければ、あることが実現しない'],
@@ -73,7 +73,7 @@ const GRAMMAR_DATA = {
   を抜きにしては: {
     cardType: 'grammar',
     id: uuidv4(),
-    grammar: 'を抜きにしては',
+    文法: 'を抜きにしては',
 
     variations: [''],
     意味: [
@@ -91,7 +91,7 @@ const GRAMMAR_DATA = {
   としても: {
     cardType: 'grammar',
     id: uuidv4(),
-    grammar: 'としても',
+    文法: 'としても',
 
     variations: ['～にしても', '～にしろ', '～にせよ'],
     意味: [
@@ -116,8 +116,8 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
     case GrammarCollectionActionTypes.RATE_GRAMMAR:
       return {
         ...state,
-        [action.payload.grammar]: grammarReducer(
-          ...[state[action.payload.grammar]],
+        [action.payload.文法]: grammarReducer(
+          ...[state[action.payload.文法]],
           action,
         ),
       };
@@ -125,8 +125,14 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
     case GrammarCollectionActionTypes.ADD_GRAMMAR:
       return {
         ...state,
-        [action.payload.grammarData.grammar]: grammarReducer(
-          {},
+        [action.payload.grammarData.文法]: grammarReducer({}, action),
+      };
+
+    case GrammarCollectionActionTypes.EDIT_GRAMMAR:
+      return {
+        ...state,
+        [action.payload.文法]: grammarReducer(
+          state[action.payload.文法],
           action,
         ),
       };

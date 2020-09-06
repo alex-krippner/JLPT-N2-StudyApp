@@ -19,7 +19,10 @@ import {
   addVocab,
   editVocab,
 } from '../redux/vocabCollection/vocabCollection.actionCreators';
-import { addGrammar } from '../redux/grammar/grammarCollection.actionCreators';
+import {
+  addGrammar,
+  editGrammar,
+} from '../redux/grammar/grammarCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
   height: props.cardType === 'grammar' ? '50rem' : '45rem',
@@ -154,7 +157,7 @@ const FormReducer = (state, action) => {
         ),
       };
     case 'RESET':
-      return action.initCardForm(action.payload);
+      return action.resetForm(action.payload);
 
     default:
       return state;
@@ -170,6 +173,7 @@ const CardForm = (props) => {
     addGrammarDispatcher,
     editKanjiDispatcher,
     editVocabDispatcher,
+    editGrammarDispatcher,
     cardType,
     editing,
     cardData,
@@ -238,7 +242,7 @@ const CardForm = (props) => {
     if (label === '文法') addGrammarDispatcher(cardFormData);
     dispatchFormAction({
       type: 'RESET',
-      initCardForm: (payloadData) => initCardForm(payloadData),
+      resetForm: (payloadData) => initCardForm(payloadData),
       payload: cardData,
     });
   };
@@ -246,6 +250,7 @@ const CardForm = (props) => {
   const handleEditCard = () => {
     if (label === '漢字') editKanjiDispatcher(cardFormData);
     if (label === '語彙') editVocabDispatcher(cardFormData);
+    if (label === '文法') editGrammarDispatcher(cardFormData);
   };
 
   return (
@@ -332,6 +337,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(editVocab(cardFormData)),
   addGrammarDispatcher: (cardFormData) =>
     dispatch(addGrammar(cardFormData)),
+  editGrammarDispatcher: (cardFormData) =>
+    dispatch(editGrammar(cardFormData)),
 });
 
 export default connect(null, mapDispatchToProps)(CardForm);

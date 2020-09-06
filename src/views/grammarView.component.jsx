@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -15,64 +15,14 @@ const Wrapper = styled.div`
 
 const tabLabels = ['variations', '意味', '接続', '用例'];
 
-const INITIAL_FORM = {
-  grammar: '',
-  variations: [],
-  意味: [],
-  接続: [],
-  用例: [],
-};
-
-const grammarFormReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_GRAMMAR':
-      return {
-        ...state,
-        grammar: action.value,
-      };
-
-    case 'ADD_ENTRY':
-      return {
-        ...state,
-        [action.entryKey]: [...state[action.entryKey], action.value],
-      };
-
-    case 'EDIT_ENTRY':
-      return {
-        ...state,
-        [action.key]: state[action.key].map((el, idx) =>
-          idx === action.entryIdx ? action.value : el,
-        ),
-      };
-
-    case 'REMOVE_ENTRY':
-      return {
-        ...state,
-        [action.key]: state[action.key].filter(
-          (el, idx) => idx !== action.entryIdx,
-        ),
-      };
-
-    default:
-      return state;
-  }
-};
-
 const GrammarView = ({ rateGrammarDispatcher, grammar }) => {
-  const [GrammarFormData, dispatchGrammarFormAction] = useReducer(
-    grammarFormReducer,
-    INITIAL_FORM,
-  );
   return (
     <Wrapper>
       <SliderContainer
         data={grammar}
         label="文法"
-        inputValue={GrammarFormData.grammar}
         onRate={rateGrammarDispatcher}
         tabLabels={tabLabels}
-        cardFormData={GrammarFormData}
-        formDispatcher={dispatchGrammarFormAction}
       />
     </Wrapper>
   );
@@ -91,3 +41,55 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(GrammarView);
+
+// const grammarFormReducer = (state, action) => {
+//   switch (action.type) {
+//     case 'INPUT_GRAMMAR':
+//       return {
+//         ...state,
+//         grammar: action.value,
+//       };
+
+//     case 'ADD_ENTRY':
+//       return {
+//         ...state,
+//         [action.entryKey]: [...state[action.entryKey], action.value],
+//       };
+
+//     case 'EDIT_ENTRY':
+//       return {
+//         ...state,
+//         [action.key]: state[action.key].map((el, idx) =>
+//           idx === action.entryIdx ? action.value : el,
+//         ),
+//       };
+
+//     case 'REMOVE_ENTRY':
+//       return {
+//         ...state,
+//         [action.key]: state[action.key].filter(
+//           (el, idx) => idx !== action.entryIdx,
+//         ),
+//       };
+
+//     default:
+//       return state;
+//   }
+// };
+
+// const INITIAL_FORM = {
+//   grammar: '',
+//   variations: [],
+//   意味: [],
+//   接続: [],
+//   用例: [],
+// };
+
+// const [GrammarFormData, dispatchGrammarFormAction] = useReducer(
+//   grammarFormReducer,
+//   INITIAL_FORM,
+// );
+
+// cardFormData={GrammarFormData}
+// formDispatcher={dispatchGrammarFormAction}
+// inputValue={GrammarFormData.grammar}
