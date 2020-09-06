@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
@@ -12,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from './cardForm.component';
+import { deleteCard } from '../redux/utils.actionCreator';
+
 import { CardFormContext } from '../context/context';
 
 // import EditCardPopover from './editCardPopover.component';
@@ -39,13 +42,13 @@ const useStyles = makeStyles({
 
 const CardMenu = ({
   front,
-  deleteCard,
   cardId,
   cardFormData,
   formDispatcher,
   label,
   tabLabels,
   cardData,
+  deleteCardDispatcher,
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -141,7 +144,7 @@ const CardMenu = ({
           className="delete"
           onClick={() => {
             handleClose();
-            deleteCard(front, cardId);
+            deleteCardDispatcher(front, cardId);
           }}
         >
           <IconButton
@@ -158,4 +161,9 @@ const CardMenu = ({
   );
 };
 
-export default CardMenu;
+const mapDispatchToProps = (dispatch) => ({
+  deleteCardDispatcher: (card, cardId) =>
+    dispatch(deleteCard(card, cardId)),
+});
+
+export default connect(null, mapDispatchToProps)(CardMenu);

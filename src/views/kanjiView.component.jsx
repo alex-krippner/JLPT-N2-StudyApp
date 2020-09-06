@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
-import { DndProvider } from 'react-dnd-multi-backend';
 
 import styled from 'styled-components';
 
@@ -20,14 +18,12 @@ const tabLabels = ['読み', '単語例', '用例'];
 const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
   return (
     <Wrapper>
-      <DndProvider options={HTML5toTouch}>
-        <CardContainer
-          data={kanji}
-          label="漢字"
-          onRate={rateKanjiDispatcher}
-          tabLabels={tabLabels}
-        />
-      </DndProvider>
+      <CardContainer
+        data={kanji}
+        label="漢字"
+        onRate={rateKanjiDispatcher}
+        tabLabels={tabLabels}
+      />
     </Wrapper>
   );
 };

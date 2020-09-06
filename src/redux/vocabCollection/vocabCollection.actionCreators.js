@@ -17,6 +17,6 @@ export const addVocab = (vocabData) => {
 export const editVocab = (vocabData) => {
   return {
     type: VocabCollectionActionTypes.EDIT_VOCAB,
-    payload: { vocabData },
+    payload: vocabData,
   };
 };

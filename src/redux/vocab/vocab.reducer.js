@@ -16,7 +16,7 @@ const vocabReducer = (state = INITIAL_STATE, action) => {
       return {
         cardType: 'vocab',
         id: uuidv4(),
-        kana: action.payload.kana,
+        語彙: action.payload.語彙,
         漢字:
           action.payload.漢字.length > 0
             ? action.payload.漢字
@@ -28,7 +28,7 @@ const vocabReducer = (state = INITIAL_STATE, action) => {
       };
 
     case 'EDIT_VOCAB':
-      return { ...state, ...action.payload.vocabData };
+      return { ...action.payload };
     default:
       return state;
   }

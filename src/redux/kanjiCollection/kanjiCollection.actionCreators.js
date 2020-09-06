@@ -17,6 +17,6 @@ export const addKanji = (kanjiData) => {
 export const editKanji = (kanjiData) => {
   return {
     type: KanjiCollectionActionTypes.EDIT_KANJI,
-    payload: { kanjiData },
+    payload: kanjiData,
   };
 };

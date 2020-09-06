@@ -8,8 +8,8 @@ const kanjiReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         rating:
-          action.payload.rating === 1 && state.rating === 1
-            ? 0
+          action.payload.rating === state.rating
+            ? action.payload.rating - 1
             : action.payload.rating,
       };
     case 'ADD_KANJI':
@@ -23,7 +23,7 @@ const kanjiReducer = (state = INITIAL_STATE, action) => {
         rating: 0,
       };
     case 'EDIT_KANJI':
-      return { ...action.payload.kanjiData };
+      return { ...action.payload };
 
     default:
       return state;

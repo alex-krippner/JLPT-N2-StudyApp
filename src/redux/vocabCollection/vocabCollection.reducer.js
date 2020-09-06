@@ -115,16 +115,17 @@ const vocabCollectionReducer = (state = INITITAL_STATE, action) => {
         ),
       };
     case VocabCollectionActionTypes.ADD_VOCAB:
+      console.log(action.payload.語彙);
       return {
         ...state,
-        [action.payload.kana]: vocabReducer({}, action),
+        [action.payload.語彙]: vocabReducer({}, action),
       };
 
     case VocabCollectionActionTypes.EDIT_VOCAB:
       return {
         ...state,
-        [action.payload.vocabData.語彙]: vocabReducer(
-          ...[state[action.payload.vocabData.語彙]],
+        [action.payload.語彙]: vocabReducer(
+          state[action.payload.語彙],
           action,
         ),
       };

@@ -153,6 +153,8 @@ const FormReducer = (state, action) => {
           (el, idx) => idx !== action.entryIdx,
         ),
       };
+    case 'RESET':
+      return action.initCardForm(action.payload);
 
     default:
       return state;
@@ -234,6 +236,11 @@ const CardForm = (props) => {
     if (label === '漢字') addKanjiDispatcher(cardFormData);
     if (label === '語彙') addVocabDispatcher(cardFormData);
     if (label === '文法') addGrammarDispatcher(cardFormData);
+    dispatchFormAction({
+      type: 'RESET',
+      initCardForm: (payloadData) => initCardForm(payloadData),
+      payload: cardData,
+    });
   };
 
   const handleEditCard = () => {
