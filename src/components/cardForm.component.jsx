@@ -15,7 +15,10 @@ import {
   addKanji,
   editKanji,
 } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
-import { addVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
+import {
+  addVocab,
+  editVocab,
+} from '../redux/vocabCollection/vocabCollection.actionCreators';
 import { addGrammar } from '../redux/grammar/grammarCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
@@ -164,6 +167,7 @@ const CardForm = (props) => {
     addVocabDispatcher,
     addGrammarDispatcher,
     editKanjiDispatcher,
+    editVocabDispatcher,
     cardType,
     editing,
     cardData,
@@ -234,6 +238,7 @@ const CardForm = (props) => {
 
   const handleEditCard = () => {
     if (label === '漢字') editKanjiDispatcher(cardFormData);
+    if (label === '語彙') editVocabDispatcher(cardFormData);
   };
 
   return (
@@ -277,49 +282,47 @@ const CardForm = (props) => {
         </CardFormContext.Provider>
       </Grid>
       <Grid container className={classes.footer}>
-        <form>
-          {editing ? (
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              classes={{
-                label: classes.buttonLabel,
-                root: classes.submitButton,
-              }}
-              onClick={(event) => handleEditCard(event)}
-              type="submit"
-            >
-              Make Changes
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              classes={{
-                label: classes.buttonLabel,
-                root: classes.submitButton,
-              }}
-              onClick={(event) => handleCreateCard(event)}
-              type="submit"
-            >
-              Create Card
-            </Button>
-          )}
-        </form>
+        {editing ? (
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            classes={{
+              label: classes.buttonLabel,
+              root: classes.submitButton,
+            }}
+            onClick={(event) => handleEditCard(event)}
+          >
+            Make Changes
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            classes={{
+              label: classes.buttonLabel,
+              root: classes.submitButton,
+            }}
+            onClick={(event) => handleCreateCard(event)}
+          >
+            Create Card
+          </Button>
+        )}
       </Grid>
     </CardFormStyled>
   );
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  editKanjiDispatcher: (cardFormData) =>
-    dispatch(editKanji(cardFormData)),
   addKanjiDispatcher: (cardFormData) =>
     dispatch(addKanji(cardFormData)),
+  editKanjiDispatcher: (cardFormData) =>
+    dispatch(editKanji(cardFormData)),
   addVocabDispatcher: (cardFormData) =>
     dispatch(addVocab(cardFormData)),
+  editVocabDispatcher: (cardFormData) =>
+    dispatch(editVocab(cardFormData)),
   addGrammarDispatcher: (cardFormData) =>
     dispatch(addGrammar(cardFormData)),
 });

@@ -157,13 +157,7 @@ const BackSection = styled.section.attrs((props) => ({
 const FrontContent = ({ cardData }) => {
   if (cardData.cardType === 'kanji') return cardData.漢字;
   if (cardData.cardType === 'grammar') return cardData.grammar;
-  if (cardData.cardType === 'vocab')
-    return (
-      <div>
-        <div>{cardData.kana}</div>
-        <div>{cardData.kanji}</div>
-      </div>
-    );
+  if (cardData.cardType === 'vocab') return cardData.語彙;
 };
 
 const Card = ({

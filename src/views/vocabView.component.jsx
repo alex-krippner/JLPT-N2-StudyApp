@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
@@ -16,62 +16,15 @@ const Wrapper = styled.div`
 
 const tabLabels = ['漢字', '語類', '定義', '用例'];
 
-const INITIAL_FORM = {
-  kana: '',
-  漢字: [],
-  語類: [],
-  定義: [],
-  用例: [],
-};
-
-const vocabFormReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_VOCAB':
-      return {
-        ...state,
-        kana: action.value,
-      };
-    case 'ADD_ENTRY':
-      return {
-        ...state,
-        [action.entryKey]: [...state[action.entryKey], action.value],
-      };
-    case 'EDIT_ENTRY':
-      return {
-        ...state,
-        [action.key]: state[action.key].map((el, idx) =>
-          idx === action.entryIdx ? action.value : el,
-        ),
-      };
-    case 'REMOVE_ENTRY':
-      return {
-        ...state,
-        [action.key]: state[action.key].filter(
-          (el, idx) => idx !== action.entryIdx,
-        ),
-      };
-    default:
-      return state;
-  }
-};
-
 const VocabView = ({ vocab, rateVocabDispatcher }) => {
-  const [VocabFormData, dispatchVocabFormAction] = useReducer(
-    vocabFormReducer,
-    INITIAL_FORM,
-  );
-
   return (
     <Wrapper>
       <DndProvider options={HTML5toTouch}>
         <CardContainer
           data={vocab}
           label="語彙"
-          inputValue={VocabFormData.vocab}
           onRate={rateVocabDispatcher}
           tabLabels={tabLabels}
-          cardFormData={VocabFormData}
-          formDispatcher={dispatchVocabFormAction}
         />
       </DndProvider>
     </Wrapper>
@@ -90,3 +43,34 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(VocabView);
+
+// const vocabFormReducer = (state, action) => {
+//   switch (action.type) {
+//     case 'INPUT_VOCAB':
+//       return {
+//         ...state,
+//         kana: action.value,
+//       };
+//     case 'ADD_ENTRY':
+//       return {
+//         ...state,
+//         [action.entryKey]: [...state[action.entryKey], action.value],
+//       };
+//     case 'EDIT_ENTRY':
+//       return {
+//         ...state,
+//         [action.key]: state[action.key].map((el, idx) =>
+//           idx === action.entryIdx ? action.value : el,
+//         ),
+//       };
+//     case 'REMOVE_ENTRY':
+//       return {
+//         ...state,
+//         [action.key]: state[action.key].filter(
+//           (el, idx) => idx !== action.entryIdx,
+//         ),
+//       };
+//     default:
+//       return state;
+//   }
+// };

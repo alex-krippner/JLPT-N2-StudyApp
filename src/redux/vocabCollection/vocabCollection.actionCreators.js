@@ -13,3 +13,10 @@ export const addVocab = (vocabData) => {
     payload: vocabData,
   };
 };
+
+export const editVocab = (vocabData) => {
+  return {
+    type: VocabCollectionActionTypes.EDIT_VOCAB,
+    payload: { vocabData },
+  };
+};

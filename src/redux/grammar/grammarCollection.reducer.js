@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
 import grammarReducer from './grammar.reducer';
-import deleteCard from '../utils';
+import { deleteCard } from '../utils';
 
 const GRAMMAR_DATA = {
   としたら: {

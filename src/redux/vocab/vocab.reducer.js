@@ -26,6 +26,9 @@ const vocabReducer = (state = INITIAL_STATE, action) => {
         用例: [...action.payload.用例],
         rating: 0,
       };
+
+    case 'EDIT_VOCAB':
+      return { ...state, ...action.payload.vocabData };
     default:
       return state;
   }
