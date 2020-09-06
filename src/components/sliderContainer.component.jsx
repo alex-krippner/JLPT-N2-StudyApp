@@ -51,7 +51,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SimplePopover({ tabLabels, label, inputValue, cardData }) {
+function SimplePopover({ tabLabels, label, cardData }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [status, setStatus] = useState(false);
@@ -113,7 +113,6 @@ function SimplePopover({ tabLabels, label, inputValue, cardData }) {
       >
         <CardForm
           label={label}
-          inputValue={inputValue}
           tabLabels={tabLabels}
           cardData={cardData}
           cardType="grammar"
@@ -125,13 +124,7 @@ function SimplePopover({ tabLabels, label, inputValue, cardData }) {
 
 SwiperCore.use([Pagination]);
 
-const SliderContainer = ({
-  data,
-  onRate,
-  tabLabels,
-  label,
-  inputValue,
-}) => {
+const SliderContainer = ({ data, onRate, tabLabels, label }) => {
   const slides = data.map((el, index) => (
     <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
       <Card
@@ -153,7 +146,6 @@ const SliderContainer = ({
         tabLabels={tabLabels}
         cardData={data}
         label={label}
-        inputValue={inputValue}
       />
 
       <Swiper

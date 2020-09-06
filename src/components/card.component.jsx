@@ -168,7 +168,6 @@ const Card = ({
   cardFormData,
   formDispatcher,
   label,
-  inputValue,
 }) => {
   return (
     <CardScene cardType={cardData.cardType}>
@@ -185,7 +184,6 @@ const Card = ({
               cardFormData={cardFormData}
               formDispatcher={formDispatcher}
               label={label}
-              inputValue={inputValue}
               tabLabels={tabLabels}
               cardData={cardData}
             />

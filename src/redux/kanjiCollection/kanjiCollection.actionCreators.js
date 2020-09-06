@@ -10,7 +10,7 @@ export const rateKanji = (kanji, cardType, rating) => {
 export const addKanji = (kanjiData) => {
   return {
     type: KanjiCollectionActionTypes.ADD_KANJI,
-    payload: { kanjiData },
+    payload: kanjiData,
   };
 };
 

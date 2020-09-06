@@ -136,7 +136,7 @@ const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
     case KanjiCollectionActionTypes.ADD_KANJI:
       return {
         ...state,
-        [action.payload.kanjiData.漢字]: kanjiReducer({}, action),
+        [action.payload.漢字]: kanjiReducer({}, action),
       };
     case KanjiCollectionActionTypes.EDIT_KANJI:
       return {

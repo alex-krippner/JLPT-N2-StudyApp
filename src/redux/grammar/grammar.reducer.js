@@ -16,11 +16,11 @@ const grammarReducer = (state = INITIAL_STATE, action) => {
       return {
         cardType: 'grammar',
         id: uuidv4(),
-        文法: action.payload.grammarData.文法,
-        variations: [...action.payload.grammarData.variations],
-        意味: [...action.payload.grammarData.意味],
-        接続: [...action.payload.grammarData.接続],
-        用例: [...action.payload.grammarData.用例],
+        文法: action.payload.文法,
+        variations: [...action.payload.variations],
+        意味: [...action.payload.意味],
+        接続: [...action.payload.接続],
+        用例: [...action.payload.用例],
         rating: 0,
       };
 

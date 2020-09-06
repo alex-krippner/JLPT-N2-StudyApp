@@ -17,14 +17,13 @@ import { deleteCard } from '../redux/utils.actionCreator';
 
 import { CardFormContext } from '../context/context';
 
-// import EditCardPopover from './editCardPopover.component';
-
 const useStyles = makeStyles({
   root: {
     background: 'rgba(0,0,0,0.4)',
 
     '& .MuiPopover-paper': {
       overflow: 'visible',
+      borderRadius: '1rem',
     },
   },
 

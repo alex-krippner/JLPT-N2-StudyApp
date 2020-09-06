@@ -125,7 +125,7 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
     case GrammarCollectionActionTypes.ADD_GRAMMAR:
       return {
         ...state,
-        [action.payload.grammarData.文法]: grammarReducer({}, action),
+        [action.payload.文法]: grammarReducer({}, action),
       };
 
     case GrammarCollectionActionTypes.EDIT_GRAMMAR:

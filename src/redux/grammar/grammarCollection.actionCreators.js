@@ -10,7 +10,7 @@ export const rateGrammar = (文法, cardType, rating) => {
 export const addGrammar = (grammarData) => {
   return {
     type: GrammarCollectionActionTypes.ADD_GRAMMAR,
-    payload: { grammarData },
+    payload: grammarData,
   };
 };
 

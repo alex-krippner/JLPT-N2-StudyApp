@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
 import { Input } from '@material-ui/core';
 
 import { CardFormContext } from '../context/context';
@@ -92,6 +93,7 @@ export default ({ entries, entryKey }) => {
                     entry
                   )}
                 </TableCell>
+
                 {currentlyEditing ? (
                   <TableCell align="right" size="small">
                     <IconButton
@@ -102,6 +104,14 @@ export default ({ entries, entryKey }) => {
                       }}
                     >
                       <DoneIcon fontSize="large" />
+                    </IconButton>
+                    <IconButton
+                      edge="end"
+                      onClick={() => {
+                        endEdit();
+                      }}
+                    >
+                      <ClearIcon fontSize="large" />
                     </IconButton>
                   </TableCell>
                 ) : (

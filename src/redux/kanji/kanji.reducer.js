@@ -15,11 +15,11 @@ const kanjiReducer = (state = INITIAL_STATE, action) => {
     case 'ADD_KANJI':
       return {
         cardType: 'kanji',
-        漢字: action.payload.kanjiData.漢字,
+        漢字: action.payload.漢字,
         id: uuidv4(),
-        読み: [...action.payload.kanjiData.読み],
-        単語例: [...action.payload.kanjiData.単語例],
-        用例: [...action.payload.kanjiData.用例],
+        読み: [...action.payload.読み],
+        単語例: [...action.payload.単語例],
+        用例: [...action.payload.用例],
         rating: 0,
       };
     case 'EDIT_KANJI':
