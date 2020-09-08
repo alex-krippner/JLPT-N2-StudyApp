@@ -5,39 +5,40 @@ import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 
 import SliderContainer from '../components/sliderContainer.component';
-import { rateGrammar } from '../redux/grammar/grammarCollection.actionCreators';
-import selectAllGrammar from '../redux/grammar/grammarCollection.selectors';
+import { rateReading } from '../redux/readingCollection/readingCollection.actionCreators';
+import selectAllReading from '../redux/readingCollection/readingCollection.selectors';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
 
-const tabLabels = ['variations', '意味', '接続', '用例'];
+const tabLabels = ['question', 'answerChoices', 'solution'];
 
-const GrammarView = ({ rateGrammarDispatcher, grammar }) => {
+const ReadingView = ({ rateReadingDispatcher, reading }) => {
   return (
     <Wrapper>
       <SliderContainer
-        data={grammar}
-        label="文法"
-        onRate={rateGrammarDispatcher}
+        data={reading}
+        label="reading"
+        onRate={rateReadingDispatcher}
         tabLabels={tabLabels}
+        cardType="reading"
       />
     </Wrapper>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  grammar: selectAllGrammar,
+  reading: selectAllReading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  rateGrammarDispatcher: (grammar, cardType, rating) =>
-    dispatch(rateGrammar(grammar, cardType, rating)),
+  rateReadingDispatcher: (reading, cardType, rating) =>
+    dispatch(rateReading(reading, cardType, rating)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GrammarView);
+)(ReadingView);

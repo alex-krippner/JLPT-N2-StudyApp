@@ -23,6 +23,7 @@ const GrammarView = ({ rateGrammarDispatcher, grammar }) => {
         label="文法"
         onRate={rateGrammarDispatcher}
         tabLabels={tabLabels}
+        cardType="grammar"
       />
     </Wrapper>
   );

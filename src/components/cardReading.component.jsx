@@ -20,7 +20,7 @@ const CardScene = styled.div.attrs((props) => ({
       ? '35rem'
       : props.cardType === 'kanji'
       ? '30rem'
-      : '75rem',
+      : '85rem',
 }))`
   height: ${(props) => props.height};
   perspective: 200rem;
@@ -65,12 +65,11 @@ const CardSide = styled.div.attrs((props) => ({
 
   .top {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 1rem;
+    left: 1rem;
     padding: 5px;
-    border-right: solid 1px;
-    border-bottom: solid 1px;
     font-size: 2rem;
+    text-transform: capitalize;
   }
 
   .bottom {
@@ -126,6 +125,10 @@ const Front = styled.div`
 const FrontData = styled.div`
   cursor: pointer;
   text-align: center;
+  width: 75%;
+  display: flex;
+  line-height: 2;
+  font-size: 1.75rem;
 `;
 
 const Rating = styled.div`
@@ -155,13 +158,10 @@ const BackSection = styled.section.attrs((props) => ({
 `;
 
 const FrontContent = ({ cardData }) => {
-  if (cardData.cardType === 'kanji') return cardData.漢字;
-  if (cardData.cardType === 'grammar') return cardData.文法;
-  if (cardData.cardType === 'vocab') return cardData.語彙;
   if (cardData.cardType === 'reading') return cardData.passage;
 };
 
-const Card = ({
+const CardReading = ({
   cardData,
   flipCard,
   onRate,
@@ -170,7 +170,6 @@ const Card = ({
   formDispatcher,
   label,
 }) => {
-  console.log(cardData);
   return (
     <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>
@@ -220,7 +219,11 @@ const Card = ({
                 section={idx}
                 labelNum={tabLabels.length}
               >
-                <div className="top">{tabLabel}</div>
+                <div className="top">
+                  {tabLabel === 'answerChoices'
+                    ? 'Choose wisely:'
+                    : tabLabel}
+                </div>
                 <div className="bottom">
                   <div className="sentenceWrapper">
                     {cardData[tabLabel].map((el) => (
@@ -240,4 +243,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default CardReading;

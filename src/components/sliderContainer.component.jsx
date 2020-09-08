@@ -13,6 +13,7 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Card from './card.component';
+import CardReading from './cardReading.component';
 import CardForm from './cardForm.component';
 import { flipCard } from './components.utils';
 import { deleteCard } from '../redux/utils.actionCreator';
@@ -51,7 +52,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SimplePopover({ tabLabels, label, cardData }) {
+function SimplePopover({ tabLabels, label, cardData, cardType }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [status, setStatus] = useState(false);
@@ -115,7 +116,7 @@ function SimplePopover({ tabLabels, label, cardData }) {
           label={label}
           tabLabels={tabLabels}
           cardData={cardData}
-          cardType="grammar"
+          cardType={cardType}
         />
       </Popover>
     </div>
@@ -124,21 +125,44 @@ function SimplePopover({ tabLabels, label, cardData }) {
 
 SwiperCore.use([Pagination]);
 
-const SliderContainer = ({ data, onRate, tabLabels, label }) => {
-  const slides = data.map((el, index) => (
-    <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
-      <Card
-        cardData={el}
-        key={uuidv4()}
-        index={index}
-        rating={el.rating}
-        onRate={onRate}
-        tabLabels={tabLabels}
-        flipCard={flipCard}
-        label={label}
-      />
-    </SwiperSlide>
-  ));
+const SliderContainer = ({
+  data,
+  onRate,
+  tabLabels,
+  label,
+  cardType,
+}) => {
+  const slides = data.map((el, index) => {
+    if (cardType === 'grammar')
+      return (
+        <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
+          <Card
+            cardData={el}
+            key={uuidv4()}
+            index={index}
+            rating={el.rating}
+            onRate={onRate}
+            tabLabels={tabLabels}
+            flipCard={flipCard}
+            label={label}
+          />
+        </SwiperSlide>
+      );
+    return (
+      <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
+        <CardReading
+          cardData={el}
+          key={uuidv4()}
+          index={index}
+          rating={el.rating}
+          onRate={onRate}
+          tabLabels={tabLabels}
+          flipCard={flipCard}
+          label={label}
+        />
+      </SwiperSlide>
+    );
+  });
 
   return (
     <SliderContainerStyled>
@@ -146,6 +170,7 @@ const SliderContainer = ({ data, onRate, tabLabels, label }) => {
         tabLabels={tabLabels}
         cardData={data}
         label={label}
+        cardType={cardType}
       />
 
       <Swiper
