@@ -25,10 +25,22 @@ import {
 } from '../redux/grammar/grammarCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
-  height: props.cardType === 'grammar' ? '50rem' : '45rem',
-  width: props.cardType === 'grammar' ? '70rem' : '32rem',
-  cardTitlePosition: props.cardType === 'grammar' ? '5px' : '-2rem',
-  cardTitleWidth: props.cardType === 'grammar' ? '25%' : '50%',
+  height:
+    props.cardType === 'grammar' || props.cardType === 'reading'
+      ? '50rem'
+      : '45rem',
+  width:
+    props.cardType === 'grammar' || props.cardType === 'reading'
+      ? '70rem'
+      : '32rem',
+  cardTitlePosition:
+    props.cardType === 'grammar' || props.cardType === 'reading'
+      ? '5px'
+      : '-2rem',
+  cardTitleWidth:
+    props.cardType === 'grammar' || props.cardType === 'reading'
+      ? '25%'
+      : '50%',
 }))`
   display: flex;
   flex-direction: column;
@@ -66,13 +78,13 @@ const CardFormStyled = styled.div.attrs((props) => ({
       background-color: var(--color-green-light);
       box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
       font-weight: 400;
-      font-size: 2rem;
+      font-size: var(--font-size-medium);
       color: var(--color-white-dark);
     }
 
     .card-front {
       align-self: flex-end;
-      font-size: 4rem;
+      font-size: var(--font-size-large);
       color: var(--color-blue-cadet);
     }
   }

@@ -57,6 +57,7 @@ const CardMenu = ({
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -68,6 +69,7 @@ const CardMenu = ({
 
   const handlePopover = () => {
     setAnchorPop(document.getElementById(cardId));
+    console.log(document.getElementById(cardId), cardId);
   };
 
   return (

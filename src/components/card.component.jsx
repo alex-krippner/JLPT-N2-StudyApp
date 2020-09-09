@@ -60,7 +60,8 @@ const CardSide = styled.div.attrs((props) => ({
   border: solid 1px #708090;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 
-  font-size: ${(props) => (props.front ? props.fontSize : '2rem')};
+  font-size: ${(props) =>
+    props.front ? props.fontSize : 'var(--font-size-small)'};
   transform: ${(props) =>
     props.back ? ' rotateY(180deg)' : 'rotateY(0)'};
   cursor: ${(props) => (props.back ? 'pointer' : '')};
@@ -72,7 +73,7 @@ const CardSide = styled.div.attrs((props) => ({
     padding: 5px;
     border-right: solid 1px;
     border-bottom: solid 1px;
-    font-size: 2rem;
+    font-size: var(--font-size-small);
   }
 
   .bottom {
@@ -90,7 +91,7 @@ const CardSide = styled.div.attrs((props) => ({
       height: 100%;
       margin: 0;
       padding: 1rem;
-      font-size: 1.75rem;
+      font-size: var(--font-size-small);
     }
 
     .paragraph {
@@ -151,7 +152,7 @@ const BackSection = styled.section.attrs((props) => ({
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-size: 2.5rem;
+  font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
   height: ${(props) => props.height};
 `;
@@ -172,7 +173,6 @@ const Card = ({
   formDispatcher,
   label,
 }) => {
-  console.log(cardData);
   return (
     <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>
