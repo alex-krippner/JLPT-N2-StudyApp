@@ -44,7 +44,7 @@ const useStyles = makeStyles({
   },
 
   addIcon: {
-    fontSize: '3.5rem',
+    fontSize: 'var(--font-size-large)',
 
     '&:hover': {
       cursor: 'pointer',

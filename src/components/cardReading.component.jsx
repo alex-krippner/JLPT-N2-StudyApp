@@ -5,6 +5,11 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { makeStyles } from '@material-ui/core/styles';
+
 import CardMenu from './cardMenu.component';
 import Star from './star.component';
 
@@ -34,14 +39,14 @@ const CardWrapper = styled.div`
   position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
-  color: #708090;
+  color: var(--color-grey-medium);
 `;
 
 const CardSide = styled.div.attrs((props) => ({
   fontSize:
     props.cardType === 'vocab' || props.cardType === 'grammar'
-      ? '4rem'
-      : '15rem',
+      ? 'var(--font-size-large)'
+      : 'var(--font-size-huge)',
 }))`
   position: absolute;
   top: 0;
@@ -54,11 +59,12 @@ const CardSide = styled.div.attrs((props) => ({
   backface-visibility: hidden;
   border-radius: 1rem;
   transition: transform 0.8s ease, background 0.8s ease;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border: solid 1px #708090;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 
-  font-size: ${(props) => (props.front ? props.fontSize : '2rem')};
+  font-size: ${(props) =>
+    props.front ? props.fontSize : 'var(--font-size-medium)'};
   transform: ${(props) =>
     props.back ? ' rotateY(180deg)' : 'rotateY(0)'};
   cursor: ${(props) => (props.back ? 'pointer' : '')};
@@ -104,7 +110,7 @@ const CardSide = styled.div.attrs((props) => ({
     margin-right: 1rem;
     border-radius: 50%;
     border: solid 1px #708090;
-    background-color: #ffffff;
+    background-color: var(--color-white);
   }
 `;
 
@@ -161,6 +167,20 @@ const FrontContent = ({ cardData }) => {
   if (cardData.cardType === 'reading') return cardData.passage;
 };
 
+const useStyles = makeStyles({
+  AppBarRoot: {
+    boxShadow: 'none',
+    width: 'auto',
+    background: 'transparent',
+    left: 0,
+    color: 'var(--color-green-light)',
+  },
+
+  tab: {
+    fontSize: 'var(--font-size-small)',
+  },
+});
+
 const CardReading = ({
   cardData,
   flipCard,
@@ -170,9 +190,22 @@ const CardReading = ({
   formDispatcher,
   label,
 }) => {
+  const classes = useStyles();
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <CardScene cardType={cardData.cardType}>
       <CardWrapper className="cardWrapper" id={cardData.id}>
+        <AppBar classes={{ root: classes.AppBarRoot }}>
+          <Tabs value={value} onChange={handleChange} centered>
+            <Tab className={classes.tab} label="Item One" />
+            <Tab className={classes.tab} label="Item Two" />
+          </Tabs>
+        </AppBar>
         <CardSide
           front
           cardType={cardData.cardType}

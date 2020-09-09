@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import CardMenu from './cardMenu.component';
 import Star from './star.component';
 
+// import { COLORS } from '../theme/styleConstants';
+
 const CardScene = styled.div.attrs((props) => ({
   height:
     props.cardType === 'vocab'
@@ -34,14 +36,14 @@ const CardWrapper = styled.div`
   position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
-  color: #708090;
+  color: var(--color-grey-medium);
 `;
 
 const CardSide = styled.div.attrs((props) => ({
   fontSize:
     props.cardType === 'vocab' || props.cardType === 'grammar'
-      ? '4rem'
-      : '15rem',
+      ? 'var(--font-size-large)'
+      : 'var(--font-size-huge)',
 }))`
   position: absolute;
   top: 0;
@@ -54,7 +56,7 @@ const CardSide = styled.div.attrs((props) => ({
   backface-visibility: hidden;
   border-radius: 1rem;
   transition: transform 0.8s ease, background 0.8s ease;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border: solid 1px #708090;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 
@@ -105,7 +107,7 @@ const CardSide = styled.div.attrs((props) => ({
     margin-right: 1rem;
     border-radius: 50%;
     border: solid 1px #708090;
-    background-color: #ffffff;
+    background-color: var(--color-white);
   }
 `;
 

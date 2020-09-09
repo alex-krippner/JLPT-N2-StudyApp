@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   padding: 2rem;
   border-radius: 3rem;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
-  background-color: #fffafa;
+  background-color: var(--color-white-medium);
   overflow-y: scroll;
 
   /* The emerging W3C standard
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
   scrollbar-width: thin;
 
-  scrollbar-color: #add8e6;
+  scrollbar-color: var(--color-blue-cadet);
 
   /* Works on Chrome/Edge/Safari */
   &::-webkit-scrollbar {
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #add8e6;
+    background-color: var(--color-blue-cadet);
   }
   &::-webkit-scrollbar-track-piece:end {
     background: transparent;

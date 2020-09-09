@@ -35,7 +35,7 @@ const CardFormStyled = styled.div.attrs((props) => ({
   justify-content: flex-start;
   height: ${(props) => props.height};
   width: ${(props) => props.width};
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border: solid 1px #708090;
   border-radius: 1rem;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
@@ -63,17 +63,17 @@ const CardFormStyled = styled.div.attrs((props) => ({
       height: 5rem;
       width: ${(props) => props.cardTitleWidth};
       border-radius: 0 2rem 0 2rem;
-      background-color: #66cdaa;
+      background-color: var(--color-green-light);
       box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
       font-weight: 400;
       font-size: 2rem;
-      color: #f5f5f5;
+      color: var(--color-white-dark);
     }
 
     .card-front {
       align-self: flex-end;
       font-size: 4rem;
-      color: #5f9ea0;
+      color: var(--color-blue-cadet);
     }
   }
 
@@ -90,10 +90,10 @@ const CardFormStyled = styled.div.attrs((props) => ({
 const useStyles = makeStyles({
   root: {
     '& .MuiFormLabel-root': {
-      fontSize: '1.5rem',
+      fontSize: 'var(--font-size-small)',
     },
     '& .MuiInputBase-input': {
-      fontSize: '1.5rem',
+      fontSize: 'var(--font-size-small)',
     },
   },
   container: {
@@ -106,7 +106,7 @@ const useStyles = makeStyles({
   },
 
   textfieldLabel: {
-    fontSize: '1.5rem',
+    fontSize: 'var(--font-size-small)',
   },
 
   footer: {
@@ -116,15 +116,18 @@ const useStyles = makeStyles({
 
   submitButton: {
     textTransform: 'capitalize',
-    backgroundColor: '#4169E1',
-    fontSize: '1.5rem',
+    backgroundColor: 'var(--color-blue-medium)',
+    fontSize: 'var(--font-size-small)',
 
     '&:hover': {
-      backgroundColor: '#000080',
+      backgroundColor: 'var(--color-blue-dark)',
     },
   },
 
-  buttonLabel: { textTransform: 'capitalize', fontSize: '1.5rem' },
+  buttonLabel: {
+    textTransform: 'capitalize',
+    fontSize: 'var(--font-size-small)',
+  },
 });
 
 const FormReducer = (state, action) => {

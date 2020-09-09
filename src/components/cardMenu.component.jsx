@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 
   icon: {
-    fontSize: '2rem',
+    fontSize: 'var(--font-size-medium)',
     cursor: 'pointer',
   },
 });

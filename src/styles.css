@@ -1,5 +1,10 @@
 /* Swiper component from sliderContainer.component */
 
+:root {
+  --color-text: black;
+  --color-background: lightgray;
+}
+
 .swiper-slide {
   justify-content: center;
   align-items: center;

@@ -7,7 +7,9 @@ const StarStyled = styled.div`
   margin: 2px;
   float: left;
   background-color: ${(props) =>
-    props.selected === true ? '#4682B4' : '#A9A9A9'};
+    props.selected === true
+      ? 'var(--color-blue-medium)'
+      : 'var(--color-grey-medium)'};
   opacity: ${(props) => (props.selected === true ? 1 : 0.5)};
   cursor: pointer;
 
@@ -23,11 +25,6 @@ const StarStyled = styled.div`
     0% 38%,
     37% 38%
   );
-
-
-  .star-selected {
-    background-color: #87cefa; !important
-  }
 `;
 
 const Star = ({ selected = false, onClick = (f) => f }) => (
@@ -39,3 +36,7 @@ const Star = ({ selected = false, onClick = (f) => f }) => (
 );
 
 export default Star;
+
+// .star-selected {
+//   background-color: var(--color-grey-medium); !important
+// }

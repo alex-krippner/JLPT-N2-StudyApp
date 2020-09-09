@@ -29,7 +29,7 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
   tablecell: {
-    fontSize: '1.5rem',
+    fontSize: 'var(--font-size-small)',
   },
 });
 

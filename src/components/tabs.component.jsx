@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.inheret,
 
     '&.MuiAppBar-colorDefault': {
-      backgroundColor: 'white',
+      backgroundColor: 'var(--color-white)',
     },
 
     '&.MuiPaper-elevation4': {
@@ -28,19 +28,19 @@ const useStyles = makeStyles((theme) => ({
   },
 
   tab: {
-    fontSize: '2rem',
+    fontSize: 'var(--font-size-small)',
     minWidth: 'auto',
     margin: '0 5px',
   },
 
   inputContainer: {
-    fontSize: '1.5rem',
+    fontSize: 'var(--font-size-small)',
     justifyContent: 'center',
     marginBottom: '1rem',
   },
 
   input: {
-    fontSize: '1.5rem',
+    fontSize: 'var(--font-size-small)',
   },
 
   form: {

@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   height: 100%;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
   border-radius: 3rem;
-  background-color: #ffffff;
+  background-color: var(--color-white);
 `;
 
 const useStyles = makeStyles({
@@ -54,11 +54,11 @@ const useStyles = makeStyles({
   // },
 
   listItemText: {
-    fontSize: '1.5rem',
+    fontSize: 'var(--font-size-small)',
   },
 
   svgIcon: {
-    fontSize: '2.5rem',
+    fontSize: 'var(--font-size-medium)',
   },
 
   listButton: {
