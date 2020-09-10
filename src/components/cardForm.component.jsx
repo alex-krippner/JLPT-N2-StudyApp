@@ -23,6 +23,7 @@ import {
   addGrammar,
   editGrammar,
 } from '../redux/grammar/grammarCollection.actionCreators';
+import { addReading } from '../redux/readingCollection/readingCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
   height:
@@ -193,6 +194,7 @@ const CardForm = (props) => {
     editKanjiDispatcher,
     editVocabDispatcher,
     editGrammarDispatcher,
+    addReadingDispatcher,
     cardType,
     editing,
     cardData,
@@ -259,6 +261,10 @@ const CardForm = (props) => {
     if (label === '漢字') addKanjiDispatcher(cardFormData);
     if (label === '語彙') addVocabDispatcher(cardFormData);
     if (label === '文法') addGrammarDispatcher(cardFormData);
+    if (label === 'reading') addReadingDispatcher(cardFormData);
+
+    // CLEAR FORM INPUTS BY PASSING initCardForm function as a action method to the FormReducer
+    // TODO: I am not sure if putting a method in an action object is good practice???
     dispatchFormAction({
       type: 'RESET',
       resetForm: (payloadData) => initCardForm(payloadData),
@@ -290,14 +296,18 @@ const CardForm = (props) => {
         ) : (
           <>
             <h2 className="card-title">New Card</h2>
-            <TextField
-              id="outlined-basic"
-              label={label}
-              value={cardFormData[label]}
-              variant="outlined"
-              className={`${classes.root} ${classes.textfield}`}
-              onChange={(event) => handleChange(event)}
-            />
+            {cardType === 'reading' ? (
+              ''
+            ) : (
+              <TextField
+                id="outlined-basic"
+                label={label}
+                value={cardFormData[label]}
+                variant="outlined"
+                className={`${classes.root} ${classes.textfield}`}
+                onChange={(event) => handleChange(event)}
+              />
+            )}
           </>
         )}
       </header>
@@ -359,6 +369,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addGrammar(cardFormData)),
   editGrammarDispatcher: (cardFormData) =>
     dispatch(editGrammar(cardFormData)),
+  addReadingDispatcher: (cardFormData) =>
+    dispatch(addReading(cardFormData)),
 });
 
 export default connect(null, mapDispatchToProps)(CardForm);

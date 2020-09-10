@@ -34,7 +34,6 @@ const useStyles = makeStyles({
 
 export default (props) => {
   const { entries, entryKey } = props;
-  console.log(entries.length);
 
   const classes = useStyles(props);
 

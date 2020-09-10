@@ -123,9 +123,11 @@ const Bottom = styled.div`
   height: 80%;
   margin: 0;
   filter: ${(props) =>
-    props.blur === false && props.section === 2
+    props.blur === false && props.tabLabel === 'solution'
       ? 'blur(3px)'
       : 'none'};
+  cursor: ${(props) =>
+    props.tabLabel === 'solution' ? 'pointer' : ''};
 
   &:after {
     content: '';
@@ -134,7 +136,7 @@ const Bottom = styled.div`
     height: 90%;
     width: 100%;
     background: ${(props) =>
-      props.visible === false && props.section === 2
+      props.visible === false && props.tabLabel === 'solution'
         ? 'rgba(63, 81, 181, 0.8)'
         : 'transparent'};
   }
@@ -234,6 +236,7 @@ const CardReading = ({
         className={classes.paper}
         height="100%"
         id={cardData.id}
+        elevation={3}
       >
         <div className={classes.container}>
           <AppBar classes={{ root: classes.AppBarRoot }}>
@@ -274,12 +277,8 @@ const CardReading = ({
                     key={uuidv4()}
                     selected={i < cardData.rating}
                     onClick={
-                      () =>
-                        onRate(
-                          cardData[label],
-                          cardData.cardType,
-                          i + 1,
-                        )
+                      // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )
+                      () => onRate(cardData.id, i + 1)
                       // eslint-disable-next-line react/jsx-curly-newline
                     }
                   />
@@ -296,6 +295,7 @@ const CardReading = ({
               value={value}
             >
               {tabLabels.map((tabLabel, idx) => {
+                if (tabLabel === 'passage') return;
                 return (
                   <BackSection
                     key={uuidv4()}
@@ -314,6 +314,7 @@ const CardReading = ({
                       visible={visible}
                       blur={blur}
                       section={idx}
+                      tabLabel={tabLabel}
                       onClick={
                         (e) =>
                           handleVisibility(e, idx, tabLabels.length)

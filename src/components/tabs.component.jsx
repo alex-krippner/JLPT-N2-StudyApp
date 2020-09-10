@@ -3,13 +3,16 @@ import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Input from '@material-ui/core/Input';
-import Grid from '@material-ui/core/Grid';
+import {
+  AppBar,
+  Grid,
+  IconButton,
+  Input,
+  Tab,
+  Tabs,
+} from '@material-ui/core';
+
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import IconButton from '@material-ui/core/IconButton';
 
 import Table from './table.component';
 import { CardFormContext } from '../context/context';
@@ -57,6 +60,14 @@ const useStyles = makeStyles((theme) => ({
     height: '50%',
     border: 'solid 1px lightblue',
   },
+  tabPanelGrid: {
+    height: '100%',
+  },
+
+  textAreaPassage: {
+    height: '100%',
+    width: '100%',
+  },
 }));
 
 function TabPanel(props) {
@@ -71,7 +82,7 @@ function TabPanel(props) {
       className={`${classes.root} ${classes.swipe}`}
     >
       {value === index && (
-        <Grid container p={3} height="100%">
+        <Grid container p={3} className={classes.tabPanelGrid}>
           {children}
         </Grid>
       )}
@@ -157,33 +168,37 @@ export default function FullWidthTabs(props) {
           ))}
         </Tabs>
       </AppBar>
-      <Grid
-        container
-        spacing={1}
-        alignItems="center"
-        className={classes.inputContainer}
-        height="15%"
-      >
-        <Grid item xs={6}>
-          <Input
-            fullWidth
-            value={entry.value}
-            className={classes.input}
-            onChange={(event) => handleEntryInput(event)}
-            placeholder={utils.capitalizeFirstWord(placeholder)}
-            id="entry-input"
-          />
+      {placeholder === 'passage' ? (
+        ''
+      ) : (
+        <Grid
+          container
+          spacing={1}
+          alignItems="center"
+          className={classes.inputContainer}
+          height="15%"
+        >
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              value={entry.value}
+              className={classes.input}
+              onChange={(event) => handleEntryInput(event)}
+              placeholder={utils.capitalizeFirstWord(placeholder)}
+              id="entry-input"
+            />
+          </Grid>
+          <Grid item>
+            <IconButton
+              onClick={(event) => {
+                handleAddEntryBtn(event);
+              }}
+            >
+              <AddCircleOutlineIcon fontSize="large" />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item>
-          <IconButton
-            onClick={(event) => {
-              handleAddEntryBtn(event);
-            }}
-          >
-            <AddCircleOutlineIcon fontSize="large" />
-          </IconButton>
-        </Grid>
-      </Grid>
+      )}
 
       {tabLabels.map((tabLabel, index) => (
         <TabPanel
@@ -191,13 +206,16 @@ export default function FullWidthTabs(props) {
           index={index}
           key={uuidv4()}
           style={{ overflow: 'inheret' }}
-          height="60%"
         >
-          <Table
-            entries={cardFormData[tabLabel]}
-            entryKey={tabLabel}
-            height="100%"
-          />
+          {tabLabel === 'passage' ? (
+            <textarea className={classes.textAreaPassage} />
+          ) : (
+            <Table
+              entries={cardFormData[tabLabel]}
+              entryKey={tabLabel}
+              height="100%"
+            />
+          )}
         </TabPanel>
       ))}
     </>

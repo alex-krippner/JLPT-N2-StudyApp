@@ -30,7 +30,7 @@ const READING_DATA = [
 const INITIAL_STATE = READING_DATA;
 
 const readingCollectionReducer = (state = INITIAL_STATE, action) => {
-  switch (action.cardType) {
+  switch (action.type) {
     case ReadingCollectionActionTypes.RATE_READING:
       return state.map((reading) => readingReducer(reading, action));
     case ReadingCollectionActionTypes.ADD_READING:

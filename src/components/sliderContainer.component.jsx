@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SwiperCore, { Pagination } from 'swiper';
 import { connect } from 'react-redux';
@@ -28,6 +28,8 @@ const SliderContainerStyled = styled.div`
 
 const useStyles = makeStyles({
   root: {
+    background: 'rgba(0,0,0,0.4)',
+
     '& .MuiPaper-root': {
       borderRadius: '1rem',
     },
@@ -55,33 +57,33 @@ const useStyles = makeStyles({
 function SimplePopover({ tabLabels, label, cardData, cardType }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [status, setStatus] = useState(false);
+  // const [status, setStatus] = useState(false);
 
-  const changeBg = (stat) => {
-    if (stat) {
-      [
-        ...document.getElementsByClassName('card-side'),
-      ].forEach((el) =>
-        el.setAttribute('style', 'background: rgba(0,0,0, 0.4);'),
-      );
-    } else {
-      [
-        ...document.getElementsByClassName('card-side'),
-      ].forEach((el) =>
-        el.setAttribute('style', 'background: inheret; '),
-      );
-    }
-  };
-  useLayoutEffect(() => changeBg(status));
+  // const changeBg = (stat) => {
+  //   if (stat) {
+  //     [
+  //       ...document.getElementsByClassName('card-side'),
+  //     ].forEach((el) =>
+  //       el.setAttribute('style', 'background: rgba(0,0,0, 0.4);'),
+  //     );
+  //   } else {
+  //     [
+  //       ...document.getElementsByClassName('card-side'),
+  //     ].forEach((el) =>
+  //       el.setAttribute('style', 'background: inheret; '),
+  //     );
+  //   }
+  // };
+  // useLayoutEffect(() => changeBg(status));
 
   const handleClick = () => {
     setAnchorEl(document.getElementById('main'));
-    setStatus(!status);
+    // setStatus(!status);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    setStatus(!status);
+    // setStatus(!status);
   };
 
   const open = Boolean(anchorEl);

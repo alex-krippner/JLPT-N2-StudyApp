@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const tabLabels = ['question', 'choices', 'solution'];
+const tabLabels = ['passage', 'question', 'choices', 'solution'];
 
 const ReadingView = ({ rateReadingDispatcher, reading }) => {
   return (

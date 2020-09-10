@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core';
-import Popover from '@material-ui/core/Popover';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  Popover,
+  IconButton,
+  Menu,
+  MenuItem,
+} from '@material-ui/core/';
 
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from './cardForm.component';
