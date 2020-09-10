@@ -19,11 +19,10 @@ import { Input } from '@material-ui/core';
 import { CardFormContext } from '../context/context';
 
 const useStyles = makeStyles({
-  container: (props) => ({
-    height: props.entries.length === 0 ? '15rem' : '20%',
+  container: {
+    height: '100%',
     boxShadow: 'none',
-    border: 'solid 1px rgba(65,105,225, 0.5)',
-  }),
+  },
   table: {
     minWidth: 'auto',
     overflow: 'auto',

@@ -62,8 +62,8 @@ const CardFormStyled = styled.div.attrs((props) => ({
     width: 100%;
     margin-bottom: ${(props) =>
       props.cardType === 'reading' ? '0' : '2rem'};
-
     border-radius: 0 0 2rem 2rem;
+    height: 15%;
 
     .card-title {
       position: absolute;
@@ -111,7 +111,7 @@ const useStyles = makeStyles({
     },
   },
   container: {
-    height: '70%',
+    height: '60%',
     justifyContent: 'center',
   },
 
@@ -126,9 +126,11 @@ const useStyles = makeStyles({
   footer: {
     justifyContent: 'center',
     margin: '1rem 0',
+    height: '15%',
   },
 
   submitButton: {
+    height: '75%',
     textTransform: 'capitalize',
     backgroundColor: 'var(--color-blue-medium)',
     fontSize: 'var(--font-size-small)',
@@ -326,6 +328,7 @@ const CardForm = (props) => {
           </Button>
         ) : (
           <Button
+            height="50%"
             variant="contained"
             color="primary"
             size="large"

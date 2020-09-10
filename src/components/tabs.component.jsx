@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     width: '90%',
     height: '50%',
+    border: 'solid 1px lightblue',
   },
 }));
 
