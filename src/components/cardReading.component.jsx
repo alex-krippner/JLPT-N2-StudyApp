@@ -29,7 +29,7 @@ const CardSide = styled.div`
   font-size: var(--font-size-medium);
   color: var(--color-grey-medium);
 
-  cursor: pointer;
+ 
 
   .top {
     position: absolute;
@@ -37,15 +37,9 @@ const CardSide = styled.div`
     left: 1rem;
     padding: 5px;
     font-size: var(--font-size-small);
-    text-transform: capitalize;
   }
 
-  .bottom {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 80%;
-    margin: 0;
+
 
     .sentenceWrapper {
       display: flex;
@@ -91,7 +85,6 @@ const Front = styled.div`
 `;
 
 const FrontData = styled.div`
-  cursor: pointer;
   text-align: center;
   width: 75%;
   display: flex;
@@ -116,20 +109,33 @@ const BackSection = styled.section.attrs((props) => ({
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-start;
   font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
   height: ${(props) => props.height};
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 80%;
+  margin: 0;
+  filter: ${(props) =>
+    props.blur === false && props.section === 2
+      ? 'blur(3px)'
+      : 'none'};
 
   &:after {
     content: '';
     position: absolute;
-    height: 100%;
+    bottom: 0;
+    height: 90%;
     width: 100%;
     background: ${(props) =>
       props.visible === false && props.section === 2
-        ? 'rgba(0, 0, 0, 0.95)'
+        ? 'rgba(63, 81, 181, 0.8)'
         : 'transparent'};
   }
 `;
@@ -194,6 +200,7 @@ const CardReading = ({
 
   const [value, setValue] = useState(0);
   const [visible, setVisibility] = useState(false);
+  const [blur, setBlur] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -203,7 +210,22 @@ const CardReading = ({
     if (index !== arrayLength - 1) return;
 
     setVisibility(!visible);
+    setBlur(!blur);
   };
+
+  const capitalizeFirstLetter = (string) => {
+    if (typeof string !== 'string') return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  function capitalizeFirstWord(string) {
+    return string
+      .split(' ')
+      .map((word, idx) =>
+        idx === 0 ? capitalizeFirstLetter(word) : word,
+      )
+      .join(' ');
+  }
 
   return (
     <CardScene cardType={cardData.cardType}>
@@ -279,28 +301,38 @@ const CardReading = ({
                     key={uuidv4()}
                     section={idx}
                     labelNum={tabLabels.length}
-                    visible={visible}
-                    onClick={
-                      (e) =>
-                        handleVisibility(e, idx, tabLabels.length)
-                      // eslint-disable-next-line react/jsx-curly-newline
-                    }
                   >
                     <div className="top">
-                      {tabLabel === 'answerChoices'
-                        ? 'Choose wisely:'
-                        : tabLabel}
+                      {tabLabel === 'choices'
+                        ? capitalizeFirstWord(
+                            'choose the most suitable',
+                          )
+                        : capitalizeFirstWord(tabLabel)}
                     </div>
-                    <div className="bottom">
+                    <Bottom
+                      className="bottom"
+                      visible={visible}
+                      blur={blur}
+                      section={idx}
+                      onClick={
+                        (e) =>
+                          handleVisibility(e, idx, tabLabels.length)
+                        // eslint-disable-next-line react/jsx-curly-newline
+                      }
+                    >
                       <div className="sentenceWrapper">
-                        {cardData[tabLabel].map((el) => (
+                        {cardData[tabLabel].map((el, i) => (
                           <div className="paragraph" key={uuidv4()}>
-                            <span className="dot">&nbsp;</span>
+                            {idx === 0 ? (
+                              ''
+                            ) : (
+                              <span>{i + 1}.&nbsp;</span>
+                            )}
                             <div>{el}</div>
                           </div>
                         ))}
                       </div>
-                    </div>
+                    </Bottom>
                   </BackSection>
                 );
               })}

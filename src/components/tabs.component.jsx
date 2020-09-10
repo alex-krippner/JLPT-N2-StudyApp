@@ -14,6 +14,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Table from './table.component';
 import { CardFormContext } from '../context/context';
 
+import * as utils from '../utils/utilitiesFunctions';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.inheret,
@@ -50,8 +52,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   swipe: {
-    overflow: 'inherit',
+    overflow: 'auto',
     width: '90%',
+    height: '50%',
   },
 }));
 
@@ -67,7 +70,7 @@ function TabPanel(props) {
       className={`${classes.root} ${classes.swipe}`}
     >
       {value === index && (
-        <Grid container p={3}>
+        <Grid container p={3} height="100%">
           {children}
         </Grid>
       )}
@@ -158,13 +161,15 @@ export default function FullWidthTabs(props) {
         spacing={1}
         alignItems="center"
         className={classes.inputContainer}
+        height="15%"
       >
-        <Grid item>
+        <Grid item xs={6}>
           <Input
+            fullWidth
             value={entry.value}
             className={classes.input}
             onChange={(event) => handleEntryInput(event)}
-            placeholder={placeholder}
+            placeholder={utils.capitalizeFirstWord(placeholder)}
             id="entry-input"
           />
         </Grid>
@@ -185,10 +190,12 @@ export default function FullWidthTabs(props) {
           index={index}
           key={uuidv4()}
           style={{ overflow: 'inheret' }}
+          height="60%"
         >
           <Table
             entries={cardFormData[tabLabel]}
             entryKey={tabLabel}
+            height="100%"
           />
         </TabPanel>
       ))}

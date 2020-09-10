@@ -19,11 +19,11 @@ import { Input } from '@material-ui/core';
 import { CardFormContext } from '../context/context';
 
 const useStyles = makeStyles({
-  container: {
-    height: '15rem',
+  container: (props) => ({
+    height: props.entries.length === 0 ? '15rem' : '20%',
     boxShadow: 'none',
     border: 'solid 1px rgba(65,105,225, 0.5)',
-  },
+  }),
   table: {
     minWidth: 'auto',
     overflow: 'auto',
@@ -33,8 +33,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ entries, entryKey }) => {
-  const classes = useStyles();
+export default (props) => {
+  const { entries, entryKey } = props;
+  console.log(entries.length);
+
+  const classes = useStyles(props);
 
   // LOCAL STATE
   const [editIdx, setEditIdx] = useState(-1);
@@ -88,7 +91,7 @@ export default ({ entries, entryKey }) => {
                   className={classes.tablecell}
                 >
                   {currentlyEditing ? (
-                    <Input id="table-input" />
+                    <Input id="table-input" fullWidth />
                   ) : (
                     entry
                   )}

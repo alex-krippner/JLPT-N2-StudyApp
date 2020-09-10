@@ -27,11 +27,11 @@ import {
 const CardFormStyled = styled.div.attrs((props) => ({
   height:
     props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '50rem'
+      ? '55rem'
       : '45rem',
   width:
     props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '70rem'
+      ? '110rem'
       : '32rem',
   cardTitlePosition:
     props.cardType === 'grammar' || props.cardType === 'reading'
@@ -57,9 +57,11 @@ const CardFormStyled = styled.div.attrs((props) => ({
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 0 1 30%;
+    flex: ${(props) =>
+      props.cardType === 'reading' ? '0 1 20%' : '0 1 30%'};
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: ${(props) =>
+      props.cardType === 'reading' ? '0' : '2rem'};
 
     border-radius: 0 0 2rem 2rem;
 
