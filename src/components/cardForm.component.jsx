@@ -113,7 +113,6 @@ const useStyles = makeStyles({
   },
   container: {
     height: '60%',
-    justifyContent: 'center',
   },
 
   textfield: {
@@ -248,6 +247,7 @@ const CardForm = (props) => {
     cardData,
     initCardForm,
   );
+  console.log(cardFormData);
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -315,11 +315,14 @@ const CardForm = (props) => {
         container
         className={classes.container}
         id="form-container"
+        direction="column"
+        justify="space-around"
+        alignItems="center"
       >
         <CardFormContext.Provider
           value={{ cardFormData, dispatchFormAction }}
         >
-          <FullWidthTabs tabLabels={tabLabels} />
+          <FullWidthTabs tabLabels={tabLabels} cardData={cardData} />
         </CardFormContext.Provider>
       </Grid>
       <Grid container className={classes.footer}>

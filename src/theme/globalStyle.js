@@ -58,17 +58,3 @@ body {
 `;
 
 export default GlobalStyle;
-
-// html {
-//   --font-size-small: 16px;
-//   --font-size-medium: 22px;
-//   @media (min-width: 1024px) {
-//     --font-size-small: 21px;
-//     --font-size-medium: 24px;
-//   }
-// }
-// `;
-// // Elsewhere...
-// const Paragraph = styled.p`
-// font-size: var(--font-size-small);
-// `;

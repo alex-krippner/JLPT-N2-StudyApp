@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
+  Button,
   Grid,
   IconButton,
   Input,
@@ -68,6 +67,11 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
   },
+  buttonPassage: {
+    alignSelf: 'flex-start',
+    marginLeft: '5rem',
+    fontSize: '1.5rem',
+  },
 }));
 
 function TabPanel(props) {
@@ -91,7 +95,7 @@ function TabPanel(props) {
 }
 
 export default function FullWidthTabs(props) {
-  const { tabLabels } = props;
+  const { tabLabels, cardData } = props;
   const classes = useStyles();
   const { cardFormData, dispatchFormAction } = useContext(
     CardFormContext,
@@ -138,10 +142,10 @@ export default function FullWidthTabs(props) {
       placeholder,
       value,
     });
-
-    setEntry({
-      value: '',
-    });
+    console.log(entry);
+    // setEntry({
+    //   value: '',
+    // });
   };
   return (
     <>
@@ -162,7 +166,7 @@ export default function FullWidthTabs(props) {
             <Tab
               label={tabLabel}
               classes={{ root: classes.tab }}
-              key={uuidv4()}
+              key={cardData.id}
               onClick={() => handlePlaceholder(tabLabel)}
             />
           ))}
@@ -204,11 +208,18 @@ export default function FullWidthTabs(props) {
         <TabPanel
           value={tabValue}
           index={index}
-          key={uuidv4()}
+          key={cardData.id}
           style={{ overflow: 'inheret' }}
         >
           {tabLabel === 'passage' ? (
-            <textarea className={classes.textAreaPassage} />
+            <>
+              <textarea
+                value={entry.value}
+                className={classes.textAreaPassage}
+                onChange={(event) => handleEntryInput(event)}
+                key={cardData.id}
+              />
+            </>
           ) : (
             <Table
               entries={cardFormData[tabLabel]}
@@ -218,6 +229,21 @@ export default function FullWidthTabs(props) {
           )}
         </TabPanel>
       ))}
+      {placeholder === 'passage' ? (
+        <Button
+          height="50%"
+          variant="outlined"
+          color="primary"
+          size="large"
+          className={classes.buttonPassage}
+          onClick={(event) => handleAddEntryBtn(event)}
+          key={cardData.id}
+        >
+          Add Passage
+        </Button>
+      ) : (
+        ''
+      )}
     </>
   );
 }

@@ -8,11 +8,23 @@ import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
+// import HomeIcon from '@material-ui/icons/Home';
 import TranslateIcon from '@material-ui/icons/Translate';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import GavelIcon from '@material-ui/icons/Gavel';
 import NoteIcon from '@material-ui/icons/Note';
+
+import daruma from '../img/daruma.svg';
+
+const Daruma = styled.div`
+  background-image: url(${daruma});
+  height: 10rem;
+  width: 10rem;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: contain;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -118,11 +130,7 @@ const Sidebar = () => {
             className={classes.MuiListRoot}
             aria-label="main mailbox folders"
           >
-            <ListItemLink
-              to="/"
-              primary="Home"
-              icon={<HomeIcon className={classes.svgIcon} />}
-            />
+            <ListItemLink to="/" primary="Home" icon={<Daruma />} />
             <ListItemLink
               to="/kanji"
               primary="Kanji"
