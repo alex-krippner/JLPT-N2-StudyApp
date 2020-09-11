@@ -27,13 +27,15 @@ const StarStyled = styled.div`
   );
 `;
 
-const Star = ({ selected = false, onClick = (f) => f }) => (
-  <StarStyled
-    selected={selected}
-    onClick={onClick}
-    className="star"
-  />
-);
+const Star = ({ selected = false, onClick = (f) => f }) => {
+  return (
+    <StarStyled
+      selected={selected}
+      onClick={onClick}
+      className="star"
+    />
+  );
+};
 
 export default Star;
 

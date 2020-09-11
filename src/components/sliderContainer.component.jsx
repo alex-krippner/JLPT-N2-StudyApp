@@ -57,33 +57,13 @@ const useStyles = makeStyles({
 function SimplePopover({ tabLabels, label, cardData, cardType }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [status, setStatus] = useState(false);
-
-  // const changeBg = (stat) => {
-  //   if (stat) {
-  //     [
-  //       ...document.getElementsByClassName('card-side'),
-  //     ].forEach((el) =>
-  //       el.setAttribute('style', 'background: rgba(0,0,0, 0.4);'),
-  //     );
-  //   } else {
-  //     [
-  //       ...document.getElementsByClassName('card-side'),
-  //     ].forEach((el) =>
-  //       el.setAttribute('style', 'background: inheret; '),
-  //     );
-  //   }
-  // };
-  // useLayoutEffect(() => changeBg(status));
 
   const handleClick = () => {
     setAnchorEl(document.getElementById('main'));
-    // setStatus(!status);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    // setStatus(!status);
   };
 
   const open = Boolean(anchorEl);
@@ -119,6 +99,7 @@ function SimplePopover({ tabLabels, label, cardData, cardType }) {
           tabLabels={tabLabels}
           cardData={cardData}
           cardType={cardType}
+          handleClose={handleClose}
         />
       </Popover>
     </div>

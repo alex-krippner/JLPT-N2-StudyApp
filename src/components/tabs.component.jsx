@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -57,7 +57,10 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     width: '90%',
     height: '50%',
-    border: 'solid 1px lightblue',
+    border: (props) =>
+      props.tabLabel === 'passage'
+        ? 'none'
+        : 'solid 1px var(--color-blue-light)',
   },
   tabPanelGrid: {
     height: '100%',
@@ -65,18 +68,34 @@ const useStyles = makeStyles((theme) => ({
 
   textAreaPassage: {
     height: '100%',
-    width: '100%',
+    width: '50%',
+    resize: 'none',
+    border: 'solid 1px var(--color-blue-light)',
+    outline: 'none',
+
+    '&:focus': {
+      border: 'solid 2px var(--color-blue-dark)',
+    },
   },
   buttonPassage: {
     alignSelf: 'flex-start',
     marginLeft: '5rem',
     fontSize: '1.5rem',
   },
+
+  paperPassage: {
+    width: '40%',
+    height: '90%',
+    resize: 'none',
+    outline: 'none',
+    border: 'solid 1px var(--color-grey-medium)',
+    cursor: 'default',
+  },
 }));
 
 function TabPanel(props) {
   const { children, value, index } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
   return (
     <div
       role="tabpanel"
@@ -117,6 +136,7 @@ export default function FullWidthTabs(props) {
   const [entry, setEntry] = useState({
     value: '',
   });
+  const [passage, setPassage] = useState(false);
 
   // CHANGE THE ENTRY INPUT PLACEHOLDER TO THE CORRESPONDING ENTRY KEY AS YOU CLICK ON THE TABS
   const handlePlaceholder = (curKey) => setPlaceholder(curKey);
@@ -125,6 +145,16 @@ export default function FullWidthTabs(props) {
       value: event.target.value,
     });
   };
+
+  useEffect(() => {
+    const buttonPassage = document.getElementById('buttonPassage');
+    if (placeholder !== 'passage') return;
+
+    if (passage) {
+      buttonPassage.textContent = 'Passage added';
+      buttonPassage.classList.add('Mui-disabled');
+    }
+  });
 
   /*
    ********************************************
@@ -142,11 +172,12 @@ export default function FullWidthTabs(props) {
       placeholder,
       value,
     });
-    console.log(entry);
-    // setEntry({
-    //   value: '',
-    // });
+    setEntry({
+      value: '',
+    });
+    setPassage(true);
   };
+
   return (
     <>
       <AppBar
@@ -166,7 +197,7 @@ export default function FullWidthTabs(props) {
             <Tab
               label={tabLabel}
               classes={{ root: classes.tab }}
-              key={cardData.id}
+              key={tabLabel}
               onClick={() => handlePlaceholder(tabLabel)}
             />
           ))}
@@ -208,18 +239,30 @@ export default function FullWidthTabs(props) {
         <TabPanel
           value={tabValue}
           index={index}
-          key={cardData.id}
+          key={tabLabel}
           style={{ overflow: 'inheret' }}
+          tabLabel={tabLabel}
         >
           {tabLabel === 'passage' ? (
-            <>
+            <Grid
+              container
+              direction="row"
+              justify="space-evenly"
+              alignItems="center"
+              width="100%"
+            >
               <textarea
                 value={entry.value}
                 className={classes.textAreaPassage}
                 onChange={(event) => handleEntryInput(event)}
                 key={cardData.id}
               />
-            </>
+              <textarea
+                className={classes.paperPassage}
+                value={cardFormData.passage}
+                readOnly
+              />
+            </Grid>
           ) : (
             <Table
               entries={cardFormData[tabLabel]}
@@ -238,6 +281,7 @@ export default function FullWidthTabs(props) {
           className={classes.buttonPassage}
           onClick={(event) => handleAddEntryBtn(event)}
           key={cardData.id}
+          id="buttonPassage"
         >
           Add Passage
         </Button>

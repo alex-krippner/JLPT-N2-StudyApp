@@ -197,6 +197,7 @@ const CardForm = (props) => {
     cardType,
     editing,
     cardData,
+    handleClose,
   } = props;
   const classes = useStyles();
 
@@ -247,7 +248,6 @@ const CardForm = (props) => {
     cardData,
     initCardForm,
   );
-  console.log(cardFormData);
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -270,6 +270,7 @@ const CardForm = (props) => {
       resetForm: (payloadData) => initCardForm(payloadData),
       payload: cardData,
     });
+    handleClose();
   };
 
   const handleEditCard = () => {

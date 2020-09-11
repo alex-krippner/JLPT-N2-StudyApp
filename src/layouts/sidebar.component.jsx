@@ -8,7 +8,6 @@ import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import HomeIcon from '@material-ui/icons/Home';
 import TranslateIcon from '@material-ui/icons/Translate';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import GavelIcon from '@material-ui/icons/Gavel';

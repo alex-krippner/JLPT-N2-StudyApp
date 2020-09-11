@@ -86,6 +86,7 @@ const Front = styled.div`
 
 const FrontData = styled.div`
   text-align: center;
+  height: 90%;
   width: 75%;
   display: flex;
   line-height: 2;
@@ -133,7 +134,7 @@ const Bottom = styled.div`
     content: '';
     position: absolute;
     bottom: 0;
-    height: 90%;
+    height: 100%;
     width: 100%;
     background: ${(props) =>
       props.visible === false && props.tabLabel === 'solution'
@@ -142,8 +143,15 @@ const Bottom = styled.div`
   }
 `;
 
+const Passage = styled.div`
+  height: 90%;
+  width: 100%;
+  overflow: auto;
+`;
+
 const FrontContent = ({ cardData }) => {
-  if (cardData.cardType === 'reading') return cardData.passage;
+  if (cardData.cardType === 'reading')
+    return <Passage>{cardData.passage}</Passage>;
 };
 
 const useStyles = makeStyles({
