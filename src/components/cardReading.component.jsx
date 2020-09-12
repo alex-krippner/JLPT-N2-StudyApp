@@ -101,8 +101,6 @@ const Rating = styled.div`
 `;
 
 const BackSection = styled.section.attrs((props) => ({
-  height: props.section === 0 ? '15%' : '45%',
-
   borderBottom: () => {
     if (props.section < props.labelNum - 1) return 'solid 1px';
   },
@@ -114,14 +112,14 @@ const BackSection = styled.section.attrs((props) => ({
   align-items: flex-start;
   font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
-  height: ${(props) => props.height};
+  height: ${(props) => (props.section === 1 ? '15%' : '45%')};
 `;
 
 const Bottom = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 80%;
+  height: 75%;
   margin: 0;
   filter: ${(props) =>
     props.blur === false && props.tabLabel === 'solution'
@@ -304,9 +302,10 @@ const CardReading = ({
             >
               {tabLabels.map((tabLabel, idx) => {
                 if (tabLabel === 'passage') return;
+
                 return (
                   <BackSection
-                    key={uuidv4()}
+                    key={tabLabel}
                     section={idx}
                     labelNum={tabLabels.length}
                   >

@@ -11,3 +11,8 @@ export const addReading = (readingData) => ({
   type: ReadingCollectionActionTypes.ADD_READING,
   payload: readingData,
 });
+
+export const editReading = (readingData) => ({
+  type: ReadingCollectionActionTypes.EDIT_READING,
+  payload: readingData,
+});

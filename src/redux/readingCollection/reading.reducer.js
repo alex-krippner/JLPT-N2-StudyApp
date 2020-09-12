@@ -20,11 +20,15 @@ const readingReducer = (state = INITIAL_STATE, action) => {
       return {
         cardType: 'reading',
         id: uuidv4(),
-        passage: [...action.payload.passage],
+        passage: action.payload.passage,
         question: [...action.payload.question],
         choices: [...action.payload.choices],
         solution: [...action.payload.solution],
         rating: 0,
+      };
+    case ReadingCollectionActionTypes.EDIT_READING:
+      return {
+        ...action.payload,
       };
     default:
       return state;

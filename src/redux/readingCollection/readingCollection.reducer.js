@@ -35,9 +35,15 @@ const readingCollectionReducer = (state = INITIAL_STATE, action) => {
       return state.map((reading) => readingReducer(reading, action));
     case ReadingCollectionActionTypes.ADD_READING:
       return [...state, readingReducer({}, action)];
-    case ReadingCollectionActionTypes.DELETE_READING:
-      return state.filter(
-        (reading) => reading.id !== action.payload.id,
+    case 'DELETE_CARD':
+      return state.filter((reading) => {
+        return reading.id !== action.payload.cardId;
+      });
+    case ReadingCollectionActionTypes.EDIT_READING:
+      return state.map((reading) =>
+        reading.id !== action.payload.id
+          ? reading
+          : readingReducer(reading, action),
       );
     default:
       return state;

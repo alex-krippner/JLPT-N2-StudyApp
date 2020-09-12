@@ -23,7 +23,10 @@ import {
   addGrammar,
   editGrammar,
 } from '../redux/grammar/grammarCollection.actionCreators';
-import { addReading } from '../redux/readingCollection/readingCollection.actionCreators';
+import {
+  addReading,
+  editReading,
+} from '../redux/readingCollection/readingCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
   height:
@@ -161,6 +164,12 @@ const FormReducer = (state, action) => {
           action.value,
         ],
       };
+    case 'ADD_PASSAGE':
+      return {
+        ...state,
+        passage: action.value,
+      };
+
     case 'EDIT_ENTRY':
       return {
         ...state,
@@ -194,6 +203,7 @@ const CardForm = (props) => {
     editVocabDispatcher,
     editGrammarDispatcher,
     addReadingDispatcher,
+    editReadingDispatcher,
     cardType,
     editing,
     cardData,
@@ -234,6 +244,12 @@ const CardForm = (props) => {
           return {
             ...d,
             cardType: '',
+          };
+        }
+        if (key === 'passage') {
+          return {
+            ...d,
+            passage: '',
           };
         }
         return {
@@ -277,6 +293,7 @@ const CardForm = (props) => {
     if (label === '漢字') editKanjiDispatcher(cardFormData);
     if (label === '語彙') editVocabDispatcher(cardFormData);
     if (label === '文法') editGrammarDispatcher(cardFormData);
+    if (label === 'reading') editReadingDispatcher(cardFormData);
   };
 
   return (
@@ -375,6 +392,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(editGrammar(cardFormData)),
   addReadingDispatcher: (cardFormData) =>
     dispatch(addReading(cardFormData)),
+  editReadingDispatcher: (cardFormData) =>
+    dispatch(editReading(cardFormData)),
 });
 
 export default connect(null, mapDispatchToProps)(CardForm);

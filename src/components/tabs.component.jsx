@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+/* eslint-disable react/jsx-curly-newline */
+import React, { useContext, useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
-  Button,
   Grid,
   IconButton,
   Input,
@@ -41,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 'var(--font-size-small)',
     justifyContent: 'center',
     marginBottom: '1rem',
+    visibility: 'visible',
+  },
+
+  inputContainerHidden: {
+    fontSize: 'var(--font-size-small)',
+    justifyContent: 'center',
+    marginBottom: '1rem',
+    visibility: 'hidden',
   },
 
   input: {
@@ -68,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
   textAreaPassage: {
     height: '100%',
-    width: '50%',
+    width: '100%',
     resize: 'none',
     border: 'solid 1px var(--color-blue-light)',
     outline: 'none',
@@ -76,20 +84,6 @@ const useStyles = makeStyles((theme) => ({
     '&:focus': {
       border: 'solid 2px var(--color-blue-dark)',
     },
-  },
-  buttonPassage: {
-    alignSelf: 'flex-start',
-    marginLeft: '5rem',
-    fontSize: '1.5rem',
-  },
-
-  paperPassage: {
-    width: '40%',
-    height: '90%',
-    resize: 'none',
-    outline: 'none',
-    border: 'solid 1px var(--color-grey-medium)',
-    cursor: 'default',
   },
 }));
 
@@ -136,7 +130,6 @@ export default function FullWidthTabs(props) {
   const [entry, setEntry] = useState({
     value: '',
   });
-  const [passage, setPassage] = useState(false);
 
   // CHANGE THE ENTRY INPUT PLACEHOLDER TO THE CORRESPONDING ENTRY KEY AS YOU CLICK ON THE TABS
   const handlePlaceholder = (curKey) => setPlaceholder(curKey);
@@ -147,13 +140,16 @@ export default function FullWidthTabs(props) {
   };
 
   useEffect(() => {
-    const buttonPassage = document.getElementById('buttonPassage');
-    if (placeholder !== 'passage') return;
+    const inputContainer = document.getElementById(
+      'grid-entry-input',
+    );
 
-    if (passage) {
-      buttonPassage.textContent = 'Passage added';
-      buttonPassage.classList.add('Mui-disabled');
-    }
+    console.log(inputContainer);
+
+    inputContainer.classList.add(classes.inputContainerHidden);
+
+    if (placeholder !== 'passage')
+      inputContainer.classList.remove(classes.inputContainerHidden);
   });
 
   /*
@@ -165,7 +161,6 @@ export default function FullWidthTabs(props) {
   const handleAddEntryBtn = (event) => {
     event.preventDefault();
     const { value } = entry;
-
     // dispatch to form reducer
     dispatchFormAction({
       type: 'ADD_ENTRY',
@@ -175,7 +170,16 @@ export default function FullWidthTabs(props) {
     setEntry({
       value: '',
     });
-    setPassage(true);
+  };
+
+  const handleEditPassage = (event) => {
+    console.log(cardFormData);
+
+    const { value } = event.target;
+    dispatchFormAction({
+      type: 'ADD_PASSAGE',
+      value,
+    });
   };
 
   return (
@@ -203,37 +207,35 @@ export default function FullWidthTabs(props) {
           ))}
         </Tabs>
       </AppBar>
-      {placeholder === 'passage' ? (
-        ''
-      ) : (
-        <Grid
-          container
-          spacing={1}
-          alignItems="center"
-          className={classes.inputContainer}
-          height="15%"
-        >
-          <Grid item xs={6}>
-            <Input
-              fullWidth
-              value={entry.value}
-              className={classes.input}
-              onChange={(event) => handleEntryInput(event)}
-              placeholder={utils.capitalizeFirstWord(placeholder)}
-              id="entry-input"
-            />
-          </Grid>
-          <Grid item>
-            <IconButton
-              onClick={(event) => {
-                handleAddEntryBtn(event);
-              }}
-            >
-              <AddCircleOutlineIcon fontSize="large" />
-            </IconButton>
-          </Grid>
+
+      <Grid
+        container
+        spacing={1}
+        alignItems="center"
+        className={classes.inputContainer}
+        height="15%"
+        id="grid-entry-input"
+      >
+        <Grid item xs={6}>
+          <Input
+            fullWidth
+            value={entry.value}
+            className={classes.input}
+            onChange={(event) => handleEntryInput(event)}
+            placeholder={utils.capitalizeFirstWord(placeholder)}
+            id="entry-input"
+          />
         </Grid>
-      )}
+        <Grid item>
+          <IconButton
+            onClick={(event) => {
+              handleAddEntryBtn(event);
+            }}
+          >
+            <AddCircleOutlineIcon fontSize="large" />
+          </IconButton>
+        </Grid>
+      </Grid>
 
       {tabLabels.map((tabLabel, index) => (
         <TabPanel
@@ -244,25 +246,13 @@ export default function FullWidthTabs(props) {
           tabLabel={tabLabel}
         >
           {tabLabel === 'passage' ? (
-            <Grid
-              container
-              direction="row"
-              justify="space-evenly"
-              alignItems="center"
-              width="100%"
-            >
-              <textarea
-                value={entry.value}
-                className={classes.textAreaPassage}
-                onChange={(event) => handleEntryInput(event)}
-                key={cardData.id}
-              />
-              <textarea
-                className={classes.paperPassage}
-                value={cardFormData.passage}
-                readOnly
-              />
-            </Grid>
+            <textarea
+              value={cardFormData.passage}
+              className={classes.textAreaPassage}
+              onChange={(event) => handleEditPassage(event)}
+              key={cardData.id}
+              id="passage-input"
+            />
           ) : (
             <Table
               entries={cardFormData[tabLabel]}
@@ -272,22 +262,6 @@ export default function FullWidthTabs(props) {
           )}
         </TabPanel>
       ))}
-      {placeholder === 'passage' ? (
-        <Button
-          height="50%"
-          variant="outlined"
-          color="primary"
-          size="large"
-          className={classes.buttonPassage}
-          onClick={(event) => handleAddEntryBtn(event)}
-          key={cardData.id}
-          id="buttonPassage"
-        >
-          Add Passage
-        </Button>
-      ) : (
-        ''
-      )}
     </>
   );
 }
