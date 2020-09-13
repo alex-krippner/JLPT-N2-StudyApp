@@ -41,7 +41,12 @@ const Home = () => {
   return (
     <>
       <h1>home</h1>
-      <DarumaIcon fontSize="15rem" />
+      <DarumaIcon
+        fontSize="5rem"
+        colorBodyLight="#add8e6"
+        colorBodyDark="#4169E1"
+        colorBodyDarkTwo="#3f51b5"
+      />
     </>
   );
 };
