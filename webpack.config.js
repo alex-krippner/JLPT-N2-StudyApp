@@ -20,15 +20,9 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-url-loader',
-            options: {
-              limit: 10000,
-            },
-          },
-        ],
+        use: ['@svgr/webpack', 'url-loader'],
       },
+
       {
         test: /\.(sa|sc|c)ss$/i,
         use: [
@@ -56,6 +50,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
+      favicon: './src/img/favicon.png',
     }),
   ],
   // (3) The /dist folder will be used to serve our application to the browser.
