@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,15 +8,16 @@ import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import TranslateIcon from '@material-ui/icons/Translate';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import GavelIcon from '@material-ui/icons/Gavel';
-import NoteIcon from '@material-ui/icons/Note';
 
-import daruma from '../img/daruma.svg';
+import koiIcon from '../img/koiIcon.svg';
+// import kanjiIcon from '../img/kanjiIcon_24px.svg';
+import VocabIcon from '../img/vocabIcon';
+import KanjiIcon from '../img/kanjiIcon';
 
-const Daruma = styled.div`
-  background-image: url(${daruma});
+const Koi = styled.div`
+  background-image: url(${koiIcon});
   height: 10rem;
   width: 10rem;
   background-position: center;
@@ -24,6 +25,16 @@ const Daruma = styled.div`
   background-repeat: no-repeat;
   background-position: contain;
 `;
+
+// const KanjiIcon = styled.div`
+//   background-image: url(${kanjiIcon});
+//   height: 10rem;
+//   width: 10rem;
+//   background-position: center;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   background-position: contain;
+// `;
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,7 +51,7 @@ const Wrapper = styled.div`
 
 const useStyles = makeStyles({
   root: {
-    width: 'auto',
+    width: '90%',
     height: '80%',
     // border: 'solid 1px',
     display: 'flex',
@@ -49,23 +60,34 @@ const useStyles = makeStyles({
   },
 
   MuiPaperRoot: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '100%',
+    width: '100%',
   },
 
   MuiListRoot: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
+    alignItems: 'center',
     height: '100%',
+    width: '100%',
   },
 
-  // list: {
-  //   border: 'solid 1px',
-  //   borderRadius: '10rem',
-  // },
+  list: {
+    width: '100%',
+  },
+
+  listItemIcon: {
+    flex: '1 1 auto',
+  },
 
   listItemText: {
+    textTransform: 'capitalize',
     fontSize: 'var(--font-size-small)',
+    fontFamily: 'var(--font-family-main)',
   },
 
   svgIcon: {
@@ -73,6 +95,8 @@ const useStyles = makeStyles({
   },
 
   listButton: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
     borderRadius: '1rem',
     '&:hover': {
       background: 'rgba(80, 130, 186, 0.3)',
@@ -85,6 +109,8 @@ const useStyles = makeStyles({
 
 function ListItemLink(props) {
   const classes = useStyles();
+
+  const [hoverState, setHoverState] = useState(false);
 
   const { icon, primary, to } = props;
 
@@ -105,14 +131,23 @@ function ListItemLink(props) {
         classes={{
           root: classes.listButton,
         }}
+        onMouseEnter={() => setHoverState(!hoverState)}
+        onMouseLeave={() => setHoverState(!hoverState)}
       >
-        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
-        <ListItemText
-          classes={{
-            primary: classes.listItemText,
-          }}
-          primary={primary}
-        />
+        {icon ? (
+          <ListItemIcon className={classes.listItemIcon}>
+            {icon}
+          </ListItemIcon>
+        ) : null}
+
+        {hoverState && (
+          <ListItemText
+            classes={{
+              primary: classes.listItemText,
+            }}
+            primary={primary}
+          />
+        )}
       </ListItem>
     </li>
   );
@@ -129,16 +164,16 @@ const Sidebar = () => {
             className={classes.MuiListRoot}
             aria-label="main mailbox folders"
           >
-            <ListItemLink to="/" primary="Home" icon={<Daruma />} />
+            <ListItemLink to="/" primary="home" icon={<Koi />} />
             <ListItemLink
               to="/kanji"
-              primary="Kanji"
-              icon={<TranslateIcon className={classes.svgIcon} />}
+              primary="kanji"
+              icon={<KanjiIcon fontSize="7rem" />}
             />
             <ListItemLink
               to="/vocab"
-              primary="Vocab"
-              icon={<NoteIcon className={classes.svgIcon} />}
+              primary="vocab"
+              icon={<VocabIcon fontSize="7rem" />}
             />
             <ListItemLink
               to="/grammar"
