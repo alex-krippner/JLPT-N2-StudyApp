@@ -19,8 +19,8 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader'],
       },
       {
-        test: /\.svg$/,
-        use: ['@svgr/webpack', 'url-loader'],
+        test: /\.(jpg|png|svg)$/,
+        use: ['url-loader'],
       },
 
       {
