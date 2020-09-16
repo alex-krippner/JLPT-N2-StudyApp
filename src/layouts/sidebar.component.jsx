@@ -8,13 +8,13 @@ import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import GavelIcon from '@material-ui/icons/Gavel';
 
 import koiIcon from '../img/koiIcon.svg';
 // import kanjiIcon from '../img/kanjiIcon_24px.svg';
 import VocabIcon from '../img/vocabIcon';
 import KanjiIcon from '../img/kanjiIcon';
+import ReadingIcon from '../img/readingIcon';
+import GrammarIcon from '../img/grammarIcon';
 
 const Koi = styled.div`
   background-image: url(${koiIcon});
@@ -25,16 +25,6 @@ const Koi = styled.div`
   background-repeat: no-repeat;
   background-position: contain;
 `;
-
-// const KanjiIcon = styled.div`
-//   background-image: url(${kanjiIcon});
-//   height: 10rem;
-//   width: 10rem;
-//   background-position: center;
-//   background-size: contain;
-//   background-repeat: no-repeat;
-//   background-position: contain;
-// `;
 
 const Wrapper = styled.div`
   display: flex;
@@ -98,9 +88,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-evenly',
     borderRadius: '1rem',
-    '&:hover': {
-      background: 'rgba(80, 130, 186, 0.3)',
-    },
+
     '&:focus': {
       background: 'rgba(0, 0, 0   , 0.1) ',
     },
@@ -178,12 +166,12 @@ const Sidebar = () => {
             <ListItemLink
               to="/grammar"
               primary="Grammar"
-              icon={<GavelIcon className={classes.svgIcon} />}
+              icon={<GrammarIcon fontSize="7rem" />}
             />
             <ListItemLink
               to="/reading"
               primary="Reading"
-              icon={<MenuBookIcon className={classes.svgIcon} />}
+              icon={<ReadingIcon fontSize="7rem" />}
             />
           </List>
         </Paper>

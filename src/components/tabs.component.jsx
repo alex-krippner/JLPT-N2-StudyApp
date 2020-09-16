@@ -144,8 +144,6 @@ export default function FullWidthTabs(props) {
       'grid-entry-input',
     );
 
-    console.log(inputContainer);
-
     inputContainer.classList.add(classes.inputContainerHidden);
 
     if (placeholder !== 'passage')
@@ -173,8 +171,6 @@ export default function FullWidthTabs(props) {
   };
 
   const handleEditPassage = (event) => {
-    console.log(cardFormData);
-
     const { value } = event.target;
     dispatchFormAction({
       type: 'ADD_PASSAGE',
