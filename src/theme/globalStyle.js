@@ -31,7 +31,8 @@ html {
     --font-size-large: ${FONT_SIZE.large};
     --font-size-huge: ${FONT_SIZE.huge};
 
-    --font-family-main: 'Roboto Mono', monospace;
+   
+        --font-family-main: 'Roboto Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -43,6 +44,7 @@ body {
     font-family: 'Roboto Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow:hidden;
 
 }
 

@@ -3,6 +3,8 @@
 :root {
   --color-text: black;
   --color-background: lightgray;
+  --starting-position-top: -10px;
+  --starting-position-left: -10px;
 }
 
 .swiper-slide {
@@ -22,47 +24,41 @@
   position: static;
 }
 
-@keyframes x {
+@keyframes spin {
   0% {
-    transform: translatex(0px);
-  }
-  50% {
-    transform: translatex(200px);
-  }
-  100% {
-    transform: translatex(500px);
-  }
-}
-
-@keyframes y {
-  0% {
-    transform: rotate(0);
+    transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
-  }
-
-  80% {
-    transform: rotate(0);
   }
 }
 
 @keyframes move {
   0% {
-    top: 0;
-    left: 0;
+    top: var(--starting-position-top);
+    left: var(--starting-position-left);
   }
-  50% {
-    top: 500px;
-    left: 1000px;
-  }
+  /* 50% {
+    top: 300px;
+    left: 30%;
+  } */
 
   100% {
-    top: 899px;
-    right: 400px;
+    right: 100%;
+    top: 100%;
   }
 }
 
-.flying-icon {
-  animation: move 10s infinite alternate, y 3s ease infinite alternate;
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

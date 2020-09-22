@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import Main from './layouts/main.component';
 import Sidebar from './layouts/sidebar.component';
+import FlyingCharsBackground from './components/backgroundAnimation.component';
 
 import GlobalStyle from './theme/globalStyle';
 import hero from './img/hero.svg';
-import AkitaOniImage from './img/akita_oni.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,23 +19,15 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-const AkitaOni = styled.img`
-  display: flex;
-  height: 7rem;
-  width: 5rem;
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-  z-index: 999999;
-`;
-const App = () => (
-  <Wrapper>
-    <AkitaOni className="flying-icon" src={AkitaOniImage} />
-    <GlobalStyle />
-    <Sidebar />
-    <Main />
-  </Wrapper>
-);
+const App = () => {
+  return (
+    <Wrapper>
+      <FlyingCharsBackground />
+      <GlobalStyle />
+      <Sidebar />
+      <Main />
+    </Wrapper>
+  );
+};
 
 export default App;
