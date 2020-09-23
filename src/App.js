@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 const App = () => {
   return (
     <Wrapper>
-      <FlyingCharsBackground />
+      <FlyingCharsBackground iconSize="5rem" />
       <GlobalStyle />
       <Sidebar />
       <Main />
