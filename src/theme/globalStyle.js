@@ -32,7 +32,7 @@ html {
     --font-size-huge: ${FONT_SIZE.huge};
 
    
-        --font-family-main: 'Roboto Mono', monospace;
+    --font-family-main: 'Roboto Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 

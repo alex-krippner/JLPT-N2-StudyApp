@@ -1,34 +1,73 @@
 import React from 'react';
 
 import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import DarumaIcon from '../img/darumaIcon';
+import MonLogo from '../img/logoMonIcon';
+
+const useStyles = makeStyles(() => ({
+  container: {
+    height: '100%',
+  },
+  headerContainer: {
+    position: 'relative',
+    height: '40%',
+    border: 'solid',
+  },
+  header: {
+    position: 'relative',
+
+    fontSize: '15rem',
+  },
+  monLogo: {
+    position: 'absolute',
+    right: 0,
+  },
+
+  welcomeHeader: {
+    fontSize: '4rem',
+    marginBottom: '4rem',
+  },
+
+  intro: {
+    width: '50%',
+    alignSelf: 'center',
+  },
+
+  paragraph: {
+    fontSize: '1.5rem',
+  },
+}));
 
 const Home = () => {
+  const classes = useStyles();
+
   return (
     <Grid
       container
       direction="column"
-      justify="center"
       alignItems="flex-start"
+      className={classes.container}
+      wrap="nowrap"
     >
       <Grid
         container
         item
         direction="row"
         justify="flex-start"
-        alignItems="center"
+        alignItems="flex-start"
         xs={6}
+        height="30%"
+        className={classes.headerContainer}
       >
-        <Typography variant="h1" gutterBottom>
+        <Typography variant="h1" className={classes.header}>
           Mon
-        </Typography>{' '}
-        <DarumaIcon
-          fontSize="5rem"
-          colorBodyLight="#add8e6"
-          colorBodyDark="#4169E1"
-          colorBodyDarkTwo="#3f51b5"
-        />
+          <MonLogo
+            fontSize="10rem"
+            color="black"
+            position="absolute"
+          />
+        </Typography>
       </Grid>
       <Grid
         container
@@ -36,16 +75,39 @@ const Home = () => {
         direction="column"
         justify="center"
         alignItems="flex-start"
+        className={classes.intro}
       >
-        <Typography variant="h2" gutterBottom>
-          Welcome!{' '}
-        </Typography>{' '}
-        <Typography variant="body1" gutterBottom>
-          body1. Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Quos blanditiis tenetur unde suscipit, quam beatae
-          rerum inventore consectetur, neque doloribus, cupiditate
-          numquam dignissimos laborum fugiat deleniti? Eum quasi
-          quidem quibusdam.
+        <Typography
+          variant="h2"
+          gutterBottom
+          className={classes.welcomeHeader}
+        >
+          Welcome!
+        </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          className={classes.paragraph}
+        >
+          Mon allows you to create and collect custom flash cards to
+          help prepare your for the JLPT N2 exam.
+        </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          className={classes.paragraph}
+        >
+          The format of the flash cards is based on the Shin Kanzen
+          Master Books. However, future updates will aim to create
+          fully customizable flash cards.
+        </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          className={classes.paragraph}
+        >
+          At the moment, the flash cards will be saved to your
+          browsers local storage.
         </Typography>
       </Grid>
     </Grid>
