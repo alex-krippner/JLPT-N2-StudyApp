@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import CardForm from './cardForm.component';
-import { CardFormContext } from '../context/context';
+import { CardFormContext } from '../../context/context';
 
 const useStyles = makeStyles({
   root: {

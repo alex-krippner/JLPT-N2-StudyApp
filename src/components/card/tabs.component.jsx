@@ -14,9 +14,9 @@ import {
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import Table from './table.component';
-import { CardFormContext } from '../context/context';
+import { CardFormContext } from '../../context/context';
 
-import * as utils from '../utils/utilitiesFunctions';
+import * as utils from '../../utils/utilitiesFunctions';
 
 const useStyles = makeStyles((theme) => ({
   root: {

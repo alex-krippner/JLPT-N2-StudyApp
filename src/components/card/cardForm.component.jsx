@@ -10,23 +10,23 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // LOCAL IMPORTS
 import FullWidthTabs from './tabs.component';
-import { CardFormContext } from '../context/context';
+import { CardFormContext } from '../../context/context';
 import {
   addKanji,
   editKanji,
-} from '../redux/kanjiCollection/kanjiCollection.actionCreators';
+} from '../../redux/kanjiCollection/kanjiCollection.actionCreators';
 import {
   addVocab,
   editVocab,
-} from '../redux/vocabCollection/vocabCollection.actionCreators';
+} from '../../redux/vocabCollection/vocabCollection.actionCreators';
 import {
   addGrammar,
   editGrammar,
-} from '../redux/grammar/grammarCollection.actionCreators';
+} from '../../redux/grammar/grammarCollection.actionCreators';
 import {
   addReading,
   editReading,
-} from '../redux/readingCollection/readingCollection.actionCreators';
+} from '../../redux/readingCollection/readingCollection.actionCreators';
 
 const CardFormStyled = styled.div.attrs((props) => ({
   height:

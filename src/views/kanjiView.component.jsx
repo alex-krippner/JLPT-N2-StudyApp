@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import styled from 'styled-components';
 
-import CardContainer from '../components/dragAndDrop/CardContainer.component';
+import CardContainer from '../components/containers/CardContainer.component';
 import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
 import selectAllKanji from '../redux/kanjiCollection/kanjiCollection.selectors';
 

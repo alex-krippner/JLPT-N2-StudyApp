@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
 import CardMenu from './cardMenu.component';
-import Star from './star.component';
+import Rating from '../rating.component';
 
 // import { COLORS } from '../theme/styleConstants';
 
@@ -131,7 +131,7 @@ const FrontData = styled.div`
   text-align: center;
 `;
 
-const Rating = styled.div`
+const RatingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,9 +196,9 @@ const Card = ({
               <FrontContent cardData={cardData} />
             </FrontData>
           </Front>
-          <Rating>
+          <RatingContainer>
             {[...Array(3)].map((cur, i) => (
-              <Star
+              <Rating
                 key={uuidv4()}
                 selected={i < cardData.rating}
                 onClick={
@@ -208,7 +208,7 @@ const Card = ({
                 }
               />
             ))}
-          </Rating>
+          </RatingContainer>
         </CardSide>
         <CardSide
           back

@@ -7,8 +7,8 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
-import Card from '../card.component';
-import CardForm from '../cardForm.component';
+import Card from '../card/card.component';
+import CardForm from '../card/cardForm.component';
 
 import { flipCard } from '../components.utils';
 

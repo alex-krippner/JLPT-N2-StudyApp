@@ -12,11 +12,11 @@ import IconButton from '@material-ui/core/IconButton';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Card from './card.component';
-import CardReading from './cardReading.component';
-import CardForm from './cardForm.component';
-import { flipCard } from './components.utils';
-import { deleteCard } from '../redux/utils.actionCreator';
+import Card from '../card/card.component';
+import CardReading from '../card/cardReading.component';
+import CardForm from '../card/cardForm.component';
+import { flipCard } from '../components.utils';
+import { deleteCard } from '../../redux/utils.actionCreator';
 
 const SliderContainerStyled = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 export const COLORS = {
   blueCadet: '#5f9ea0',
-  blueLight: '#add8e6',
-  blueMedium: '#4169E1',
+  blueLight: '#508DC6',
+  blueMedium: '#32587C',
   blueDark: '#3f51b5',
   greenLight: '#66cdaa',
   greyMedium: '#708090',

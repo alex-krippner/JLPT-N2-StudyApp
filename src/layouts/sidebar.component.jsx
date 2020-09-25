@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-param-reassign */
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -9,22 +10,11 @@ import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import koiIcon from '../img/koiIcon.svg';
-// import kanjiIcon from '../img/kanjiIcon_24px.svg';
+import MonLogo from '../img/logoMonIcon';
 import VocabIcon from '../img/vocabIcon';
 import KanjiIcon from '../img/kanjiIcon';
 import ReadingIcon from '../img/readingIcon';
 import GrammarIcon from '../img/grammarIcon';
-
-const Koi = styled.div`
-  background-image: url(${koiIcon});
-  height: 10rem;
-  width: 10rem;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: contain;
-`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -97,11 +87,9 @@ const useStyles = makeStyles({
 });
 
 function ListItemLink(props) {
-  const classes = useStyles();
-
-  const [hoverState, setHoverState] = useState(false);
-
   const { icon, primary, to } = props;
+
+  const classes = useStyles();
 
   const renderLink = React.useMemo(
     () =>
@@ -120,23 +108,19 @@ function ListItemLink(props) {
         classes={{
           root: classes.listButton,
         }}
-        onMouseEnter={() => setHoverState(!hoverState)}
-        onMouseLeave={() => setHoverState(!hoverState)}
       >
         {icon ? (
           <ListItemIcon className={classes.listItemIcon}>
             {icon}
           </ListItemIcon>
         ) : null}
-
-        {hoverState && (
-          <ListItemText
-            classes={{
-              primary: classes.listItemText,
-            }}
-            primary={primary}
-          />
-        )}
+        <ListItemText
+          id={primary}
+          classes={{
+            primary: classes.listItemText,
+          }}
+          primary={primary}
+        />
       </ListItem>
     </li>
   );
@@ -153,7 +137,11 @@ const Sidebar = () => {
             className={classes.MuiListRoot}
             aria-label="main mailbox folders"
           >
-            <ListItemLink to="/" primary="home" icon={<Koi />} />
+            <ListItemLink
+              to="/"
+              primary="home"
+              icon={<MonLogo fontSize="7rem" color="black" />}
+            />
             <ListItemLink
               to="/kanji"
               primary="kanji"

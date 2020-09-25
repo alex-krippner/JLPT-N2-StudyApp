@@ -2,7 +2,7 @@ import React from 'react';
 
 import DarumaIcon from '../img/darumaIcon';
 
-const Star = ({ selected = false, onClick }) => {
+const Rating = ({ selected = false, onClick }) => {
   let colorBody;
   let colorOutline;
   let colorEye;
@@ -26,4 +26,4 @@ const Star = ({ selected = false, onClick }) => {
   );
 };
 
-export default Star;
+export default Rating;

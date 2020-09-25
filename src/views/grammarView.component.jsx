@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import styled from 'styled-components';
 
-import SliderContainer from '../components/sliderContainer.component';
+import SliderContainer from '../components/containers/sliderContainer.component';
 import { rateGrammar } from '../redux/grammar/grammarCollection.actionCreators';
 import selectAllGrammar from '../redux/grammar/grammarCollection.selectors';
 

@@ -10,7 +10,7 @@ import { AppBar, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
-import Star from './star.component';
+import Rating from '../rating.component';
 
 const CardScene = styled.div`
   height: 55rem;
@@ -93,7 +93,7 @@ const FrontData = styled.div`
   font-size: var(--font-size-small);
 `;
 
-const Rating = styled.div`
+const RatingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -277,9 +277,9 @@ const CardReading = ({
                   <FrontContent cardData={cardData} />
                 </FrontData>
               </Front>
-              <Rating>
+              <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
-                  <Star
+                  <Rating
                     key={uuidv4()}
                     selected={i < cardData.rating}
                     onClick={
@@ -289,7 +289,7 @@ const CardReading = ({
                     }
                   />
                 ))}
-              </Rating>
+              </RatingContainer>
             </CardSide>
           </TabPanel>
 

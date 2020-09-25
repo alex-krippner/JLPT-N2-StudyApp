@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import styled from 'styled-components';
 
-import SliderContainer from '../components/sliderContainer.component';
+import SliderContainer from '../components/containers/sliderContainer.component';
 import { rateReading } from '../redux/readingCollection/readingCollection.actionCreators';
 import selectAllReading from '../redux/readingCollection/readingCollection.selectors';
 

@@ -12,11 +12,11 @@ const useStyles = makeStyles(() => ({
   headerContainer: {
     position: 'relative',
     height: '40%',
-    border: 'solid',
+    flexBasis: 0,
   },
   header: {
     position: 'relative',
-
+    color: 'var(--color-blue-medium)',
     fontSize: '15rem',
   },
   monLogo: {
@@ -27,15 +27,18 @@ const useStyles = makeStyles(() => ({
   welcomeHeader: {
     fontSize: '4rem',
     marginBottom: '4rem',
+    color: 'var(--color-blue-medium)',
   },
 
   intro: {
     width: '50%',
     alignSelf: 'center',
+    marginTop: '4rem',
   },
 
   paragraph: {
     fontSize: '1.5rem',
+    color: 'var(--color-blue-medium)',
   },
 }));
 
@@ -63,7 +66,7 @@ const Home = () => {
         <Typography variant="h1" className={classes.header}>
           Mon
           <MonLogo
-            fontSize="10rem"
+            fontSize="7rem"
             color="black"
             position="absolute"
           />
@@ -90,7 +93,7 @@ const Home = () => {
           className={classes.paragraph}
         >
           Mon allows you to create and collect custom flash cards to
-          help prepare your for the JLPT N2 exam.
+          help prepare you for the JLPT N2 exam.
         </Typography>
         <Typography
           variant="body1"
@@ -98,8 +101,7 @@ const Home = () => {
           className={classes.paragraph}
         >
           The format of the flash cards is based on the Shin Kanzen
-          Master Books. However, future updates will aim to create
-          fully customizable flash cards.
+          Master Books.
         </Typography>
         <Typography
           variant="body1"

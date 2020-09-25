@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 
-import CardContainer from '../components/dragAndDrop/CardContainer.component';
+import CardContainer from '../components/containers/CardContainer.component';
 import { rateVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
 import selectAllVocab from '../redux/vocabCollection/vocabCollection.selectors';
 

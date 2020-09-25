@@ -8,8 +8,8 @@ const vocabReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         rating:
-          action.payload.rating === 1 && state.rating === 1
-            ? 0
+          action.payload.rating === state.rating
+            ? action.payload.rating - 1
             : action.payload.rating,
       };
     case 'ADD_VOCAB':

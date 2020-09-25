@@ -15,9 +15,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from './cardForm.component';
-import { deleteCard } from '../redux/utils.actionCreator';
+import { deleteCard } from '../../redux/utils.actionCreator';
 
-import { CardFormContext } from '../context/context';
+import { CardFormContext } from '../../context/context';
 
 const useStyles = makeStyles({
   root: {
@@ -54,6 +54,7 @@ const CardMenu = ({
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorPop, setAnchorPop] = useState(null);
+  const [edit, setEdit] = useState(null);
   const openPop = Boolean(anchorPop);
   const open = Boolean(anchorEl);
 
@@ -68,8 +69,13 @@ const CardMenu = ({
     setAnchorPop(null);
   };
 
+  const handleEdit = () => {
+    setEdit(false);
+  };
+
   const handlePopover = () => {
     setAnchorPop(document.getElementById(cardId));
+    setEdit(true);
   };
 
   return (
@@ -117,6 +123,7 @@ const CardMenu = ({
           open={openPop}
           anchorEl={anchorPop}
           onClose={handleClosePop}
+          onExited={handleEdit}
           anchorOrigin={{
             vertical: 'center',
             horizontal: 'center',
@@ -134,7 +141,7 @@ const CardMenu = ({
               label={label}
               tabLabels={tabLabels}
               cardType={cardData.cardType}
-              editing={openPop}
+              editing={edit}
               cardId={cardId}
               cardData={cardData}
             />
