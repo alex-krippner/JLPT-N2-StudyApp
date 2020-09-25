@@ -53,7 +53,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SimplePopover({ tabLabels, label, cardData, cardType }) {
+function AddCardPopover({ tabLabels, label, cardData, cardType }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -120,7 +120,7 @@ const SliderContainer = ({
         <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
           <Card
             cardData={el}
-            key={uuidv4()}
+            key={el}
             index={index}
             rating={el.rating}
             onRate={onRate}
@@ -133,7 +133,7 @@ const SliderContainer = ({
       <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
         <CardReading
           cardData={el}
-          key={uuidv4()}
+          key={el}
           index={index}
           rating={el.rating}
           onRate={onRate}
@@ -146,7 +146,7 @@ const SliderContainer = ({
 
   return (
     <SliderContainerStyled>
-      <SimplePopover
+      <AddCardPopover
         tabLabels={tabLabels}
         cardData={data}
         label={label}
@@ -161,8 +161,8 @@ const SliderContainer = ({
         slidesPerView={1}
         onClick={(swiper) => swiper.setGrabCursor()}
       >
-        <div className="swiper-pagination" />
         {slides}
+        <div className="swiper-pagination" />
       </Swiper>
     </SliderContainerStyled>
   );

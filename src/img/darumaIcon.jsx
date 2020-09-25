@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-curly-brace-presence */
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,7 +22,7 @@ const DarumaIcon = (props) => {
   const memorizedIcon = React.useMemo(() => {
     return (
       <SvgIcon
-        viewBox={'0 0 24 24'}
+        viewBox="0 0 24 24"
         className={classes.darumaIcon}
         onClick={onClick}
       >

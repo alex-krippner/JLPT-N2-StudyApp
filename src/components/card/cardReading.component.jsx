@@ -5,15 +5,16 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
-import { AppBar, Tab, Tabs, Paper } from '@material-ui/core/';
-
+import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
 
+import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
+
 const CardScene = styled.div`
-  height: 55rem;
+  height: 90%;
   width: 85rem;
 `;
 
@@ -28,7 +29,6 @@ const CardSide = styled.div`
   background-color: var(--color-white);
   font-size: var(--font-size-medium);
   color: var(--color-grey-medium);
-
  
 
   .top {
@@ -156,10 +156,8 @@ const useStyles = makeStyles({
   AppBarRoot: {
     position: 'static',
     display: 'flex',
+    justifyContent: 'flex-start',
     boxShadow: 'none',
-    width: '50%',
-    background: 'transparent',
-    left: 0,
     color: 'var(--color-blue-dark)',
   },
 
@@ -168,17 +166,14 @@ const useStyles = makeStyles({
   },
   paper: {
     height: '100%',
+    overflow: 'auto',
   },
 
   grid: {
     height: '100%',
   },
 
-  container: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+  container_main: {
     height: '100%',
   },
 });
@@ -221,51 +216,57 @@ const CardReading = ({
     setBlur(!blur);
   };
 
-  const capitalizeFirstLetter = (string) => {
-    if (typeof string !== 'string') return '';
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  function capitalizeFirstWord(string) {
-    return string
-      .split(' ')
-      .map((word, idx) =>
-        idx === 0 ? capitalizeFirstLetter(word) : word,
-      )
-      .join(' ');
-  }
-
   return (
     <CardScene cardType={cardData.cardType}>
       <Paper
         square={false}
         className={classes.paper}
-        height="100%"
         id={cardData.id}
         elevation={3}
       >
-        <div className={classes.container}>
-          <AppBar classes={{ root: classes.AppBarRoot }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              indicatorColor="primary"
-              centered
-            >
-              <Tab className={classes.tab} label="Passage" />
-              <Tab className={classes.tab} label="Q &amp; A" />
-            </Tabs>
-          </AppBar>
-          <CardMenu
-            front={cardData[label]}
-            cardId={cardData.id}
-            cardFormData={cardFormData}
-            formDispatcher={formDispatcher}
-            label={label}
-            tabLabels={tabLabels}
-            cardData={cardData}
-            className={classes.cardMenu}
-          />
+        <Grid
+          container
+          direction="column"
+          justify="space-between"
+          alignItems="center"
+          wrap="nowrap"
+          className={classes.container_main}
+        >
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
+            wrap="nowrap"
+          >
+            <Grid item container xs={9} justify="flex-start">
+              <AppBar
+                classes={{ root: classes.AppBarRoot }}
+                color="transparent"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="default"
+                >
+                  <Tab className={classes.tab} label="Passage" />
+                  <Tab className={classes.tab} label="Q &amp; A" />
+                </Tabs>
+              </AppBar>
+            </Grid>
+            <Grid item container xs={3} justify="flex-end">
+              <CardMenu
+                front={cardData[label]}
+                cardId={cardData.id}
+                cardFormData={cardFormData}
+                formDispatcher={formDispatcher}
+                label={label}
+                tabLabels={tabLabels}
+                cardData={cardData}
+                className={classes.cardMenu}
+              />
+            </Grid>
+          </Grid>
           <TabPanel value={value} index={0}>
             <CardSide
               front
@@ -285,14 +286,12 @@ const CardReading = ({
                     onClick={
                       // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )
                       () => onRate(cardData.id, i + 1)
-                      // eslint-disable-next-line react/jsx-curly-newline
                     }
                   />
                 ))}
               </RatingContainer>
             </CardSide>
           </TabPanel>
-
           <TabPanel value={value} index={1}>
             <CardSide
               back
@@ -322,10 +321,8 @@ const CardReading = ({
                       blur={blur}
                       section={idx}
                       tabLabel={tabLabel}
-                      onClick={
-                        (e) =>
-                          handleVisibility(e, idx, tabLabels.length)
-                        // eslint-disable-next-line react/jsx-curly-newline
+                      onClick={(e) =>
+                        handleVisibility(e, idx, tabLabels.length)
                       }
                     >
                       <div className="sentenceWrapper">
@@ -346,7 +343,7 @@ const CardReading = ({
               })}
             </CardSide>
           </TabPanel>
-        </div>
+        </Grid>
       </Paper>
     </CardScene>
   );

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-curly-newline */
 import React, { useContext, useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';

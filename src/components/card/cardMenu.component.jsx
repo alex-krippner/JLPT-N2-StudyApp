@@ -30,9 +30,8 @@ const useStyles = makeStyles({
   },
 
   menuButton: {
-    position: 'absolute',
-    top: '1rem',
-    right: '1rem',
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 
   icon: {
@@ -79,13 +78,12 @@ const CardMenu = ({
   };
 
   return (
-    <div>
+    <div className={classes.menuButton}>
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        className={classes.menuButton}
       >
         <MoreVertIcon className={classes.icon} />
       </IconButton>

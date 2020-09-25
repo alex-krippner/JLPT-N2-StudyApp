@@ -8,15 +8,13 @@ import styled from 'styled-components';
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
 
-// import { COLORS } from '../theme/styleConstants';
-
 const CardScene = styled.div.attrs((props) => ({
   height:
     props.cardType === 'vocab'
       ? '45rem'
       : props.cardType === 'kanji'
       ? '40rem'
-      : '55rem',
+      : '90%',
   width:
     props.cardType === 'vocab'
       ? '35rem'
@@ -91,6 +89,8 @@ const CardSide = styled.div.attrs((props) => ({
       height: 100%;
       margin: 0;
       padding: 1rem;
+      overflow: auto;
+
       font-size: var(--font-size-small);
     }
 
@@ -166,7 +166,6 @@ const FrontContent = ({ cardData }) => {
 
 const Card = ({
   cardData,
-  // flipCard,
   onRate,
   tabLabels,
   cardFormData,
@@ -187,7 +186,11 @@ const Card = ({
 
   return (
     <CardScene cardType={cardData.cardType}>
-      <CardWrapper className="cardWrapper" ref={cardToFlip}>
+      <CardWrapper
+        className="cardWrapper"
+        ref={cardToFlip}
+        id={cardData.id}
+      >
         <CardSide
           front
           cardType={cardData.cardType}
@@ -213,10 +216,8 @@ const Card = ({
               <Rating
                 key={uuidv4()}
                 selected={i < cardData.rating}
-                onClick={
-                  () =>
-                    onRate(cardData[label], cardData.cardType, i + 1)
-                  // eslint-disable-next-line react/jsx-curly-newline
+                onClick={() =>
+                  onRate(cardData[label], cardData.cardType, i + 1)
                 }
               />
             ))}
