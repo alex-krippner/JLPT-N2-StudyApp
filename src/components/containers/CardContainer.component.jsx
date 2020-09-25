@@ -10,8 +10,6 @@ import styled from 'styled-components';
 import Card from '../card/card.component';
 import CardForm from '../card/cardForm.component';
 
-import { flipCard } from '../components.utils';
-
 const CardsContainerStyled = styled.div`
   display: flex;
   justify-content: space-around;
@@ -42,7 +40,6 @@ const CardContainer = (props) => {
             <div>
               <Card
                 cardData={el}
-                flipCard={flipCard}
                 tabLabels={tabLabels}
                 label={label}
                 inputValue={inputValue}

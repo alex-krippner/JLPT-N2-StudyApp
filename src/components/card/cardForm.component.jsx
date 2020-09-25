@@ -36,7 +36,7 @@ const CardFormStyled = styled.div.attrs((props) => ({
   width:
     props.cardType === 'grammar' || props.cardType === 'reading'
       ? '110rem'
-      : '32rem',
+      : '35rem',
   cardTitlePosition:
     props.cardType === 'grammar' || props.cardType === 'reading'
       ? '5px'

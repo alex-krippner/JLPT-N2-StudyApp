@@ -15,7 +15,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '../card/card.component';
 import CardReading from '../card/cardReading.component';
 import CardForm from '../card/cardForm.component';
-import { flipCard } from '../components.utils';
 import { deleteCard } from '../../redux/utils.actionCreator';
 
 const SliderContainerStyled = styled.div`
@@ -126,7 +125,6 @@ const SliderContainer = ({
             rating={el.rating}
             onRate={onRate}
             tabLabels={tabLabels}
-            flipCard={flipCard}
             label={label}
           />
         </SwiperSlide>
@@ -140,7 +138,6 @@ const SliderContainer = ({
           rating={el.rating}
           onRate={onRate}
           tabLabels={tabLabels}
-          flipCard={flipCard}
           label={label}
         />
       </SwiperSlide>

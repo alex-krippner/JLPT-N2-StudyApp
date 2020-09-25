@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable consistent-return */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 
@@ -166,16 +166,28 @@ const FrontContent = ({ cardData }) => {
 
 const Card = ({
   cardData,
-  flipCard,
+  // flipCard,
   onRate,
   tabLabels,
   cardFormData,
   formDispatcher,
   label,
 }) => {
+  const cardToFlip = useRef(null);
+
+  const handleFlip = (cardRef) => {
+    const { current } = cardRef;
+
+    if (!current.style.transform) {
+      current.style.transform = 'rotateY(180deg)';
+    } else if (current.style.transform) {
+      current.style.transform = '';
+    }
+  };
+
   return (
     <CardScene cardType={cardData.cardType}>
-      <CardWrapper className="cardWrapper" id={cardData.id}>
+      <CardWrapper className="cardWrapper" ref={cardToFlip}>
         <CardSide
           front
           cardType={cardData.cardType}
@@ -192,7 +204,7 @@ const Card = ({
               cardData={cardData}
             />
 
-            <FrontData onClick={() => flipCard(cardData.id)}>
+            <FrontData onClick={() => handleFlip(cardToFlip)}>
               <FrontContent cardData={cardData} />
             </FrontData>
           </Front>
@@ -212,7 +224,7 @@ const Card = ({
         </CardSide>
         <CardSide
           back
-          onClick={() => flipCard(cardData.id)}
+          onClick={() => handleFlip(cardToFlip)}
           className="card-side"
         >
           {tabLabels.map((tabLabel, idx) => {

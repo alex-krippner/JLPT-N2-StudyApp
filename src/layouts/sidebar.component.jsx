@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   width: 20%;
   height: 100%;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 3rem;
+  border-radius: 1rem;
   background-color: var(--color-white);
   z-index: 99;
 `;
