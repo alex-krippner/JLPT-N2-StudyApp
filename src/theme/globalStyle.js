@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { COLORS, FONT_SIZE } from './styleConstants';
-
 const GlobalStyle = createGlobalStyle`
 *,
 *::after,
@@ -13,28 +11,31 @@ const GlobalStyle = createGlobalStyle`
 
 
 
-html {
+:root {
     font-size: 62.5%; 
 
-    --color-blue-cadet:${COLORS.blueCadet};
-    --color-blue-light: ${COLORS.blueLight};
-    --color-blue-medium: ${COLORS.blueMedium};
-    --color-blue-dark: ${COLORS.blueDark};
-    --color-green-light: ${COLORS.greenLight};
-    --color-grey-medium: ${COLORS.greyMedium};
-    --color-white: ${COLORS.white};
-    --color-white-medium: ${COLORS.whiteMedium};
-    --color-white-dark: ${COLORS.whiteDark};
+    --color-blue-cadet:#5f9ea0;
+    --color-blue-light: #508DC6;
+    --color-blue-medium:#32587C;
+    --color-blue-dark: #3f51b5;
+    --color-green-light: #66cdaa;
+    --color-grey-medium: #708090;
+    --color-white: #ffffff;
+    --color-white-medium: #fffafa;
+    --color-white-dark: #f5f5f5;
 
-    --font-size-small: ${FONT_SIZE.small};
-    --font-size-medium: ${FONT_SIZE.medium};
-    --font-size-large: ${FONT_SIZE.large};
-    --font-size-huge: ${FONT_SIZE.huge};
+    --font-size-small: 1.75rem;
+    --font-size-medium: 2.5rem;
+    --font-size-large: 3.5rem;
+    --font-size-huge: 15rem;
+
+    --padding-large: 3rem;
 
    
     --font-family-main: 'Roboto Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
 
 
 body {
@@ -58,6 +59,12 @@ body {
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
+  }
+
+  @media only screen and (max-width: 425px) {                             
+    :root {
+    --padding-large: 2rem;
+    }
   }
 `;
 

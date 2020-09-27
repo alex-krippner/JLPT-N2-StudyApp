@@ -12,11 +12,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 100vh;
-  width: 100%;
-  padding: 3rem;
+  width: 100vw;
+  padding: var(--padding-large);
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
   background-image: url(${hero});
-  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const App = () => {

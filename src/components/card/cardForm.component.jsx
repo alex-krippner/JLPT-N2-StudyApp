@@ -31,11 +31,11 @@ import {
 const CardFormStyled = styled.div.attrs((props) => ({
   height:
     props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '55rem'
+      ? '75vh'
       : '45rem',
   width:
     props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '110rem'
+      ? '75vw'
       : '35rem',
   cardTitlePosition:
     props.cardType === 'grammar' || props.cardType === 'reading'
@@ -336,6 +336,7 @@ const CardForm = (props) => {
         direction="column"
         justify="space-around"
         alignItems="center"
+        wrap="nowrap"
       >
         <CardFormContext.Provider
           value={{ cardFormData, dispatchFormAction }}

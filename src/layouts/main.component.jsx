@@ -21,6 +21,10 @@ const Wrapper = styled.div`
   background-color: var(--color-white-medium);
   overflow-y: scroll;
 
+  @media only screen and (max-width: 430px) {
+    width: 100%;
+  }
+
   /* The emerging W3C standard
    that is currently Firefox-only */
 
