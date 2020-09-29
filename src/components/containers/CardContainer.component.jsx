@@ -18,6 +18,10 @@ const CardsContainerStyled = styled.div`
   height: 100%;
   width: 100%;
   padding: 3rem;
+
+  @media only screen and (max-width: 430px) {
+    padding: 0;
+  }
 `;
 
 const CardContainer = (props) => {

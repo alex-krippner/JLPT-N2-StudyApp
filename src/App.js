@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Main from './layouts/main.component';
@@ -7,6 +7,8 @@ import FlyingCharsBackground from './components/backgroundAnimation.component';
 
 import GlobalStyle from './theme/globalStyle';
 import hero from './img/hero.svg';
+import Hamburger from './components/hamburger/hamburger.component';
+import HamburgerNav from './components/hamburger/hamburgerNav.component';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,11 +24,15 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <Wrapper>
       <FlyingCharsBackground iconSize="5rem" />
       <GlobalStyle />
       <Sidebar />
+      <Hamburger open={open} setOpen={setOpen} />
+      <HamburgerNav open={open} setOpen={setOpen} />
       <Main />
     </Wrapper>
   );

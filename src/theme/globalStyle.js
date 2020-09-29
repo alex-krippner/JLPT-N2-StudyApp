@@ -29,7 +29,13 @@ const GlobalStyle = createGlobalStyle`
     --font-size-large: 3.5rem;
     --font-size-huge: 15rem;
 
+    --left-cardTitle: 2rem;
+
     --padding-large: 3rem;
+
+    --top-cardTitle: -2rem;
+
+    --width-cardForm: 35rem;
 
    
     --font-family-main: 'Roboto Mono', monospace;
@@ -61,9 +67,13 @@ body {
       monospace;
   }
 
-  @media only screen and (max-width: 425px) {                             
+  @media only screen and (max-width: 430px) {                             
     :root {
+      --left-cardTitle: 1rem;
     --padding-large: 2rem;
+    --top-cardTitle: -1rem;
+    --width-cardForm: 55rem;
+
     }
   }
 `;
