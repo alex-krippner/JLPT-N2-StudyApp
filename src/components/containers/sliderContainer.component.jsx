@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Card from '../card/card.component';
+import CardGrammar from '../card/cardGrammar.component';
 import CardReading from '../card/cardReading.component';
 import CardForm from '../card/cardForm.component';
 import { deleteCard } from '../../redux/utils.actionCreator';
@@ -118,7 +118,7 @@ const SliderContainer = ({
     if (cardType === 'grammar')
       return (
         <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
-          <Card
+          <CardGrammar
             cardData={el}
             key={el}
             index={index}

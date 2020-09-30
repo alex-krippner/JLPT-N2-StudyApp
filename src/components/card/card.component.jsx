@@ -84,12 +84,11 @@ const CardSide = styled.div.attrs((props) => ({
     .sentenceWrapper {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-around;
       align-items: flex-start;
       height: 100%;
       margin: 0;
       padding: 1rem;
-      overflow: auto;
 
       font-size: var(--font-size-small);
     }
@@ -136,7 +135,6 @@ const RatingContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: min-content;
-  border-top: solid 1px;
   z-index: 99;
 `;
 

@@ -11,8 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
 
-import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
-
 const CardScene = styled.div`
   height: 90%;
   width: 85rem;
@@ -85,12 +83,10 @@ const Front = styled.div`
 `;
 
 const FrontData = styled.div`
-  text-align: center;
-  height: 90%;
-  width: 75%;
   display: flex;
-  line-height: 2;
-  font-size: var(--font-size-small);
+  align-items: center;
+  height: 90%;
+  font-size: var(--font-size-large);
 `;
 
 const RatingContainer = styled.div`
@@ -120,6 +116,7 @@ const Top = styled.div`
   flex: 0 0 20%;
   padding: 5px;
   font-size: var(--font-size-small);
+  text-transform: capitalize;
 `;
 
 const Bottom = styled.div`
@@ -128,37 +125,11 @@ const Bottom = styled.div`
   width: 100%;
   
   margin: 0;
-  filter: ${(props) =>
-    props.blur === false && props.tabLabel === 'solution'
-      ? 'blur(3px)'
-      : 'none'};
-  cursor: ${(props) =>
-    props.tabLabel === 'solution' ? 'pointer' : ''};
 
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background: ${(props) =>
-      props.visible === false && props.tabLabel === 'solution'
-        ? 'rgba(63, 81, 181, 0.8)'
-        : 'transparent'};
-  }
+ 
+
+
 `;
-
-const Passage = styled.div`
-  height: 90%;
-  width: 100%;
-  padding: 1rem;
-  overflow: auto;
-`;
-
-const FrontContent = ({ cardData }) => {
-  if (cardData.cardType === 'reading')
-    return <Passage>{cardData.passage}</Passage>;
-};
 
 const useStyles = makeStyles({
   root: {
@@ -199,7 +170,7 @@ const TabPanel = (props) => {
   );
 };
 
-const CardReading = ({
+const CardGrammar = ({
   cardData,
   onRate,
   tabLabels,
@@ -210,18 +181,9 @@ const CardReading = ({
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
-  const [visible, setVisibility] = useState(false);
-  const [blur, setBlur] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleVisibility = (e, index, arrayLength) => {
-    if (index !== arrayLength - 1) return;
-
-    setVisibility(!visible);
-    setBlur(!blur);
   };
 
   return (
@@ -261,8 +223,8 @@ const CardReading = ({
                   aria-label="full width tabs"
                   variant="fullWidth"
                 >
-                  <Tab className={classes.tab} label="Passage" />
-                  <Tab className={classes.tab} label="Q &amp; A" />
+                  <Tab className={classes.tab} label="Front" />
+                  <Tab className={classes.tab} label="Back" />
                 </Tabs>
               </AppBar>
             </Grid>
@@ -286,9 +248,7 @@ const CardReading = ({
               className="card-side"
             >
               <Front>
-                <FrontData>
-                  <FrontContent cardData={cardData} />
-                </FrontData>
+                <FrontData>{cardData[label]} </FrontData>
               </Front>
               <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
@@ -312,42 +272,30 @@ const CardReading = ({
               value={value}
             >
               {tabLabels.map((tabLabel, idx) => {
-                if (tabLabel === 'passage') return;
-
                 return (
                   <BackSection
                     key={tabLabel}
                     section={idx}
                     labelNum={tabLabels.length}
                   >
-                    {/* set minHeight to 0 to prevent cutoff when the BackSection overflow is set to auto */}
                     <div style={{ minHeight: 0 }}>
-                      <Top>
-                        {tabLabel === 'choices'
-                          ? capitalizeFirstWord(
-                              'choose the most suitable',
-                            )
-                          : capitalizeFirstWord(tabLabel)}
-                      </Top>
-                      <Bottom
-                        className="bottom"
-                        visible={visible}
-                        blur={blur}
-                        section={idx}
-                        tabLabel={tabLabel}
-                        onClick={(e) =>
-                          handleVisibility(e, idx, tabLabels.length)
-                        }
-                      >
+                      <Top>{tabLabel}</Top>
+                      <Bottom className="bottom" section={idx}>
                         <div className="sentenceWrapper">
                           {cardData[tabLabel].map((el, i) => (
                             <div className="paragraph" key={el}>
-                              {idx === 0 ? (
-                                ''
+                              {cardData[tabLabel].length === 0 ||
+                              cardData[tabLabel][0] === '' ? (
+                                <div>
+                                  Looks like there is no data for this
+                                  section...
+                                </div>
                               ) : (
-                                <span>{i + 1}.&nbsp;</span>
+                                <>
+                                  <span>{i + 1}.&nbsp;</span>
+                                  <div>{el}</div>{' '}
+                                </>
                               )}
-                              <div>{el}</div>
                             </div>
                           ))}
                         </div>
@@ -364,4 +312,4 @@ const CardReading = ({
   );
 };
 
-export default CardReading;
+export default CardGrammar;

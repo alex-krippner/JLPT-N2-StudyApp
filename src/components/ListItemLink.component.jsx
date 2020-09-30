@@ -19,7 +19,11 @@ const useStyles = makeStyles({
     textTransform: 'capitalize',
     fontSize: 'var(--font-size-small)',
     fontFamily: 'var(--font-family-main)',
-    color: 'var(--color-primary-light)',
+    color: 'var(--color-primary-dark)',
+
+    '&:hover': {
+      color: 'var(--color-primary-light)',
+    },
   },
 
   listButton: {
