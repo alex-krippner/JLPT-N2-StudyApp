@@ -5,7 +5,7 @@ const StyledBurger = styled.button`
   position: absolute;
   top: 2rem;
   left: 2rem;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -30,6 +30,10 @@ const StyledBurger = styled.button`
     border-radius: 1rem;
     transition: all 0.3s linear;
     transform-origin: 1px;
+  }
+
+  @media only screen and (max-width: 430px) {
+    display: flex;
   }
 `;
 

@@ -13,12 +13,11 @@ import GrammarIcon from '../img/grammarIcon';
 
 const useStyles = makeStyles({
   navLinkList: {
-    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
+    height: '100%',
     width: '100%',
-    overflow: 'auto',
   },
 });
 
@@ -30,31 +29,33 @@ const NavLinkList = () => {
       className={classes.navLinkList}
       aria-label="main mailbox folders"
     >
-      <ListItemLink
-        to="/"
-        primary="home"
-        icon={<MonLogo fontSize="7rem" color="black" />}
-      />
-      <ListItemLink
-        to="/kanji"
-        primary="kanji"
-        icon={<KanjiIcon fontSize="7rem" />}
-      />
-      <ListItemLink
-        to="/vocab"
-        primary="vocab"
-        icon={<VocabIcon fontSize="7rem" />}
-      />
-      <ListItemLink
-        to="/grammar"
-        primary="Grammar"
-        icon={<GrammarIcon fontSize="7rem" />}
-      />
-      <ListItemLink
-        to="/reading"
-        primary="Reading"
-        icon={<ReadingIcon fontSize="7rem" />}
-      />
+      <div style={{ minHeight: 0 }}>
+        <ListItemLink
+          to="/"
+          primary="home"
+          icon={<MonLogo color="black" />}
+        />
+        <ListItemLink
+          to="/kanji"
+          primary="kanji"
+          icon={<KanjiIcon />}
+        />
+        <ListItemLink
+          to="/vocab"
+          primary="vocab"
+          icon={<VocabIcon />}
+        />
+        <ListItemLink
+          to="/grammar"
+          primary="Grammar"
+          icon={<GrammarIcon />}
+        />
+        <ListItemLink
+          to="/reading"
+          primary="Reading"
+          icon={<ReadingIcon />}
+        />
+      </div>
     </List>
   );
 };

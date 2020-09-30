@@ -67,9 +67,41 @@ body {
       monospace;
   }
 
+
+  @media only screen and (min-width: 1800px) {
+    :root {
+      font-size: 75%;
+    }
+  }
+
+  
+  @media only screen and (max-width: 1200px) {
+    :root {
+
+      font-size: 56.25%;
+    }
+  }
+
+  
+  @media only screen and (max-width: 900px){
+
+    :root {
+      font-size: 50%;
+    }
+  }
+
+
+  @media only screen and (max-width: 600px){
+
+    :root {
+      font-size: 45%;
+    }
+  }
+
   @media only screen and (max-width: 430px) {                             
     :root {
-      --left-cardTitle: 1rem;
+
+    --left-cardTitle: 1rem;
     --padding-large: 2rem;
     --top-cardTitle: -1rem;
     --width-cardForm: 55rem;

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   vocabIcon: {
-    fontSize: (props) => `${props.fontSize}`,
+    fontSize: '7rem',
     cursor: 'pointer',
   },
 }));

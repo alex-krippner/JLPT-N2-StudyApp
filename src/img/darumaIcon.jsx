@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   darumaIcon: {
-    fontSize: (props) => `${props.fontSize}`,
+    fontSize: '4rem',
+
     cursor: 'pointer',
   },
 }));
