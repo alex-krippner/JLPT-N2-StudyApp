@@ -34,7 +34,7 @@ const CardWrapper = styled.div`
   position: relative;
   transition: transform 1s;
   transform-style: preserve-3d;
-  color: var(--color-grey-medium);
+  color: var(--color-primary-dark);
 `;
 
 const CardSide = styled.div.attrs((props) => ({
@@ -135,7 +135,7 @@ const RatingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10%;
+  height: min-content;
   border-top: solid 1px;
   z-index: 99;
 `;

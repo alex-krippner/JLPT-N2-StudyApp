@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 
   scrollbar-width: thin;
 
-  scrollbar-color: var(--color-blue-cadet);
+  scrollbar-color: var(--color-scrollbar);
 
   /* Works on Chrome/Edge/Safari */
   &::-webkit-scrollbar {
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: var(--color-blue-cadet);
+    background-color: var(--color-scrollbar);
   }
   &::-webkit-scrollbar-track-piece:end {
     background: transparent;

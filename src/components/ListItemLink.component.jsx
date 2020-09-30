@@ -19,10 +19,7 @@ const useStyles = makeStyles({
     textTransform: 'capitalize',
     fontSize: 'var(--font-size-small)',
     fontFamily: 'var(--font-family-main)',
-  },
-
-  svgIcon: {
-    fontSize: 'var(--font-size-medium)',
+    color: 'var(--color-primary-light)',
   },
 
   listButton: {

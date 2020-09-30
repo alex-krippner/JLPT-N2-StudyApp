@@ -17,14 +17,8 @@ import { CardFormContext } from '../../context/context';
 
 import * as utils from '../../utils/utilitiesFunctions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: theme.palette.background.inheret,
-
-    '&.MuiAppBar-colorDefault': {
-      backgroundColor: 'var(--color-white)',
-    },
-
     '&.MuiPaper-elevation4': {
       boxShadow: 'none',
     },
@@ -67,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     border: (props) =>
       props.tabLabel === 'passage'
         ? 'none'
-        : 'solid 1px var(--color-blue-light)',
+        : 'solid 1px var(--color-primary-light)',
   },
   tabPanelGrid: {
     height: '100%',
@@ -77,11 +71,11 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
     resize: 'none',
-    border: 'solid 1px var(--color-blue-light)',
+    border: 'solid 1px var(--color-primary-light)',
     outline: 'none',
 
     '&:focus': {
-      border: 'solid 2px var(--color-blue-dark)',
+      border: 'solid 2px var(--color-primary-medium)',
     },
   },
 }));
@@ -181,7 +175,7 @@ export default function FullWidthTabs(props) {
     <>
       <AppBar
         position="static"
-        color="default"
+        color="transparent"
         className={classes.root}
       >
         <Tabs

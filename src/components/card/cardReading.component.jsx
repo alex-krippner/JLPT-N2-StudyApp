@@ -28,7 +28,7 @@ const CardSide = styled.div`
   transition: transform 0.8s ease, background 0.8s ease;
   background-color: var(--color-white);
   font-size: var(--font-size-medium);
-  color: var(--color-grey-medium);
+  color: var(--color-primary-dark);
  
 
   .top {
@@ -158,7 +158,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'flex-start',
     boxShadow: 'none',
-    color: 'var(--color-blue-dark)',
+    color: 'var(--color-primary-medium)',
   },
 
   tab: {

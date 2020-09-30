@@ -26,7 +26,7 @@ const StyledBurger = styled.button`
     width: 2rem;
     height: 0.25rem;
     margin: 0.15rem 0;
-    background-color: var(--color-blue-medium);
+    background-color: var(--color-primary-dark);
     border-radius: 1rem;
     transition: all 0.3s linear;
     transform-origin: 1px;

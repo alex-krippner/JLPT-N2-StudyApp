@@ -84,8 +84,8 @@ const CardFormStyled = styled.div.attrs((props) => ({
       margin-left: ${(props) => props.cardTitleTop};
       height: 5rem;
       width: ${(props) => props.cardTitleWidth};
-      border-radius: 0 2rem 0 2rem;
-      background-color: var(--color-green-light);
+      border-radius: 1rem;
+      background-color: var(--color-secondary-medium);
       box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
       font-weight: 400;
       font-size: var(--font-size-medium);
@@ -95,7 +95,7 @@ const CardFormStyled = styled.div.attrs((props) => ({
     .card-front {
       align-self: flex-end;
       font-size: var(--font-size-large);
-      color: var(--color-blue-cadet);
+      color: var(--color-primary-dark);
     }
   }
 
@@ -126,10 +126,6 @@ const useStyles = makeStyles({
     marginTop: '2.5rem',
   },
 
-  textfieldLabel: {
-    fontSize: 'var(--font-size-small)',
-  },
-
   footer: {
     justifyContent: 'center',
     margin: '1rem 0',
@@ -139,11 +135,11 @@ const useStyles = makeStyles({
   submitButton: {
     height: '75%',
     textTransform: 'capitalize',
-    backgroundColor: 'var(--color-blue-medium)',
+    backgroundColor: 'var(--color-primary-dark)',
     fontSize: 'var(--font-size-small)',
 
     '&:hover': {
-      backgroundColor: 'var(--color-blue-dark)',
+      backgroundColor: 'var(--color-primary-medium)',
     },
   },
 
@@ -322,6 +318,7 @@ const CardForm = (props) => {
               ''
             ) : (
               <TextField
+                key={label}
                 id="outlined-basic"
                 label={label}
                 value={cardFormData[label]}

@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
   header: {
     position: 'relative',
-    color: 'var(--color-blue-medium)',
+    color: 'var(--color-primary-dark)',
     fontSize: '15rem',
   },
   monLogo: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   welcomeHeader: {
     fontSize: '4rem',
     marginBottom: '4rem',
-    color: 'var(--color-blue-medium)',
+    color: 'var(--color-primary-dark)',
   },
 
   intro: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
 
   paragraph: {
     fontSize: '1.5rem',
-    color: 'var(--color-blue-medium)',
+    color: 'var(--color-primary-dark)',
   },
 }));
 

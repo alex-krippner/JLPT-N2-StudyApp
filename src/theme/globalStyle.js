@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import COLORS from './styleConstants';
+
 const GlobalStyle = createGlobalStyle`
 *,
 *::after,
@@ -14,11 +16,11 @@ const GlobalStyle = createGlobalStyle`
 :root {
     font-size: 62.5%; 
 
-    --color-blue-cadet:#5f9ea0;
-    --color-blue-light: #508DC6;
-    --color-blue-medium:#32587C;
-    --color-blue-dark: #3f51b5;
-    --color-green-light: #66cdaa;
+    --color-scrollbar: ${COLORS.blueCadet};
+    --color-primary-light: ${COLORS.blueLight};
+    --color-primary-medium: ${COLORS.blueMedium};
+    --color-primary-dark: ${COLORS.blueDark};
+    --color-secondary-medium: ${COLORS.greenSeaMedium};
     --color-grey-medium: #708090;
     --color-white: #ffffff;
     --color-white-medium: #fffafa;
@@ -29,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     --font-size-large: 3.5rem;
     --font-size-huge: 15rem;
 
-    --left-cardTitle: 2rem;
+    --left-cardTitle: -1rem;
 
     --padding-large: 3rem;
 
@@ -45,6 +47,9 @@ const GlobalStyle = createGlobalStyle`
 
 
 body {
+
+  height: 100vh;
+  width: 100vw;
     
     
     box-sizing: border-box;
@@ -91,23 +96,19 @@ body {
   }
 
 
-  @media only screen and (max-width: 600px){
+  @media only screen and (max-width: 770px){
 
     :root {
       font-size: 45%;
-    }
-  }
-
-  @media only screen and (max-width: 430px) {                             
-    :root {
-
-    --left-cardTitle: 1rem;
+      --left-cardTitle: 25%;
     --padding-large: 2rem;
-    --top-cardTitle: -1rem;
+    --top-cardTitle: -2rem;
     --width-cardForm: 55rem;
-
     }
   }
+
+ 
+
 `;
 
 export default GlobalStyle;

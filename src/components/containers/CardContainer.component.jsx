@@ -19,7 +19,7 @@ const CardsContainerStyled = styled.div`
   width: 100%;
   padding: 3rem;
 
-  @media only screen and (max-width: 430px) {
+  @media only screen and (max-width: 600px) {
     padding: 0;
   }
 `;
