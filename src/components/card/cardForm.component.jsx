@@ -28,6 +28,8 @@ import {
   editReading,
 } from '../../redux/readingCollection/readingCollection.actionCreators';
 
+import COLORS from '../../theme/styleConstants';
+
 const CardFormStyled = styled.div.attrs((props) => ({
   height:
     props.cardType === 'grammar' || props.cardType === 'reading'
@@ -303,7 +305,7 @@ const CardForm = (props) => {
           <>
             <h2
               style={{
-                background: 'rgba(255,160,150)',
+                background: `${COLORS.greenSeaMedium}`,
               }}
               className="card-title"
             >

@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 
   menuButton: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    alignSelf: 'flex-end',
   },
 
   icon: {

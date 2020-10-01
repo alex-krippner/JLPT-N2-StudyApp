@@ -65,9 +65,6 @@ const CardSide = styled.div.attrs((props) => ({
   cursor: ${(props) => (props.back ? 'pointer' : '')};
 
   .top {
-    position: absolute;
-    top: 0;
-    left: 0;
     padding: 5px;
     border-right: solid 1px;
     border-bottom: solid 1px;
@@ -114,18 +111,16 @@ const CardSide = styled.div.attrs((props) => ({
 const Front = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-
-  .menu-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
 `;
 
 const FrontData = styled.div`
+  flex: 0 0 80%;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   text-align: center;
 `;
@@ -139,7 +134,7 @@ const RatingContainer = styled.div`
 `;
 
 const BackSection = styled.section.attrs((props) => ({
-  height: props.section === 0 ? '15%' : '45%',
+  // height: props.section === 0 ? '15%' : '45%',
 
   borderBottom: () => {
     if (props.section < props.labelNum - 1) return 'solid 1px';
@@ -152,7 +147,7 @@ const BackSection = styled.section.attrs((props) => ({
   align-items: flex-start;
   font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
-  height: ${(props) => props.height};
+  height: min-content;
 `;
 
 const FrontContent = ({ cardData }) => {

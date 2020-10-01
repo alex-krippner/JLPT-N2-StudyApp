@@ -109,25 +109,22 @@ const BackSection = styled.section.attrs((props) => ({
   font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
   height: ${(props) => (props.section === 1 ? '20%' : '40%')};
-  overflow: auto;
 `;
 
 const Top = styled.div`
   flex: 0 0 20%;
   padding: 5px;
   font-size: var(--font-size-small);
+  color: var(--color-primary-light);
   text-transform: capitalize;
 `;
 
 const Bottom = styled.div`
   flex: 0 0 80%
   justify-content: center;
-  width: 100%;
-  
+  width: 100%;  
   margin: 0;
-
- 
-
+  overflow: auto;
 
 `;
 
@@ -223,8 +220,11 @@ const CardGrammar = ({
                   aria-label="full width tabs"
                   variant="fullWidth"
                 >
-                  <Tab className={classes.tab} label="Front" />
-                  <Tab className={classes.tab} label="Back" />
+                  <Tab className={classes.tab} label="Grammar" />
+                  <Tab
+                    className={classes.tab}
+                    label="Grammar Details"
+                  />
                 </Tabs>
               </AppBar>
             </Grid>
@@ -278,9 +278,9 @@ const CardGrammar = ({
                     section={idx}
                     labelNum={tabLabels.length}
                   >
-                    <div style={{ minHeight: 0 }}>
-                      <Top>{tabLabel}</Top>
-                      <Bottom className="bottom" section={idx}>
+                    <Top>{tabLabel}</Top>
+                    <Bottom className="bottom" section={idx}>
+                      <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
                           {cardData[tabLabel].map((el, i) => (
                             <div className="paragraph" key={el}>
@@ -299,8 +299,8 @@ const CardGrammar = ({
                             </div>
                           ))}
                         </div>
-                      </Bottom>
-                    </div>
+                      </div>
+                    </Bottom>
                   </BackSection>
                 );
               })}

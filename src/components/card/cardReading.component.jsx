@@ -113,20 +113,19 @@ const BackSection = styled.section.attrs((props) => ({
   font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
   height: ${(props) => (props.section === 1 ? '20%' : '40%')};
-  overflow: auto;
 `;
 
 const Top = styled.div`
   flex: 0 0 20%;
   padding: 5px;
   font-size: var(--font-size-small);
+  color: var(--color-primary-light);
 `;
 
 const Bottom = styled.div`
   flex: 0 0 80%
   justify-content: center;
-  width: 100%;
-  
+  width: 100%;  
   margin: 0;
   filter: ${(props) =>
     props.blur === false && props.tabLabel === 'solution'
@@ -134,6 +133,8 @@ const Bottom = styled.div`
       : 'none'};
   cursor: ${(props) =>
     props.tabLabel === 'solution' ? 'pointer' : ''};
+    overflow: auto;
+
 
   &:after {
     content: '';
@@ -321,24 +322,26 @@ const CardReading = ({
                     labelNum={tabLabels.length}
                   >
                     {/* set minHeight to 0 to prevent cutoff when the BackSection overflow is set to auto */}
-                    <div style={{ minHeight: 0 }}>
-                      <Top>
-                        {tabLabel === 'choices'
-                          ? capitalizeFirstWord(
-                              'choose the most suitable',
-                            )
-                          : capitalizeFirstWord(tabLabel)}
-                      </Top>
-                      <Bottom
-                        className="bottom"
-                        visible={visible}
-                        blur={blur}
-                        section={idx}
-                        tabLabel={tabLabel}
-                        onClick={(e) =>
-                          handleVisibility(e, idx, tabLabels.length)
-                        }
-                      >
+
+                    <Top>
+                      {tabLabel === 'choices'
+                        ? capitalizeFirstWord(
+                            'choose the most suitable',
+                          )
+                        : capitalizeFirstWord(tabLabel)}
+                    </Top>
+
+                    <Bottom
+                      className="bottom"
+                      visible={visible}
+                      blur={blur}
+                      section={idx}
+                      tabLabel={tabLabel}
+                      onClick={(e) =>
+                        handleVisibility(e, idx, tabLabels.length)
+                      }
+                    >
+                      <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
                           {cardData[tabLabel].map((el, i) => (
                             <div className="paragraph" key={el}>
@@ -351,8 +354,8 @@ const CardReading = ({
                             </div>
                           ))}
                         </div>
-                      </Bottom>
-                    </div>
+                      </div>
+                    </Bottom>
                   </BackSection>
                 );
               })}
