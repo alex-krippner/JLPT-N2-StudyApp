@@ -1,4 +1,4 @@
-/node_modules
-/unused
-/archive
-/dist
+node_modules/
+unused/
+archive/
+dist/
