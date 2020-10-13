@@ -257,7 +257,7 @@ const CardGrammar = ({
                     selected={i < cardData.rating}
                     onClick={
                       // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )
-                      () => onRate(cardData.id, i + 1)
+                      () => onRate(cardData[label], i + 1)
                     }
                   />
                 ))}

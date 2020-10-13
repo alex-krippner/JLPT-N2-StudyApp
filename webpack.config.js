@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const port = process.env.PORT || 8080;
 
@@ -19,19 +20,31 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader'],
       },
       {
-        test: /\.(jpg|png|svg)$/,
-        use: ['url-loader'],
+        test: /\.(jpg|png|gif|svg)$/,
+        loader: 'image-webpack-loader',
+        // Specify enforce: 'pre' to apply the loader
+        // before url-loader/svg-url-loader
+        // and not duplicate it in rules with them
+        enforce: 'pre',
       },
-
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+            output: 'img',
+          },
+        },
+      },
       {
         test: /\.(sa|sc|c)ss$/i,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
           // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader',
+         'css-loader',
+        'sass-loader', // Compiles Sass to CSS
         ],
       },
     ],
@@ -42,15 +55,16 @@ module.exports = {
 
   // (2) The bundled source code files shall result in a bundle.js file in the /dist folder.
   output: {
-    path: path.resolve(__dirname, '/dist'),
+    path: path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
-      favicon: './src/img/favicon.png',
+      favicon: './assets/img/favicon.png',
     }),
   ],
   // (3) The /dist folder will be used to serve our application to the browser.

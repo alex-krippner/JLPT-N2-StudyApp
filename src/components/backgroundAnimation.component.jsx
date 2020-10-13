@@ -5,21 +5,21 @@ import { motion } from 'framer-motion';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 
-import AkitaOniImage from '../img/akita_oni.png';
-import BeerImage from '../img/beer.png';
-import BemusutaImage from '../img/bemusuta.png';
-import BirdImage from '../img/bird.png';
-import BuddhaRoundImage from '../img/buddha_round.png';
-import ChawanImage from '../img/chawan.png';
-import FujiImage from '../img/fuji.png';
-import GeishaImage from '../img/geisha.png';
-import JudoImage from '../img/judo.png';
-import KabuImage from '../img/kabu.png';
-import LanternLadyImage from '../img/lady_lantern.png';
-import MatsuriImage from '../img/matsuri.png';
-import TakoImage from '../img/tako.png';
-import TanukiImage from '../img/tanuki.png';
-import TenguImage from '../img/tengu.png';
+import AkitaOniImage from '../../assets/img/akita_oni.png';
+import BeerImage from '../../assets/img/beer.png';
+import BemusutaImage from '../../assets/img/bemusuta.png';
+import BirdImage from '../../assets/img/bird.png';
+import BuddhaRoundImage from '../../assets/img/buddha_round.png';
+import ChawanImage from '../../assets/img/chawan.png';
+import FujiImage from '../../assets/img/fuji.png';
+import GeishaImage from '../../assets/img/geisha.png';
+import JudoImage from '../../assets/img/judo.png';
+import KabuImage from '../../assets/img/kabu.png';
+import LanternLadyImage from '../../assets/img/lady_lantern.png';
+import MatsuriImage from '../../assets/img/matsuri.png';
+import TakoImage from '../../assets/img/tako.png';
+import TanukiImage from '../../assets/img/tanuki.png';
+import TenguImage from '../../assets/img/tengu.png';
 
 const FlyingCharBgStyled = styled.div`
   position: absolute;

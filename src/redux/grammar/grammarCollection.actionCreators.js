@@ -1,8 +1,8 @@
 import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
 
-export const rateGrammar = (文法, cardType, rating) => ({
+export const rateGrammar = (文法, rating) => ({
   type: GrammarCollectionActionTypes.RATE_GRAMMAR,
-  payload: { 文法, cardType, rating },
+  payload: { 文法, rating },
 });
 
 export const addGrammar = (grammarData) => ({

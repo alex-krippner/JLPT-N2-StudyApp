@@ -6,7 +6,7 @@ import Sidebar from './layouts/sidebar.component';
 import FlyingCharsBackground from './components/backgroundAnimation.component';
 
 import GlobalStyle from './theme/globalStyle';
-import hero from './img/hero.svg';
+import hero from '../assets/img/hero.svg';
 import Hamburger from './components/hamburger/hamburger.component';
 import HamburgerNav from './components/hamburger/hamburgerNav.component';
 

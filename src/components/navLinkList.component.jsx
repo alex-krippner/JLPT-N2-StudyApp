@@ -5,11 +5,11 @@ import List from '@material-ui/core/List';
 
 import ListItemLink from './ListItemLink.component';
 
-import MonLogo from '../img/logoMonIcon';
-import VocabIcon from '../img/vocabIcon';
-import KanjiIcon from '../img/kanjiIcon';
-import ReadingIcon from '../img/readingIcon';
-import GrammarIcon from '../img/grammarIcon';
+import MonLogo from '../../assets/img/logoMonIcon';
+import VocabIcon from '../../assets/img/vocabIcon';
+import KanjiIcon from '../../assets/img/kanjiIcon';
+import ReadingIcon from '../../assets/img/readingIcon';
+import GrammarIcon from '../../assets/img/grammarIcon';
 
 const useStyles = makeStyles({
   navLinkList: {
