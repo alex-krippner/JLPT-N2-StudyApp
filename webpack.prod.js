@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -7,7 +9,7 @@ const port = process.env.PORT || 8080;
 
 module.exports = {
   // (1) Use the src/index.js file as entry point to bundle it. If the src/index.js file imports other JavaScript files, bundle them as well.
-
+  mode: 'production',
   entry: './src/index.js',
   module: {
     rules: [
