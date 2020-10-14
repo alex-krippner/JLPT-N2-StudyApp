@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import Main from './layouts/main.component';
 import Sidebar from './layouts/sidebar.component';
 import FlyingCharsBackground from './components/backgroundAnimation.component';
-
 import GlobalStyle from './theme/globalStyle';
+
 import hero from '../assets/img/hero.svg';
 import Hamburger from './components/hamburger/hamburger.component';
 import HamburgerNav from './components/hamburger/hamburgerNav.component';
@@ -22,7 +21,6 @@ const Wrapper = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 `;
-
 const App = () => {
   const [open, setOpen] = useState(false);
 
