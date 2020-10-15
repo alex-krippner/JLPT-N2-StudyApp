@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import homeView from '../views/homeView.component';
+import HomeView from '../views/homeView.component';
 import KanjiView from '../views/kanjiView.component';
 import VocabView from '../views/vocabView.component';
 import GrammarView from '../views/grammarView.component';
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 const Main = () => (
   <Wrapper>
     <Switch>
-      <Route exact path="/" component={homeView} />
+      <Route exact path="/" component={HomeView} />
       <Route path="/kanji" component={KanjiView} />
       <Route path="/vocab" component={VocabView} />
       <Route path="/grammar" component={GrammarView} />

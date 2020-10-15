@@ -4,12 +4,14 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
+import GramReadTabPanel from './gramReadTabPanel.component';
 
 import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
 
@@ -187,19 +189,6 @@ const useStyles = makeStyles({
   },
 });
 
-const TabPanel = (props) => {
-  const { value, index, children } = props;
-  const classes = useStyles();
-
-  return (
-    <div hidden={value !== index} className={classes.grid}>
-      {value === index && (
-        <div className={classes.grid}>{children}</div>
-      )}
-    </div>
-  );
-};
-
 const CardReading = ({
   cardData,
   onRate,
@@ -280,7 +269,7 @@ const CardReading = ({
               />
             </Grid>
           </Grid>
-          <TabPanel value={value} index={0}>
+          <GramReadTabPanel value={value} index={0}>
             <CardSide
               front
               cardType={cardData.cardType}
@@ -304,8 +293,8 @@ const CardReading = ({
                 ))}
               </RatingContainer>
             </CardSide>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
+          </GramReadTabPanel>
+          <GramReadTabPanel value={value} index={1}>
             <CardSide
               back
               className="card-side"
@@ -360,7 +349,7 @@ const CardReading = ({
                 );
               })}
             </CardSide>
-          </TabPanel>
+          </GramReadTabPanel>
         </Grid>
       </Paper>
     </CardScene>
@@ -368,3 +357,16 @@ const CardReading = ({
 };
 
 export default CardReading;
+
+CardReading.propTypes = {
+  cardData: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      PropTypes.number,
+    ]),
+  ).isRequired,
+  onRate: PropTypes.func.isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  label: PropTypes.string.isRequired,
+};

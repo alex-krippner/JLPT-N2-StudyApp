@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import CardContainer from '../components/containers/CardContainer.component';
 import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
@@ -41,3 +41,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(KanjiView);
+
+KanjiView.propTypes = {
+  kanji: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rateKanjiDispatcher: PropTypes.func.isRequired,
+};

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import CardContainer from '../components/containers/CardContainer.component';
 import { rateVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
@@ -39,3 +40,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(VocabView);
+
+VocabView.propTypes = {
+  vocab: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rateVocabDispatcher: PropTypes.func.isRequired,
+};

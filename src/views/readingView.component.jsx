@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import SliderContainer from '../components/containers/sliderContainer.component';
 import { rateReading } from '../redux/readingCollection/readingCollection.actionCreators';
@@ -42,3 +42,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(ReadingView);
+
+ReadingView.propTypes = {
+  reading: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rateReadingDispatcher: PropTypes.func.isRequired,
+};

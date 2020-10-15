@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import SliderContainer from '../components/containers/sliderContainer.component';
 import { rateGrammar } from '../redux/grammar/grammarCollection.actionCreators';
@@ -42,3 +42,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(GrammarView);
+
+GrammarView.propTypes = {
+  grammar: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rateGrammarDispatcher: PropTypes.func.isRequired,
+};

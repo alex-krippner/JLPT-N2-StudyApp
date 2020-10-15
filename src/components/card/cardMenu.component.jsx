@@ -1,6 +1,8 @@
+/* eslint-disable no-debugger */
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -51,18 +53,17 @@ const CardMenu = ({
   deleteCardDispatcher,
 }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorMenu, setAnchorMenu] = useState(null);
   const [anchorPop, setAnchorPop] = useState(null);
   const [edit, setEdit] = useState(null);
   const openPop = Boolean(anchorPop);
-  const open = Boolean(anchorEl);
-
+  const openMenu = Boolean(anchorMenu);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorMenu(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorMenu(null);
   };
   const handleClosePop = () => {
     setAnchorPop(null);
@@ -89,9 +90,9 @@ const CardMenu = ({
       </IconButton>
       <Menu
         id="long-menu"
-        anchorEl={anchorEl}
+        anchorEl={anchorMenu}
         keepMounted
-        open={open}
+        open={openMenu}
         onClose={handleClose}
         PaperProps={{
           style: {
@@ -173,3 +174,17 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(CardMenu);
+
+CardMenu.propTypes = {
+  cardId: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cardData: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      PropTypes.number,
+    ]),
+  ).isRequired,
+  deleteCardDispatcher: PropTypes.func.isRequired,
+};

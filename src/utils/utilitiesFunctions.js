@@ -11,3 +11,42 @@ export function capitalizeFirstWord(string) {
     )
     .join(' ');
 }
+
+export const initCardFormProperties = function initCardFormProperties(
+  d,
+  key,
+  label,
+) {
+  switch (key) {
+    case 'rating':
+      return {
+        ...d,
+        rating: 0,
+      };
+    case 'id':
+      return {
+        ...d,
+        id: '',
+      };
+    case label:
+      return {
+        ...d,
+        [label]: '',
+      };
+    case 'cardType':
+      return {
+        ...d,
+        cardType: '',
+      };
+    case 'passage':
+      return {
+        ...d,
+        passage: '',
+      };
+    default:
+      return {
+        ...d,
+        [key]: [],
+      };
+  }
+};

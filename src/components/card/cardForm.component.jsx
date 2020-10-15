@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // MATERIAL UI IMPORTS
 import Button from '@material-ui/core/Button';
@@ -9,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 // LOCAL IMPORTS
-import FullWidthTabs from './tabs.component';
+import FormTabs from './formTabs.component';
 import { CardFormContext } from '../../context/context';
 import {
   addKanji,
@@ -29,6 +30,7 @@ import {
 } from '../../redux/readingCollection/readingCollection.actionCreators';
 
 import COLORS from '../../theme/styleConstants';
+import { initCardFormProperties } from '../../utils/utilitiesFunctions';
 
 const CardFormStyled = styled.div.attrs((props) => ({
   height:
@@ -223,44 +225,14 @@ const CardForm = (props) => {
     // CREATE AN CARD FORM OBJECT WITH EMPTY DEFAULT VALUES
     // THE FIRST ELEMENT OF THE cardData IS USED AS A TEMPLATE
     if (!editing)
-      initState = Object.keys(cardData[0]).reduce((d, key) => {
-        if (key === 'rating') {
-          return {
-            ...d,
-            rating: 0,
-          };
-        }
-        if (key === 'id') {
-          return {
-            ...d,
-            id: '',
-          };
-        }
-        if (key === label) {
-          return {
-            ...d,
-            [label]: '',
-          };
-        }
-        if (key === 'cardType') {
-          return {
-            ...d,
-            cardType: '',
-          };
-        }
-        if (key === 'passage') {
-          return {
-            ...d,
-            passage: '',
-          };
-        }
-        return {
-          ...d,
-          [key]: [],
-        };
-      }, {});
+      initState = Object.keys(cardData[0]).reduce(
+        (d, key) => initCardFormProperties(d, key, label),
+        {},
+      );
+
     return initState;
   };
+
   const [cardFormData, dispatchFormAction] = useReducer(
     FormReducer,
     cardData,
@@ -275,6 +247,7 @@ const CardForm = (props) => {
       label,
     });
   };
+
   const handleCreateCard = () => {
     if (label === '漢字') addKanjiDispatcher(cardFormData);
     if (label === '語彙') addVocabDispatcher(cardFormData);
@@ -344,7 +317,7 @@ const CardForm = (props) => {
         <CardFormContext.Provider
           value={{ cardFormData, dispatchFormAction }}
         >
-          <FullWidthTabs tabLabels={tabLabels} cardData={cardData} />
+          <FormTabs tabLabels={tabLabels} cardData={cardData} />
         </CardFormContext.Provider>
       </Grid>
       <Grid container className={classes.footer}>
@@ -401,3 +374,15 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(CardForm);
+
+CardForm.propTypes = {
+  label: PropTypes.string.isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cardData: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      PropTypes.number,
+    ]),
+  ).isRequired,
+};

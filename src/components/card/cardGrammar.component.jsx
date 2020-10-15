@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
+import GramReadTabpanel from './gramReadTabPanel.component';
 
 const CardScene = styled.div`
   height: 90%;
@@ -145,27 +146,10 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
 
-  grid: {
-    height: '100%',
-  },
-
   container_main: {
     height: '100%',
   },
 });
-
-const TabPanel = (props) => {
-  const { value, index, children } = props;
-  const classes = useStyles();
-
-  return (
-    <div hidden={value !== index} className={classes.grid}>
-      {value === index && (
-        <div className={classes.grid}>{children}</div>
-      )}
-    </div>
-  );
-};
 
 const CardGrammar = ({
   cardData,
@@ -241,7 +225,7 @@ const CardGrammar = ({
               />
             </Grid>
           </Grid>
-          <TabPanel value={value} index={0}>
+          <GramReadTabpanel value={value} index={0}>
             <CardSide
               front
               cardType={cardData.cardType}
@@ -263,8 +247,8 @@ const CardGrammar = ({
                 ))}
               </RatingContainer>
             </CardSide>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
+          </GramReadTabpanel>
+          <GramReadTabpanel value={value} index={1}>
             <CardSide
               back
               className="card-side"
@@ -305,7 +289,7 @@ const CardGrammar = ({
                 );
               })}
             </CardSide>
-          </TabPanel>
+          </GramReadTabpanel>
         </Grid>
       </Paper>
     </CardScene>

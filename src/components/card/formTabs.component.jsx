@@ -100,7 +100,7 @@ function TabPanel(props) {
   );
 }
 
-export default function FullWidthTabs(props) {
+export default function FormTabs(props) {
   const { tabLabels, cardData } = props;
   const classes = useStyles();
   const { cardFormData, dispatchFormAction } = useContext(

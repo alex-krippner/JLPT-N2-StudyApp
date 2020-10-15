@@ -42,7 +42,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Home = () => {
+const HomeView = () => {
   const classes = useStyles();
 
   return (
@@ -133,4 +133,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeView;
