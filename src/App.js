@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import Main from './layouts/main.component';
 import Sidebar from './layouts/sidebar.component';
 import FlyingCharsBackground from './components/backgroundAnimation.component';
@@ -23,14 +24,15 @@ const Wrapper = styled.div`
 `;
 const App = () => {
   const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(!open);
 
   return (
     <Wrapper>
       <FlyingCharsBackground iconSize="5rem" />
       <GlobalStyle />
       <Sidebar />
-      <Hamburger open={open} setOpen={setOpen} />
-      <HamburgerNav open={open} setOpen={setOpen} />
+      <Hamburger open={open} handleOpen={handleOpen} />
+      <HamburgerNav open={open} handleOpen={handleOpen} />
       <Main />
     </Wrapper>
   );

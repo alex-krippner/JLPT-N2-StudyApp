@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -75,6 +76,12 @@ const ListItemLink = (props) => {
       </ListItem>
     </li>
   );
+};
+
+ListItemLink.propTypes = {
+  icon: PropTypes.element.isRequired,
+  primary: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
 };
 
 export default ListItemLink;

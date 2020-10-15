@@ -324,7 +324,7 @@ const CardForm = (props) => {
                 id="outlined-basic"
                 label={label}
                 value={cardFormData[label]}
-                variant="outlined"
+                variant="filled"
                 className={`${classes.root} ${classes.textfield}`}
                 onChange={(event) => handleChange(event)}
               />

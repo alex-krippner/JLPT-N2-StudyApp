@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -14,18 +15,23 @@ const useStyles = makeStyles({
 const HamburgerNav = (props) => {
   const classes = useStyles();
 
-  const { open, setOpen } = props;
+  const { open, handleOpen } = props;
 
   return (
     <Drawer
       anchor="left"
       open={open}
-      onClose={() => setOpen(false)}
+      onClose={handleOpen}
       classes={{ paper: classes.navDrawer }}
     >
       <NavLinkList />
     </Drawer>
   );
+};
+
+HamburgerNav.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };
 
 export default HamburgerNav;

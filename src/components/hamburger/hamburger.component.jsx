@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledBurger = styled.button`
   position: absolute;
@@ -38,14 +39,19 @@ const StyledBurger = styled.button`
 `;
 
 const Hamburger = (props) => {
-  const { open, setOpen } = props;
+  const { open, handleOpen } = props;
   return (
-    <StyledBurger open={open} onClick={() => setOpen(true)}>
+    <StyledBurger open={open} onClick={handleOpen}>
       <div />
       <div />
       <div />
     </StyledBurger>
   );
+};
+
+Hamburger.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };
 
 export default Hamburger;

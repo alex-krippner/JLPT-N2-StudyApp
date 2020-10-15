@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
   intro: {
     width: '50%',
     alignSelf: 'center',
-    marginTop: '4rem',
+    margin: '4rem',
   },
 
   paragraph: {
@@ -93,7 +93,7 @@ const Home = () => {
           className={classes.paragraph}
         >
           Mon allows you to create and collect custom flash cards to
-          help prepare you for the JLPT N2 exam.
+          help you prepare for the JLPT N2 exam.
         </Typography>
         <Typography
           variant="body1"
@@ -108,8 +108,25 @@ const Home = () => {
           gutterBottom
           className={classes.paragraph}
         >
+          You can create, edit, and delete cards. By clicking the
+          daruma icon (the little dude) on the bottom of card you can
+          rate how familiar you are with the card&apos;s material.
+        </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          className={classes.paragraph}
+        >
           At the moment, the flash cards will be saved to your
-          browsers local storage.
+          browser&apos;s local storage.
+        </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          className={classes.paragraph}
+        >
+          I am planning to develop more features, but hope that this
+          app can already help you in your studies.
         </Typography>
       </Grid>
     </Grid>
