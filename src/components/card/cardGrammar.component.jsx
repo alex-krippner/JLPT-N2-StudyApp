@@ -1,9 +1,6 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable consistent-return */
-
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,123 +8,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
 import GramReadTabpanel from './gramReadTabPanel.component';
+import cardReadingGramStyles from '../styledComponents';
 
-const CardScene = styled.div`
-  height: 90%;
-  width: 85rem;
-`;
-
-const CardSide = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.8s ease, background 0.8s ease;
-  background-color: var(--color-white);
-  font-size: var(--font-size-medium);
-  color: var(--color-primary-dark);
- 
-
-  .top {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 5px;
-    font-size: var(--font-size-small);
-  }
-
-
-
-    .sentenceWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: flex-start;
-      height: 100%;
-      margin: 0;
-      padding: 1rem;
-      font-size: var(--font-size-small);
-    }
-
-    .paragraph {
-      display: flex;
-      align-items: center;
-      margin: 0;
-    }
-  }
-
-  .dot {
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    margin-right: 1rem;
-    border-radius: 50%;
-    border: solid 1px #708090;
-    background-color: var(--color-white);
-  }
-`;
-
-const Front = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-
-  .menu-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-`;
-
-const FrontData = styled.div`
-  display: flex;
-  align-items: center;
-  height: 90%;
-  font-size: var(--font-size-large);
-`;
-
-const RatingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10%;
-`;
-
-const BackSection = styled.section.attrs((props) => ({
-  borderBottom: () => {
-    if (props.section < props.labelNum - 1) return 'solid 1px';
-  },
-}))`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  font-size: var(--font-size-medium);
-  border-bottom: ${(props) => props.borderBottom};
-  height: ${(props) => (props.section === 1 ? '20%' : '40%')};
-`;
-
-const Top = styled.div`
-  flex: 0 0 20%;
-  padding: 5px;
-  font-size: var(--font-size-small);
-  color: var(--color-primary-light);
-  text-transform: capitalize;
-`;
-
-const Bottom = styled.div`
-  flex: 0 0 80%
-  justify-content: center;
-  width: 100%;  
-  margin: 0;
-  overflow: auto;
-
-`;
+const {
+  CardScene,
+  CardSide,
+  Front,
+  FrontData,
+  RatingContainer,
+  BackSection,
+  Top,
+  Bottom,
+} = cardReadingGramStyles;
 
 const useStyles = makeStyles({
   root: {
@@ -232,7 +124,7 @@ const CardGrammar = ({
               className="card-side"
             >
               <Front>
-                <FrontData>{cardData[label]} </FrontData>
+                <FrontData grammar>{cardData[label]} </FrontData>
               </Front>
               <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
@@ -277,7 +169,7 @@ const CardGrammar = ({
                               ) : (
                                 <>
                                   <span>{i + 1}.&nbsp;</span>
-                                  <div>{el}</div>{' '}
+                                  <div>{el}</div>
                                 </>
                               )}
                             </div>
@@ -297,3 +189,16 @@ const CardGrammar = ({
 };
 
 export default CardGrammar;
+
+CardGrammar.propTypes = {
+  cardData: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      PropTypes.number,
+    ]),
+  ).isRequired,
+  onRate: PropTypes.func.isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  label: PropTypes.string.isRequired,
+};

@@ -1,9 +1,5 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable consistent-return */
-
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
@@ -11,158 +7,29 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
-import GramReadTabPanel from './gramReadTabPanel.component';
+import GramReadTabpanel from './gramReadTabPanel.component';
+import cardReadingGramStyles from '../styledComponents';
 
 import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
 
-const CardScene = styled.div`
-  height: 90%;
-  width: 85rem;
-`;
+const {
+  CardScene,
+  CardSide,
+  Front,
+  FrontData,
+  RatingContainer,
+  BackSection,
+  Top,
+  Bottom,
+  Passage,
+} = cardReadingGramStyles;
 
-const CardSide = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.8s ease, background 0.8s ease;
-  background-color: var(--color-white);
-  font-size: var(--font-size-medium);
-  color: var(--color-primary-dark);
- 
-
-  .top {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 5px;
-    font-size: var(--font-size-small);
-  }
-
-
-
-    .sentenceWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: flex-start;
-      height: 100%;
-      margin: 0;
-      padding: 1rem;
-      font-size: var(--font-size-small);
-    }
-
-    .paragraph {
-      display: flex;
-      align-items: center;
-      margin: 0;
-    }
-  }
-
-  .dot {
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    margin-right: 1rem;
-    border-radius: 50%;
-    border: solid 1px #708090;
-    background-color: var(--color-white);
-  }
-`;
-
-const Front = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-
-  .menu-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-`;
-
-const FrontData = styled.div`
-  text-align: center;
-  height: 90%;
-  width: 75%;
-  display: flex;
-  line-height: 2;
-  font-size: var(--font-size-small);
-`;
-
-const RatingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10%;
-`;
-
-const BackSection = styled.section.attrs((props) => ({
-  borderBottom: () => {
-    if (props.section < props.labelNum - 1) return 'solid 1px';
-  },
-}))`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  font-size: var(--font-size-medium);
-  border-bottom: ${(props) => props.borderBottom};
-  height: ${(props) => (props.section === 1 ? '20%' : '40%')};
-`;
-
-const Top = styled.div`
-  flex: 0 0 20%;
-  padding: 5px;
-  font-size: var(--font-size-small);
-  color: var(--color-primary-light);
-`;
-
-const Bottom = styled.div`
-  flex: 0 0 80%
-  justify-content: center;
-  width: 100%;  
-  margin: 0;
-  filter: ${(props) =>
-    props.blur === false && props.tabLabel === 'solution'
-      ? 'blur(3px)'
-      : 'none'};
-  cursor: ${(props) =>
-    props.tabLabel === 'solution' ? 'pointer' : ''};
-    overflow: auto;
-
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background: ${(props) =>
-      props.visible === false && props.tabLabel === 'solution'
-        ? 'rgba(63, 81, 181, 0.8)'
-        : 'transparent'};
-  }
-`;
-
-const Passage = styled.div`
-  height: 90%;
-  width: 100%;
-  padding: 1rem;
-  overflow: auto;
-`;
-
-const FrontContent = ({ cardData }) => {
-  if (cardData.cardType === 'reading')
-    return <Passage>{cardData.passage}</Passage>;
-};
-
+const FrontContent = ({ cardData }) =>
+  cardData.cardType === 'reading' ? (
+    <Passage>{cardData.passage}</Passage>
+  ) : (
+    ''
+  );
 const useStyles = makeStyles({
   root: {
     '&.MuiPaper-elevation4': {
@@ -269,7 +136,7 @@ const CardReading = ({
               />
             </Grid>
           </Grid>
-          <GramReadTabPanel value={value} index={0}>
+          <GramReadTabpanel value={value} index={0}>
             <CardSide
               front
               cardType={cardData.cardType}
@@ -293,18 +160,18 @@ const CardReading = ({
                 ))}
               </RatingContainer>
             </CardSide>
-          </GramReadTabPanel>
-          <GramReadTabPanel value={value} index={1}>
+          </GramReadTabpanel>
+          <GramReadTabpanel value={value} index={1}>
             <CardSide
               back
               className="card-side"
               hidden={value !== 1}
               value={value}
             >
-              {tabLabels.map((tabLabel, idx) => {
-                if (tabLabel === 'passage') return;
-
-                return (
+              {tabLabels.map((tabLabel, idx) =>
+                tabLabel === 'passage' ? (
+                  ''
+                ) : (
                   <BackSection
                     key={tabLabel}
                     section={idx}
@@ -346,10 +213,10 @@ const CardReading = ({
                       </div>
                     </Bottom>
                   </BackSection>
-                );
-              })}
+                ),
+              )}
             </CardSide>
-          </GramReadTabPanel>
+          </GramReadTabpanel>
         </Grid>
       </Paper>
     </CardScene>

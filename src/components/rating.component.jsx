@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import DarumaIcon from '../../assets/img/darumaIcon';
 
@@ -24,3 +25,8 @@ const Rating = ({ selected = false, onClick }) => {
 };
 
 export default Rating;
+
+Rating.propTypes = {
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
