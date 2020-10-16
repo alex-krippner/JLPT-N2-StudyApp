@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -8,8 +9,7 @@ const useStyles = makeStyles({
   },
 });
 
-const GramReadTabpanel = (props) => {
-  const { value, index, children } = props;
+const GramReadTabpanel = ({ value, index, children }) => {
   const classes = useStyles();
 
   return (
@@ -22,3 +22,9 @@ const GramReadTabpanel = (props) => {
 };
 
 export default GramReadTabpanel;
+
+GramReadTabpanel.propTypes = {
+  value: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+  children: PropTypes.element.isRequired,
+};

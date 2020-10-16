@@ -8,13 +8,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
 import GramReadTabpanel from './gramReadTabPanel.component';
-import cardReadingGramStyles from '../styledComponents';
+import { cardReadingGramStyles } from '../../theme/styledComponents';
 
 import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
 
 const {
   CardScene,
-  CardSide,
+  CardSideLarge,
   Front,
   FrontData,
   RatingContainer,
@@ -24,12 +24,6 @@ const {
   Passage,
 } = cardReadingGramStyles;
 
-const FrontContent = ({ cardData }) =>
-  cardData.cardType === 'reading' ? (
-    <Passage>{cardData.passage}</Passage>
-  ) : (
-    ''
-  );
 const useStyles = makeStyles({
   root: {
     '&.MuiPaper-elevation4': {
@@ -137,14 +131,14 @@ const CardReading = ({
             </Grid>
           </Grid>
           <GramReadTabpanel value={value} index={0}>
-            <CardSide
+            <CardSideLarge
               front
               cardType={cardData.cardType}
               className="card-side"
             >
               <Front>
                 <FrontData>
-                  <FrontContent cardData={cardData} />
+                  <Passage>{cardData.passage}</Passage>
                 </FrontData>
               </Front>
               <RatingContainer>
@@ -159,10 +153,10 @@ const CardReading = ({
                   />
                 ))}
               </RatingContainer>
-            </CardSide>
+            </CardSideLarge>
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
-            <CardSide
+            <CardSideLarge
               back
               className="card-side"
               hidden={value !== 1}
@@ -215,7 +209,7 @@ const CardReading = ({
                   </BackSection>
                 ),
               )}
-            </CardSide>
+            </CardSideLarge>
           </GramReadTabpanel>
         </Grid>
       </Paper>

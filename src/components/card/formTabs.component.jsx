@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -12,7 +13,7 @@ import {
 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
-import Table from './table.component';
+import FormTable from './FormTable.component';
 import { CardFormContext } from '../../context/context';
 
 import * as utils from '../../utils/utilitiesFunctions';
@@ -80,7 +81,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function TabPanel(props) {
+const TabPanel = (props) => {
   const { children, value, index } = props;
   const classes = useStyles(props);
   return (
@@ -98,10 +99,9 @@ function TabPanel(props) {
       )}
     </div>
   );
-}
+};
 
-export default function FormTabs(props) {
-  const { tabLabels, cardData } = props;
+const FormTabs = ({ tabLabels, cardData }) => {
   const classes = useStyles();
   const { cardFormData, dispatchFormAction } = useContext(
     CardFormContext,
@@ -243,7 +243,7 @@ export default function FormTabs(props) {
               id="passage-input"
             />
           ) : (
-            <Table
+            <FormTable
               entries={cardFormData[tabLabel]}
               entryKey={tabLabel}
               height="100%"
@@ -253,4 +253,18 @@ export default function FormTabs(props) {
       ))}
     </>
   );
-}
+};
+
+export default FormTabs;
+
+FormTabs.propTypes = {
+  cardData: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+    ]),
+  ).isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

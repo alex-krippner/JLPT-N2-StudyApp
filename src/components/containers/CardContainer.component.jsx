@@ -1,28 +1,12 @@
-/* eslint-disable no-useless-return */
-/* eslint-disable no-else-return */
-/* eslint-disable consistent-return */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import styled from 'styled-components';
 
 import Card from '../card/card.component';
 import CardForm from '../card/cardForm.component';
-
-const CardsContainerStyled = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  grid-gap: 30px;
-  height: 100%;
-  width: 100%;
-  padding: 3rem;
-
-  @media only screen and (max-width: 600px) {
-    padding: 0;
-  }
-`;
+import { CardsContainerStyled } from '../../theme/styledComponents';
 
 const CardContainer = (props) => {
   let flipId = '';
@@ -58,3 +42,10 @@ const CardContainer = (props) => {
 };
 
 export default CardContainer;
+
+CardContainer.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onRate: PropTypes.func.isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  label: PropTypes.string.isRequired,
+};

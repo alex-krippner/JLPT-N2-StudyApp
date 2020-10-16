@@ -8,11 +8,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMenu from './cardMenu.component';
 import Rating from '../rating.component';
 import GramReadTabpanel from './gramReadTabPanel.component';
-import cardReadingGramStyles from '../styledComponents';
+import { cardReadingGramStyles } from '../../theme/styledComponents';
 
 const {
   CardScene,
-  CardSide,
+  CardSideLarge,
   Front,
   FrontData,
   RatingContainer,
@@ -118,7 +118,7 @@ const CardGrammar = ({
             </Grid>
           </Grid>
           <GramReadTabpanel value={value} index={0}>
-            <CardSide
+            <CardSideLarge
               front
               cardType={cardData.cardType}
               className="card-side"
@@ -138,10 +138,10 @@ const CardGrammar = ({
                   />
                 ))}
               </RatingContainer>
-            </CardSide>
+            </CardSideLarge>
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
-            <CardSide
+            <CardSideLarge
               back
               className="card-side"
               hidden={value !== 1}
@@ -180,7 +180,7 @@ const CardGrammar = ({
                   </BackSection>
                 );
               })}
-            </CardSide>
+            </CardSideLarge>
           </GramReadTabpanel>
         </Grid>
       </Paper>

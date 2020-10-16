@@ -261,7 +261,7 @@ const CardForm = (props) => {
       resetForm: (payloadData) => initCardForm(payloadData),
       payload: cardData,
     });
-    handleClose();
+    if (label === '文法' || label === 'reading') handleClose();
   };
 
   const handleEditCard = () => {
@@ -378,11 +378,4 @@ export default connect(null, mapDispatchToProps)(CardForm);
 CardForm.propTypes = {
   label: PropTypes.string.isRequired,
   tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cardData: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-    ]),
-  ).isRequired,
 };

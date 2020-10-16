@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
@@ -35,7 +36,7 @@ const useStyles = makeStyles({
   },
 });
 
-function AddCardPopover({ tabLabels, label, cardData, cardType }) {
+const AddCardPopover = ({ tabLabels, label, cardData, cardType }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -85,6 +86,19 @@ function AddCardPopover({ tabLabels, label, cardData, cardType }) {
       </Popover>
     </div>
   );
-}
+};
 
 export default AddCardPopover;
+
+AddCardPopover.propTypes = {
+  label: PropTypes.string.isRequired,
+  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cardData: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+    ]),
+  ).isRequired,
+};
