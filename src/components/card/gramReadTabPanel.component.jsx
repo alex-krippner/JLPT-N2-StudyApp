@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   grid: {
     height: '100%',
+    width: '95%',
   },
 });
 
