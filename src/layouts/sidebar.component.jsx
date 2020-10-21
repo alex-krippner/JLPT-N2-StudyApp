@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   height: 100%;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
-  background-color: var(--color-white);
+  background-color: var(--color-white-medium);
   z-index: 99;
   overflow: auto;
 
