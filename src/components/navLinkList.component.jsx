@@ -2,6 +2,8 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Button from '@material-ui/core/Button';
 
 import ListItemLink from './ListItemLink.component';
 
@@ -12,6 +14,11 @@ import ReadingIcon from '../../assets/img/readingIcon';
 import GrammarIcon from '../../assets/img/grammarIcon';
 
 const useStyles = makeStyles({
+  portfolioLink: {
+    justifySelf: 'flex-start',
+    fontSize: 'var(--font-size-small)',
+    color: 'var(--color-primary-dark)',
+  },
   navLinkList: {
     display: 'flex',
     flexDirection: 'column',
@@ -29,6 +36,13 @@ const NavLinkList = () => {
       className={classes.navLinkList}
       aria-label="main mailbox folders"
     >
+      <Button
+        href="http://alexkrippner.com/"
+        className={classes.portfolioLink}
+        startIcon={<ArrowBackIcon fontSize="large" />}
+      >
+        To Portfolio
+      </Button>
       <div style={{ minHeight: 0 }}>
         <ListItemLink
           to="/"
