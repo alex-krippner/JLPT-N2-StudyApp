@@ -1,12 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import CardContainer from '../components/containers/CardContainer.component';
 import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
-import selectAllKanji from '../redux/kanjiCollection/kanjiCollection.selectors';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,34 +12,24 @@ const Wrapper = styled.div`
 
 const tabLabels = ['読み', '単語例', '用例'];
 
-const KanjiView = ({ kanji, rateKanjiDispatcher }) => {
+const KanjiView = () => {
+  const dispatch = useDispatch();
+  const kanjiState = useSelector((state) =>
+    Object.values(state.kanjiCollection),
+  );
+  const handleRate = (grammar, rating) => {
+    dispatch(rateKanji(grammar, rating));
+  };
   return (
     <Wrapper>
       <CardContainer
-        data={kanji}
+        data={kanjiState}
         label="漢字"
-        onRate={rateKanjiDispatcher}
+        onRate={handleRate}
         tabLabels={tabLabels}
       />
     </Wrapper>
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  kanji: selectAllKanji,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  rateKanjiDispatcher: (kanji, cardType, rating) =>
-    dispatch(rateKanji(kanji, cardType, rating)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(KanjiView);
-
-KanjiView.propTypes = {
-  kanji: PropTypes.arrayOf(PropTypes.object).isRequired,
-  rateKanjiDispatcher: PropTypes.func.isRequired,
-};
+export default KanjiView;

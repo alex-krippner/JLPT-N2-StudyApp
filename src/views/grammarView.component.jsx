@@ -14,16 +14,17 @@ const tabLabels = ['variations', '意味', '接続', '用例'];
 
 const GrammarView = () => {
   const dispatch = useDispatch();
-
+  const grammarState = useSelector((state) =>
+    Object.values(state.grammarCollection),
+  );
   const handleRate = (grammar, rating) => {
     dispatch(rateGrammar(grammar, rating));
   };
-  let grammar = useSelector((state) => state.grammarCollection);
-  grammar = Object.values(grammar);
+
   return (
     <Wrapper>
       <SliderContainer
-        data={grammar}
+        data={grammarState}
         label="文法"
         onRate={handleRate}
         tabLabels={tabLabels}

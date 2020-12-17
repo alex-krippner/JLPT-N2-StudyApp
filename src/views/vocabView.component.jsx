@@ -15,8 +15,9 @@ const tabLabels = ['漢字', '語類', '定義', '用例'];
 
 const VocabView = () => {
   const dispatch = useDispatch();
-  let vocabState = useSelector((state) => state.vocabCollection);
-  vocabState = Object.values(vocabState);
+  const vocabState = useSelector((state) =>
+    Object.values(state.vocabCollection),
+  );
   const handleRate = (vocab, rating) => {
     dispatch(rateVocab(vocab, rating));
   };
