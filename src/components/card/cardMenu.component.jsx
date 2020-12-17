@@ -16,7 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import CardForm from './cardForm.component';
+import CardForm from '../cardForm/cardForm.component';
 import { deleteCard } from '../../redux/utils.actionCreator';
 
 import { CardFormContext } from '../../context/context';

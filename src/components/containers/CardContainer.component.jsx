@@ -5,7 +5,7 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
 import Card from '../card/card.component';
-import CardForm from '../card/cardForm.component';
+import CardForm from '../cardForm/cardForm.component';
 import { CardsContainerStyled } from '../../theme/styledComponents';
 
 const CardContainer = (props) => {

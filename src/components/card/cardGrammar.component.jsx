@@ -52,7 +52,6 @@ const CardGrammar = ({
   label,
 }) => {
   const classes = useStyles();
-
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -133,7 +132,9 @@ const CardGrammar = ({
                     selected={i < cardData.rating}
                     onClick={
                       // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )
-                      () => onRate(cardData[label], i + 1)
+                      () => {
+                        return onRate(cardData[label], i + 1);
+                      }
                     }
                   />
                 ))}

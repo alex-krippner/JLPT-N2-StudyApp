@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { makeStyles } from '@material-ui/core/styles';
 
-import CardForm from './cardForm.component';
+import CardForm from '../cardForm/cardForm.component';
 
 const useStyles = makeStyles({
   root: {

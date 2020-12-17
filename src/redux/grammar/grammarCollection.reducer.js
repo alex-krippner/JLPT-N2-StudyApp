@@ -110,7 +110,6 @@ const GRAMMAR_DATA = {
 };
 
 const INITIAL_STATE = { ...GRAMMAR_DATA };
-
 const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GrammarCollectionActionTypes.RATE_GRAMMAR:

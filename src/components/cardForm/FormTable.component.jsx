@@ -1,7 +1,6 @@
 /* eslint-disable no-debugger */
 import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -146,10 +145,3 @@ const FormTable = (props) => {
 };
 
 export default FormTable;
-
-FormTable.propTypes = {
-  entries: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  ).isRequired,
-  entryKey: PropTypes.string.isRequired,
-};

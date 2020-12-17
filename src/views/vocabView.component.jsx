@@ -1,12 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import CardContainer from '../components/containers/CardContainer.component';
 import { rateVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
-import selectAllVocab from '../redux/vocabCollection/vocabCollection.selectors';
+// import selectAllVocab from '../redux/vocabCollection/vocabCollection.selectors';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,33 +13,24 @@ const Wrapper = styled.div`
 
 const tabLabels = ['漢字', '語類', '定義', '用例'];
 
-const VocabView = ({ vocab, rateVocabDispatcher }) => {
+const VocabView = () => {
+  const dispatch = useDispatch();
+  let vocabState = useSelector((state) => state.vocabCollection);
+  vocabState = Object.values(vocabState);
+  const handleRate = (vocab, rating) => {
+    dispatch(rateVocab(vocab, rating));
+  };
+
   return (
     <Wrapper>
       <CardContainer
-        data={vocab}
+        data={vocabState}
         label="語彙"
-        onRate={rateVocabDispatcher}
+        onRate={handleRate}
         tabLabels={tabLabels}
       />
     </Wrapper>
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  vocab: selectAllVocab,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  rateVocabDispatcher: (vocab, cardType, rating) =>
-    dispatch(rateVocab(vocab, cardType, rating)),
-});
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(VocabView);
-
-VocabView.propTypes = {
-  vocab: PropTypes.arrayOf(PropTypes.object).isRequired,
-  rateVocabDispatcher: PropTypes.func.isRequired,
-};
+export default VocabView;

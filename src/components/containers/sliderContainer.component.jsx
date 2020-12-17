@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.scss';
-import PropTypes from 'prop-types';
 
 import CardGrammar from '../card/cardGrammar.component';
 import CardReading from '../card/cardReading.component';
@@ -60,7 +59,6 @@ const SliderContainer = ({
       </SwiperSlide>
     );
   });
-
   return (
     <SliderContainerStyled>
       <AddCardPopover
@@ -90,11 +88,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(SliderContainer);
-
-SliderContainer.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onRate: PropTypes.func.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  label: PropTypes.string.isRequired,
-  cardType: PropTypes.string.isRequired,
-};

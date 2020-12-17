@@ -50,3 +50,20 @@ export const initCardFormProperties = function initCardFormProperties(
       };
   }
 };
+
+export const initCardForm = (editing, cardData, label) => {
+  let initState;
+
+  // CREATE CARD FORM OBJECT WITH CARD DATA OF CURRENTLY EDITING CARD
+  if (editing) initState = cardData;
+
+  // CREATE AN CARD FORM OBJECT WITH EMPTY DEFAULT VALUES
+  // THE FIRST ELEMENT OF THE cardData IS USED AS A TEMPLATE
+  if (!editing)
+    initState = Object.keys(cardData[0]).reduce(
+      (d, key) => initCardFormProperties(d, key, label),
+      {},
+    );
+
+  return initState;
+};

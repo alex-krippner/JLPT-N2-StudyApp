@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -256,15 +255,3 @@ const FormTabs = ({ tabLabels, cardData }) => {
 };
 
 export default FormTabs;
-
-FormTabs.propTypes = {
-  cardData: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-    ]),
-  ).isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-};

@@ -71,9 +71,7 @@ const Card = ({
               <Rating
                 key={uuidv4()}
                 selected={i < cardData.rating}
-                onClick={() =>
-                  onRate(cardData[label], cardData.cardType, i + 1)
-                }
+                onClick={() => onRate(cardData[label], i + 1)}
               />
             ))}
           </RatingContainer>
