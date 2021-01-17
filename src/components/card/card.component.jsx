@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 
 import CardMenu from './cardMenu.component';
@@ -69,7 +68,7 @@ const Card = ({
           <RatingContainer>
             {[...Array(3)].map((cur, i) => (
               <Rating
-                key={uuidv4()}
+                key={cardData.id}
                 selected={i < cardData.rating}
                 onClick={() => onRate(cardData[label], i + 1)}
               />

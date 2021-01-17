@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import CardContainer from '../components/containers/CardContainer.component';
 import { rateVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
-// import selectAllVocab from '../redux/vocabCollection/vocabCollection.selectors';
 
 const Wrapper = styled.div`
   width: 100%;

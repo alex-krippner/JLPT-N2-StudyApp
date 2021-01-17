@@ -13,7 +13,7 @@ import {
 import { store, persistor } from './redux/store';
 
 import App from './App';
-import './styles.css';
+import './theme/swiper-styles.css';
 
 const theme = createMuiTheme({
   typography: {
