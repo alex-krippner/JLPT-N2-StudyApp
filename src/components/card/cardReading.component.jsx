@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
@@ -144,7 +143,8 @@ const CardReading = ({
               <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
                   <Rating
-                    key={uuidv4()}
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={cardData.id + i}
                     selected={i < cardData.rating}
                     onClick={
                       // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )

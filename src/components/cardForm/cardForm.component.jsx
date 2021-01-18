@@ -101,6 +101,7 @@ const CardForm = (props) => {
   };
 
   const handleCreateCard = () => {
+    // CREATE A NEW CARD IN THE COLLECTIONS
     if (label === '漢字') dispatch(addKanji(cardFormData));
     if (label === '語彙') dispatch(addVocab(cardFormData));
     if (label === '文法') dispatch(addGrammar(cardFormData));
@@ -110,7 +111,7 @@ const CardForm = (props) => {
     // TODO: I am not sure if putting a method in an action object is good practice???
     dispatchFormAction({
       type: 'RESET',
-      resetForm: (payloadData) => initCardForm(payloadData),
+      resetForm: () => initCardForm(),
       payload: cardData,
     });
     if (label === '文法' || label === 'reading') handleClose();

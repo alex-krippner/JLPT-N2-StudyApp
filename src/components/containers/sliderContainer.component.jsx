@@ -1,9 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
 import SwiperCore, { Pagination } from 'swiper';
 import { connect } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { v4 as uuidv4 } from 'uuid';
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.scss';
 
@@ -22,31 +22,22 @@ const SliderContainerStyled = styled.div`
 
 SwiperCore.use([Pagination]);
 
-const SliderContainer = ({
-  data,
-  onRate,
-  tabLabels,
-  label,
-  cardType,
-}) => {
-  const slides = data.map((el, index) => {
-    if (cardType === 'grammar')
-      return (
-        <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
-          <CardGrammar
-            cardData={el}
-            key={el}
-            index={index}
-            rating={el.rating}
-            onRate={onRate}
-            tabLabels={tabLabels}
-            label={label}
-          />
-        </SwiperSlide>
-      );
-
-    return (
-      <SwiperSlide key={`slide-${uuidv4()}`} tag="li">
+function slidesCreator(data, cardType, onRate, tabLabels, label) {
+  return data.map((el, index) => {
+    return cardType === 'grammar' ? (
+      <SwiperSlide key={`slide-grammar-${el.id}`} tag="li">
+        <CardGrammar
+          cardData={el}
+          key={el}
+          index={index}
+          rating={el.rating}
+          onRate={onRate}
+          tabLabels={tabLabels}
+          label={label}
+        />
+      </SwiperSlide>
+    ) : cardType === 'reading' ? (
+      <SwiperSlide key={`slide-reading-${el.id}`} tag="li">
         <CardReading
           cardData={el}
           key={el}
@@ -57,8 +48,27 @@ const SliderContainer = ({
           label={label}
         />
       </SwiperSlide>
+    ) : (
+      ''
     );
   });
+}
+
+const SliderContainer = ({
+  data,
+  onRate,
+  tabLabels,
+  label,
+  cardType,
+}) => {
+  const slides = slidesCreator(
+    data,
+    cardType,
+    onRate,
+    tabLabels,
+    label,
+  );
+
   return (
     <SliderContainerStyled>
       <AddCardPopover

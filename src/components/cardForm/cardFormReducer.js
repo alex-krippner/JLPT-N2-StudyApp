@@ -34,7 +34,7 @@ const FormReducer = (state, action) => {
         ),
       };
     case 'RESET':
-      return action.resetForm(action.payload);
+      return action.resetForm();
 
     default:
       return state;

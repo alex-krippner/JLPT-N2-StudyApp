@@ -68,7 +68,8 @@ const Card = ({
           <RatingContainer>
             {[...Array(3)].map((cur, i) => (
               <Rating
-                key={cardData.id}
+                // eslint-disable-next-line react/no-array-index-key
+                key={cardData.id + i}
                 selected={i < cardData.rating}
                 onClick={() => onRate(cardData[label], i + 1)}
               />
