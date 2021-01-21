@@ -114,6 +114,8 @@ const CardForm = (props) => {
       resetForm: () => initCardForm(),
       payload: cardData,
     });
+
+    // CLOSE POPOVER WHEN FINISHED CREATING GRAMMAR OR READING CARD
     if (label === '文法' || label === 'reading') handleClose();
   };
 

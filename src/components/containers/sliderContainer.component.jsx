@@ -23,7 +23,7 @@ const SliderContainerStyled = styled.div`
 SwiperCore.use([Pagination]);
 
 function slidesCreator(data, cardType, onRate, tabLabels, label) {
-  return data.map((el, index) => {
+  const createdSlides = data.map((el, index) => {
     return cardType === 'grammar' ? (
       <SwiperSlide key={`slide-grammar-${el.id}`} tag="li">
         <CardGrammar
@@ -52,6 +52,8 @@ function slidesCreator(data, cardType, onRate, tabLabels, label) {
       ''
     );
   });
+
+  return createdSlides;
 }
 
 const SliderContainer = ({

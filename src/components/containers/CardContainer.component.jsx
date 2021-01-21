@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Flipper, Flipped } from 'react-flip-toolkit';
-import { v4 as uuidv4 } from 'uuid';
 
 import Card from '../card/card.component';
 import CardForm from '../cardForm/cardForm.component';
@@ -24,7 +23,7 @@ const CardContainer = (props) => {
         />
 
         {data.map((el) => (
-          <Flipped key={uuidv4()} flipId={el.id}>
+          <Flipped key={el.id} flipId={el.id}>
             <div>
               <Card
                 cardData={el}

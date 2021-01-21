@@ -1,6 +1,5 @@
 /* eslint-disable no-debugger */
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -103,7 +102,6 @@ const CardMenu = ({
         }}
       >
         <MenuItem
-          key={uuidv4()}
           className="edit"
           onClick={() => {
             handleClose();
@@ -147,7 +145,6 @@ const CardMenu = ({
           </CardFormContext.Provider>
         </Popover>
         <MenuItem
-          key={uuidv4()}
           className="delete"
           onClick={() => {
             handleClose();

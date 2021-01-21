@@ -1,6 +1,4 @@
-/* eslint-disable no-debugger */
 import React, { useContext, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -83,7 +81,7 @@ const FormTable = (props) => {
           {entries.map((entry, entryIdx) => {
             const currentlyEditing = entryIdx === editIdx;
             return (
-              <TableRow key={uuidv4()}>
+              <TableRow key={entry}>
                 <TableCell
                   align="center"
                   size="small"
