@@ -19,7 +19,7 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader'],
       },
       {
-        test: /\.(jpg|png|gif|svg)$/,
+        test: /\.(jpg|png|svg)$/,
         loader: 'image-webpack-loader',
         // Specify enforce: 'pre' to apply the loader
         // before url-loader/svg-url-loader
