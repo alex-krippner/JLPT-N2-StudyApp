@@ -108,7 +108,41 @@ const Card = ({
   );
 };
 
-export default React.memo(Card);
+const compareProps = function compareProps(prevProps, nextProps) {
+  const prevCardDataKeys = Object.keys(prevProps.cardData);
+  const comparePropsArray = [];
+
+  prevCardDataKeys.forEach((k) => {
+    const previousCardDataValue = prevProps.cardData[k];
+    const nextCardDataValue = nextProps.cardData[k];
+
+    // If the value of a cardData property is an array than compare each element
+    if (Array.isArray(previousCardDataValue)) {
+      const arrayDeepEquality = nextCardDataValue.every((el, idx) => {
+        if (
+          previousCardDataValue.length !== nextCardDataValue.length
+        ) {
+          return false;
+        }
+        return el === previousCardDataValue[idx];
+      });
+
+      console.log(k, nextCardDataValue, arrayDeepEquality);
+
+      comparePropsArray.push(arrayDeepEquality);
+      return;
+    }
+    comparePropsArray.push(
+      previousCardDataValue === nextCardDataValue,
+    );
+  });
+
+  return comparePropsArray.every((e) => e === true);
+};
+
+export default React.memo(Card, (prevProps, nextProps) =>
+  compareProps(prevProps, nextProps),
+);
 
 Card.propTypes = {
   cardData: PropTypes.objectOf(
@@ -122,3 +156,18 @@ Card.propTypes = {
   tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
   label: PropTypes.string.isRequired,
 };
+
+// => {
+//   const prevCardDataKeys = Object.keys(prevProps.cardData);
+
+//   const comparePropsArray = [];
+
+//   prevCardDataKeys.forEach((k, i) => {
+//     comparePropsArray.push(
+//       prevProps.cardData[prevCardDataKeys[i]] ===
+//         nextProps.cardData[prevCardDataKeys[i]],
+//     );
+//   });
+
+//   return comparePropsArray.every((e) => e === true);
+// }
