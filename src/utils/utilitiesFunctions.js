@@ -67,3 +67,38 @@ export const initCardForm = (editing, cardData, label) => {
 
   return initState;
 };
+
+export const compareProps = function compareProps(
+  prevProps,
+  nextProps,
+) {
+  const prevCardDataKeys = Object.keys(prevProps.cardData);
+  const comparePropsArray = [];
+
+  prevCardDataKeys.forEach((k) => {
+    const previousCardDataValue = prevProps.cardData[k];
+    const nextCardDataValue = nextProps.cardData[k];
+
+    // If the value of a cardData property is an array than compare each array element
+    if (Array.isArray(previousCardDataValue)) {
+      const arrayDeepEquality = nextCardDataValue.every((el, idx) => {
+        if (
+          previousCardDataValue.length !== nextCardDataValue.length
+        ) {
+          return false;
+        }
+        return el === previousCardDataValue[idx];
+      });
+
+      comparePropsArray.push(arrayDeepEquality);
+      return;
+    }
+
+    // If the object value is not an array simply compare the previous and new values
+    comparePropsArray.push(
+      previousCardDataValue === nextCardDataValue,
+    );
+  });
+
+  return comparePropsArray.every((e) => e === true);
+};
