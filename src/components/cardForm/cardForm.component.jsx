@@ -14,7 +14,7 @@ import { CardFormContext } from '../../context/context';
 import {
   addKanji,
   editKanji,
-} from '../../redux/kanjiCollection/kanjiCollection.actionCreators';
+} from '../../redux/kanjiCollection/kanjiCollection.reducer';
 import {
   addVocab,
   editVocab,
