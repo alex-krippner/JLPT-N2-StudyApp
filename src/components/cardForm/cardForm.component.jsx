@@ -22,7 +22,7 @@ import {
 import {
   addGrammar,
   editGrammar,
-} from '../../redux/grammar/grammarCollection.actionCreators';
+} from '../../redux/grammar/grammarCollection.reducer';
 import {
   addReading,
   editReading,

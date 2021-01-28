@@ -1,10 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit';
 
-// import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
-import grammarReducer from './grammar.reducer';
-import { deleteCard } from '../utils';
-
 const GRAMMAR_DATA = {
   としたら: {
     cardType: 'grammar',
@@ -111,37 +107,6 @@ const GRAMMAR_DATA = {
 };
 
 const INITIAL_STATE = { ...GRAMMAR_DATA };
-// const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
-//   switch (action.type) {
-//     case GrammarCollectionActionTypes.RATE_GRAMMAR:
-//       return {
-//         ...state,
-//         [action.payload.文法]: grammarReducer(
-//           ...[state[action.payload.文法]],
-//           action,
-//         ),
-//       };
-
-//     case GrammarCollectionActionTypes.ADD_GRAMMAR:
-//       return {
-//         ...state,
-//         [action.payload.文法]: grammarReducer({}, action),
-//       };
-
-//     case GrammarCollectionActionTypes.EDIT_GRAMMAR:
-//       return {
-//         ...state,
-//         [action.payload.文法]: grammarReducer(
-//           state[action.payload.文法],
-//           action,
-//         ),
-//       };
-//     case 'DELETE_CARD':
-//       return deleteCard(state, action.payload.card);
-//     default:
-//       return state;
-//   }
-// };
 
 const grammarCollectionSlice = createSlice({
   name: 'grammarCollection',
@@ -153,7 +118,8 @@ const grammarCollectionSlice = createSlice({
         [action.payload.grammar]: {
           ...state[action.payload.grammar],
           rating:
-            action.payload.rating === state.rating
+            action.payload.rating ===
+            state[action.payload.grammar].rating
               ? state.rating - 1
               : action.payload.rating,
         },
@@ -162,20 +128,33 @@ const grammarCollectionSlice = createSlice({
     addGrammar(state = {}, action) {
       return {
         ...state,
-        [action.payload.文法]: grammarReducer({}, action),
+        [action.payload.文法]: {
+          cardType: 'grammar',
+          id: uuidv4(),
+          文法: action.payload.文法,
+          variations: [...action.payload.variations],
+          意味: [...action.payload.意味],
+          接続: [...action.payload.接続],
+          用例: [...action.payload.用例],
+          rating: 0,
+        },
       };
     },
     editGrammar(state, action) {
       return {
         ...state,
-        [action.payload.文法]: grammarReducer(
-          state[action.payload.文法],
-          action,
-        ),
+        [action.payload.文法]: {
+          ...action.payload,
+        },
       };
     },
-    deleteCollectionCard(state, action) {
-      return deleteCard(state, action.payload.card);
+    deleteGrammar(state, action) {
+      const {
+        [action.payload]: objectPropsToDelete,
+        ...remainingState
+      } = state;
+
+      return remainingState;
     },
   },
 });
@@ -184,7 +163,7 @@ export const {
   rateGrammar,
   addGrammar,
   editGrammar,
-  deleteCollectionCard,
+  deleteGrammar,
 } = grammarCollectionSlice.actions;
 
 export default grammarCollectionSlice.reducer;

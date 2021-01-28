@@ -1,6 +1,6 @@
-/* eslint-disable no-debugger */
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,7 +16,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from '../cardForm/cardForm.component';
-import { deleteCard } from '../../redux/utils.actionCreator';
+import { deleteGrammar } from '../../redux/grammar/grammarCollection.reducer';
 
 import { CardFormContext } from '../../context/context';
 
@@ -49,8 +49,9 @@ const CardMenu = ({
   label,
   tabLabels,
   cardData,
-  deleteCardDispatcher,
 }) => {
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState(null);
   const [anchorPop, setAnchorPop] = useState(null);
@@ -75,6 +76,13 @@ const CardMenu = ({
   const handlePopover = () => {
     setAnchorPop(document.getElementById(cardId));
     setEdit(true);
+  };
+
+  const handleDelete = () => {
+    // if (label === '漢字') dispatch(deleteKanji(cardFormData));
+    // if (label === '語彙') dispatch(deleteVocab(cardFormData));
+    if (label === '文法') dispatch(deleteGrammar(front));
+    // if (label === 'reading') dispatch(deleteReading(cardFormData));
   };
 
   return (
@@ -148,7 +156,7 @@ const CardMenu = ({
           className="delete"
           onClick={() => {
             handleClose();
-            deleteCardDispatcher(front, cardId);
+            handleDelete();
           }}
         >
           <IconButton
@@ -165,12 +173,7 @@ const CardMenu = ({
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  deleteCardDispatcher: (card, cardId) =>
-    dispatch(deleteCard(card, cardId)),
-});
-
-export default connect(null, mapDispatchToProps)(CardMenu);
+export default CardMenu;
 
 CardMenu.propTypes = {
   cardId: PropTypes.string.isRequired,
@@ -183,5 +186,4 @@ CardMenu.propTypes = {
       PropTypes.number,
     ]),
   ).isRequired,
-  deleteCardDispatcher: PropTypes.func.isRequired,
 };
