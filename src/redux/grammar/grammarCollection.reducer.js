@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
+import { createSlice } from '@reduxjs/toolkit';
 
-import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
+// import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
 import grammarReducer from './grammar.reducer';
 import { deleteCard } from '../utils';
 
@@ -110,9 +111,43 @@ const GRAMMAR_DATA = {
 };
 
 const INITIAL_STATE = { ...GRAMMAR_DATA };
-const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case GrammarCollectionActionTypes.RATE_GRAMMAR:
+// const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
+//   switch (action.type) {
+//     case GrammarCollectionActionTypes.RATE_GRAMMAR:
+//       return {
+//         ...state,
+//         [action.payload.文法]: grammarReducer(
+//           ...[state[action.payload.文法]],
+//           action,
+//         ),
+//       };
+
+//     case GrammarCollectionActionTypes.ADD_GRAMMAR:
+//       return {
+//         ...state,
+//         [action.payload.文法]: grammarReducer({}, action),
+//       };
+
+//     case GrammarCollectionActionTypes.EDIT_GRAMMAR:
+//       return {
+//         ...state,
+//         [action.payload.文法]: grammarReducer(
+//           state[action.payload.文法],
+//           action,
+//         ),
+//       };
+//     case 'DELETE_CARD':
+//       return deleteCard(state, action.payload.card);
+//     default:
+//       return state;
+//   }
+// };
+
+const grammarCollectionSlice = createSlice({
+  name: 'grammarCollection',
+  initialState: INITIAL_STATE,
+  reducers: {
+    rateGrammar(state, action) {
       return {
         ...state,
         [action.payload.文法]: grammarReducer(
@@ -120,14 +155,14 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
           action,
         ),
       };
-
-    case GrammarCollectionActionTypes.ADD_GRAMMAR:
+    },
+    addGrammar(state = {}, action) {
       return {
         ...state,
         [action.payload.文法]: grammarReducer({}, action),
       };
-
-    case GrammarCollectionActionTypes.EDIT_GRAMMAR:
+    },
+    editGrammar(state, action) {
       return {
         ...state,
         [action.payload.文法]: grammarReducer(
@@ -135,11 +170,20 @@ const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
           action,
         ),
       };
-    case 'DELETE_CARD':
+    },
+    deleteCollectionCard(state, action) {
       return deleteCard(state, action.payload.card);
-    default:
-      return state;
-  }
-};
+    },
+  },
+});
 
-export default grammarCollectionReducer;
+export const {
+  rateGrammar,
+  addGrammar,
+  editGrammar,
+  deleteCollectionCard,
+} = grammarCollectionSlice.actions;
+
+export default grammarCollectionSlice.reducer;
+
+// export default grammarCollectionReducer;
