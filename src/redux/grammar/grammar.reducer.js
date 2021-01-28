@@ -5,6 +5,7 @@ const INITIAL_STATE = {};
 const grammarReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'RATE_GRAMMAR':
+      console.log(action);
       return {
         ...state,
         rating:

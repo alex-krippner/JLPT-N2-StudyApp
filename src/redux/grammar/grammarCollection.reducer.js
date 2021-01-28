@@ -150,10 +150,13 @@ const grammarCollectionSlice = createSlice({
     rateGrammar(state, action) {
       return {
         ...state,
-        [action.payload.文法]: grammarReducer(
-          ...[state[action.payload.文法]],
-          action,
-        ),
+        [action.payload.grammar]: {
+          ...state[action.payload.grammar],
+          rating:
+            action.payload.rating === state.rating
+              ? state.rating - 1
+              : action.payload.rating,
+        },
       };
     },
     addGrammar(state = {}, action) {
@@ -185,5 +188,3 @@ export const {
 } = grammarCollectionSlice.actions;
 
 export default grammarCollectionSlice.reducer;
-
-// export default grammarCollectionReducer;

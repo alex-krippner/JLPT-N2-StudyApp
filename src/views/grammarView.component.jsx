@@ -19,7 +19,7 @@ const GrammarView = () => {
     Object.values(state.grammarCollection),
   );
   const handleRate = (grammar, rating) => {
-    dispatch(rateGrammar(grammar, rating));
+    dispatch(rateGrammar({ grammar, rating }));
   };
 
   return (
