@@ -13,7 +13,7 @@ import {
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import FormTable from './formTable.component';
-import { CardFormContext } from '../../context/context';
+import CardFormContext from '../../context/context';
 
 import * as utils from '../../utils/utilitiesFunctions';
 

@@ -15,7 +15,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Input } from '@material-ui/core';
 
-import { CardFormContext } from '../../context/context';
+import CardFormContext from '../../context/context';
 
 const useStyles = makeStyles({
   container: {

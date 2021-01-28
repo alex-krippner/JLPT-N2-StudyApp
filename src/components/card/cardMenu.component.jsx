@@ -18,7 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardForm from '../cardForm/cardForm.component';
 import { deleteCard } from '../../redux/utils.actionCreator';
 
-import { CardFormContext } from '../../context/context';
+import CardFormContext from '../../context/context';
 
 const useStyles = makeStyles({
   root: {

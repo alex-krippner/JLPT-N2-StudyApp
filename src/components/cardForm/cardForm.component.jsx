@@ -10,7 +10,7 @@ import FormTabs from './formTabs.component';
 import CardFormHeader from './cardFormHeader.component';
 import CardFormButtons from './cardFormButtons.component';
 import cardFormReducer from './cardFormReducer';
-import { CardFormContext } from '../../context/context';
+import CardFormContext from '../../context/context';
 import {
   addKanji,
   editKanji,
