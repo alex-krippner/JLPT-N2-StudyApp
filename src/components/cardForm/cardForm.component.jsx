@@ -26,7 +26,7 @@ import {
 import {
   addReading,
   editReading,
-} from '../../redux/readingCollection/readingCollection.actionCreators';
+} from '../../redux/readingCollection/readingCollection.reducer';
 
 import { initCardFormProperties } from '../../utils/utilitiesFunctions';
 

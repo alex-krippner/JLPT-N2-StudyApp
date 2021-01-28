@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import SliderContainer from '../components/containers/sliderContainer.component';
-import { rateReading } from '../redux/readingCollection/readingCollection.actionCreators';
+import { rateReading } from '../redux/readingCollection/readingCollection.reducer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -19,8 +19,8 @@ const ReadingView = () => {
     Object.values(state.readingCollection),
   );
 
-  const handleRate = (reading, rating) => {
-    dispatch(rateReading(reading, rating));
+  const handleRate = (readingId, rating) => {
+    dispatch(rateReading({ readingId, rating }));
   };
   return (
     <Wrapper>

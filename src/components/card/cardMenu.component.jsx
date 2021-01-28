@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardForm from '../cardForm/cardForm.component';
 import { deleteGrammar } from '../../redux/grammar/grammarCollection.reducer';
 import { deleteKanji } from '../../redux/kanjiCollection/kanjiCollection.reducer';
+import { deleteReading } from '../../redux/readingCollection/readingCollection.reducer';
 
 import { CardFormContext } from '../../context/context';
 
@@ -83,7 +84,7 @@ const CardMenu = ({
     if (label === '漢字') dispatch(deleteKanji(front));
     // if (label === '語彙') dispatch(deleteVocab(cardFormData));
     if (label === '文法') dispatch(deleteGrammar(front));
-    // if (label === 'reading') dispatch(deleteReading(cardFormData));
+    if (label === 'reading') dispatch(deleteReading({ cardId }));
   };
 
   return (
