@@ -18,7 +18,7 @@ import {
 import {
   addVocab,
   editVocab,
-} from '../../redux/vocabCollection/vocabCollection.actionCreators';
+} from '../../redux/vocabCollection/vocabCollection.reducer';
 import {
   addGrammar,
   editGrammar,
