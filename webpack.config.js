@@ -19,6 +19,11 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader'],
       },
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(jpg|png|svg)$/,
         loader: 'image-webpack-loader',
         // Specify enforce: 'pre' to apply the loader
@@ -49,7 +54,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
   },
 
   // (2) The bundled source code files shall result in a bundle.js file in the /dist folder.
