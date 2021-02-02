@@ -9,9 +9,9 @@
         "allowJs": true,
         "jsx": "react",
         "sourceMap": true,
-        "outDir": "dist"
-    },
+        "outDir": "./dist/",
+        },
     "include": [
-        "src"
+        "./src/"
     ]
 }

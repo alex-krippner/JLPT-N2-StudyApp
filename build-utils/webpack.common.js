@@ -9,14 +9,12 @@ module.exports = {
   module: {
     rules: [
       {
-        // Include Babel loader in build process on .js files; exclude the node modules folder
-        // Babel loader webpack configuration also requires Babel configuration see https://babeljs.io/docs/en/configuration
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader'],
-      },
+        test: /\.(ts|tsx)$/,
+        enforce: 'pre',
+        use: ['eslint', 'eslint-loader'],
+       },
       {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },

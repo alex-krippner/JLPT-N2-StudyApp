@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "node": true
@@ -6,10 +7,10 @@
   "globals": {
     "document": false
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": { "ecmaVersion": 8 },
 
-  "plugins": ["prettier", "react-hooks"],
+  "plugins": ["prettier", "react-hooks", "@typescript-eslint"],
   /*
    "plugin:prettier/recommended" does three things:
 
@@ -19,9 +20,10 @@
       
   */
   "extends": [
-    "airbnb",
+    "airbnb-typescript",
     "prettier",
     "prettier/react",
+    "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
   "rules": {
