@@ -1,7 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
-import ReadingCollectionActionTypes from './readingCollection.actionTypes';
-import readingReducer from './reading.reducer';
+import { createSlice } from '@reduxjs/toolkit';
 
 const READING_DATA = [
   {
@@ -29,25 +27,65 @@ const READING_DATA = [
 
 const INITIAL_STATE = READING_DATA;
 
-const readingCollectionReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case ReadingCollectionActionTypes.RATE_READING:
-      return state.map((reading) => readingReducer(reading, action));
-    case ReadingCollectionActionTypes.ADD_READING:
-      return [...state, readingReducer({}, action)];
-    case 'DELETE_CARD':
-      return state.filter((reading) => {
-        return reading.id !== action.payload.cardId;
+const readingCollectionSlice = createSlice({
+  name: 'readingCollection',
+  initialState: INITIAL_STATE,
+  reducers: {
+    rateReading(state, action) {
+      return state.map((reading) => {
+        return reading.id !== action.payload.readingId
+          ? reading
+          : {
+              ...reading,
+              rating:
+                action.payload.rating === reading.rating
+                  ? reading.rating - 1
+                  : action.payload.rating,
+            };
       });
-    case ReadingCollectionActionTypes.EDIT_READING:
+    },
+    addReading(state, action) {
+      return [
+        ...state,
+        {
+          cardType: 'reading',
+          id: uuidv4(),
+          passage: action.payload.passage,
+          question: [...action.payload.question],
+          choices: [...action.payload.choices],
+          solution: [...action.payload.solution],
+          rating: 0,
+        },
+      ];
+    },
+    editReading(state, action) {
       return state.map((reading) =>
         reading.id !== action.payload.id
           ? reading
-          : readingReducer(reading, action),
+          : {
+              cardType: 'reading',
+              id: uuidv4(),
+              passage: action.payload.passage,
+              question: [...action.payload.question],
+              choices: [...action.payload.choices],
+              solution: [...action.payload.solution],
+              rating: 0,
+            },
       );
-    default:
-      return state;
-  }
-};
+    },
+    deleteReading(state, action) {
+      return state.filter((reading) => {
+        return reading.id !== action.payload.cardId;
+      });
+    },
+  },
+});
 
-export default readingCollectionReducer;
+export const {
+  rateReading,
+  addReading,
+  editReading,
+  deleteReading,
+} = readingCollectionSlice.actions;
+
+export default readingCollectionSlice.reducer;

@@ -1,8 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
-import KanjiCollectionActionTypes from './kanjiCollection.actionTypes';
-import kanjiReducer from '../kanji/kanji.reducer';
-import { deleteCard } from '../utils';
+import { createSlice } from '@reduxjs/toolkit';
 
 const KANJI_DATA = {
   濯: {
@@ -123,34 +120,62 @@ const KANJI_DATA = {
 };
 
 const INITIAL_STATE = { ...KANJI_DATA };
-const kanjiCollectionReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case KanjiCollectionActionTypes.RATE_KANJI:
-      return {
-        ...state,
-        [action.payload.kanji]: kanjiReducer(
-          state[action.payload.kanji],
-          action,
-        ),
-      };
-    case KanjiCollectionActionTypes.ADD_KANJI:
-      return {
-        ...state,
-        [action.payload.漢字]: kanjiReducer({}, action),
-      };
-    case KanjiCollectionActionTypes.EDIT_KANJI:
-      return {
-        ...state,
-        [action.payload.漢字]: kanjiReducer(
-          state[action.payload.漢字],
-          action,
-        ),
-      };
-    case 'DELETE_CARD':
-      return deleteCard(state, action.payload.card);
-    default:
-      return state;
-  }
-};
 
-export default kanjiCollectionReducer;
+const kanjiCollectionSlice = createSlice({
+  name: 'kanjiCollection',
+  initialState: INITIAL_STATE,
+  reducers: {
+    rateKanji(state, action) {
+      return {
+        ...state,
+        [action.payload.kanji]: {
+          ...state[action.payload.kanji],
+          rating:
+            action.payload.rating ===
+            state[action.payload.kanji].rating
+              ? state.rating - 1
+              : action.payload.rating,
+        },
+      };
+    },
+    addKanji(state = {}, action) {
+      return {
+        ...state,
+        [action.payload.漢字]: {
+          cardType: 'kanji',
+          漢字: action.payload.漢字,
+          id: uuidv4(),
+          読み: [...action.payload.読み],
+          単語例: [...action.payload.単語例],
+          用例: [...action.payload.用例],
+          rating: 0,
+        },
+      };
+    },
+    editKanji(state, action) {
+      return {
+        ...state,
+        [action.payload.漢字]: {
+          ...action.payload,
+        },
+      };
+    },
+    deleteKanji(state, action) {
+      const {
+        [action.payload]: objectPropsToDelete,
+        ...remainingState
+      } = state;
+
+      return remainingState;
+    },
+  },
+});
+
+export const {
+  rateKanji,
+  addKanji,
+  editKanji,
+  deleteKanji,
+} = kanjiCollectionSlice.actions;
+
+export default kanjiCollectionSlice.reducer;

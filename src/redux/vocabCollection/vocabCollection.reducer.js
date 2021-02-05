@@ -1,8 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
-import VocabCollectionActionTypes from './vocabCollection.actionTypes';
-import vocabReducer from '../vocab/vocab.reducer';
-import { deleteCard } from '../utils';
+import { createSlice } from '@reduxjs/toolkit';
 
 const VOCAB_DATA = {
   あっ: {
@@ -103,37 +100,63 @@ const VOCAB_DATA = {
   },
 };
 
-const INITITAL_STATE = { ...VOCAB_DATA };
-const vocabCollectionReducer = (state = INITITAL_STATE, action) => {
-  switch (action.type) {
-    case VocabCollectionActionTypes.RATE_VOCAB:
+const INITIAL_STATE = { ...VOCAB_DATA };
+
+const vocabCollectionSlice = createSlice({
+  name: 'vocabCollection',
+  initialState: INITIAL_STATE,
+  reducers: {
+    rateVocab(state, action) {
       return {
         ...state,
-        [action.payload.kana]: vocabReducer(
-          ...[state[action.payload.kana]],
-          action,
-        ),
+        [action.payload.vocab]: {
+          ...state[action.payload.vocab],
+          rating:
+            action.payload.rating ===
+            state[action.payload.vocab].rating
+              ? state.rating - 1
+              : action.payload.rating,
+        },
       };
-    case VocabCollectionActionTypes.ADD_VOCAB:
+    },
+    addVocab(state = {}, action) {
       return {
         ...state,
-        [action.payload.語彙]: vocabReducer({}, action),
+        [action.payload.漢字]: {
+          cardType: 'kanji',
+          漢字: action.payload.漢字,
+          id: uuidv4(),
+          読み: [...action.payload.読み],
+          単語例: [...action.payload.単語例],
+          用例: [...action.payload.用例],
+          rating: 0,
+        },
       };
-
-    case VocabCollectionActionTypes.EDIT_VOCAB:
+    },
+    editVocab(state, action) {
       return {
         ...state,
-        [action.payload.語彙]: vocabReducer(
-          state[action.payload.語彙],
-          action,
-        ),
+        [action.payload.語彙]: {
+          ...action.payload,
+        },
       };
-    case 'DELETE_CARD':
-      return deleteCard(state, action.payload.card);
+    },
+    deleteVocab(state, action) {
+      const {
+        [action.payload]: objectPropsToDelete,
+        ...remainingState
+      } = state;
 
-    default:
-      return state;
-  }
-};
+      return remainingState;
+    },
+  },
+});
 
-export default vocabCollectionReducer;
+export const {
+  rateVocab,
+  addVocab,
+  editVocab,
+  deleteVocab,
+} = vocabCollectionSlice.actions;
+
+export default vocabCollectionSlice.reducer;

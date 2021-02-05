@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import CardContainer from '../components/containers/CardContainer.component';
-import { rateVocab } from '../redux/vocabCollection/vocabCollection.actionCreators';
+import { rateVocab } from '../redux/vocabCollection/vocabCollection.reducer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -18,7 +18,7 @@ const VocabView = () => {
     Object.values(state.vocabCollection),
   );
   const handleRate = (vocab, rating) => {
-    dispatch(rateVocab(vocab, rating));
+    dispatch(rateVocab({ vocab, rating }));
   };
 
   return (

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import SliderContainer from '../components/containers/sliderContainer.component';
-import { rateGrammar } from '../redux/grammar/grammarCollection.actionCreators';
+import { rateGrammar } from '../redux/grammar/grammarCollection.reducer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -18,7 +18,7 @@ const GrammarView = () => {
     Object.values(state.grammarCollection),
   );
   const handleRate = (grammar, rating) => {
-    dispatch(rateGrammar(grammar, rating));
+    dispatch(rateGrammar({ grammar, rating }));
   };
 
   return (

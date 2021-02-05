@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import CardContainer from '../components/containers/CardContainer.component';
-import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.actionCreators';
+import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.reducer';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -17,8 +17,8 @@ const KanjiView = () => {
   const kanjiState = useSelector((state) =>
     Object.values(state.kanjiCollection),
   );
-  const handleRate = (grammar, rating) => {
-    dispatch(rateKanji(grammar, rating));
+  const handleRate = (kanji, rating) => {
+    dispatch(rateKanji({ kanji, rating }));
   };
   return (
     <Wrapper>

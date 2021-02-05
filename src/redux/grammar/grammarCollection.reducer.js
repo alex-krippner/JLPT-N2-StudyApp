@@ -1,8 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
-import GrammarCollectionActionTypes from './grammarCollection.actionTypes';
-import grammarReducer from './grammar.reducer';
-import { deleteCard } from '../utils';
+import { createSlice } from '@reduxjs/toolkit';
 
 const GRAMMAR_DATA = {
   としたら: {
@@ -110,36 +107,63 @@ const GRAMMAR_DATA = {
 };
 
 const INITIAL_STATE = { ...GRAMMAR_DATA };
-const grammarCollectionReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case GrammarCollectionActionTypes.RATE_GRAMMAR:
+
+const grammarCollectionSlice = createSlice({
+  name: 'grammarCollection',
+  initialState: INITIAL_STATE,
+  reducers: {
+    rateGrammar(state, action) {
       return {
         ...state,
-        [action.payload.文法]: grammarReducer(
-          ...[state[action.payload.文法]],
-          action,
-        ),
+        [action.payload.grammar]: {
+          ...state[action.payload.grammar],
+          rating:
+            action.payload.rating ===
+            state[action.payload.grammar].rating
+              ? state.rating - 1
+              : action.payload.rating,
+        },
       };
-
-    case GrammarCollectionActionTypes.ADD_GRAMMAR:
+    },
+    addGrammar(state = {}, action) {
       return {
         ...state,
-        [action.payload.文法]: grammarReducer({}, action),
+        [action.payload.文法]: {
+          cardType: 'grammar',
+          id: uuidv4(),
+          文法: action.payload.文法,
+          variations: [...action.payload.variations],
+          意味: [...action.payload.意味],
+          接続: [...action.payload.接続],
+          用例: [...action.payload.用例],
+          rating: 0,
+        },
       };
-
-    case GrammarCollectionActionTypes.EDIT_GRAMMAR:
+    },
+    editGrammar(state, action) {
       return {
         ...state,
-        [action.payload.文法]: grammarReducer(
-          state[action.payload.文法],
-          action,
-        ),
+        [action.payload.文法]: {
+          ...action.payload,
+        },
       };
-    case 'DELETE_CARD':
-      return deleteCard(state, action.payload.card);
-    default:
-      return state;
-  }
-};
+    },
+    deleteGrammar(state, action) {
+      const {
+        [action.payload]: objectPropsToDelete,
+        ...remainingState
+      } = state;
 
-export default grammarCollectionReducer;
+      return remainingState;
+    },
+  },
+});
+
+export const {
+  rateGrammar,
+  addGrammar,
+  editGrammar,
+  deleteGrammar,
+} = grammarCollectionSlice.actions;
+
+export default grammarCollectionSlice.reducer;
