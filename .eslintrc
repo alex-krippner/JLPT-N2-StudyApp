@@ -8,7 +8,10 @@
     "document": false
   },
   "parser": "@typescript-eslint/parser",
-  "parserOptions": { "ecmaVersion": 8 },
+  "parserOptions": { 
+    "project": "./tsconfig.json",
+    "ecmaVersion": 8
+  },
 
   "plugins": ["prettier", "react-hooks", "@typescript-eslint"],
   /*
@@ -33,7 +36,7 @@
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-filename-extension": [
       1,
-      { "extensions": [".js", ".jsx"] }
+      { "extensions": [".js", ".jsx", ".tsx"] }
     ],
     "react/prop-types": 0
   }

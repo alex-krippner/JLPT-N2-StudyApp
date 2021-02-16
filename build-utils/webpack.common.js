@@ -3,16 +3,16 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin')
+
+const options = {
+  overrideConfigFile: path.resolve(__dirname, '..', '.eslintrc')
+}
 
 module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.js'),
   module: {
-    rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        enforce: 'pre',
-        use: ['eslint', 'eslint-loader'],
-       },
+    rules: [ 
       {
         test: /\.(t|j)sx?$/,
         use: 'ts-loader',
@@ -55,6 +55,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
+    new ESLintPlugin(options),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', './src/index.html'),
