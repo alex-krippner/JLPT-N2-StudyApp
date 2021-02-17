@@ -5,7 +5,7 @@ import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
-import Rating from '../rating.component';
+import Rating from '../Rating';
 import GramReadTabpanel from './gramReadTabPanel.component';
 import { cardReadingGramStyles } from '../../theme/styledComponents';
 

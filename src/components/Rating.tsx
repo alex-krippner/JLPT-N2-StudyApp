@@ -2,7 +2,14 @@ import * as React from 'react';
 
 import DarumaIcon from '../../assets/img/darumaIcon';
 
-const Rating = ({ selected = false, onClick }) => {
+type Props = {
+  selected?: boolean;
+  onClick: (
+    callback: Function,
+  ) => (label: string, ratingIndex: number) => void;
+};
+// { selected = false, onClick }
+const Rating = ({ selected = false, onClick }: Props) => {
   let colorOutline;
   let colorEye;
   let colorEyeOutline;

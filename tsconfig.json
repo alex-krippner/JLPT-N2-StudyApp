@@ -10,9 +10,10 @@
         "jsx": "react",
         "sourceMap": true,
         "outDir": "./dist/",
+        "noImplicitAny": true,
         },
     "include": [
         "./src/",
     ],
-    "exclude": ["./build-utils/"]
+    "exclude": ["build-utils"]
 }
