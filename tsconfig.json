@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "moduleResolution": "node",
         "target": "ES5",
         "lib": ["ES5", "DOM"],
         // this project is bundled with webpack, for which

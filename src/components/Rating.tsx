@@ -5,7 +5,7 @@ import DarumaIcon from '../../assets/img/darumaIcon';
 type Props = {
   selected?: boolean;
   onClick: (
-    callback: Function,
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => (label: string, ratingIndex: number) => void;
 };
 // { selected = false, onClick }
