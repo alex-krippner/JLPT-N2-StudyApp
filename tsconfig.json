@@ -13,7 +13,6 @@
         "noImplicitAny": true,
         },
     "include": [
-        "./src/",
+        "src",
     ],
-    "exclude": ["build-utils"]
 }

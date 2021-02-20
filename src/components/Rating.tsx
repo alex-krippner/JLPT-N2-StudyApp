@@ -10,9 +10,9 @@ type Props = {
 };
 // { selected = false, onClick }
 const Rating = ({ selected = false, onClick }: Props) => {
-  let colorOutline;
-  let colorEye;
-  let colorEyeOutline;
+  let colorOutline: string;
+  let colorEye: string;
+  let colorEyeOutline: string;
 
   if (selected) {
     colorOutline = '#c13a3a';

@@ -1,18 +1,16 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const options = {
-  overrideConfigFile: path.resolve(__dirname, '..', '.eslintrc')
-}
+  overrideConfigFile: path.resolve(__dirname, '..', '.eslintrc'),
+};
 
 module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.js'),
   module: {
-    rules: [ 
+    rules: [
       {
         test: /\.(t|j)sx?$/,
         use: 'ts-loader',
