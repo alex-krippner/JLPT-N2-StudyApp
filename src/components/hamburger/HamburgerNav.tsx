@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,10 +11,13 @@ const useStyles = makeStyles({
   },
 });
 
-const HamburgerNav = (props) => {
-  const classes = useStyles();
+type HamburgerNavProps = {
+  open: boolean;
+  handleOpen: React.MouseEventHandler;
+};
 
-  const { open, handleOpen } = props;
+const HamburgerNav = ({ open, handleOpen }: HamburgerNavProps) => {
+  const classes = useStyles();
 
   return (
     <Drawer
@@ -27,11 +29,6 @@ const HamburgerNav = (props) => {
       <NavLinkList />
     </Drawer>
   );
-};
-
-HamburgerNav.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleOpen: PropTypes.func.isRequired,
 };
 
 export default HamburgerNav;

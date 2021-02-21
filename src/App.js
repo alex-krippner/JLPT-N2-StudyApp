@@ -7,8 +7,8 @@ import FlyingCharsBackground from './components/backgroundAnimation.component';
 import GlobalStyle from './theme/globalStyle';
 
 import hero from '../assets/img/hero.svg';
-import Hamburger from './components/hamburger/hamburger.component';
-import HamburgerNav from './components/hamburger/hamburgerNav.component';
+import Hamburger from './components/hamburger/Hamburger';
+import HamburgerNav from './components/hamburger/HamburgerNav';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const App = () => {
       <FlyingCharsBackground iconSize="5rem" />
       <GlobalStyle />
       <Sidebar />
-      <Hamburger open={open} handleOpen={handleOpen} />
+      <Hamburger handleOpen={handleOpen} />
       <HamburgerNav open={open} handleOpen={handleOpen} />
       <Main />
     </Wrapper>
