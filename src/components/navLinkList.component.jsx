@@ -7,11 +7,11 @@ import Button from '@material-ui/core/Button';
 
 import ListItemLink from './ListItemLink.component';
 
-import MonLogo from '../../assets/img/logoMonIcon';
-import VocabIcon from '../../assets/img/vocabIcon';
-import KanjiIcon from '../../assets/img/kanjiIcon';
-import ReadingIcon from '../../assets/img/readingIcon';
-import GrammarIcon from '../../assets/img/grammarIcon';
+import MonLogo from '../../assets/img/LogoMonIcon';
+import VocabIcon from '../../assets/img/VocabIcon';
+import KanjiIcon from '../../assets/img/KanjiIcon';
+import ReadingIcon from '../../assets/img/ReadingIcon';
+import GrammarIcon from '../../assets/img/GrammarIcon';
 
 const useStyles = makeStyles({
   portfolioLink: {
