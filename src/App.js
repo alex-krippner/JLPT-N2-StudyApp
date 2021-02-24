@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Main from './layouts/main.component';
 import Sidebar from './layouts/sidebar.component';
-import FlyingCharsBackground from './components/backgroundAnimation.component';
+import FlyingCharsBackground from './components/BackgroundAnimation';
 import GlobalStyle from './theme/globalStyle';
 
 import hero from '../assets/img/hero.svg';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -35,9 +35,14 @@ const Image = styled(motion.div)`
   overflow: visible;
 `;
 
+type FlyingCharBackgroundProps = {
+  iconSize: string;
+};
+
 const useStyles = makeStyles(() => ({
   iconChar: {
-    fontSize: (props) => `${props.iconSize}`,
+    fontSize: (props: FlyingCharBackgroundProps) =>
+      `${props.iconSize}`,
     position: 'absolute',
   },
 }));
@@ -60,7 +65,7 @@ const imgArray = [
   TenguImage,
 ];
 
-const FlyingCharBackground = (props) => {
+const FlyingCharBackground = (props: FlyingCharBackgroundProps) => {
   const classes = useStyles(props);
 
   return (
@@ -81,8 +86,8 @@ const FlyingCharBackground = (props) => {
             ease: 'easeOut',
             duration: 30,
             repeat: Infinity,
-            repeatType: 'infinity',
-            delay: `${Math.floor(Math.random() * 10)}`,
+            repeatType: 'loop',
+            delay: Math.floor(Math.random() * 10),
           }}
         >
           <Icon className={classes.iconChar}>
