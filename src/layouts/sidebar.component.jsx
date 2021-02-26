@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import styled from 'styled-components';
-import NavLinkList from '../components/navLinkList.component';
+import NavLinkList from '../components/NavLinkList.component';
 
 const Wrapper = styled.div`
   display: flex;

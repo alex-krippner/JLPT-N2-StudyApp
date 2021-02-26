@@ -6,13 +6,13 @@
         // this project is bundled with webpack, for which
         // webpack docs and programming literature suggests 
         // setting module to 'ES2015'
-        "module": "ES2015",
+        "module": "es6",
         "allowJs": true,
         "jsx": "react",
         "sourceMap": true,
         "outDir": "./dist/",
-        "noImplicitAny": true,
-        "esModuleInterop": true
+        "noImplicitAny": true, 
+        "esModuleInterop": true,
         },
     "include": [
         "src", "assets", "types.ts"
