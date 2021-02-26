@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from './cardMenu.component';
 import Rating from '../Rating';
-import GramReadTabpanel from './gramReadTabPanel.component';
+import GramReadTabpanel from './GramReadTabPanel.component';
 import { cardReadingGramStyles } from '../../theme/styledComponents';
 
 import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
