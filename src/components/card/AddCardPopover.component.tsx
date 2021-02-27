@@ -36,7 +36,23 @@ const useStyles = makeStyles({
   },
 });
 
-const AddCardPopover = ({ tabLabels, label, cardData, cardType }) => {
+type AddCardPopoverProps = {
+  tabLabels: string[];
+  label: string;
+  cardType: string;
+  cardData:
+    | KanjiCardData
+    | VocabCardData
+    | GrammarCardData
+    | ReadingCardData;
+};
+
+const AddCardPopover = ({
+  tabLabels,
+  label,
+  cardData,
+  cardType,
+}: AddCardPopoverProps) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -54,10 +70,9 @@ const AddCardPopover = ({ tabLabels, label, cardData, cardType }) => {
   return (
     <div>
       <IconButton
-        variant="contained"
         color="primary"
         className={classes.button}
-        onClick={(event) => handleClick(event)}
+        onClick={() => handleClick()}
       >
         <AddToPhotosIcon className={classes.addIcon} />
       </IconButton>

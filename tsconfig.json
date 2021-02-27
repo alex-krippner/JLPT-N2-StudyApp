@@ -15,6 +15,6 @@
         "esModuleInterop": true,
         },
     "include": [
-        "src", "assets", "types.ts"
+        "src", "assets", "types.d.ts"
     ],
 }

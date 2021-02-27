@@ -10,7 +10,7 @@ import 'swiper/components/pagination/pagination.scss';
 import CardGrammar from '../card/cardGrammar.component';
 import CardReading from '../card/cardReading.component';
 import { deleteCard } from '../../redux/utils.actionCreator';
-import AddCardPopover from '../card/addCardPopover.component';
+import AddCardPopover from '../card/AddCardPopover.component';
 
 const SliderContainerStyled = styled.div`
   display: flex;
