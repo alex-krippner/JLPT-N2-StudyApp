@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
@@ -40,11 +39,7 @@ type AddCardPopoverProps = {
   tabLabels: string[];
   label: string;
   cardType: string;
-  cardData:
-    | KanjiCardData
-    | VocabCardData
-    | GrammarCardData
-    | ReadingCardData;
+  cardData: CardDataType;
 };
 
 const AddCardPopover = ({
@@ -104,16 +99,3 @@ const AddCardPopover = ({
 };
 
 export default AddCardPopover;
-
-AddCardPopover.propTypes = {
-  label: PropTypes.string.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cardData: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-    ]),
-  ).isRequired,
-};

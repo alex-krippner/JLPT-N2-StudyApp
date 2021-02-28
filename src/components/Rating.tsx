@@ -8,7 +8,6 @@ type Props = {
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
   ) => (label: string, ratingIndex: number) => void;
 };
-// { selected = false, onClick }
 const Rating = ({ selected = false, onClick }: Props) => {
   let colorOutline: string;
   let colorEye: string;

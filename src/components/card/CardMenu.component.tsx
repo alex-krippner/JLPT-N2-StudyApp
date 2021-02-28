@@ -44,6 +44,16 @@ const useStyles = makeStyles({
   },
 });
 
+type CardMenuProps = {
+  front: string;
+  cardId: string;
+  cardFormData: undefined | CardDataType;
+  formDispatcher: undefined | Function;
+  label: string;
+  tabLabels: string[];
+  cardData: CardDataType;
+};
+
 const CardMenu = ({
   front,
   cardId,
@@ -52,7 +62,7 @@ const CardMenu = ({
   label,
   tabLabels,
   cardData,
-}) => {
+}: CardMenuProps) => {
   const dispatch = useDispatch();
 
   const classes = useStyles();
@@ -61,7 +71,7 @@ const CardMenu = ({
   const [edit, setEdit] = useState(null);
   const openPop = Boolean(anchorPop);
   const openMenu = Boolean(anchorMenu);
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent) => {
     setAnchorMenu(event.currentTarget);
   };
 
@@ -119,11 +129,7 @@ const CardMenu = ({
             handlePopover();
           }}
         >
-          <IconButton
-            variant="contained"
-            color="primary"
-            className="edit"
-          >
+          <IconButton color="primary" className="edit">
             <EditIcon className={classes.icon} />
           </IconButton>
         </MenuItem>
@@ -162,12 +168,7 @@ const CardMenu = ({
             handleDelete();
           }}
         >
-          <IconButton
-            variant="contained"
-            color="secondary"
-            edge="end"
-            className="bin"
-          >
+          <IconButton color="secondary" edge="end" className="bin">
             <DeleteIcon className={classes.icon} />
           </IconButton>
         </MenuItem>

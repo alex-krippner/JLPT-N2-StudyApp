@@ -3,21 +3,21 @@ declare module '*.png' {
   export = value;
 }
 
-interface CardData {
+interface CardDataBaseTypeMap {
   cardType: string;
   id: string;
   rating: null | number;
   'new entry'?: string;
 }
 
-interface KanjiCardData extends CardData {
+interface KanjiCardData extends CardDataBaseTypeMap {
   単語例: string[];
   漢字: string;
   用例: string[];
   読み: string[];
 }
 
-interface VocabCardData extends CardData {
+interface VocabCardData extends CardDataBaseTypeMap {
   定義: string[];
   漢字: string[];
   用例: string[];
@@ -25,7 +25,7 @@ interface VocabCardData extends CardData {
   語類: string[];
 }
 
-interface GrammarCardData extends CardData {
+interface GrammarCardData extends CardDataBaseTypeMap {
   variations: string[];
   意味: string[];
   接続: string[];
@@ -33,9 +33,15 @@ interface GrammarCardData extends CardData {
   用例: string[];
 }
 
-interface ReadingCardData extends CardData {
+interface ReadingCardData extends CardDataBaseTypeMap {
   choices: string[];
   passage: string[];
   question: string[];
   solution: string[];
 }
+
+type CardDataType =
+  | KanjiCardData
+  | VocabCardData
+  | GrammarCardData
+  | ReadingCardData;

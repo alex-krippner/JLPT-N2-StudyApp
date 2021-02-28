@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import CardMenu from './cardMenu.component';
+import CardMenu from './CardMenu.component';
 import Rating from '../Rating';
 import { cardKanjiVocabStyles } from '../../theme/styledComponents';
 import * as utils from '../../utils/utilitiesFunctions';
