@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
-import Card from '../card/card.component';
+import Card from '../card/Card.component';
 import CardForm from '../cardForm/cardForm.component';
 import { CardsContainerStyled } from '../../theme/styledComponents';
 

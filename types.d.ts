@@ -2,7 +2,7 @@ declare module '*.png' {
   const value: any;
   export = value;
 }
-
+// Indexed Access Types or maps
 interface CardDataBaseTypeMap {
   cardType: string;
   id: string;
@@ -40,8 +40,13 @@ interface ReadingCardData extends CardDataBaseTypeMap {
   solution: string[];
 }
 
-type CardDataType =
-  | KanjiCardData
-  | VocabCardData
-  | GrammarCardData
-  | ReadingCardData;
+type CardDataType = KanjiCardData &
+  VocabCardData &
+  GrammarCardData &
+  ReadingCardData;
+
+type CardDataKeys =
+  | keyof KanjiCardData
+  | keyof VocabCardData
+  | keyof GrammarCardData
+  | keyof ReadingCardData;

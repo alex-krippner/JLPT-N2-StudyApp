@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
-
 import CardMenu from './CardMenu.component';
 import Rating from '../Rating';
 import { cardKanjiVocabStyles } from '../../theme/styledComponents';
@@ -16,8 +14,17 @@ const {
   RatingContainer,
 } = cardKanjiVocabStyles;
 
-const FrontContent = ({ cardData }) =>
-  cardData.cardType === 'kanji' ? cardData.漢字 : cardData.語彙;
+type CardProps = {
+  cardData: CardDataType;
+  onRate: (
+    label: string[] | string | number | null | (string & string[]),
+    ratingIndex: number,
+  ) => void;
+  tabLabels: string[];
+  cardFormData: CardDataType;
+  formDispatcher: Function;
+  label: CardDataKeys;
+};
 
 const Card = ({
   cardData,
@@ -26,10 +33,12 @@ const Card = ({
   cardFormData,
   formDispatcher,
   label,
-}) => {
+}: CardProps) => {
   const cardToFlip = useRef(null);
 
-  const handleFlip = (cardRef) => {
+  const handleFlip = (
+    cardRef: React.MutableRefObject<any> | null,
+  ) => {
     const { current } = cardRef;
 
     if (!current.style.transform) {
@@ -63,7 +72,13 @@ const Card = ({
             />
 
             <FrontDataSmall onClick={() => handleFlip(cardToFlip)}>
-              <FrontContent cardData={cardData} />
+              <div>
+                {cardData.cardType === 'kanji'
+                  ? cardData.漢字
+                  : cardData.cardType === 'vocab'
+                  ? cardData.語彙
+                  : ''}
+              </div>{' '}
             </FrontDataSmall>
           </Front>
           <RatingContainer>
@@ -82,7 +97,7 @@ const Card = ({
           onClick={() => handleFlip(cardToFlip)}
           className="card-side"
         >
-          {tabLabels.map((tabLabel, idx) => {
+          {tabLabels.map((tabLabel: CardDataKeys, idx) => {
             return (
               <BackSectionSmall
                 key={tabLabel}
@@ -92,7 +107,7 @@ const Card = ({
                 <div className="top">{tabLabel}</div>
                 <div className="bottom">
                   <div className="sentenceWrapper">
-                    {cardData[tabLabel].map((el) => (
+                    {[cardData[tabLabel]].map((el: string) => (
                       <div className="paragraph" key={el}>
                         <span className="dot">&nbsp;</span>
                         <div>{el}</div>
@@ -112,16 +127,3 @@ const Card = ({
 export default React.memo(Card, (prevProps, nextProps) =>
   utils.compareProps(prevProps, nextProps),
 );
-
-Card.propTypes = {
-  cardData: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-    ]),
-  ).isRequired,
-  onRate: PropTypes.func.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  label: PropTypes.string.isRequired,
-};

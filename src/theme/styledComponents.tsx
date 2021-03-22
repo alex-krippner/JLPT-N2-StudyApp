@@ -1,11 +1,24 @@
 import styled from 'styled-components';
 
+type StyledProps = {
+  cardType?: string;
+  front?: boolean | string;
+  back?: boolean | string;
+  fontSize?: string;
+  grammar?: string;
+  section?: number;
+  labelNum?: number;
+  blur?: boolean;
+  tabLabel?: string;
+  visible?: boolean;
+};
+
 const CardScene = styled.div`
   height: 90%;
   width: 85rem;
 `;
 
-const CardSceneSmall = styled.div`
+const CardSceneSmall = styled.div<StyledProps>`
   height: ${(props) =>
     props.cardType === 'vocab' ? '45rem' : '40rem'};
   perspective: 200rem;
@@ -73,12 +86,12 @@ const CardSideLarge = styled.div`
   }
 `;
 
-const CardSideSmall = styled.div.attrs((props) => ({
+const CardSideSmall = styled.div.attrs((props: StyledProps) => ({
   fontSize:
     props.cardType === 'vocab'
       ? 'var(--font-size-large)'
       : 'var(--font-size-huge)',
-}))`
+}))<StyledProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -159,7 +172,7 @@ const Front = styled.div`
   }
 `;
 
-const FrontData = styled.div`
+const FrontData = styled.div<StyledProps>`
   display: flex;
   align-items: ${(props) => (props.grammar ? 'center' : '')};
   text-align: ${(props) => (props.grammar ? '' : 'center')};
@@ -187,10 +200,10 @@ const RatingContainer = styled.div`
   height: 10%;
 `;
 
-const BackSection = styled.section.attrs((props) => ({
+const BackSection = styled.section.attrs((props: StyledProps) => ({
   borderBottom: () =>
     props.section < props.labelNum - 1 ? 'solid 1px' : '',
-}))`
+}))<StyledProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -201,10 +214,12 @@ const BackSection = styled.section.attrs((props) => ({
   height: ${(props) => (props.section === 1 ? '20%' : '40%')};
 `;
 
-const BackSectionSmall = styled.section.attrs((props) => ({
-  borderBottom: () =>
-    props.section < props.labelNum - 1 ? 'solid 1px' : '',
-}))`
+const BackSectionSmall = styled.section.attrs(
+  (props: StyledProps) => ({
+    borderBottom: () =>
+      props.section < props.labelNum - 1 ? 'solid 1px' : '',
+  }),
+)<StyledProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -222,7 +237,7 @@ const Top = styled.div`
   color: var(--color-primary-light);
 `;
 
-const Bottom = styled.div`
+const Bottom = styled.div<StyledProps>`
   flex: 0 0 80%
   justify-content: center;
   width: 100%;  
@@ -317,28 +332,30 @@ export const WrapperMain = styled.div`
   }
 `;
 
-export const CardFormStyled = styled.div.attrs((props) => ({
-  height:
-    props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '75vh'
-      : '45rem',
-  width:
-    props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '75vw'
-      : 'var(--width-cardForm)',
-  cardTitleTop:
-    props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '5px'
-      : 'var(--top-cardTitle)',
-  cardTitleLeft:
-    props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '5px'
-      : 'var(--left-cardTitle)',
-  cardTitleWidth:
-    props.cardType === 'grammar' || props.cardType === 'reading'
-      ? '25%'
-      : '50%',
-}))`
+export const CardFormStyled = styled.div.attrs(
+  (props: StyledProps) => ({
+    height:
+      props.cardType === 'grammar' || props.cardType === 'reading'
+        ? '75vh'
+        : '45rem',
+    width:
+      props.cardType === 'grammar' || props.cardType === 'reading'
+        ? '75vw'
+        : 'var(--width-cardForm)',
+    cardTitleTop:
+      props.cardType === 'grammar' || props.cardType === 'reading'
+        ? '5px'
+        : 'var(--top-cardTitle)',
+    cardTitleLeft:
+      props.cardType === 'grammar' || props.cardType === 'reading'
+        ? '5px'
+        : 'var(--left-cardTitle)',
+    cardTitleWidth:
+      props.cardType === 'grammar' || props.cardType === 'reading'
+        ? '25%'
+        : '50%',
+  }),
+)<StyledProps>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

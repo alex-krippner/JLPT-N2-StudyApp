@@ -45,7 +45,7 @@ const useStyles = makeStyles({
 });
 
 type CardMenuProps = {
-  front: string;
+  front: string | number | string[] | (string & string[]);
   cardId: string;
   cardFormData: undefined | CardDataType;
   formDispatcher: undefined | Function;

@@ -6,7 +6,7 @@ type Props = {
   selected?: boolean;
   onClick: (
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
-  ) => (label: string, ratingIndex: number) => void;
+  ) => void;
 };
 const Rating = ({ selected = false, onClick }: Props) => {
   let colorOutline: string;
