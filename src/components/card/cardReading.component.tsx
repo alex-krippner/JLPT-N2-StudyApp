@@ -56,18 +56,25 @@ const CardReading = ({
   cardFormData,
   formDispatcher,
   label,
-}) => {
+}: CardProps) => {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
   const [visible, setVisibility] = useState(false);
   const [blur, setBlur] = useState(false);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (
+    event: React.MouseEvent,
+    newValue: number,
+  ) => {
     setValue(newValue);
   };
 
-  const handleVisibility = (e, index, arrayLength) => {
+  const handleVisibility = (
+    event: React.MouseEvent,
+    index: number,
+    arrayLength: number,
+  ) => {
     if (index !== arrayLength - 1) return;
 
     setVisibility(!visible);
@@ -75,7 +82,7 @@ const CardReading = ({
   };
 
   return (
-    <CardScene cardType={cardData.cardType}>
+    <CardScene>
       <Paper
         square={false}
         className={classes.paper}
@@ -125,16 +132,11 @@ const CardReading = ({
                 label={label}
                 tabLabels={tabLabels}
                 cardData={cardData}
-                className={classes.cardMenu}
               />
             </Grid>
           </Grid>
           <GramReadTabpanel value={value} index={0}>
-            <CardSideLarge
-              front
-              cardType={cardData.cardType}
-              className="card-side"
-            >
+            <CardSideLarge>
               <Front>
                 <FrontData>
                   <Passage>{cardData.passage}</Passage>
@@ -156,13 +158,8 @@ const CardReading = ({
             </CardSideLarge>
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
-            <CardSideLarge
-              back
-              className="card-side"
-              hidden={value !== 1}
-              value={value}
-            >
-              {tabLabels.map((tabLabel, idx) =>
+            <CardSideLarge>
+              {tabLabels.map((tabLabel: CardDataKeys, idx) =>
                 tabLabel === 'passage' ? (
                   ''
                 ) : (
@@ -193,16 +190,18 @@ const CardReading = ({
                     >
                       <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
-                          {cardData[tabLabel].map((el, i) => (
-                            <div className="paragraph" key={el}>
-                              {idx === 0 ? (
-                                ''
-                              ) : (
-                                <span>{i + 1}.&nbsp;</span>
-                              )}
-                              <div>{el}</div>
-                            </div>
-                          ))}
+                          {[cardData[tabLabel]].map(
+                            (el: string, i) => (
+                              <div className="paragraph" key={el}>
+                                {idx === 0 ? (
+                                  ''
+                                ) : (
+                                  <span>{i + 1}.&nbsp;</span>
+                                )}
+                                <div>{el}</div>
+                              </div>
+                            ),
+                          )}
                         </div>
                       </div>
                     </Bottom>

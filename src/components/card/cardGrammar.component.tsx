@@ -42,18 +42,6 @@ const useStyles = makeStyles({
   },
 });
 
-type CardGrammarProps = {
-  cardData: CardDataType;
-  onRate: (
-    label: string[] | string | number | null | (string & string[]),
-    ratingIndex: number,
-  ) => void;
-  tabLabels: string[];
-  cardFormData: CardDataType;
-  formDispatcher: Function;
-  label: CardDataKeys;
-};
-
 const CardGrammar = ({
   cardData,
   onRate,
@@ -61,7 +49,7 @@ const CardGrammar = ({
   cardFormData,
   formDispatcher,
   label,
-}: CardGrammarProps) => {
+}: CardProps) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 

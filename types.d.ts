@@ -50,3 +50,15 @@ type CardDataKeys =
   | keyof VocabCardData
   | keyof GrammarCardData
   | keyof ReadingCardData;
+
+type CardProps = {
+  cardData: CardDataType;
+  onRate: (
+    label: string[] | string | number | null | (string & string[]),
+    ratingIndex: number,
+  ) => void;
+  tabLabels: string[];
+  cardFormData: CardDataType;
+  formDispatcher: Function;
+  label: CardDataKeys;
+};

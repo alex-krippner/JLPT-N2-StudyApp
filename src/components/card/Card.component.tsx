@@ -14,18 +14,6 @@ const {
   RatingContainer,
 } = cardKanjiVocabStyles;
 
-type CardProps = {
-  cardData: CardDataType;
-  onRate: (
-    label: string[] | string | number | null | (string & string[]),
-    ratingIndex: number,
-  ) => void;
-  tabLabels: string[];
-  cardFormData: CardDataType;
-  formDispatcher: Function;
-  label: CardDataKeys;
-};
-
 const Card = ({
   cardData,
   onRate,
