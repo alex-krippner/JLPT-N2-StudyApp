@@ -42,6 +42,18 @@ const useStyles = makeStyles({
   },
 });
 
+type CardGrammarProps = {
+  cardData: CardDataType;
+  onRate: (
+    label: string[] | string | number | null | (string & string[]),
+    ratingIndex: number,
+  ) => void;
+  tabLabels: string[];
+  cardFormData: CardDataType;
+  formDispatcher: Function;
+  label: CardDataKeys;
+};
+
 const CardGrammar = ({
   cardData,
   onRate,
@@ -49,16 +61,19 @@ const CardGrammar = ({
   cardFormData,
   formDispatcher,
   label,
-}) => {
+}: CardGrammarProps) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (
+    event: React.MouseEvent,
+    newValue: number,
+  ) => {
     setValue(newValue);
   };
 
   return (
-    <CardScene cardType={cardData.cardType}>
+    <CardScene>
       <Paper
         square={false}
         className={classes.paper}
@@ -111,16 +126,11 @@ const CardGrammar = ({
                 label={label}
                 tabLabels={tabLabels}
                 cardData={cardData}
-                className={classes.cardMenu}
               />
             </Grid>
           </Grid>
           <GramReadTabpanel value={value} index={0}>
-            <CardSideLarge
-              front
-              cardType={cardData.cardType}
-              className="card-side"
-            >
+            <CardSideLarge className="card-side">
               <Front>
                 <FrontData grammar>{cardData[label]} </FrontData>
               </Front>
@@ -142,13 +152,8 @@ const CardGrammar = ({
             </CardSideLarge>
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
-            <CardSideLarge
-              back
-              className="card-side"
-              hidden={value !== 1}
-              value={value}
-            >
-              {tabLabels.map((tabLabel, idx) => {
+            <CardSideLarge>
+              {tabLabels.map((tabLabel: CardDataKeys, idx) => {
                 return (
                   <BackSection
                     key={tabLabel}
@@ -159,22 +164,24 @@ const CardGrammar = ({
                     <Bottom className="bottom" section={idx}>
                       <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
-                          {cardData[tabLabel].map((el, i) => (
-                            <div className="paragraph" key={el}>
-                              {cardData[tabLabel].length === 0 ||
-                              cardData[tabLabel][0] === '' ? (
-                                <div>
-                                  Looks like there is no data for this
-                                  section...
-                                </div>
-                              ) : (
-                                <>
-                                  <span>{i + 1}.&nbsp;</span>
-                                  <div>{el}</div>
-                                </>
-                              )}
-                            </div>
-                          ))}
+                          {[cardData[tabLabel]].map(
+                            (el: string, i) => (
+                              <div className="paragraph" key={el}>
+                                {[cardData[tabLabel]].length === 0 ||
+                                [cardData[tabLabel]][0] === '' ? (
+                                  <div>
+                                    Looks like there is no data for
+                                    this section...
+                                  </div>
+                                ) : (
+                                  <>
+                                    <span>{i + 1}.&nbsp;</span>
+                                    <div>{el}</div>
+                                  </>
+                                )}
+                              </div>
+                            ),
+                          )}
                         </div>
                       </div>
                     </Bottom>

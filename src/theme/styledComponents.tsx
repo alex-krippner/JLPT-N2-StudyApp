@@ -5,7 +5,7 @@ type StyledProps = {
   front?: boolean | string;
   back?: boolean | string;
   fontSize?: string;
-  grammar?: string;
+  grammar?: boolean;
   section?: number;
   labelNum?: number;
   blur?: boolean;
