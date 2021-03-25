@@ -31,10 +31,13 @@ const useStyles = makeStyles({
   },
 });
 
-const FormTable = (props) => {
-  const { entries, entryKey } = props;
-  // debugger;
-  const classes = useStyles(props);
+type FormTableProps = {
+  entries: string[];
+  entryKey: string;
+};
+
+const FormTable = ({ entries, entryKey }: FormTableProps) => {
+  const classes = useStyles();
 
   // LOCAL STATE
   const [editIdx, setEditIdx] = useState(-1);
@@ -43,7 +46,7 @@ const FormTable = (props) => {
   const { dispatchFormAction } = useContext(CardFormContext);
 
   // remove entry input from table
-  const handleRemove = (key, entryIdx) => {
+  const handleRemove = (key: string, entryIdx: number) => {
     dispatchFormAction({
       type: 'REMOVE_ENTRY',
       key,
@@ -54,7 +57,7 @@ const FormTable = (props) => {
   // initiate edit for targeted entry input / table row
   // by setting the editIdx to the entry's array index
 
-  const startEdit = (entryIndex) => {
+  const startEdit = (entryIndex: number) => {
     setEditIdx(entryIndex);
   };
 
@@ -64,9 +67,11 @@ const FormTable = (props) => {
   };
 
   // submit/dispatch edited entry input / table row to card form reducer
-
-  const submitEdit = (key, entryIdx) => {
-    const { value } = document.getElementById('table-input');
+  // FIXME: Don't interact with DOM directly
+  const submitEdit = (key: string, entryIdx: number) => {
+    const { value } = document.getElementById(
+      'table-input',
+    ) as HTMLInputElement;
     dispatchFormAction({
       type: 'EDIT_ENTRY',
       value,

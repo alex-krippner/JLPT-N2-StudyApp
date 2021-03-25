@@ -12,7 +12,7 @@ import {
 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
-import FormTable from './formTable.component';
+import FormTable from './FormTable';
 import CardFormContext from '../../context/context';
 
 import * as utils from '../../utils/utilitiesFunctions';
@@ -272,7 +272,6 @@ const FormTabs = ({ tabLabels, cardData }: FormTabsProps) => {
             <FormTable
               entries={cardFormData[tabLabel]}
               entryKey={tabLabel}
-              height="100%"
             />
           )}
         </TabPanel>

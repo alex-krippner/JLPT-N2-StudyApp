@@ -7,8 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // LOCAL IMPORTS
 import FormTabs from './FormTabs';
-import CardFormHeader from './cardFormHeader.component';
-import CardFormButtons from './cardFormButtons.component';
+import CardFormHeader from './CardFormHeader';
+import CardFormButtons from './CardFormButtons';
 import cardFormReducer from './cardFormReducer';
 import CardFormContext from '../../context/context';
 import {

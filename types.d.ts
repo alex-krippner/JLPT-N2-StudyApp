@@ -62,3 +62,9 @@ type CardProps = {
   formDispatcher: Function;
   label: CardDataKeys;
 };
+
+type CardFormReducerData = {
+  type: string;
+  value: string;
+  label: string;
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -18,13 +18,21 @@ const useStyles = makeStyles({
   },
 });
 
+type CardFormHeaderProps = {
+  editing: boolean;
+  cardFormData: CardDataType;
+  cardType: string;
+  label: CardDataKeys;
+  handleChange: (event: React.ChangeEvent) => void;
+};
+
 const CardFormHeader = ({
   editing,
   cardFormData,
   cardType,
   label,
   handleChange,
-}) => {
+}: CardFormHeaderProps) => {
   const classes = useStyles();
 
   return (
@@ -64,5 +72,3 @@ const CardFormHeader = ({
 };
 
 export default CardFormHeader;
-
-// (event) => handleChange(event)

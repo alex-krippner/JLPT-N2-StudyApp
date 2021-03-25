@@ -21,11 +21,21 @@ const useStyles = makeStyles({
   },
 });
 
+type CardFormButtonsProps = {
+  editing: boolean;
+  handleCreateCard: (event: React.MouseEvent) => void;
+  handleEditCard: (
+    event:
+      | React.MouseEvent<HTMLAnchorElement>
+      | React.MouseEvent<HTMLButtonElement>,
+  ) => void;
+};
+
 const CardFormButtons = ({
   editing,
   handleCreateCard,
   handleEditCard,
-}) => {
+}: CardFormButtonsProps) => {
   const classes = useStyles();
   return (
     <>
@@ -38,13 +48,16 @@ const CardFormButtons = ({
             label: classes.buttonLabel,
             root: classes.submitButton,
           }}
-          onClick={(event) => handleEditCard(event)}
+          onClick={(
+            event:
+              | React.MouseEvent<HTMLAnchorElement>
+              | React.MouseEvent<HTMLButtonElement>,
+          ) => handleEditCard(event)}
         >
           Make Changes
         </Button>
       ) : (
         <Button
-          height="50%"
           variant="contained"
           color="primary"
           size="large"
@@ -52,7 +65,11 @@ const CardFormButtons = ({
             label: classes.buttonLabel,
             root: classes.submitButton,
           }}
-          onClick={(event) => handleCreateCard(event)}
+          onClick={(
+            event:
+              | React.MouseEvent<HTMLAnchorElement>
+              | React.MouseEvent<HTMLButtonElement>,
+          ) => handleCreateCard(event)}
         >
           Create Card
         </Button>
