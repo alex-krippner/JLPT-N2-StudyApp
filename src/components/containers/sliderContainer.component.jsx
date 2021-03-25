@@ -7,10 +7,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.scss';
 
-import CardGrammar from '../card/cardGrammar.component';
-import CardReading from '../card/cardReading.component';
+import CardGrammar from '../card/CardGrammar';
+import CardReading from '../card/CardReading';
 import { deleteCard } from '../../redux/utils.actionCreator';
-import AddCardPopover from '../card/AddCardPopover.component';
+import AddCardPopover from '../card/AddCardPopover';
 
 const SliderContainerStyled = styled.div`
   display: flex;

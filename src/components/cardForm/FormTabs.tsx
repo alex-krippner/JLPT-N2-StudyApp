@@ -58,7 +58,7 @@ const useStyles = makeStyles(() => ({
     overflow: 'auto',
     width: '90%',
     height: '50%',
-    border: (props) =>
+    border: (props: TabPanelProps) =>
       props.tabLabel === 'passage'
         ? 'none'
         : 'solid 1px var(--color-primary-light)',
@@ -80,7 +80,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const TabPanel = (props) => {
+type TabPanelProps = {
+  children: React.ReactNode;
+  value: number;
+  index: number;
+  tabLabel: string;
+};
+
+const TabPanel = (props: TabPanelProps) => {
   const { children, value, index } = props;
   const classes = useStyles(props);
   return (
@@ -92,7 +99,7 @@ const TabPanel = (props) => {
       className={`${classes.root} ${classes.swipe}`}
     >
       {value === index && (
-        <Grid container p={3} className={classes.tabPanelGrid}>
+        <Grid container className={classes.tabPanelGrid}>
           {children}
         </Grid>
       )}
@@ -100,7 +107,12 @@ const TabPanel = (props) => {
   );
 };
 
-const FormTabs = ({ tabLabels, cardData }) => {
+type FormTabsProps = {
+  tabLabels: string[];
+  cardData: CardDataType;
+};
+
+const FormTabs = ({ tabLabels, cardData }: FormTabsProps) => {
   const classes = useStyles();
   const { cardFormData, dispatchFormAction } = useContext(
     CardFormContext,
@@ -114,7 +126,7 @@ const FormTabs = ({ tabLabels, cardData }) => {
 
   const [tabValue, setTabValue] = useState(0);
 
-  const changeTab = (event, newValue) => {
+  const changeTab = (event: React.MouseEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
@@ -124,8 +136,11 @@ const FormTabs = ({ tabLabels, cardData }) => {
   });
 
   // CHANGE THE ENTRY INPUT PLACEHOLDER TO THE CORRESPONDING ENTRY KEY AS YOU CLICK ON THE TABS
-  const handlePlaceholder = (curKey) => setPlaceholder(curKey);
-  const handleEntryInput = (event) => {
+  const handlePlaceholder = (curKey: string) =>
+    setPlaceholder(curKey);
+  const handleEntryInput = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setEntry({
       value: event.target.value,
     });
@@ -148,7 +163,11 @@ const FormTabs = ({ tabLabels, cardData }) => {
 
   // CARD FORM REDUCER HANDLER
 
-  const handleAddEntryBtn = (event) => {
+  const handleAddEntryBtn = (
+    event:
+      | React.MouseEvent<HTMLAnchorElement>
+      | React.MouseEvent<HTMLButtonElement>,
+  ) => {
     event.preventDefault();
     const { value } = entry;
     // dispatch to form reducer
@@ -162,7 +181,9 @@ const FormTabs = ({ tabLabels, cardData }) => {
     });
   };
 
-  const handleEditPassage = (event) => {
+  const handleEditPassage = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     const { value } = event.target;
     dispatchFormAction({
       type: 'ADD_PASSAGE',
@@ -201,7 +222,6 @@ const FormTabs = ({ tabLabels, cardData }) => {
         spacing={1}
         alignItems="center"
         className={classes.inputContainer}
-        height="15%"
         id="grid-entry-input"
       >
         <Grid item xs={6}>
@@ -209,14 +229,20 @@ const FormTabs = ({ tabLabels, cardData }) => {
             fullWidth
             value={entry.value}
             className={classes.input}
-            onChange={(event) => handleEntryInput(event)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleEntryInput(event)
+            }
             placeholder={utils.capitalizeFirstWord(placeholder)}
             id="entry-input"
           />
         </Grid>
         <Grid item>
           <IconButton
-            onClick={(event) => {
+            onClick={(
+              event:
+                | React.MouseEvent<HTMLAnchorElement>
+                | React.MouseEvent<HTMLButtonElement>,
+            ) => {
               handleAddEntryBtn(event);
             }}
           >
@@ -230,14 +256,15 @@ const FormTabs = ({ tabLabels, cardData }) => {
           value={tabValue}
           index={index}
           key={tabLabel}
-          style={{ overflow: 'inheret' }}
           tabLabel={tabLabel}
         >
           {tabLabel === 'passage' ? (
             <textarea
               value={cardFormData.passage}
               className={classes.textAreaPassage}
-              onChange={(event) => handleEditPassage(event)}
+              onChange={(
+                event: React.ChangeEvent<HTMLTextAreaElement>,
+              ) => handleEditPassage(event)}
               key={cardData.id}
               id="passage-input"
             />

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import CardMenu from './CardMenu.component';
+import CardMenu from './CardMenu';
 import Rating from '../Rating';
 import { cardKanjiVocabStyles } from '../../theme/styledComponents';
 import * as utils from '../../utils/utilitiesFunctions';

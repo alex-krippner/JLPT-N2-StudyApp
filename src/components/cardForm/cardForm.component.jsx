@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 // LOCAL IMPORTS
-import FormTabs from './formTabs.component';
+import FormTabs from './FormTabs';
 import CardFormHeader from './cardFormHeader.component';
 import CardFormButtons from './cardFormButtons.component';
 import cardFormReducer from './cardFormReducer';

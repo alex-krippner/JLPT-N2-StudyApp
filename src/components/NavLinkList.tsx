@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
 
-import ListItemLink from './ListItemLink.component';
+import ListItemLink from './ListItemLink';
 
 import MonLogo from '../../assets/img/LogoMonIcon';
 import VocabIcon from '../../assets/img/VocabIcon';
