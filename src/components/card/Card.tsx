@@ -86,6 +86,8 @@ const Card = ({
           className="card-side"
         >
           {tabLabels.map((tabLabel: CardDataKeys, idx) => {
+            // FIXME: Avoid variable declaration
+            const cardEntries = cardData[tabLabel] as Array<string>;
             return (
               <BackSectionSmall
                 key={tabLabel}
@@ -95,7 +97,7 @@ const Card = ({
                 <div className="top">{tabLabel}</div>
                 <div className="bottom">
                   <div className="sentenceWrapper">
-                    {[cardData[tabLabel]].map((el: string) => (
+                    {cardEntries.map((el: string) => (
                       <div className="paragraph" key={el}>
                         <span className="dot">&nbsp;</span>
                         <div>{el}</div>

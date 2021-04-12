@@ -4,7 +4,7 @@ declare module '*.png' {
 }
 // Indexed Access Types or maps
 interface CardDataBaseTypeMap {
-  cardType: string;
+  cardType: CardType;
   id: string;
   rating: null | number;
   'new entry'?: string;
@@ -51,16 +51,21 @@ type CardDataKeys =
   | keyof GrammarCardData
   | keyof ReadingCardData;
 
+type CardLabels = '語彙' | '文法' | '漢字';
+
+type CardType = 'kanji' | 'vocab' | 'grammar' | 'reading';
+
 type CardProps = {
   cardData: CardDataType;
   onRate: (
     label: string[] | string | number | null | (string & string[]),
     ratingIndex: number,
   ) => void;
-  tabLabels: string[];
+  tabLabels: CardDataKeys[];
   cardFormData: CardDataType;
   formDispatcher: Function;
-  label: CardDataKeys;
+  label: CardLabels;
+  cardType: CardType;
 };
 
 type CardFormReducerData = {

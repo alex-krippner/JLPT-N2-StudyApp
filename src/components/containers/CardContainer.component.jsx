@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
 import Card from '../card/Card';
-import CardForm from '../cardForm/cardForm.component';
+import CardForm from '../cardForm/CardForm';
 import { CardsContainerStyled } from '../../theme/styledComponents';
 
 const CardContainer = (props) => {

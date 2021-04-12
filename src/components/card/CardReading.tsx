@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
@@ -125,7 +124,7 @@ const CardReading = ({
             </Grid>
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
-                front={cardData[label]}
+                // front={cardData[label]}
                 cardId={cardData.id}
                 cardFormData={cardFormData}
                 formDispatcher={formDispatcher}
@@ -159,10 +158,14 @@ const CardReading = ({
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
             <CardSideLarge>
-              {tabLabels.map((tabLabel: CardDataKeys, idx) =>
-                tabLabel === 'passage' ? (
-                  ''
-                ) : (
+              {tabLabels.map((tabLabel: CardDataKeys, idx) => {
+                const cardEntries = cardData[tabLabel] as Array<
+                  string
+                >;
+                if (tabLabel === 'passage') {
+                  return '';
+                }
+                return (
                   <BackSection
                     key={tabLabel}
                     section={idx}
@@ -190,24 +193,22 @@ const CardReading = ({
                     >
                       <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
-                          {[cardData[tabLabel]].map(
-                            (el: string, i) => (
-                              <div className="paragraph" key={el}>
-                                {idx === 0 ? (
-                                  ''
-                                ) : (
-                                  <span>{i + 1}.&nbsp;</span>
-                                )}
-                                <div>{el}</div>
-                              </div>
-                            ),
-                          )}
+                          {cardEntries.map((el: string, i) => (
+                            <div className="paragraph" key={el}>
+                              {idx === 0 ? (
+                                ''
+                              ) : (
+                                <span>{i + 1}.&nbsp;</span>
+                              )}
+                              <div>{el}</div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </Bottom>
                   </BackSection>
-                ),
-              )}
+                );
+              })}
             </CardSideLarge>
           </GramReadTabpanel>
         </Grid>
@@ -217,16 +218,3 @@ const CardReading = ({
 };
 
 export default CardReading;
-
-CardReading.propTypes = {
-  cardData: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-    ]),
-  ).isRequired,
-  onRate: PropTypes.func.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  label: PropTypes.string.isRequired,
-};

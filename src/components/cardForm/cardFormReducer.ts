@@ -1,4 +1,18 @@
-const FormReducer = (state, action) => {
+type FormAction = {
+  type?: string;
+  value?: string;
+  placeholder?: CardDataKeys;
+  label?: string;
+  key?: string;
+  entryIdx?: number;
+  resetForm?: () => () => CardDataType;
+};
+
+// FIXME: remove any and correctly type CardDataType to allow the spread operator
+const FormReducer = (
+  state: CardDataType | any,
+  action: FormAction,
+) => {
   switch (action.type) {
     case 'INPUT_MAIN':
       return {
@@ -22,7 +36,9 @@ const FormReducer = (state, action) => {
     case 'EDIT_ENTRY':
       return {
         ...state,
-        [action.key]: state[action.key].map((el, idx) =>
+        [action.key]: state[
+          action.key
+        ].map((el: string, idx: number) =>
           idx === action.entryIdx ? action.value : el,
         ),
       };
@@ -30,7 +46,7 @@ const FormReducer = (state, action) => {
       return {
         ...state,
         [action.key]: state[action.key].filter(
-          (el, idx) => idx !== action.entryIdx,
+          (el: string, idx: number) => idx !== action.entryIdx,
         ),
       };
     case 'RESET':

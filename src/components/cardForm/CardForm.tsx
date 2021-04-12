@@ -56,15 +56,21 @@ const useStyles = makeStyles({
   },
 });
 
-const CardForm = (props) => {
-  const {
-    label,
-    tabLabels,
-    cardType,
-    editing,
-    cardData,
-    handleClose,
-  } = props;
+type CardFormProps = {
+  label: CardLabels;
+  tabLabels: CardDataKeys[];
+  cardType: CardType;
+  editing?: boolean;
+  cardData: CardDataType | CardDataType[];
+};
+
+const CardForm = ({
+  label,
+  tabLabels,
+  cardType,
+  editing,
+  cardData,
+}: CardFormProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -77,7 +83,7 @@ const CardForm = (props) => {
 
     // CREATE AN CARD FORM OBJECT WITH EMPTY DEFAULT VALUES
     // THE FIRST ELEMENT OF THE cardData IS USED AS A TEMPLATE
-    if (!editing)
+    if (!editing && Array.isArray(cardData))
       initState = Object.keys(cardData[0]).reduce(
         (d, key) => initCardFormProperties(d, key, label),
         {},
@@ -91,8 +97,8 @@ const CardForm = (props) => {
     cardData,
     initCardForm,
   );
-  const handleChange = (event) => {
-    const { value } = event.target;
+  const handleChange = (event: React.ChangeEvent) => {
+    const { value } = event.target as HTMLInputElement;
     dispatchFormAction({
       type: 'INPUT_MAIN',
       value,
@@ -105,25 +111,21 @@ const CardForm = (props) => {
     if (label === '漢字') dispatch(addKanji(cardFormData));
     if (label === '語彙') dispatch(addVocab(cardFormData));
     if (label === '文法') dispatch(addGrammar(cardFormData));
-    if (label === 'reading') dispatch(addReading(cardFormData));
+    if (cardType === 'reading') dispatch(addReading(cardFormData));
 
     // CLEAR FORM INPUTS BY PASSING initCardForm function as a action method to the FormReducer
     // TODO: I am not sure if putting a method in an action object is good practice???
     dispatchFormAction({
       type: 'RESET',
       resetForm: () => initCardForm(),
-      payload: cardData,
     });
-
-    // CLOSE POPOVER WHEN FINISHED CREATING GRAMMAR OR READING CARD
-    if (label === '文法' || label === 'reading') handleClose();
   };
 
   const handleEditCard = () => {
     if (label === '漢字') dispatch(editKanji(cardFormData));
     if (label === '語彙') dispatch(editVocab(cardFormData));
     if (label === '文法') dispatch(editGrammar(cardFormData));
-    if (label === 'reading') dispatch(editReading(cardFormData));
+    if (cardType === 'reading') dispatch(editReading(cardFormData));
   };
 
   return (
@@ -147,7 +149,10 @@ const CardForm = (props) => {
         <CardFormContext.Provider
           value={{ cardFormData, dispatchFormAction }}
         >
-          <FormTabs tabLabels={tabLabels} cardData={cardData} />
+          <FormTabs
+            tabLabels={tabLabels}
+            cardData={cardData as CardDataType}
+          />
         </CardFormContext.Provider>
       </Grid>
       <Grid container className={classes.footer}>

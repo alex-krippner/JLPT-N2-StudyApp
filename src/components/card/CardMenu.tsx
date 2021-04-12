@@ -15,7 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import CardForm from '../cardForm/cardForm.component';
+import CardForm from '../cardForm/CardForm';
 import { deleteGrammar } from '../../redux/grammar/grammarCollection.reducer';
 import { deleteKanji } from '../../redux/kanjiCollection/kanjiCollection.reducer';
 import { deleteReading } from '../../redux/readingCollection/readingCollection.reducer';
@@ -45,12 +45,12 @@ const useStyles = makeStyles({
 });
 
 type CardMenuProps = {
-  front: string | number | string[] | (string & string[]);
+  front?: string | number | string[] | (string & string[]);
   cardId: string;
   cardFormData: undefined | CardDataType;
   formDispatcher: undefined | Function;
-  label: string;
-  tabLabels: string[];
+  label: CardLabels;
+  tabLabels: CardDataKeys[];
   cardData: CardDataType;
 };
 
@@ -90,12 +90,13 @@ const CardMenu = ({
     setAnchorPop(document.getElementById(cardId));
     setEdit(true);
   };
-
+  // FIXME: use cardData.cardType for control statement
   const handleDelete = () => {
     if (label === '漢字') dispatch(deleteKanji(front));
     if (label === '語彙') dispatch(deleteVocab(front));
     if (label === '文法') dispatch(deleteGrammar(front));
-    if (label === 'reading') dispatch(deleteReading({ cardId }));
+    if (cardData.cardType === 'reading')
+      dispatch(deleteReading({ cardId }));
   };
 
   return (
@@ -156,7 +157,6 @@ const CardMenu = ({
               tabLabels={tabLabels}
               cardType={cardData.cardType}
               editing={edit}
-              cardId={cardId}
               cardData={cardData}
             />
           </CardFormContext.Provider>

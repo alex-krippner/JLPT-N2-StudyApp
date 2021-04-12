@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { makeStyles } from '@material-ui/core/styles';
 
-import CardForm from '../cardForm/cardForm.component';
+import CardForm from '../cardForm/CardForm';
 
 const useStyles = makeStyles({
   root: {
@@ -36,9 +36,9 @@ const useStyles = makeStyles({
 });
 
 type AddCardPopoverProps = {
-  tabLabels: string[];
-  label: string;
-  cardType: string;
+  tabLabels: CardDataKeys[];
+  label: CardLabels;
+  cardType: CardType;
   cardData: CardDataType;
 };
 
@@ -91,7 +91,6 @@ const AddCardPopover = ({
           tabLabels={tabLabels}
           cardData={cardData}
           cardType={cardType}
-          handleClose={handleClose}
         />
       </Popover>
     </div>
