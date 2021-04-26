@@ -39,7 +39,7 @@ type AddCardPopoverProps = {
   tabLabels: CardDataKeys[];
   label: CardLabels;
   cardType: CardType;
-  cardData: CardDataType;
+  cardData: CardDataType[];
 };
 
 const AddCardPopover = ({

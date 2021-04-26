@@ -2,14 +2,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import SwiperCore, { Pagination } from 'swiper';
-import { connect } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.scss';
 
 import CardGrammar from '../card/CardGrammar';
 import CardReading from '../card/CardReading';
-import { deleteCard } from '../../redux/utils.actionCreator';
 import AddCardPopover from '../card/AddCardPopover';
 
 const SliderContainerStyled = styled.div`
@@ -22,15 +20,32 @@ const SliderContainerStyled = styled.div`
 
 SwiperCore.use([Pagination]);
 
-function slidesCreator(data, cardType, onRate, tabLabels, label) {
-  const createdSlides = data.map((el, index) => {
+type SliderContainerProps = {
+  data: CardDataType[];
+  cardType: CardType;
+  onRate: (
+    label: string[] | string | number | null | (string & string[]),
+    ratingIndex: number,
+  ) => void;
+  tabLabels: CardDataKeys[];
+  label: CardLabels;
+};
+
+function slidesCreator(
+  data: CardDataType[],
+  cardType: CardType,
+  onRate: (
+    label: string[] | string | number | null | (string & string[]),
+    ratingIndex: number,
+  ) => void,
+  tabLabels: CardDataKeys[],
+  label: CardLabels,
+) {
+  const createdSlides = data.map((el) => {
     return cardType === 'grammar' ? (
       <SwiperSlide key={`slide-grammar-${el.id}`} tag="li">
         <CardGrammar
           cardData={el}
-          key={el}
-          index={index}
-          rating={el.rating}
           onRate={onRate}
           tabLabels={tabLabels}
           label={label}
@@ -40,9 +55,6 @@ function slidesCreator(data, cardType, onRate, tabLabels, label) {
       <SwiperSlide key={`slide-reading-${el.id}`} tag="li">
         <CardReading
           cardData={el}
-          key={el}
-          index={index}
-          rating={el.rating}
           onRate={onRate}
           tabLabels={tabLabels}
           label={label}
@@ -62,7 +74,7 @@ const SliderContainer = ({
   tabLabels,
   label,
   cardType,
-}) => {
+}: SliderContainerProps) => {
   const slides = slidesCreator(
     data,
     cardType,
@@ -82,7 +94,6 @@ const SliderContainer = ({
 
       <Swiper
         id="main"
-        grabCursor="true"
         pagination={{ clickable: true }}
         spaceBetween={3}
         slidesPerView={1}
@@ -94,9 +105,5 @@ const SliderContainer = ({
     </SliderContainerStyled>
   );
 };
-const mapDispatchToProps = (dispatch) => ({
-  deleteCardDispatcher: (card, cardId) =>
-    dispatch(deleteCard(card, cardId)),
-});
 
-export default connect(null, mapDispatchToProps)(SliderContainer);
+export default SliderContainer;

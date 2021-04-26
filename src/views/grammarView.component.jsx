@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import SliderContainer from '../components/containers/sliderContainer.component';
+import SliderContainer from '../components/containers/SliderContainer';
 import { rateGrammar } from '../redux/grammar/grammarCollection.reducer';
 
 const Wrapper = styled.div`

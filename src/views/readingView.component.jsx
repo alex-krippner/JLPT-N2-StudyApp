@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 
-import SliderContainer from '../components/containers/sliderContainer.component';
+import SliderContainer from '../components/containers/SliderContainer';
 import { rateReading } from '../redux/readingCollection/readingCollection.reducer';
 
 const Wrapper = styled.div`
