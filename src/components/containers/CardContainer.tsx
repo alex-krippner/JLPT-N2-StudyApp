@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
@@ -7,17 +6,30 @@ import Card from '../card/Card';
 import CardForm from '../cardForm/CardForm';
 import { CardsContainerStyled } from '../../theme/styledComponents';
 
-const CardContainer = (props) => {
+type CardContainerProps = {
+  data: CardDataType[];
+  label: CardLabels;
+  tabLabels: CardDataKeys[];
+  onRate: (
+    label: string[] | string | number | null | (string & string[]),
+    ratingIndex: number,
+  ) => void;
+};
+
+const CardContainer = ({
+  data,
+  label,
+  tabLabels,
+  onRate,
+}: CardContainerProps) => {
   let flipId = '';
-  const { data, label, inputValue, tabLabels, onRate } = props;
-  flipId += data.map((x) => x.id).join('');
+  flipId += data.map((x: CardDataType) => x.id).join('');
 
   return (
     <Flipper flipKey={flipId} spring="stiff">
       <CardsContainerStyled>
         <CardForm
           label={label}
-          inputValue={inputValue}
           tabLabels={tabLabels}
           cardData={data}
         />
@@ -29,7 +41,6 @@ const CardContainer = (props) => {
                 cardData={el}
                 tabLabels={tabLabels}
                 label={label}
-                inputValue={inputValue}
                 onRate={onRate}
               />
             </div>
@@ -41,10 +52,3 @@ const CardContainer = (props) => {
 };
 
 export default CardContainer;
-
-CardContainer.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onRate: PropTypes.func.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  label: PropTypes.string.isRequired,
-};

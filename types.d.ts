@@ -62,10 +62,8 @@ type CardProps = {
     ratingIndex: number,
   ) => void;
   tabLabels: CardDataKeys[];
-  cardFormData: CardDataType;
-  formDispatcher: Function;
   label: CardLabels;
-  cardType: CardType;
+  cardType?: CardType;
 };
 
 type CardFormReducerData = {

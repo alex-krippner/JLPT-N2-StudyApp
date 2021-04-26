@@ -59,7 +59,7 @@ const useStyles = makeStyles({
 type CardFormProps = {
   label: CardLabels;
   tabLabels: CardDataKeys[];
-  cardType: CardType;
+  cardType?: CardType;
   editing?: boolean;
   cardData: CardDataType | CardDataType[];
 };

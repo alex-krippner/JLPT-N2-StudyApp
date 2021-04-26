@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import PropTypes from 'prop-types';
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Popover,
@@ -47,8 +45,6 @@ const useStyles = makeStyles({
 type CardMenuProps = {
   front?: string | number | string[] | (string & string[]);
   cardId: string;
-  cardFormData: undefined | CardDataType;
-  formDispatcher: undefined | Function;
   label: CardLabels;
   tabLabels: CardDataKeys[];
   cardData: CardDataType;
@@ -57,8 +53,6 @@ type CardMenuProps = {
 const CardMenu = ({
   front,
   cardId,
-  cardFormData,
-  formDispatcher,
   label,
   tabLabels,
   cardData,
@@ -149,17 +143,13 @@ const CardMenu = ({
           }}
           className={classes.root}
         >
-          <CardFormContext.Provider
-            value={{ cardFormData, formDispatcher }}
-          >
-            <CardForm
-              label={label}
-              tabLabels={tabLabels}
-              cardType={cardData.cardType}
-              editing={edit}
-              cardData={cardData}
-            />
-          </CardFormContext.Provider>
+          <CardForm
+            label={label}
+            tabLabels={tabLabels}
+            cardType={cardData.cardType}
+            editing={edit}
+            cardData={cardData}
+          />
         </Popover>
         <MenuItem
           className="delete"
@@ -178,16 +168,3 @@ const CardMenu = ({
 };
 
 export default CardMenu;
-
-CardMenu.propTypes = {
-  cardId: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cardData: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-    ]),
-  ).isRequired,
-};

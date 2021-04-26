@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import CardContainer from '../components/containers/CardContainer.component';
+import CardContainer from '../components/containers/CardContainer';
 import { rateVocab } from '../redux/vocabCollection/vocabCollection.reducer';
 
 const Wrapper = styled.div`

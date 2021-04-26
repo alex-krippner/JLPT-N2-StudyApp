@@ -46,8 +46,6 @@ const CardGrammar = ({
   cardData,
   onRate,
   tabLabels,
-  cardFormData,
-  formDispatcher,
   label,
 }: CardProps) => {
   const classes = useStyles();
@@ -109,8 +107,6 @@ const CardGrammar = ({
               <CardMenu
                 front={cardData[label]}
                 cardId={cardData.id}
-                cardFormData={cardFormData}
-                formDispatcher={formDispatcher}
                 label={label}
                 tabLabels={tabLabels}
                 cardData={cardData}

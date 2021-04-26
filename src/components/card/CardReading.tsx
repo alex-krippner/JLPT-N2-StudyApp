@@ -52,8 +52,6 @@ const CardReading = ({
   cardData,
   onRate,
   tabLabels,
-  cardFormData,
-  formDispatcher,
   label,
 }: CardProps) => {
   const classes = useStyles();
@@ -126,8 +124,6 @@ const CardReading = ({
               <CardMenu
                 // front={cardData[label]}
                 cardId={cardData.id}
-                cardFormData={cardFormData}
-                formDispatcher={formDispatcher}
                 label={label}
                 tabLabels={tabLabels}
                 cardData={cardData}

@@ -14,14 +14,7 @@ const {
   RatingContainer,
 } = cardKanjiVocabStyles;
 
-const Card = ({
-  cardData,
-  onRate,
-  tabLabels,
-  cardFormData,
-  formDispatcher,
-  label,
-}: CardProps) => {
+const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
   const cardToFlip = useRef(null);
 
   const handleFlip = (
@@ -52,8 +45,6 @@ const Card = ({
             <CardMenu
               front={cardData[label]}
               cardId={cardData.id}
-              cardFormData={cardFormData}
-              formDispatcher={formDispatcher}
               label={label}
               tabLabels={tabLabels}
               cardData={cardData}
