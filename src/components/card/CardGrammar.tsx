@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,12 +41,15 @@ const useStyles = makeStyles({
   },
 });
 
-const CardGrammar = ({
+const CardGrammar = <
+  T extends GrammarCardData,
+  K extends keyof GrammarCardData
+>({
   cardData,
   onRate,
   tabLabels,
   label,
-}: CardProps) => {
+}: CardProps<T, K>) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -137,7 +139,10 @@ const CardGrammar = ({
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
             <CardSideLarge>
-              {tabLabels.map((tabLabel: CardDataKeys, idx) => {
+              {tabLabels.map((tabLabel: K, idx) => {
+                const cardEntries = cardData[tabLabel] as Array<
+                  string
+                >;
                 return (
                   <BackSection
                     key={tabLabel}
@@ -148,24 +153,22 @@ const CardGrammar = ({
                     <Bottom className="bottom" section={idx}>
                       <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
-                          {[cardData[tabLabel]].map(
-                            (el: string, i) => (
-                              <div className="paragraph" key={el}>
-                                {[cardData[tabLabel]].length === 0 ||
-                                [cardData[tabLabel]][0] === '' ? (
-                                  <div>
-                                    Looks like there is no data for
-                                    this section...
-                                  </div>
-                                ) : (
-                                  <>
-                                    <span>{i + 1}.&nbsp;</span>
-                                    <div>{el}</div>
-                                  </>
-                                )}
-                              </div>
-                            ),
-                          )}
+                          {cardEntries.map((el: K, i) => (
+                            <div className="paragraph" key={el}>
+                              {[cardData[tabLabel]].length === 0 ||
+                              [cardData[tabLabel]][0] === '' ? (
+                                <div>
+                                  Looks like there is no data for this
+                                  section...
+                                </div>
+                              ) : (
+                                <>
+                                  <span>{i + 1}.&nbsp;</span>
+                                  <div>{el}</div>
+                                </>
+                              )}
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </Bottom>
@@ -181,16 +184,3 @@ const CardGrammar = ({
 };
 
 export default CardGrammar;
-
-CardGrammar.propTypes = {
-  cardData: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-    ]),
-  ).isRequired,
-  onRate: PropTypes.func.isRequired,
-  tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  label: PropTypes.string.isRequired,
-};

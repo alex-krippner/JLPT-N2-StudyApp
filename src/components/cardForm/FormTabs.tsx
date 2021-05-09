@@ -107,12 +107,15 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-type FormTabsProps = {
-  tabLabels: string[];
-  cardData: CardDataType;
-};
+interface FormTabsProps<T, K> {
+  tabLabels: K[];
+  cardData: T;
+}
 
-const FormTabs = ({ tabLabels, cardData }: FormTabsProps) => {
+const FormTabs = <T extends CardDataType, K extends TabLabel>({
+  tabLabels,
+  cardData,
+}: FormTabsProps<T, K>) => {
   const classes = useStyles();
   const { cardFormData, dispatchFormAction } = useContext(
     CardFormContext,
@@ -136,8 +139,7 @@ const FormTabs = ({ tabLabels, cardData }: FormTabsProps) => {
   });
 
   // CHANGE THE ENTRY INPUT PLACEHOLDER TO THE CORRESPONDING ENTRY KEY AS YOU CLICK ON THE TABS
-  const handlePlaceholder = (curKey: string) =>
-    setPlaceholder(curKey);
+  const handlePlaceholder = (curKey: any) => setPlaceholder(curKey);
   const handleEntryInput = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -210,7 +212,7 @@ const FormTabs = ({ tabLabels, cardData }: FormTabsProps) => {
             <Tab
               label={tabLabel}
               classes={{ root: classes.tab }}
-              key={tabLabel}
+              key={cardData.id}
               onClick={() => handlePlaceholder(tabLabel)}
             />
           ))}
@@ -255,7 +257,7 @@ const FormTabs = ({ tabLabels, cardData }: FormTabsProps) => {
         <TabPanel
           value={tabValue}
           index={index}
-          key={tabLabel}
+          key={cardData.id}
           tabLabel={tabLabel}
         >
           {tabLabel === 'passage' ? (

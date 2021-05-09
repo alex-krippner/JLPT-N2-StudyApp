@@ -6,22 +6,22 @@ import Card from '../card/Card';
 import CardForm from '../cardForm/CardForm';
 import { CardsContainerStyled } from '../../theme/styledComponents';
 
-type CardContainerProps = {
-  data: CardDataType[];
+interface CardContainerProps<T, K> {
+  data: T[];
   label: CardLabels;
-  tabLabels: CardDataKeys[];
-  onRate: (
-    label: string[] | string | number | null | (string & string[]),
-    ratingIndex: number,
-  ) => void;
-};
+  tabLabels: K[];
+  onRate: (label: string, ratingIndex: number) => void;
+}
 
-const CardContainer = ({
+const CardContainer = <
+  T extends KanjiCardData | VocabCardData,
+  K extends KanjiTabLabels | VocabTabLabels
+>({
   data,
   label,
   tabLabels,
   onRate,
-}: CardContainerProps) => {
+}: CardContainerProps<T, K>) => {
   let flipId = '';
   flipId += data.map((x: CardDataType) => x.id).join('');
 

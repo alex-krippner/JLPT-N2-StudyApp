@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import kanjiCollectionReducer from './kanjiCollection/kanjiCollection.reducer';
 import vocabCollectionReducer from './vocabCollection/vocabCollection.reducer';
-import grammarCollectionReducer from './grammar/grammarCollection.reducer';
+import grammarCollectionReducer from './grammarCollection.reducer';
 import readingCollectionReducer from './readingCollection/readingCollection.reducer';
 
 const persistConfig = {

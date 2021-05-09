@@ -22,7 +22,7 @@ import {
 import {
   addGrammar,
   editGrammar,
-} from '../../redux/grammar/grammarCollection.reducer';
+} from '../../redux/grammarCollection.reducer';
 import {
   addReading,
   editReading,
@@ -56,21 +56,21 @@ const useStyles = makeStyles({
   },
 });
 
-type CardFormProps = {
+interface CardFormProps<T extends CardDataType, K> {
   label: CardLabels;
-  tabLabels: CardDataKeys[];
+  tabLabels: K[];
   cardType?: CardType;
   editing?: boolean;
-  cardData: CardDataType | CardDataType[];
-};
+  cardData: T | T[];
+}
 
-const CardForm = ({
+const CardForm = <T extends CardDataType, K extends TabLabel>({
   label,
   tabLabels,
   cardType,
   editing,
   cardData,
-}: CardFormProps) => {
+}: CardFormProps<T, K>) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -106,6 +106,7 @@ const CardForm = ({
     });
   };
 
+  // FIXME: Use cardtype instead of label for consistency
   const handleCreateCard = () => {
     // CREATE A NEW CARD IN THE COLLECTIONS
     if (label === '漢字') dispatch(addKanji(cardFormData));
@@ -121,6 +122,7 @@ const CardForm = ({
     });
   };
 
+  // FIXME: Use cardtype instead of label for consistency
   const handleEditCard = () => {
     if (label === '漢字') dispatch(editKanji(cardFormData));
     if (label === '語彙') dispatch(editVocab(cardFormData));

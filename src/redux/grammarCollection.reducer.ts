@@ -1,7 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit';
 
-const GRAMMAR_DATA = {
+interface GrammarState {
+  [grammar: string]: GrammarCardData;
+}
+
+const GRAMMAR_DATA: GrammarState = {
   としたら: {
     cardType: 'grammar',
     id: uuidv4(),
@@ -120,7 +124,7 @@ const grammarCollectionSlice = createSlice({
           rating:
             action.payload.rating ===
             state[action.payload.grammar].rating
-              ? state.rating - 1
+              ? state[action.payload.grammar].rating - 1
               : action.payload.rating,
         },
       };

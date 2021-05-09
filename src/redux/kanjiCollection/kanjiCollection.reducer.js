@@ -5,6 +5,7 @@ const KANJI_DATA = {
   濯: {
     cardType: 'kanji',
     漢字: '濯',
+    mainContent: '濯',
     id: uuidv4(),
     読み: ['タク'],
     単語例: ['洗濯'],
@@ -14,6 +15,7 @@ const KANJI_DATA = {
   燥: {
     cardType: 'kanji',
     漢字: '燥',
+    mainContent: '燥',
     id: uuidv4(),
     読み: ['ソウ'],
     単語例: ['乾燥'],
@@ -24,6 +26,7 @@ const KANJI_DATA = {
   司: {
     cardType: 'kanji',
     漢字: '司',
+    mainContent: '司',
     id: uuidv4(),
     読み: [' シ'],
     単語例: ['司会'],
@@ -34,6 +37,7 @@ const KANJI_DATA = {
   紹: {
     cardType: 'kanji',
     漢字: '紹',
+    mainContent: '紹',
     id: uuidv4(),
     読み: ['ショウ'],
     単語例: ['紹介'],
@@ -44,6 +48,7 @@ const KANJI_DATA = {
   独: {
     cardType: 'kanji',
     漢字: '独',
+    mainContent: '独',
     id: uuidv4(),
     読み: ['ドク', 'ひと・り'],
     単語例: ['独立', '独身', '独り言'],
@@ -54,6 +59,7 @@ const KANJI_DATA = {
   香: {
     cardType: 'kanji',
     漢字: '香',
+    mainContent: '香',
     id: uuidv4(),
     読み: ['コウ', 'かお・り'],
     単語例: ['香水', '香り'],
@@ -64,6 +70,7 @@ const KANJI_DATA = {
   貯: {
     cardType: 'kanji',
     漢字: '貯',
+    mainContent: '貯',
     id: uuidv4(),
     読み: ['チョ'],
     単語例: ['貯金', '貯蔵'],
@@ -74,6 +81,7 @@ const KANJI_DATA = {
   価: {
     cardType: 'kanji',
     漢字: '価',
+    mainContent: '価',
     id: uuidv4(),
     読み: ['カ'],
     単語例: ['価値', '価格', '物価'],
@@ -84,6 +92,7 @@ const KANJI_DATA = {
   看: {
     cardType: 'kanji',
     漢字: '看',
+    mainContent: '看',
     id: uuidv4(),
     読み: ['カン'],
     単語例: ['看病', '看板'],
@@ -93,6 +102,7 @@ const KANJI_DATA = {
   吹: {
     cardType: 'kanji',
     漢字: '吹',
+    mainContent: '吹',
     id: uuidv4(),
     読み: ['ふ・く'],
     単語例: ['吹く'],
@@ -102,6 +112,7 @@ const KANJI_DATA = {
   液: {
     cardType: 'kanji',
     漢字: '液',
+    mainContent: '液',
     id: uuidv4(),
     読み: ['エキ'],
     単語例: ['血液', '液体'],
@@ -111,6 +122,7 @@ const KANJI_DATA = {
   傾: {
     cardType: 'kanji',
     漢字: '傾',
+    mainContent: '傾',
     id: uuidv4(),
     読み: ['ケイ', 'かたむ・く'],
     単語例: ['傾向', '傾く'],
@@ -144,6 +156,7 @@ const kanjiCollectionSlice = createSlice({
         [action.payload.漢字]: {
           cardType: 'kanji',
           漢字: action.payload.漢字,
+          mainContent: action.payload.漢字,
           id: uuidv4(),
           読み: [...action.payload.読み],
           単語例: [...action.payload.単語例],

@@ -48,14 +48,16 @@ const useStyles = makeStyles({
   },
 });
 
-const CardReading = ({
+const CardReading = <
+  T extends ReadingCardData,
+  K extends keyof ReadingCardData
+>({
   cardData,
   onRate,
   tabLabels,
   label,
-}: CardProps) => {
+}: CardProps<T, K>) => {
   const classes = useStyles();
-
   const [value, setValue] = useState(0);
   const [visible, setVisibility] = useState(false);
   const [blur, setBlur] = useState(false);
@@ -154,7 +156,7 @@ const CardReading = ({
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
             <CardSideLarge>
-              {tabLabels.map((tabLabel: CardDataKeys, idx) => {
+              {tabLabels.map((tabLabel: K, idx: number) => {
                 const cardEntries = cardData[tabLabel] as Array<
                   string
                 >;

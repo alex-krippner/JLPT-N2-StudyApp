@@ -14,7 +14,15 @@ const {
   RatingContainer,
 } = cardKanjiVocabStyles;
 
-const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
+const Card = <
+  T extends VocabCardData | KanjiCardData,
+  K extends keyof T
+>({
+  cardData,
+  onRate,
+  tabLabels,
+  label,
+}: CardProps<T, K>) => {
   const cardToFlip = useRef(null);
 
   const handleFlip = (
@@ -28,7 +36,6 @@ const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
       current.style.transform = '';
     }
   };
-
   return (
     <CardSceneSmall cardType={cardData.cardType}>
       <CardWrapper
@@ -43,7 +50,7 @@ const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
         >
           <Front>
             <CardMenu
-              front={cardData[label]}
+              front={cardData.mainContent}
               cardId={cardData.id}
               label={label}
               tabLabels={tabLabels}
@@ -51,13 +58,7 @@ const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
             />
 
             <FrontDataSmall onClick={() => handleFlip(cardToFlip)}>
-              <div>
-                {cardData.cardType === 'kanji'
-                  ? cardData.漢字
-                  : cardData.cardType === 'vocab'
-                  ? cardData.語彙
-                  : ''}
-              </div>{' '}
+              <div>{cardData.mainContent}</div>
             </FrontDataSmall>
           </Front>
           <RatingContainer>
@@ -66,7 +67,7 @@ const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
                 // eslint-disable-next-line react/no-array-index-key
                 key={cardData.id + i}
                 selected={i < cardData.rating}
-                onClick={() => onRate(cardData[label], i + 1)}
+                onClick={() => onRate(cardData.mainContent, i + 1)}
               />
             ))}
           </RatingContainer>
@@ -76,12 +77,13 @@ const Card = ({ cardData, onRate, tabLabels, label }: CardProps) => {
           onClick={() => handleFlip(cardToFlip)}
           className="card-side"
         >
-          {tabLabels.map((tabLabel: CardDataKeys, idx) => {
-            // FIXME: Avoid variable declaration
-            const cardEntries = cardData[tabLabel] as Array<string>;
+          {tabLabels.map((tabLabel: K, idx) => {
+            const cardEntries = (cardData[
+              tabLabel
+            ] as unknown) as Array<any>;
             return (
               <BackSectionSmall
-                key={tabLabel}
+                key={cardData.id}
                 section={idx}
                 labelNum={tabLabels.length}
               >

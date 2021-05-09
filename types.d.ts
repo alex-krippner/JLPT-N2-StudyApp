@@ -3,21 +3,23 @@ declare module '*.png' {
   export = value;
 }
 // Indexed Access Types or maps
-interface CardDataBaseTypeMap {
-  cardType: CardType;
+interface CardDataBaseDefinition {
   id: string;
+  mainContent: string;
   rating: null | number;
   'new entry'?: string;
 }
 
-interface KanjiCardData extends CardDataBaseTypeMap {
+interface KanjiCardData extends CardDataBaseDefinition {
+  cardType: 'kanji' | string;
   単語例: string[];
   漢字: string;
   用例: string[];
   読み: string[];
 }
 
-interface VocabCardData extends CardDataBaseTypeMap {
+interface VocabCardData extends CardDataBaseDefinition {
+  cardType: 'vocab' | string;
   定義: string[];
   漢字: string[];
   用例: string[];
@@ -25,7 +27,8 @@ interface VocabCardData extends CardDataBaseTypeMap {
   語類: string[];
 }
 
-interface GrammarCardData extends CardDataBaseTypeMap {
+interface GrammarCardData extends CardDataBaseDefinition {
+  cardType: 'grammar' | string;
   variations: string[];
   意味: string[];
   接続: string[];
@@ -33,17 +36,19 @@ interface GrammarCardData extends CardDataBaseTypeMap {
   用例: string[];
 }
 
-interface ReadingCardData extends CardDataBaseTypeMap {
+interface ReadingCardData extends CardDataBaseDefinition {
+  cardType: 'reading' | string;
   choices: string[];
   passage: string[];
   question: string[];
   solution: string[];
 }
 
-type CardDataType = KanjiCardData &
-  VocabCardData &
-  GrammarCardData &
-  ReadingCardData;
+type CardDataType =
+  | KanjiCardData
+  | VocabCardData
+  | GrammarCardData
+  | ReadingCardData;
 
 type CardDataKeys =
   | keyof KanjiCardData
@@ -53,18 +58,37 @@ type CardDataKeys =
 
 type CardLabels = '語彙' | '文法' | '漢字';
 
-type CardType = 'kanji' | 'vocab' | 'grammar' | 'reading';
+type KanjiTabLabels = '読み' | '単語例' | '用例';
 
-type CardProps = {
-  cardData: CardDataType;
+type VocabTabLabels = '漢字' | '語類' | '定義' | '用例';
+
+type TabLabel =
+  | '単語例'
+  | '読み'
+  | '定義'
+  | '漢字'
+  | '用例'
+  | '語彙'
+  | '語類'
+  | 'variations'
+  | '意味'
+  | '接続'
+  | 'question'
+  | 'solution'
+  | 'passage';
+
+type CardType = string | 'kanji' | 'vocab' | 'grammar' | 'reading';
+
+interface CardProps<T, K extends keyof T> {
+  cardData: T;
   onRate: (
     label: string[] | string | number | null | (string & string[]),
     ratingIndex: number,
   ) => void;
-  tabLabels: CardDataKeys[];
+  tabLabels: K[];
   label: CardLabels;
   cardType?: CardType;
-};
+}
 
 type CardFormReducerData = {
   type: string;

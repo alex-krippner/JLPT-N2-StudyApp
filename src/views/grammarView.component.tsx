@@ -3,21 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import SliderContainer from '../components/containers/SliderContainer';
-import { rateGrammar } from '../redux/grammar/grammarCollection.reducer';
+import { rateGrammar } from '../redux/grammarCollection.reducer';
+import { RootState } from '../redux/store';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
 
-const tabLabels = ['variations', '意味', '接続', '用例'];
+const tabLabels: CardDataKeys[] = [
+  'variations',
+  '意味',
+  '接続',
+  '用例',
+];
 
 const GrammarView = () => {
   const dispatch = useDispatch();
-  const grammarState = useSelector((state) =>
-    Object.values(state.grammarCollection),
+  const grammarState: GrammarCardData[] = useSelector(
+    (state: RootState) => Object.values(state.grammarCollection),
   );
-  const handleRate = (grammar, rating) => {
+  const handleRate = (grammar: string, rating: number) => {
     dispatch(rateGrammar({ grammar, rating }));
   };
 

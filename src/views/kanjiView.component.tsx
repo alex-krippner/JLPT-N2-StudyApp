@@ -4,20 +4,21 @@ import styled from 'styled-components';
 
 import CardContainer from '../components/containers/CardContainer';
 import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.reducer';
+import { RootState } from '../redux/store';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
 
-const tabLabels = ['読み', '単語例', '用例'];
+const tabLabels: KanjiTabLabels[] = ['読み', '単語例', '用例'];
 
 const KanjiView = () => {
   const dispatch = useDispatch();
-  const kanjiState = useSelector((state) =>
+  const kanjiState = useSelector((state: RootState) =>
     Object.values(state.kanjiCollection),
   );
-  const handleRate = (kanji, rating) => {
+  const handleRate = (kanji: string, rating: number) => {
     dispatch(rateKanji({ kanji, rating }));
   };
   return (

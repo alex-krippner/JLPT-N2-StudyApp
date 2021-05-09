@@ -23,6 +23,7 @@ module.exports = {
         // before url-loader/svg-url-loader
         // and not duplicate it in rules with them
         enforce: 'pre',
+
       },
       {
         test: /\.(jpg|png|svg)$/,

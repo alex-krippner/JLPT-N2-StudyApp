@@ -14,12 +14,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from '../cardForm/CardForm';
-import { deleteGrammar } from '../../redux/grammar/grammarCollection.reducer';
+import { deleteGrammar } from '../../redux/grammarCollection.reducer';
 import { deleteKanji } from '../../redux/kanjiCollection/kanjiCollection.reducer';
 import { deleteReading } from '../../redux/readingCollection/readingCollection.reducer';
 import { deleteVocab } from '../../redux/vocabCollection/vocabCollection.reducer';
-
-import CardFormContext from '../../context/context';
 
 const useStyles = makeStyles({
   root: {
@@ -42,21 +40,21 @@ const useStyles = makeStyles({
   },
 });
 
-type CardMenuProps = {
+interface CardMenuProps<T, K extends keyof T> {
   front?: string | number | string[] | (string & string[]);
   cardId: string;
   label: CardLabels;
-  tabLabels: CardDataKeys[];
-  cardData: CardDataType;
-};
+  tabLabels: K[];
+  cardData: T;
+}
 
-const CardMenu = ({
+const CardMenu = <T extends CardDataType, K extends keyof T>({
   front,
   cardId,
   label,
   tabLabels,
   cardData,
-}: CardMenuProps) => {
+}: CardMenuProps<T, K>) => {
   const dispatch = useDispatch();
 
   const classes = useStyles();
