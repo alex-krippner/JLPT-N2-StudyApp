@@ -48,10 +48,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CardReading = <
-  T extends ReadingCardData,
-  K extends keyof ReadingCardData
->({
+const CardReading = <T extends ReadingCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
@@ -157,6 +154,7 @@ const CardReading = <
           <GramReadTabpanel value={value} index={1}>
             <CardSideLarge>
               {tabLabels.map((tabLabel: K, idx: number) => {
+                // @ts-ignore
                 const cardEntries = cardData[tabLabel] as Array<
                   string
                 >;

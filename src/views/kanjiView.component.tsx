@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import CardContainer from '../components/containers/CardContainer';
-import { rateKanji } from '../redux/kanjiCollection/kanjiCollection.reducer';
+import { rateKanji } from '../redux/kanjiCollection.reducer';
 import { RootState } from '../redux/store';
 
 const Wrapper = styled.div`

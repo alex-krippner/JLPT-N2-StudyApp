@@ -9,6 +9,7 @@ const GRAMMAR_DATA: GrammarState = {
   としたら: {
     cardType: 'grammar',
     id: uuidv4(),
+    mainContent: 'としたら',
     文法: 'としたら',
     variations: [
       '～とすれば',
@@ -31,6 +32,7 @@ const GRAMMAR_DATA: GrammarState = {
   ものなら: {
     cardType: 'grammar',
     id: uuidv4(),
+    mainContent: 'ものなら',
     文法: 'ものなら',
     variations: [''],
     意味: ['もし～できるなら、そうしたい・そうしてほしい'],
@@ -44,8 +46,8 @@ const GRAMMAR_DATA: GrammarState = {
   ようものなら: {
     cardType: 'grammar',
     id: uuidv4(),
+    mainContent: 'ようものなら',
     文法: 'ようものなら',
-
     variations: [''],
     意味: ['もし～たら、大変なことになる'],
     接続: ['動う・よう形　＋　ものなら'],
@@ -58,8 +60,8 @@ const GRAMMAR_DATA: GrammarState = {
   ないことには: {
     cardType: 'grammar',
     id: uuidv4(),
+    mainContent: 'ないことには',
     文法: 'ないことには',
-
     variations: [''],
     意味: ['～なければ、あることが実現しない'],
     接続: [
@@ -74,8 +76,8 @@ const GRAMMAR_DATA: GrammarState = {
   を抜きにしては: {
     cardType: 'grammar',
     id: uuidv4(),
+    mainContent: 'を抜きにしては',
     文法: 'を抜きにしては',
-
     variations: [''],
     意味: [
       '～がなければ・～を考えに入れない状態では、あることが実現しない',
@@ -92,8 +94,8 @@ const GRAMMAR_DATA: GrammarState = {
   としても: {
     cardType: 'grammar',
     id: uuidv4(),
+    mainContent: 'としても',
     文法: 'としても',
-
     variations: ['～にしても', '～にしろ', '～にせよ'],
     意味: [
       'たとえ～ということが事実でも、話者の気持ちはそれに影響されない',
@@ -136,6 +138,7 @@ const grammarCollectionSlice = createSlice({
           cardType: 'grammar',
           id: uuidv4(),
           文法: action.payload.文法,
+          mainContent: action.payload.文法,
           variations: [...action.payload.variations],
           意味: [...action.payload.意味],
           接続: [...action.payload.接続],

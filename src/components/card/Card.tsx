@@ -16,7 +16,7 @@ const {
 
 const Card = <
   T extends VocabCardData | KanjiCardData,
-  K extends keyof T
+  K extends TabLabel
 >({
   cardData,
   onRate,
@@ -77,20 +77,19 @@ const Card = <
           onClick={() => handleFlip(cardToFlip)}
           className="card-side"
         >
-          {tabLabels.map((tabLabel: K, idx) => {
-            const cardEntries = (cardData[
-              tabLabel
-            ] as unknown) as Array<any>;
+          {tabLabels.map((tabLabel, idx: number) => {
             return (
               <BackSectionSmall
-                key={cardData.id}
+                // @ts-ignore
+                key={cardData[tabLabel]}
                 section={idx}
                 labelNum={tabLabels.length}
               >
                 <div className="top">{tabLabel}</div>
                 <div className="bottom">
                   <div className="sentenceWrapper">
-                    {cardEntries.map((el: string) => (
+                    {/* @ts-ignore */}
+                    {cardData[tabLabel].map((el: string) => (
                       <div className="paragraph" key={el}>
                         <span className="dot">&nbsp;</span>
                         <div>{el}</div>

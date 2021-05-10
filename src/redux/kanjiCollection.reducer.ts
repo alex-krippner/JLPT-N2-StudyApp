@@ -1,7 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit';
 
-const KANJI_DATA = {
+interface KanjiState {
+  [kanji: string]: KanjiCardData;
+}
+
+const KANJI_DATA: KanjiState = {
   濯: {
     cardType: 'kanji',
     漢字: '濯',
@@ -145,7 +149,7 @@ const kanjiCollectionSlice = createSlice({
           rating:
             action.payload.rating ===
             state[action.payload.kanji].rating
-              ? state.rating - 1
+              ? state[action.payload.kanji].rating - 1
               : action.payload.rating,
         },
       };

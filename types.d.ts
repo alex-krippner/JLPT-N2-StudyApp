@@ -36,7 +36,8 @@ interface GrammarCardData extends CardDataBaseDefinition {
   用例: string[];
 }
 
-interface ReadingCardData extends CardDataBaseDefinition {
+interface ReadingCardData
+  extends Omit<CardDataBaseDefinition, 'mainContent'> {
   cardType: 'reading' | string;
   choices: string[];
   passage: string[];
@@ -56,11 +57,13 @@ type CardDataKeys =
   | keyof GrammarCardData
   | keyof ReadingCardData;
 
-type CardLabels = '語彙' | '文法' | '漢字';
+type CardLabels = '語彙' | '文法' | '漢字' | 'reading';
 
 type KanjiTabLabels = '読み' | '単語例' | '用例';
 
 type VocabTabLabels = '漢字' | '語類' | '定義' | '用例';
+
+type GrammarTabLabels = 'variations' | '意味' | '接続' | '用例';
 
 type TabLabel =
   | '単語例'
@@ -75,11 +78,12 @@ type TabLabel =
   | '接続'
   | 'question'
   | 'solution'
+  | 'choices'
   | 'passage';
 
 type CardType = string | 'kanji' | 'vocab' | 'grammar' | 'reading';
 
-interface CardProps<T, K extends keyof T> {
+interface CardProps<T, K> {
   cardData: T;
   onRate: (
     label: string[] | string | number | null | (string & string[]),

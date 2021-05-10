@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -47,7 +47,12 @@ const CardFormHeader = ({
           >
             Edit Card
           </h2>
-          <h2 className="card-front">{cardFormData[label]} </h2>
+
+          <h2 className="card-front">
+            {'mainContent' in cardFormData
+              ? cardFormData.mainContent
+              : ''}{' '}
+          </h2>
         </>
       ) : (
         <>
@@ -59,7 +64,11 @@ const CardFormHeader = ({
               key={label}
               id="outlined-basic"
               label={label}
-              value={cardFormData[label]}
+              value={
+                'mainContent' in cardFormData
+                  ? cardFormData.mainContent
+                  : ''
+              }
               variant="filled"
               className={`${classes.root} ${classes.textfield}`}
               onChange={handleChange}

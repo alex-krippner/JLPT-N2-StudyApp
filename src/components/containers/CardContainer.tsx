@@ -15,7 +15,7 @@ interface CardContainerProps<T, K> {
 
 const CardContainer = <
   T extends KanjiCardData | VocabCardData,
-  K extends KanjiTabLabels | VocabTabLabels
+  K extends TabLabel
 >({
   data,
   label,

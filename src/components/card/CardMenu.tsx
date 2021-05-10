@@ -15,9 +15,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from '../cardForm/CardForm';
 import { deleteGrammar } from '../../redux/grammarCollection.reducer';
-import { deleteKanji } from '../../redux/kanjiCollection/kanjiCollection.reducer';
-import { deleteReading } from '../../redux/readingCollection/readingCollection.reducer';
-import { deleteVocab } from '../../redux/vocabCollection/vocabCollection.reducer';
+import { deleteKanji } from '../../redux/kanjiCollection.reducer';
+import { deleteReading } from '../../redux/readingCollection.reducer';
+import { deleteVocab } from '../../redux/vocabCollection.reducer';
 
 const useStyles = makeStyles({
   root: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface CardMenuProps<T, K extends keyof T> {
+interface CardMenuProps<T, K> {
   front?: string | number | string[] | (string & string[]);
   cardId: string;
   label: CardLabels;
@@ -48,7 +48,7 @@ interface CardMenuProps<T, K extends keyof T> {
   cardData: T;
 }
 
-const CardMenu = <T extends CardDataType, K extends keyof T>({
+const CardMenu = <T extends CardDataType, K extends TabLabel>({
   front,
   cardId,
   label,

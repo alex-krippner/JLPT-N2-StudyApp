@@ -20,7 +20,7 @@ const SliderContainerStyled = styled.div`
 
 SwiperCore.use([Pagination]);
 
-type SliderContainerProps<T, K extends keyof T> = {
+type SliderContainerProps<T, K> = {
   data: T[];
   cardType: CardType;
   onRate: (
@@ -33,7 +33,7 @@ type SliderContainerProps<T, K extends keyof T> = {
 
 function slidesCreator<
   T extends GrammarCardData | ReadingCardData,
-  K extends keyof T
+  K extends TabLabel
 >(
   data: T[],
   onRate: (
@@ -41,9 +41,9 @@ function slidesCreator<
     ratingIndex: number,
   ) => void,
   tabLabels: K[],
-  label: K,
+  label: CardLabels,
 ) {
-  const createdSlides = data.map((el) => {
+  return data.map((el) => {
     return el.cardType === 'grammar' ? (
       <SwiperSlide key={`slide-grammar-${el.id}`} tag="li">
         <CardGrammar
@@ -56,6 +56,7 @@ function slidesCreator<
     ) : el.cardType === 'reading' ? (
       <SwiperSlide key={`slide-reading-${el.id}`} tag="li">
         <CardReading
+          // @ts-ignore
           cardData={el}
           onRate={onRate}
           tabLabels={tabLabels}
@@ -66,13 +67,11 @@ function slidesCreator<
       ''
     );
   });
-
-  return createdSlides;
 }
 
 const SliderContainer = <
   T extends GrammarCardData | ReadingCardData,
-  K extends keyof T
+  K extends TabLabel
 >({
   data,
   onRate,

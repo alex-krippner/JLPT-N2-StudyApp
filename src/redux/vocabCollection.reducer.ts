@@ -1,10 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit';
 
-const VOCAB_DATA = {
+interface VocabState {
+  [vocab: string]: VocabCardData;
+}
+
+const VOCAB_DATA: VocabState = {
   あっ: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あっ',
     語彙: 'あっ',
     漢字: ['No Kanji Provided'],
     語類: ['int'],
@@ -15,6 +20,7 @@ const VOCAB_DATA = {
   ああ: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'ああ',
     語彙: 'ああ',
     漢字: ['No Kanji Provided'],
     語類: ['adv'],
@@ -25,6 +31,7 @@ const VOCAB_DATA = {
   あい: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あい',
     語彙: 'あい',
     漢字: ['愛'],
     語類: ['n,n-suf'],
@@ -35,6 +42,7 @@ const VOCAB_DATA = {
   あいかわらず: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あいかわらず',
     語彙: 'あいかわらず',
     漢字: ['相変わらず'],
     語類: ['adv,adj-no'],
@@ -45,6 +53,7 @@ const VOCAB_DATA = {
   あいさつ: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あいさつ',
     語彙: 'あいさつ',
     漢字: ['挨拶'],
     語類: ['n,vs,adj-no'],
@@ -61,6 +70,7 @@ const VOCAB_DATA = {
   あいじょう: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あいじょう',
     語彙: 'あいじょう',
     漢字: ['愛情'],
     語類: ['n,adj-no'],
@@ -71,6 +81,7 @@ const VOCAB_DATA = {
   あいず: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あいず',
     語彙: 'あいず',
     漢字: ['合図'],
     語類: ['n,vs'],
@@ -81,6 +92,7 @@ const VOCAB_DATA = {
   あいする: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あいする',
     語彙: 'あいする',
     漢字: ['愛する'],
     語類: ['vs-s,vt'],
@@ -91,6 +103,7 @@ const VOCAB_DATA = {
   あいだ: {
     cardType: 'vocab',
     id: uuidv4(),
+    mainContent: 'あいだ',
     語彙: 'あいだ',
     漢字: ['間'],
     語類: ['n-adv,n'],
@@ -114,7 +127,7 @@ const vocabCollectionSlice = createSlice({
           rating:
             action.payload.rating ===
             state[action.payload.vocab].rating
-              ? state.rating - 1
+              ? state[action.payload.kanji].rating - 1
               : action.payload.rating,
         },
       };

@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 });
 
 type AddCardPopoverProps = {
-  tabLabels: CardDataKeys[];
+  tabLabels: TabLabel[];
   label: CardLabels;
   cardType: CardType;
   cardData: CardDataType[];

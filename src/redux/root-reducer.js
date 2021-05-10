@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import kanjiCollectionReducer from './kanjiCollection/kanjiCollection.reducer';
-import vocabCollectionReducer from './vocabCollection/vocabCollection.reducer';
+import kanjiCollectionReducer from './kanjiCollection.reducer';
+import vocabCollectionReducer from './vocabCollection.reducer';
 import grammarCollectionReducer from './grammarCollection.reducer';
-import readingCollectionReducer from './readingCollection/readingCollection.reducer';
+import readingCollectionReducer from './readingCollection.reducer';
 
 const persistConfig = {
   key: 'root',

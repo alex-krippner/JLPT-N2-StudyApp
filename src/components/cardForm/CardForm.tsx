@@ -14,11 +14,11 @@ import CardFormContext from '../../context/context';
 import {
   addKanji,
   editKanji,
-} from '../../redux/kanjiCollection/kanjiCollection.reducer';
+} from '../../redux/kanjiCollection.reducer';
 import {
   addVocab,
   editVocab,
-} from '../../redux/vocabCollection/vocabCollection.reducer';
+} from '../../redux/vocabCollection.reducer';
 import {
   addGrammar,
   editGrammar,
@@ -26,7 +26,7 @@ import {
 import {
   addReading,
   editReading,
-} from '../../redux/readingCollection/readingCollection.reducer';
+} from '../../redux/readingCollection.reducer';
 
 import { initCardFormProperties } from '../../utils/utilitiesFunctions';
 

@@ -41,10 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CardGrammar = <
-  T extends GrammarCardData,
-  K extends keyof GrammarCardData
->({
+const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
@@ -107,7 +104,7 @@ const CardGrammar = <
             </Grid>
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
-                front={cardData[label]}
+                front={cardData.mainContent}
                 cardId={cardData.id}
                 label={label}
                 tabLabels={tabLabels}
@@ -118,7 +115,7 @@ const CardGrammar = <
           <GramReadTabpanel value={value} index={0}>
             <CardSideLarge className="card-side">
               <Front>
-                <FrontData grammar>{cardData[label]} </FrontData>
+                <FrontData grammar>{cardData.mainContent} </FrontData>
               </Front>
               <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
@@ -129,7 +126,7 @@ const CardGrammar = <
                     onClick={
                       // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )
                       () => {
-                        return onRate(cardData[label], i + 1);
+                        return onRate(cardData.mainContent, i + 1);
                       }
                     }
                   />
@@ -140,6 +137,7 @@ const CardGrammar = <
           <GramReadTabpanel value={value} index={1}>
             <CardSideLarge>
               {tabLabels.map((tabLabel: K, idx) => {
+                // @ts-ignore
                 const cardEntries = cardData[tabLabel] as Array<
                   string
                 >;
@@ -155,8 +153,8 @@ const CardGrammar = <
                         <div className="sentenceWrapper">
                           {cardEntries.map((el: K, i) => (
                             <div className="paragraph" key={el}>
-                              {[cardData[tabLabel]].length === 0 ||
-                              [cardData[tabLabel]][0] === '' ? (
+                              {/* @ts-ignore */}
+                              {cardData[tabLabel].length === 0 ? (
                                 <div>
                                   Looks like there is no data for this
                                   section...

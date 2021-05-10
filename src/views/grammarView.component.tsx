@@ -11,12 +11,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const tabLabels: CardDataKeys[] = [
-  'variations',
-  '意味',
-  '接続',
-  '用例',
-];
+const tabLabels: TabLabel[] = ['variations', '意味', '接続', '用例'];
 
 const GrammarView = () => {
   const dispatch = useDispatch();
