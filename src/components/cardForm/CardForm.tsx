@@ -88,7 +88,6 @@ const CardForm = <T extends CardDataType, K extends TabLabel>({
         (d, key) => initCardFormProperties(d, key, label),
         {},
       );
-
     return initState;
   };
 

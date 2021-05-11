@@ -60,16 +60,11 @@ const HomeView = () => {
         justify="flex-start"
         alignItems="flex-start"
         xs={6}
-        height="30%"
         className={classes.headerContainer}
       >
         <Typography variant="h1" className={classes.header}>
           Mon
-          <MonLogo
-            fontSize="7rem"
-            color="black"
-            position="absolute"
-          />
+          <MonLogo color="black" position="absolute" />
         </Typography>
       </Grid>
       <Grid

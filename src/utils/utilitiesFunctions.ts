@@ -1,9 +1,9 @@
-export const capitalizeFirstLetter = (string) => {
+export const capitalizeFirstLetter = (string: string) => {
   if (typeof string !== 'string') return '';
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export function capitalizeFirstWord(string) {
+export function capitalizeFirstWord(string: string) {
   return string
     .split(' ')
     .map((word, idx) =>
@@ -13,9 +13,9 @@ export function capitalizeFirstWord(string) {
 }
 
 export const initCardFormProperties = function initCardFormProperties(
-  d,
-  key,
-  label,
+  d: any,
+  key: any,
+  label: CardLabels,
 ) {
   switch (key) {
     case 'rating':
@@ -27,6 +27,11 @@ export const initCardFormProperties = function initCardFormProperties(
       return {
         ...d,
         id: '',
+      };
+    case 'mainContent':
+      return {
+        ...d,
+        mainContent: '',
       };
     case label:
       return {
@@ -51,7 +56,11 @@ export const initCardFormProperties = function initCardFormProperties(
   }
 };
 
-export const initCardForm = (editing, cardData, label) => {
+export const initCardForm = (
+  editing: boolean,
+  cardData: any,
+  label: CardLabels,
+) => {
   let initState;
 
   // CREATE CARD FORM OBJECT WITH CARD DATA OF CURRENTLY EDITING CARD
@@ -69,11 +78,11 @@ export const initCardForm = (editing, cardData, label) => {
 };
 
 export const compareProps = function compareProps(
-  prevProps,
-  nextProps,
+  prevProps: any,
+  nextProps: any,
 ) {
   const prevCardDataKeys = Object.keys(prevProps.cardData);
-  const comparePropsArray = [];
+  const comparePropsArray: any[] = [];
 
   prevCardDataKeys.forEach((k) => {
     const previousCardDataValue = prevProps.cardData[k];
@@ -81,14 +90,16 @@ export const compareProps = function compareProps(
 
     // If the value of a cardData property is an array than compare each array element
     if (Array.isArray(previousCardDataValue)) {
-      const arrayDeepEquality = nextCardDataValue.every((el, idx) => {
-        if (
-          previousCardDataValue.length !== nextCardDataValue.length
-        ) {
-          return false;
-        }
-        return el === previousCardDataValue[idx];
-      });
+      const arrayDeepEquality = nextCardDataValue.every(
+        (el: any, idx: number) => {
+          if (
+            previousCardDataValue.length !== nextCardDataValue.length
+          ) {
+            return false;
+          }
+          return el === previousCardDataValue[idx];
+        },
+      );
 
       comparePropsArray.push(arrayDeepEquality);
       return;

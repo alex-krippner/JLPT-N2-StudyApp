@@ -42,6 +42,7 @@
     "no-nested-ternary": 0,
     "@typescript-eslint/comma-dangle": 0,
     "default-case": 0,
-    "consistent-return": 0
+    "consistent-return": 0,
+    "react/no-array-index-key": 0
   }
 }

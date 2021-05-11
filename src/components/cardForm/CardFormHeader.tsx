@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 
 type CardFormHeaderProps = {
   editing: boolean;
-  cardFormData: CardDataType;
+  cardFormData: any;
   cardType: string;
   label: CardLabels;
   handleChange: (event: React.ChangeEvent) => void;
@@ -64,11 +64,7 @@ const CardFormHeader = ({
               key={label}
               id="outlined-basic"
               label={label}
-              value={
-                'mainContent' in cardFormData
-                  ? cardFormData.mainContent
-                  : ''
-              }
+              value={cardFormData[label]}
               variant="filled"
               className={`${classes.root} ${classes.textfield}`}
               onChange={handleChange}

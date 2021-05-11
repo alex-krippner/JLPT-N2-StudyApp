@@ -212,7 +212,7 @@ const FormTabs = <T extends CardDataType, K extends TabLabel>({
             <Tab
               label={tabLabel}
               classes={{ root: classes.tab }}
-              key={cardData.id}
+              key={tabLabel}
               onClick={() => handlePlaceholder(tabLabel)}
             />
           ))}
@@ -257,7 +257,7 @@ const FormTabs = <T extends CardDataType, K extends TabLabel>({
         <TabPanel
           value={tabValue}
           index={index}
-          key={cardData.id}
+          key={tabLabel}
           tabLabel={tabLabel}
         >
           {tabLabel === 'passage' ? (
@@ -267,7 +267,7 @@ const FormTabs = <T extends CardDataType, K extends TabLabel>({
               onChange={(
                 event: React.ChangeEvent<HTMLTextAreaElement>,
               ) => handleEditPassage(event)}
-              key={cardData.id}
+              key={tabLabel}
               id="passage-input"
             />
           ) : (

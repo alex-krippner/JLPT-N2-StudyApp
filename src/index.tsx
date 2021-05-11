@@ -34,4 +34,5 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
+// @ts-ignore
 module.hot.accept();
