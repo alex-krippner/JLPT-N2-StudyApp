@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import CardContainer from '../components/containers/CardContainer';
 import { rateVocab } from '../redux/vocabCollection.reducer';
 import { RootState } from '../redux/store';
+import CardsContainerTemplate from '../components/templates/CardsContainerTemplate';
+import VocabCard from '../components/organisms/Vocab/VocabCard';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,11 +25,12 @@ const VocabView = () => {
 
   return (
     <Wrapper>
-      <CardContainer
+      <CardsContainerTemplate
         data={vocabState}
         label="語彙"
         onRate={handleRate}
         tabLabels={tabLabels}
+        CardComponent={VocabCard}
       />
     </Wrapper>
   );

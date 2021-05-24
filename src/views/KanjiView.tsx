@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import { rateKanji } from '../redux/kanjiCollection.reducer';
 import { RootState } from '../redux/store';
-import CardContainerTest from '../components/containers/CardContainerTest.';
+import CardsContainerTemplate from '../components/templates/CardsContainerTemplate';
 import KanjiCard from '../components/organisms/Kanji/KanjiCard';
 
 const tabLabels: KanjiTabLabels[] = ['読み', '単語例', '用例'];
@@ -19,7 +19,7 @@ const KanjiView = () => {
   };
   return (
     <Box width="100%" height="100%">
-      <CardContainerTest
+      <CardsContainerTemplate
         data={kanjiState}
         label="漢字"
         onRate={handleRate}

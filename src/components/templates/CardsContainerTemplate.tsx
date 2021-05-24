@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
 import CardForm from '../cardForm/CardForm';
-import { CardsContainerStyled } from '../../theme/styledComponents';
+import CardsContainer from '../containers/CardsContainer';
 
 interface CardContainerProps<T, K> {
   data: T[];
@@ -13,7 +12,7 @@ interface CardContainerProps<T, K> {
   CardComponent: React.ElementType;
 }
 
-const CardContainerTest = <
+const CardsContainerTemplate = <
   T extends KanjiCardData | VocabCardData,
   K extends TabLabel
 >({
@@ -28,7 +27,7 @@ const CardContainerTest = <
 
   return (
     <Flipper flipKey={flipId} spring="stiff">
-      <CardsContainerStyled>
+      <CardsContainer>
         <CardForm
           label={label}
           tabLabels={tabLabels}
@@ -47,9 +46,9 @@ const CardContainerTest = <
             </div>
           </Flipped>
         ))}
-      </CardsContainerStyled>
+      </CardsContainer>
     </Flipper>
   );
 };
 
-export default CardContainerTest;
+export default CardsContainerTemplate;
