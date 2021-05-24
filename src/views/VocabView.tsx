@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { rateVocab } from '../redux/vocabCollection.reducer';
-import { RootState } from '../redux/store';
+import { rateVocab } from '../state-management/redux/vocabCollection.reducer';
+import { RootState } from '../state-management/redux/store';
 import CardsContainerTemplate from '../components/templates/CardsContainerTemplate';
 import VocabCard from '../components/organisms/Vocab/VocabCard';
 

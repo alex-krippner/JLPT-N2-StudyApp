@@ -9,24 +9,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormTabs from '../molecules/FormTabs';
 import CardFormHeader from '../atoms/CardFormHeader';
 import CardFormButtons from '../atoms/CardFormButtons';
-import cardFormReducer from '../../redux/cardFormReducer';
+import cardFormReducer from '../../state-management/cardFormReducer';
 import CardFormContext from '../../context/context';
 import {
   addKanji,
   editKanji,
-} from '../../redux/kanjiCollection.reducer';
+} from '../../state-management/redux/kanjiCollection.reducer';
 import {
   addVocab,
   editVocab,
-} from '../../redux/vocabCollection.reducer';
+} from '../../state-management/redux/vocabCollection.reducer';
 import {
   addGrammar,
   editGrammar,
-} from '../../redux/grammarCollection.reducer';
+} from '../../state-management/redux/grammarCollection.reducer';
 import {
   addReading,
   editReading,
-} from '../../redux/readingCollection.reducer';
+} from '../../state-management/redux/readingCollection.reducer';
 
 import { initCardFormProperties } from '../../utils/utilitiesFunctions';
 

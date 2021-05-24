@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 
-import { rateGrammar } from '../redux/grammarCollection.reducer';
-import { RootState } from '../redux/store';
+import { rateGrammar } from '../state-management/redux/grammarCollection.reducer';
+import { RootState } from '../state-management/redux/store';
 import SlidesContainerTemplate from '../components/templates/SlidesContainerTemplate';
 import GrammarCard from '../components/organisms/Grammar/GrammarCard';
 

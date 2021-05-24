@@ -14,10 +14,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CardForm from '../organisms/CardForm';
-import { deleteGrammar } from '../../redux/grammarCollection.reducer';
-import { deleteKanji } from '../../redux/kanjiCollection.reducer';
-import { deleteReading } from '../../redux/readingCollection.reducer';
-import { deleteVocab } from '../../redux/vocabCollection.reducer';
+import { deleteGrammar } from '../../state-management/redux/grammarCollection.reducer';
+import { deleteKanji } from '../../state-management/redux/kanjiCollection.reducer';
+import { deleteReading } from '../../state-management/redux/readingCollection.reducer';
+import { deleteVocab } from '../../state-management/redux/vocabCollection.reducer';
 
 const useStyles = makeStyles({
   root: {

@@ -10,7 +10,7 @@ import {
   ThemeProvider,
 } from '@material-ui/core/styles';
 
-import { store, persistor } from './redux/store';
+import { store, persistor } from './state-management/redux/store';
 
 import App from './App';
 import './theme/swiper-styles.css';

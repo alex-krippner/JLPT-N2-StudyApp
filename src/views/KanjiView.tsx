@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Box } from '@material-ui/core';
-import { rateKanji } from '../redux/kanjiCollection.reducer';
-import { RootState } from '../redux/store';
+import { rateKanji } from '../state-management/redux/kanjiCollection.reducer';
+import { RootState } from '../state-management/redux/store';
 import CardsContainerTemplate from '../components/templates/CardsContainerTemplate';
 import KanjiCard from '../components/organisms/Kanji/KanjiCard';
 
