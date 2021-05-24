@@ -13,11 +13,6 @@ type StyledProps = {
   visible?: boolean;
 };
 
-const CardScene = styled.div`
-  height: 90%;
-  width: 85rem;
-`;
-
 const CardSceneSmall = styled.div<StyledProps>`
   height: ${(props) =>
     props.cardType === 'vocab' ? '45rem' : '40rem'};
@@ -31,7 +26,7 @@ const CardWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  transition: transform 1s;
+  transition: transform 0.5s;
   transform-style: preserve-3d;
   color: var(--color-primary-dark);
 `;
@@ -102,7 +97,6 @@ const CardSideSmall = styled.div.attrs((props: StyledProps) => ({
 
   backface-visibility: hidden;
   border-radius: 1rem;
-  transition: transform 0.8s ease, background 0.8s ease;
   background-color: var(--color-white);
   border: solid 1px #708090;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
@@ -226,7 +220,7 @@ const BackSectionSmall = styled.section.attrs(
   justify-content: center;
   align-items: flex-start;
   font-size: var(--font-size-medium);
-  border-bottom: ${(props) => props.borderBottom};
+  border-bottom: solid 1px;
   height: min-content;
 `;
 
@@ -416,7 +410,6 @@ export const CardFormStyled = styled.div.attrs(
 `;
 
 export const cardReadingGramStyles = {
-  CardScene,
   CardSideLarge,
   Front,
   FrontData,

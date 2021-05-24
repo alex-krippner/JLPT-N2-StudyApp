@@ -104,3 +104,29 @@ type CardFormReducerData = {
   value: string;
   label: string;
 };
+
+type StyledProps = {
+  top?: string;
+  left?: string;
+  width?: string;
+  height?: string;
+  display?: string;
+  fxDirection?: string;
+  borderRadius?: string;
+  bgColor?: string;
+  border?: string;
+  boxShadow?: string;
+  transform?: string;
+  cursor?: string;
+  position?: string;
+  cardType?: string;
+  front?: boolean | string;
+  back?: boolean | string;
+  fontSize?: string;
+  grammar?: boolean;
+  section?: number;
+  labelNum?: number;
+  blur?: boolean;
+  tabLabel?: string;
+  visible?: boolean;
+};

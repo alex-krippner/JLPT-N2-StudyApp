@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
+import { Box } from '@material-ui/core';
 import CardMenu from './CardMenu';
 import Rating from '../Rating';
 import { cardKanjiVocabStyles } from '../../theme/styledComponents';
 import * as utils from '../../utils/utilitiesFunctions';
+import CardSection from '../atoms/Section';
 
 const {
   CardSceneSmall,
@@ -10,7 +12,6 @@ const {
   CardSideSmall,
   Front,
   FrontDataSmall,
-  BackSectionSmall,
   RatingContainer,
 } = cardKanjiVocabStyles;
 
@@ -79,11 +80,16 @@ const Card = <
         >
           {tabLabels.map((tabLabel, idx: number) => {
             return (
-              <BackSectionSmall
+              <CardSection
                 // @ts-ignore
-                key={cardData[tabLabel]}
-                section={idx}
-                labelNum={tabLabels.length}
+                key={cardData[tabLabel] + idx}
+                // @ts-ignore
+                borderBottom={idx === tabLabels.length - 1 ? 0 : 1}
+                position="relative"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="flex-start"
               >
                 <div className="top">{tabLabel}</div>
                 <div className="bottom">
@@ -97,7 +103,7 @@ const Card = <
                     ))}
                   </div>
                 </div>
-              </BackSectionSmall>
+              </CardSection>
             );
           })}
         </CardSideSmall>

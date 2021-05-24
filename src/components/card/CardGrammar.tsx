@@ -7,9 +7,9 @@ import CardMenu from './CardMenu';
 import Rating from '../Rating';
 import GramReadTabpanel from './GramReadTabPanel';
 import { cardReadingGramStyles } from '../../theme/styledComponents';
+import CardScene from '../atoms/CardScene';
 
 const {
-  CardScene,
   CardSideLarge,
   Front,
   FrontData,

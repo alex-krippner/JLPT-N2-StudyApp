@@ -9,9 +9,9 @@ import GramReadTabpanel from './GramReadTabPanel';
 import { cardReadingGramStyles } from '../../theme/styledComponents';
 
 import { capitalizeFirstWord } from '../../utils/utilitiesFunctions';
+import CardScene from '../atoms/CardScene';
 
 const {
-  CardScene,
   CardSideLarge,
   Front,
   FrontData,
