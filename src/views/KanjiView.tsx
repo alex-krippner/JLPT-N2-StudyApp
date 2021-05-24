@@ -1,16 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 
-import CardContainer from '../components/containers/CardContainer';
+import { Box } from '@material-ui/core';
 import { rateKanji } from '../redux/kanjiCollection.reducer';
 import { RootState } from '../redux/store';
 import CardContainerTest from '../components/containers/CardContainerTest.';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+import KanjiCard from '../components/organisms/Kanji/KanjiCard';
 
 const tabLabels: KanjiTabLabels[] = ['読み', '単語例', '用例'];
 
@@ -23,23 +18,16 @@ const KanjiView = () => {
     dispatch(rateKanji({ kanji, rating }));
   };
   return (
-    <Wrapper>
-      <CardContainer
+    <Box width="100%" height="100%">
+      <CardContainerTest
         data={kanjiState}
         label="漢字"
         onRate={handleRate}
         tabLabels={tabLabels}
+        CardComponent={KanjiCard}
       />
-    </Wrapper>
+    </Box>
   );
 };
 
 export default KanjiView;
-
-//
-// <CardContainer
-//     data={kanjiState}
-//     label="漢字"
-//     onRate={handleRate}
-//     tabLabels={tabLabels}
-// />

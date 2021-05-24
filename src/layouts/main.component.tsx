@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomeView from '../views/homeView.component';
-import KanjiView from '../views/kanjiView.component';
+import KanjiView from '../views/KanjiView';
 import VocabView from '../views/vocabView.component';
 import GrammarView from '../views/grammarView.component';
 import ReadingView from '../views/readingView.component';

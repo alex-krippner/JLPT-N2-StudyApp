@@ -2,12 +2,10 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const CardScene = styled.div<StyledProps>`
-  height: ${(props) =>
-    props.cardType === 'vocab' ? '45rem' : '40rem'};
-  perspective: 200rem;
-  -moz-perspective: 150rem;
-  width: ${(props) =>
-    props.cardType === 'vocab' ? '35rem' : '30rem'};
+  height: ${(props) => props.height};
+  perspective: ${(props) => props.perspective};
+  -moz-perspective: ${(props) => props.perspective};
+  width: ${(props) => props.width};
   user-select: none;
 `;
 
@@ -24,15 +22,25 @@ interface FlipCardProps<T> {
   children: ReactNode;
   cardRef: React.MutableRefObject<any> | null;
   cardData: T;
+  height: string;
+  width: string;
+  perspective: string;
 }
 
 const FlipCard = <T extends VocabCardData | KanjiCardData>({
   children,
   cardData,
   cardRef,
+  height,
+  width,
+  perspective,
 }: FlipCardProps<T>) => {
   return (
-    <CardScene>
+    <CardScene
+      height={height}
+      width={width}
+      perspective={perspective}
+    >
       <CardWrapper ref={cardRef} id={cardData.id}>
         {children}
       </CardWrapper>

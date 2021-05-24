@@ -129,4 +129,5 @@ type StyledProps = {
   blur?: boolean;
   tabLabel?: string;
   visible?: boolean;
+  perspective?: string;
 };
