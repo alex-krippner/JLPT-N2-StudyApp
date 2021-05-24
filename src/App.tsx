@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import Main from './layouts/main.component';
 import Sidebar from './layouts/sidebar.component';
-import FlyingCharsBackground from './components/BackgroundAnimation';
+import FlyingCharsBackground from './components/organisms/BackgroundAnimation';
 import GlobalStyle from './theme/globalStyle';
 
 import hero from '../assets/img/hero.svg';
-import Hamburger from './components/hamburger/Hamburger';
-import HamburgerNav from './components/hamburger/HamburgerNav';
+import Hamburger from './components/atoms/Hamburger';
+import HamburgerNav from './components/molecules/HamburgerNav';
 
 const Wrapper = styled.div`
   display: flex;

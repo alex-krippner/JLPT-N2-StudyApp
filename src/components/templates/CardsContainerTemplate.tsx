@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
-import CardForm from '../cardForm/CardForm';
+import CardForm from '../organisms/CardForm';
 import CardsContainer from '../containers/CardsContainer';
 
 interface CardContainerProps<T, K> {

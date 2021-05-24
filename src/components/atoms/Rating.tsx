@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DarumaIcon from '../../assets/img/DarumaIcon';
+import DarumaIcon from '../../../assets/img/DarumaIcon';
 
 type Props = {
   selected?: boolean;

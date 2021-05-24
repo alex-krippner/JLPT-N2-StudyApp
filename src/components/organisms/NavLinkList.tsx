@@ -5,13 +5,13 @@ import List from '@material-ui/core/List';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
 
-import ListItemLink from './ListItemLink';
+import ListItemLink from '../molecules/ListItemLink';
 
-import MonLogo from '../../assets/img/LogoMonIcon';
-import VocabIcon from '../../assets/img/VocabIcon';
-import KanjiIcon from '../../assets/img/KanjiIcon';
-import ReadingIcon from '../../assets/img/ReadingIcon';
-import GrammarIcon from '../../assets/img/GrammarIcon';
+import MonLogo from '../../../assets/img/LogoMonIcon';
+import VocabIcon from '../../../assets/img/VocabIcon';
+import KanjiIcon from '../../../assets/img/KanjiIcon';
+import ReadingIcon from '../../../assets/img/ReadingIcon';
+import GrammarIcon from '../../../assets/img/GrammarIcon';
 
 const useStyles = makeStyles({
   portfolioLink: {

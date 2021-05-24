@@ -127,7 +127,7 @@ const vocabCollectionSlice = createSlice({
           rating:
             action.payload.rating ===
             state[action.payload.vocab].rating
-              ? state[action.payload.kanji].rating - 1
+              ? state[action.payload.vocab].rating - 1
               : action.payload.rating,
         },
       };

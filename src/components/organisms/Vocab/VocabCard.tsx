@@ -2,10 +2,11 @@ import React, { useRef } from 'react';
 import { Box } from '@material-ui/core';
 import FlipCard from '../../molecules/FlipCard';
 import CardSide from '../../atoms/CardSide';
-import CardMenu from '../../card/CardMenu';
-import Rating from '../../Rating';
+import CardMenu from '../../molecules/CardMenu';
+import Rating from '../../atoms/Rating';
 import CardSection from '../../atoms/Section';
 import Dot from '../../atoms/Dot';
+import * as utils from '../../../utils/utilitiesFunctions';
 
 const VocabCard = <T extends VocabCardData, K extends TabLabel>({
   cardData,
@@ -136,4 +137,6 @@ const VocabCard = <T extends VocabCardData, K extends TabLabel>({
   );
 };
 
-export default VocabCard;
+export default React.memo(VocabCard, (prevProps, nextProps) =>
+  utils.compareProps(prevProps, nextProps),
+);

@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
-import CardMenu from './CardMenu';
-import Rating from '../Rating';
-import GramReadTabpanel from './GramReadTabPanel';
-import { cardReadingGramStyles } from '../../theme/styledComponents';
-import CardScene from '../atoms/CardScene';
+import CardMenu from '../../molecules/CardMenu';
+import Rating from '../../atoms/Rating';
+import GramReadTabpanel from '../../atoms/GramReadTabPanel';
+import { cardReadingGramStyles } from '../../../theme/styledComponents';
+
+import { capitalizeFirstWord } from '../../../utils/utilitiesFunctions';
+import CardScene from '../../atoms/CardScene';
 
 const {
   CardSideLarge,
@@ -17,6 +19,7 @@ const {
   BackSection,
   Top,
   Bottom,
+  Passage,
 } = cardReadingGramStyles;
 
 const useStyles = makeStyles({
@@ -36,12 +39,16 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
 
+  grid: {
+    height: '100%',
+  },
+
   container_main: {
     height: '100%',
   },
 });
 
-const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
+const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
@@ -49,12 +56,25 @@ const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
 }: CardProps<T, K>) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const [visible, setVisibility] = useState(false);
+  const [blur, setBlur] = useState(false);
 
   const handleChange = (
     event: React.MouseEvent,
     newValue: number,
   ) => {
     setValue(newValue);
+  };
+
+  const handleVisibility = (
+    event: React.MouseEvent,
+    index: number,
+    arrayLength: number,
+  ) => {
+    if (index !== arrayLength - 1) return;
+
+    setVisibility(!visible);
+    setBlur(!blur);
   };
 
   return (
@@ -94,17 +114,14 @@ const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
                   aria-label="full width tabs"
                   variant="fullWidth"
                 >
-                  <Tab className={classes.tab} label="Grammar" />
-                  <Tab
-                    className={classes.tab}
-                    label="Grammar Details"
-                  />
+                  <Tab className={classes.tab} label="Passage" />
+                  <Tab className={classes.tab} label="Q &amp; A" />
                 </Tabs>
               </AppBar>
             </Grid>
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
-                front={cardData.mainContent}
+                // front={cardData[label]}
                 cardId={cardData.id}
                 label={label}
                 tabLabels={tabLabels}
@@ -113,9 +130,11 @@ const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
             </Grid>
           </Grid>
           <GramReadTabpanel value={value} index={0}>
-            <CardSideLarge className="card-side">
+            <CardSideLarge>
               <Front>
-                <FrontData grammar>{cardData.mainContent} </FrontData>
+                <FrontData>
+                  <Passage>{cardData.passage}</Passage>
+                </FrontData>
               </Front>
               <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
@@ -125,9 +144,7 @@ const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
                     selected={i < cardData.rating}
                     onClick={
                       // the rating is passed as 'i + 1' (ie. to convert from array index: the index of the star plus 1 )
-                      () => {
-                        return onRate(cardData.mainContent, i + 1);
-                      }
+                      () => onRate(cardData.id, i + 1)
                     }
                   />
                 ))}
@@ -136,35 +153,50 @@ const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
           </GramReadTabpanel>
           <GramReadTabpanel value={value} index={1}>
             <CardSideLarge>
-              {tabLabels.map((tabLabel: K, idx) => {
+              {tabLabels.map((tabLabel: K, idx: number) => {
                 // @ts-ignore
                 const cardEntries = cardData[tabLabel] as Array<
                   string
                 >;
+                if (tabLabel === 'passage') {
+                  return '';
+                }
                 return (
                   <BackSection
                     key={tabLabel}
                     section={idx}
                     labelNum={tabLabels.length}
                   >
-                    <Top>{tabLabel}</Top>
-                    <Bottom className="bottom" section={idx}>
+                    {/* set minHeight to 0 to prevent cutoff when the BackSection overflow is set to auto */}
+
+                    <Top>
+                      {tabLabel === 'choices'
+                        ? capitalizeFirstWord(
+                            'choose the most suitable',
+                          )
+                        : capitalizeFirstWord(tabLabel)}
+                    </Top>
+
+                    <Bottom
+                      className="bottom"
+                      visible={visible}
+                      blur={blur}
+                      section={idx}
+                      tabLabel={tabLabel}
+                      onClick={(e) =>
+                        handleVisibility(e, idx, tabLabels.length)
+                      }
+                    >
                       <div style={{ minHeight: 0 }}>
                         <div className="sentenceWrapper">
-                          {cardEntries.map((el: K, i) => (
+                          {cardEntries.map((el: string, i) => (
                             <div className="paragraph" key={el}>
-                              {/* @ts-ignore */}
-                              {cardData[tabLabel].length === 0 ? (
-                                <div>
-                                  Looks like there is no data for this
-                                  section...
-                                </div>
+                              {idx === 0 ? (
+                                ''
                               ) : (
-                                <>
-                                  <span>{i + 1}.&nbsp;</span>
-                                  <div>{el}</div>
-                                </>
+                                <span>{i + 1}.&nbsp;</span>
                               )}
+                              <div>{el}</div>
                             </div>
                           ))}
                         </div>
@@ -181,4 +213,4 @@ const CardGrammar = <T extends GrammarCardData, K extends TabLabel>({
   );
 };
 
-export default CardGrammar;
+export default ReadingCard;

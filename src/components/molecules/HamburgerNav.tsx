@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 
-import NavLinkList from '../NavLinkList';
+import NavLinkList from '../organisms/NavLinkList';
 
 const useStyles = makeStyles({
   navDrawer: {

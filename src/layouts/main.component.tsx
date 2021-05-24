@@ -4,8 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import HomeView from '../views/homeView.component';
 import KanjiView from '../views/KanjiView';
 import VocabView from '../views/VocabView';
-import GrammarView from '../views/grammarView.component';
-import ReadingView from '../views/readingView.component';
+import GrammarView from '../views/GrammarView';
+import ReadingView from '../views/ReadingView';
 
 import { WrapperMain } from '../theme/styledComponents';
 

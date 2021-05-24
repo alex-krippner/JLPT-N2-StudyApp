@@ -13,24 +13,6 @@ type StyledProps = {
   visible?: boolean;
 };
 
-const CardSceneSmall = styled.div<StyledProps>`
-  height: ${(props) =>
-    props.cardType === 'vocab' ? '45rem' : '40rem'};
-  perspective: 200rem;
-  -moz-perspective: 150rem;
-  width: ${(props) =>
-    props.cardType === 'vocab' ? '35rem' : '30rem'};
-  user-select: none;
-`;
-const CardWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transition: transform 0.5s;
-  transform-style: preserve-3d;
-  color: var(--color-primary-dark);
-`;
-
 const CardSideLarge = styled.div`
   display: flex;
   flex-direction: column;
@@ -81,76 +63,6 @@ const CardSideLarge = styled.div`
   }
 `;
 
-const CardSideSmall = styled.div.attrs((props: StyledProps) => ({
-  fontSize:
-    props.cardType === 'vocab'
-      ? 'var(--font-size-large)'
-      : 'var(--font-size-huge)',
-}))<StyledProps>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  backface-visibility: hidden;
-  border-radius: 1rem;
-  background-color: var(--color-white);
-  border: solid 1px #708090;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
-
-  font-size: ${(props) =>
-    props.front ? props.fontSize : 'var(--font-size-small)'};
-  transform: ${(props) =>
-    props.back ? ' rotateY(180deg)' : 'rotateY(0)'};
-  cursor: ${(props) => (props.back ? 'pointer' : '')};
-
-  .top {
-    padding: 5px;
-    border-right: solid 1px;
-    border-bottom: solid 1px;
-    font-size: var(--font-size-small);
-  }
-
-  .bottom {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 80%;
-    margin: 0;
-
-    .sentenceWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: flex-start;
-      height: 100%;
-      margin: 0;
-      padding: 1rem;
-
-      font-size: var(--font-size-small);
-    }
-
-    .paragraph {
-      display: flex;
-      align-items: center;
-      margin: 0;
-    }
-  }
-
-  .dot {
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    margin-right: 1rem;
-    border-radius: 50%;
-    border: solid 1px #708090;
-    background-color: var(--color-white);
-  }
-`;
-
 const Front = styled.div`
   position: relative;
   display: flex;
@@ -179,14 +91,6 @@ const FrontData = styled.div<StyledProps>`
       : 'var(--font-size-small)'};
 `;
 
-const FrontDataSmall = styled.div`
-  flex: 0 0 80%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  text-align: center;
-`;
-
 const RatingContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -206,22 +110,6 @@ const BackSection = styled.section.attrs((props: StyledProps) => ({
   font-size: var(--font-size-medium);
   border-bottom: ${(props) => props.borderBottom};
   height: ${(props) => (props.section === 1 ? '20%' : '40%')};
-`;
-
-const BackSectionSmall = styled.section.attrs(
-  (props: StyledProps) => ({
-    borderBottom: () =>
-      props.section < props.labelNum - 1 ? 'solid 1px' : '',
-  }),
-)<StyledProps>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: var(--font-size-medium);
-  border-bottom: solid 1px;
-  height: min-content;
 `;
 
 const Top = styled.div`
@@ -263,20 +151,6 @@ const Passage = styled.div`
   width: 100%;
   padding: 1rem;
   overflow: auto;
-`;
-
-export const CardsContainerStyled = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  grid-gap: 30px;
-  height: 100%;
-  width: 100%;
-  padding: 3rem;
-
-  @media only screen and (max-width: 600px) {
-    padding: 0;
-  }
 `;
 
 export const WrapperMain = styled.div`
@@ -418,14 +292,4 @@ export const cardReadingGramStyles = {
   Top,
   Bottom,
   Passage,
-};
-
-export const cardKanjiVocabStyles = {
-  CardSceneSmall,
-  CardWrapper,
-  CardSideSmall,
-  Front,
-  FrontDataSmall,
-  BackSectionSmall,
-  RatingContainer,
 };

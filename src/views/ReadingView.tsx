@@ -1,16 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import styled from 'styled-components';
-
-import SliderContainer from '../components/containers/SliderContainer';
+import { Box } from '@material-ui/core';
 import { rateReading } from '../redux/readingCollection.reducer';
 import { RootState } from '../redux/store';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+import ReadingCard from '../components/organisms/Reading/ReadingCard';
+import SlidesContainerTemplate from '../components/templates/SlidesContainerTemplate';
 
 const tabLabels: TabLabel[] = [
   'passage',
@@ -29,15 +24,16 @@ const ReadingView = () => {
     dispatch(rateReading({ readingId, rating }));
   };
   return (
-    <Wrapper>
-      <SliderContainer
+    <Box width="100%" height="100%">
+      <SlidesContainerTemplate
         data={readingState}
         label="reading"
         onRate={handleRate}
         tabLabels={tabLabels}
         cardType="reading"
+        CardComponent={ReadingCard}
       />
-    </Wrapper>
+    </Box>
   );
 };
 

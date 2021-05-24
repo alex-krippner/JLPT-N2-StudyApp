@@ -13,7 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import CardForm from '../cardForm/CardForm';
+import CardForm from '../organisms/CardForm';
 import { deleteGrammar } from '../../redux/grammarCollection.reducer';
 import { deleteKanji } from '../../redux/kanjiCollection.reducer';
 import { deleteReading } from '../../redux/readingCollection.reducer';

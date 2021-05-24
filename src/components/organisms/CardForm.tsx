@@ -6,10 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 // LOCAL IMPORTS
-import FormTabs from './FormTabs';
-import CardFormHeader from './CardFormHeader';
-import CardFormButtons from './CardFormButtons';
-import cardFormReducer from './cardFormReducer';
+import FormTabs from '../molecules/FormTabs';
+import CardFormHeader from '../atoms/CardFormHeader';
+import CardFormButtons from '../atoms/CardFormButtons';
+import cardFormReducer from '../../redux/cardFormReducer';
 import CardFormContext from '../../context/context';
 import {
   addKanji,

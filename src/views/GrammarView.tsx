@@ -1,15 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import { Box } from '@material-ui/core';
 
-import SliderContainer from '../components/containers/SliderContainer';
 import { rateGrammar } from '../redux/grammarCollection.reducer';
 import { RootState } from '../redux/store';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+import SlidesContainerTemplate from '../components/templates/SlidesContainerTemplate';
+import GrammarCard from '../components/organisms/Grammar/GrammarCard';
 
 const tabLabels: TabLabel[] = ['variations', '意味', '接続', '用例'];
 
@@ -23,15 +19,16 @@ const GrammarView = () => {
   };
 
   return (
-    <Wrapper>
-      <SliderContainer
+    <Box width="100%" height="100%">
+      <SlidesContainerTemplate
         data={grammarState}
         label="文法"
         onRate={handleRate}
         tabLabels={tabLabels}
         cardType="grammar"
+        CardComponent={GrammarCard}
       />
-    </Wrapper>
+    </Box>
   );
 };
 

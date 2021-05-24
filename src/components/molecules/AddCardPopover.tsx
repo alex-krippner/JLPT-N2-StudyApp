@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Popover from '@material-ui/core/Popover';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 
-import CardForm from '../cardForm/CardForm';
-import ButtonIcon from '../molecules/ButtonIcon';
+import CardForm from '../organisms/CardForm';
+import ButtonIcon from './ButtonIcon';
 
 type AddCardPopoverProps = {
   tabLabels: TabLabel[];
