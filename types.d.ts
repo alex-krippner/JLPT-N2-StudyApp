@@ -105,7 +105,7 @@ type CardFormReducerData = {
   label: string;
 };
 
-type StyledProps = {
+interface StyledProps {
   top?: string;
   left?: string;
   width?: string;
@@ -130,4 +130,6 @@ type StyledProps = {
   tabLabel?: string;
   visible?: boolean;
   perspective?: string;
-};
+  transition?: string;
+  bfVisibility?: string;
+}

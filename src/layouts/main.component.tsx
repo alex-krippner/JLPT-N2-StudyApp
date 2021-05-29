@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomeView from '../views/homeView.component';
+import HomeView from '../views/HomeView';
 import KanjiView from '../views/KanjiView';
 import VocabView from '../views/VocabView';
 import GrammarView from '../views/GrammarView';

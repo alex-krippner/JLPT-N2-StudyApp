@@ -14,9 +14,11 @@ const CardSide = styled.div<StyledProps>`
   border: ${(props) => props.border || 'solid 1px #708090'};
   box-shadow: ${(props) =>
     props.boxShadow || '0px 0px 5px 1px rgba(0, 0, 0, 0.2)'};
-  backface-visibility: hidden;
+  backface-visibility: ${(props) => props.bfVisibility || 'hidden'};
+  color: ${(props) => props.color};
   font-size: ${(props) => props.fontSize};
   transform: ${(props) => props.transform};
+  transition: ${(props) => props.transition};
   cursor: ${(props) => props.cursor};
 `;
 

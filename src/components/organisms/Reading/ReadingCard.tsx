@@ -5,11 +5,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from '../../molecules/CardMenu';
 import Rating from '../../atoms/Rating';
-import GramReadTabpanel from '../../atoms/GramReadTabPanel';
+import Panel from '../../atoms/Panel';
 import { cardReadingGramStyles } from '../../../theme/styledComponents';
 
 import { capitalizeFirstWord } from '../../../utils/utilitiesFunctions';
 import CardScene from '../../atoms/CardScene';
+import AppBarHeader from '../../molecules/AppBarHeader';
 
 const {
   CardSideLarge,
@@ -23,17 +24,6 @@ const {
 } = cardReadingGramStyles;
 
 const useStyles = makeStyles({
-  root: {
-    '&.MuiPaper-elevation4': {
-      boxShadow: 'none',
-    },
-  },
-
-  tab: {
-    fontSize: 'var(--font-size-small)',
-    minWidth: 'auto',
-    margin: '0 5px',
-  },
   paper: {
     height: '100%',
     overflow: 'auto',
@@ -48,6 +38,15 @@ const useStyles = makeStyles({
   },
 });
 
+const appBarStyles = {
+  boxShadow: 'none',
+};
+
+const tabStyles = {
+  fontSize: 'var(--font-size-small)',
+  minWidth: 'auto',
+  margin: '0 5px',
+};
 const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
   cardData,
   onRate,
@@ -101,23 +100,13 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
             wrap="nowrap"
           >
             <Grid item container xs={9} justify="flex-start">
-              <AppBar
-                position="static"
-                color="transparent"
-                className={classes.root}
-              >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  aria-label="full width tabs"
-                  variant="fullWidth"
-                >
-                  <Tab className={classes.tab} label="Passage" />
-                  <Tab className={classes.tab} label="Q &amp; A" />
-                </Tabs>
-              </AppBar>
+              <AppBarHeader
+                tabLabels={['Passage', 'Q & A']}
+                appBarStyles={appBarStyles}
+                tabStyles={tabStyles}
+                value={value}
+                handleChange={handleChange}
+              />
             </Grid>
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
@@ -129,7 +118,7 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
               />
             </Grid>
           </Grid>
-          <GramReadTabpanel value={value} index={0}>
+          <Panel value={value} index={0}>
             <CardSideLarge>
               <Front>
                 <FrontData>
@@ -150,8 +139,8 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
                 ))}
               </RatingContainer>
             </CardSideLarge>
-          </GramReadTabpanel>
-          <GramReadTabpanel value={value} index={1}>
+          </Panel>
+          <Panel value={value} index={1}>
             <CardSideLarge>
               {tabLabels.map((tabLabel: K, idx: number) => {
                 // @ts-ignore
@@ -206,7 +195,7 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
                 );
               })}
             </CardSideLarge>
-          </GramReadTabpanel>
+          </Panel>
         </Grid>
       </Paper>
     </CardScene>

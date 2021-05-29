@@ -34,7 +34,7 @@ const GRAMMAR_DATA: GrammarState = {
     id: uuidv4(),
     mainContent: 'ものなら',
     文法: 'ものなら',
-    variations: [''],
+    variations: [],
     意味: ['もし～できるなら、そうしたい・そうしてほしい'],
     接続: ['動辞書形　＋　ものなら'],
     用例: [
@@ -48,7 +48,7 @@ const GRAMMAR_DATA: GrammarState = {
     id: uuidv4(),
     mainContent: 'ようものなら',
     文法: 'ようものなら',
-    variations: [''],
+    variations: [],
     意味: ['もし～たら、大変なことになる'],
     接続: ['動う・よう形　＋　ものなら'],
     用例: [
@@ -62,7 +62,7 @@ const GRAMMAR_DATA: GrammarState = {
     id: uuidv4(),
     mainContent: 'ないことには',
     文法: 'ないことには',
-    variations: [''],
+    variations: [],
     意味: ['～なければ、あることが実現しない'],
     接続: [
       '動ないけい・イ形くない・ナ形－でない・名－でない　＋　ことには',
@@ -78,7 +78,7 @@ const GRAMMAR_DATA: GrammarState = {
     id: uuidv4(),
     mainContent: 'を抜きにしては',
     文法: 'を抜きにしては',
-    variations: [''],
+    variations: [],
     意味: [
       '～がなければ・～を考えに入れない状態では、あることが実現しない',
     ],

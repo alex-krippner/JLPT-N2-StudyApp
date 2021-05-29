@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 
-import { AppBar, Grid, Tab, Tabs, Paper } from '@material-ui/core/';
+import { Grid, Paper, Box } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CardMenu from '../../molecules/CardMenu';
 import Rating from '../../atoms/Rating';
-import GramReadTabpanel from '../../atoms/GramReadTabPanel';
+import Panel from '../../atoms/Panel';
 import { cardReadingGramStyles } from '../../../theme/styledComponents';
 import CardScene from '../../atoms/CardScene';
+import AppBarHeader from '../../molecules/AppBarHeader';
+import CardSide from '../../atoms/CardSide';
+import Section from '../../atoms/Section';
+import SubSection from '../../atoms/SubSection';
 
 const {
-  CardSideLarge,
-  Front,
-  FrontData,
   RatingContainer,
   BackSection,
   Top,
@@ -20,17 +21,6 @@ const {
 } = cardReadingGramStyles;
 
 const useStyles = makeStyles({
-  root: {
-    '&.MuiPaper-elevation4': {
-      boxShadow: 'none',
-    },
-  },
-
-  tab: {
-    fontSize: 'var(--font-size-small)',
-    minWidth: 'auto',
-    margin: '0 5px',
-  },
   paper: {
     height: '100%',
     overflow: 'auto',
@@ -40,6 +30,16 @@ const useStyles = makeStyles({
     height: '100%',
   },
 });
+
+const tabStyles = {
+  fontSize: 'var(--font-size-small)',
+  minWidth: 'auto',
+  margin: '0 5px',
+};
+
+const appBarStyles = {
+  boxShadow: 'none',
+};
 
 const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
   cardData,
@@ -51,8 +51,8 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
   const [value, setValue] = useState(0);
 
   const handleChange = (
-    event: React.MouseEvent,
-    newValue: number,
+    event: React.ChangeEvent<{}>,
+    newValue?: number,
   ) => {
     setValue(newValue);
   };
@@ -81,26 +81,13 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
             wrap="nowrap"
           >
             <Grid item container xs={9} justify="flex-start">
-              <AppBar
-                position="static"
-                color="transparent"
-                className={classes.root}
-              >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  aria-label="full width tabs"
-                  variant="fullWidth"
-                >
-                  <Tab className={classes.tab} label="Grammar" />
-                  <Tab
-                    className={classes.tab}
-                    label="Grammar Details"
-                  />
-                </Tabs>
-              </AppBar>
+              <AppBarHeader
+                tabLabels={['Grammar', 'Grammar Details']}
+                appBarStyles={appBarStyles}
+                tabStyles={tabStyles}
+                value={value}
+                handleChange={handleChange}
+              />
             </Grid>
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
@@ -112,11 +99,33 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
               />
             </Grid>
           </Grid>
-          <GramReadTabpanel value={value} index={0}>
-            <CardSideLarge className="card-side">
-              <Front>
-                <FrontData grammar>{cardData.mainContent} </FrontData>
-              </Front>
+          <Panel value={value} index={0}>
+            <CardSide
+              position="inherit"
+              border="0"
+              boxShadow="none"
+              transition="transform 0.8s ease, background 0.8s ease"
+              bgColor="var(--color-white)"
+              fontSize="var(--font-size-medium)"
+              color="var(--color-primary-dark)"
+            >
+              <Box
+                position="relative"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                height=" 100%"
+              >
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  height="90%"
+                  fontSize="var(--font-size-large)"
+                >
+                  {cardData.mainContent}{' '}
+                </Box>
+              </Box>
               <RatingContainer>
                 {[...Array(3)].map((cur, i) => (
                   <Rating
@@ -132,49 +141,86 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
                   />
                 ))}
               </RatingContainer>
-            </CardSideLarge>
-          </GramReadTabpanel>
-          <GramReadTabpanel value={value} index={1}>
-            <CardSideLarge>
+            </CardSide>
+          </Panel>
+          <Panel value={value} index={1}>
+            <CardSide
+              position="inherit"
+              border="0"
+              boxShadow="none"
+              transition="transform 0.8s ease, background 0.8s ease"
+              bgColor="var(--color-white)"
+              fontSize="var(--font-size-medium)"
+              color="var(--color-primary-dark)"
+            >
               {tabLabels.map((tabLabel: K, idx) => {
                 // @ts-ignore
                 const cardEntries = cardData[tabLabel] as Array<
                   string
                 >;
                 return (
-                  <BackSection
+                  <Section
                     key={tabLabel}
-                    section={idx}
-                    labelNum={tabLabels.length}
+                    position="relative"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="space-around"
+                    alignItems="flex-start"
+                    fontSize="var(--font-size-medium)"
+                    borderBottom={
+                      idx < tabLabels.length - 1 ? 'solid 1px' : ''
+                    }
+                    height={idx === 1 ? '20%' : '40%'}
                   >
-                    <Top>{tabLabel}</Top>
-                    <Bottom className="bottom" section={idx}>
-                      <div style={{ minHeight: 0 }}>
-                        <div className="sentenceWrapper">
+                    <SubSection
+                      flex="0 0 20%"
+                      padding=" 5px"
+                      fontSize="var(--font-size-small)"
+                      color="var(--color-primary-light)"
+                    >
+                      {tabLabel}
+                    </SubSection>
+                    <SubSection
+                      flex="0 0 80%"
+                      justifyContent="center"
+                      width="100%"
+                      section={idx}
+                      overflow="auto"
+                    >
+                      <Box minHeight="0">
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="space-around"
+                          alignItems="flex-start"
+                          height="100%"
+                          padding="1rem"
+                          fontSize="var(--font-size-small)"
+                        >
+                          {cardEntries.length === 0 ? 'No data' : ''}
                           {cardEntries.map((el: K, i) => (
-                            <div className="paragraph" key={el}>
-                              {/* @ts-ignore */}
-                              {cardData[tabLabel].length === 0 ? (
+                            <Box
+                              display="flex"
+                              align-items="center"
+                              key={el}
+                            >
+                              <>
+                                <span>{i + 1}.&nbsp;</span>
                                 <div>
-                                  Looks like there is no data for this
-                                  section...
+                                  {/* @ts-ignore */}
+                                  {el || 'No data'}
                                 </div>
-                              ) : (
-                                <>
-                                  <span>{i + 1}.&nbsp;</span>
-                                  <div>{el}</div>
-                                </>
-                              )}
-                            </div>
+                              </>
+                            </Box>
                           ))}
-                        </div>
-                      </div>
-                    </Bottom>
-                  </BackSection>
+                        </Box>
+                      </Box>
+                    </SubSection>
+                  </Section>
                 );
               })}
-            </CardSideLarge>
-          </GramReadTabpanel>
+            </CardSide>
+          </Panel>
         </Grid>
       </Paper>
     </CardScene>
