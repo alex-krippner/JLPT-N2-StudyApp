@@ -6,19 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMenu from '../../molecules/CardMenu';
 import Rating from '../../atoms/Rating';
 import Panel from '../../atoms/Panel';
-import { cardReadingGramStyles } from '../../../theme/styledComponents';
 import CardScene from '../../atoms/CardScene';
 import AppBarHeader from '../../molecules/AppBarHeader';
 import CardSide from '../../atoms/CardSide';
 import Section from '../../atoms/Section';
 import SubSection from '../../atoms/SubSection';
-
-const {
-  RatingContainer,
-  BackSection,
-  Top,
-  Bottom,
-} = cardReadingGramStyles;
 
 const useStyles = makeStyles({
   paper: {
@@ -126,7 +118,12 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
                   {cardData.mainContent}{' '}
                 </Box>
               </Box>
-              <RatingContainer>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="10%"
+              >
                 {[...Array(3)].map((cur, i) => (
                   <Rating
                     // eslint-disable-next-line react/no-array-index-key
@@ -140,7 +137,7 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
                     }
                   />
                 ))}
-              </RatingContainer>
+              </Box>
             </CardSide>
           </Panel>
           <Panel value={value} index={1}>
