@@ -3,6 +3,38 @@ import { createGlobalStyle } from 'styled-components';
 import COLORS from './styleConstants';
 
 const GlobalStyle = createGlobalStyle`
+  * {
+  
+  /* The emerging W3C standard
+   that is currently Firefox-only */
+
+  scrollbar-width: thin;
+
+  scrollbar-color: var(--color-scrollbar);
+
+  /* Works on Chrome/Edge/Safari */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--color-scrollbar);
+  }
+  &::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 20px;
+  }
+
+  &::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 20px;
+  }
+  }
+  
   *,
   *::after,
   *::before {
