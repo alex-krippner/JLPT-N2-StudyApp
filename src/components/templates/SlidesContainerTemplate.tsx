@@ -19,6 +19,7 @@ type SliderContainerProps<T, K> = {
   tabLabels: K[];
   label: CardLabels;
   CardComponent: React.ElementType;
+  CardFormComponent?: any;
 };
 
 const SlidesContainerTemplate = <
@@ -31,6 +32,7 @@ const SlidesContainerTemplate = <
   label,
   cardType,
   CardComponent,
+  CardFormComponent,
 }: SliderContainerProps<T, K>) => {
   return (
     <SlidesContainer>
@@ -39,6 +41,7 @@ const SlidesContainerTemplate = <
         cardData={data}
         label={label}
         cardType={cardType}
+        CardFormComponent={CardFormComponent}
       />
       <Swiper
         id="main"

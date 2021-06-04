@@ -6,6 +6,7 @@ type FormAction = {
   key?: string;
   entryIdx?: number;
   resetForm?: () => () => CardDataType;
+  payload?: any;
 };
 
 // FIXME: remove any and correctly type CardDataType to allow the spread operator
@@ -50,7 +51,7 @@ const FormReducer = (
         ),
       };
     case 'RESET':
-      return action.resetForm();
+      return action.payload;
 
     default:
       return state;

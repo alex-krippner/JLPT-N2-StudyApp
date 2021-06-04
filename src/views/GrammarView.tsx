@@ -6,6 +6,7 @@ import { rateGrammar } from '../state-management/redux/grammarCollection.reducer
 import { RootState } from '../state-management/redux/store';
 import SlidesContainerTemplate from '../components/templates/SlidesContainerTemplate';
 import GrammarCard from '../components/organisms/Grammar/GrammarCard';
+import { GrammarForm } from '../components/organisms/Grammar/GrammarForm';
 
 const tabLabels: TabLabel[] = ['variations', '意味', '接続', '用例'];
 
@@ -27,6 +28,14 @@ const GrammarView = () => {
         tabLabels={tabLabels}
         cardType="grammar"
         CardComponent={GrammarCard}
+        CardFormComponent={
+          <GrammarForm
+            label="文法"
+            tabLabels={tabLabels}
+            cardData={grammarState}
+            cardType="grammar"
+          />
+        }
       />
     </Box>
   );

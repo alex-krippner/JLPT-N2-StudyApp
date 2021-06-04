@@ -12,10 +12,12 @@ import {
 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
-import FormTable from './FormTable';
 import CardFormContext from '../../context/context';
 
 import * as utils from '../../utils/utilitiesFunctions';
+import FormTable from './FormTable';
+import CardFormTabs from './CardFormTabs';
+import { CardFormInput } from './CardFormInput';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -80,6 +82,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const inputContainerStyles: Partial<React.CSSProperties> = {
+  fontSize: 'var(--font-size-small)',
+  justifyContent: 'center',
+  marginBottom: '1rem',
+  visibility: 'visible',
+};
+
+const inputStyles: Partial<React.CSSProperties> = {
+  fontSize: 'var(--font-size-small)',
+};
+
 type TabPanelProps = {
   children: React.ReactNode;
   value: number;
@@ -143,6 +156,7 @@ const FormTabs = <T extends CardDataType, K extends TabLabel>({
   const handleEntryInput = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    console.log(event.target.value);
     setEntry({
       value: event.target.value,
     });
@@ -195,63 +209,24 @@ const FormTabs = <T extends CardDataType, K extends TabLabel>({
 
   return (
     <>
-      <AppBar
-        position="static"
-        color="transparent"
-        className={classes.root}
-      >
-        <Tabs
-          value={tabValue}
-          onChange={changeTab}
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="full width tabs"
-          variant="fullWidth"
-        >
-          {tabLabels.map((tabLabel) => (
-            <Tab
-              label={tabLabel}
-              classes={{ root: classes.tab }}
-              key={tabLabel}
-              onClick={() => handlePlaceholder(tabLabel)}
-            />
-          ))}
-        </Tabs>
-      </AppBar>
-
-      <Grid
-        container
-        spacing={1}
-        alignItems="center"
-        className={classes.inputContainer}
-        id="grid-entry-input"
-      >
-        <Grid item xs={6}>
-          <Input
-            fullWidth
-            value={entry.value}
-            className={classes.input}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleEntryInput(event)
-            }
-            placeholder={utils.capitalizeFirstWord(placeholder)}
-            id="entry-input"
+      <CardFormTabs tabValue={tabValue} changeTab={changeTab}>
+        {tabLabels.map((tabLabel) => (
+          <Tab
+            label={tabLabel}
+            classes={{ root: classes.tab }}
+            key={tabLabel}
+            onClick={() => handlePlaceholder(tabLabel)}
           />
-        </Grid>
-        <Grid item>
-          <IconButton
-            onClick={(
-              event:
-                | React.MouseEvent<HTMLAnchorElement>
-                | React.MouseEvent<HTMLButtonElement>,
-            ) => {
-              handleAddEntryBtn(event);
-            }}
-          >
-            <AddCircleOutlineIcon fontSize="large" />
-          </IconButton>
-        </Grid>
-      </Grid>
+        ))}
+      </CardFormTabs>
+      <CardFormInput
+        inputContainerStyles={inputContainerStyles}
+        inputStyles={inputStyles}
+        handleEntryInput={handleEntryInput}
+        handleAddEntryBtn={handleAddEntryBtn}
+        placeholder={placeholder}
+        entryValue={entry.value}
+      />
 
       {tabLabels.map((tabLabel, index) => (
         <TabPanel

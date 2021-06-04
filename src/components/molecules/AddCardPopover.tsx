@@ -10,6 +10,7 @@ type AddCardPopoverProps = {
   label: CardLabels;
   cardType: CardType;
   cardData: CardDataType[];
+  CardFormComponent: React.ElementType;
 };
 
 const AddCardPopover = ({
@@ -17,9 +18,9 @@ const AddCardPopover = ({
   label,
   cardData,
   cardType,
+  CardFormComponent,
 }: AddCardPopoverProps) => {
   const [anchorEl, setAnchorEl] = useState(null);
-
   const handleClick = () =>
     setAnchorEl(document.getElementById('main'));
   const handleClose = () => setAnchorEl(null);
@@ -51,12 +52,23 @@ const AddCardPopover = ({
           horizontal: 'center',
         }}
       >
-        <CardForm
-          label={label}
-          tabLabels={tabLabels}
-          cardData={cardData}
-          cardType={cardType}
-        />
+        {label === '文法' ? (
+          CardFormComponent
+        ) : (
+          <CardForm
+            label={label}
+            tabLabels={tabLabels}
+            cardData={cardData}
+            cardType={cardType}
+            editing={false}
+          />
+        )}
+        {/* <CardForm */}
+        {/*  label={label} */}
+        {/*  tabLabels={tabLabels} */}
+        {/*  cardData={cardData} */}
+        {/*  cardType={cardType} */}
+        {/* /> */}
       </Popover>
     </>
   );
