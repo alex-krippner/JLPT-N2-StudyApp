@@ -59,7 +59,7 @@ interface CardFormProps<T extends CardDataType, K> {
   cardData: T | T[];
 }
 
-export const GrammarForm = <
+export const KanjiForm = <
   T extends CardDataType,
   K extends TabLabel
 >({

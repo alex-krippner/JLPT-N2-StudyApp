@@ -6,6 +6,7 @@ import { rateKanji } from '../state-management/redux/kanjiCollection.reducer';
 import { RootState } from '../state-management/redux/store';
 import CardsContainerTemplate from '../components/templates/CardsContainerTemplate';
 import KanjiCard from '../components/organisms/Kanji/KanjiCard';
+import { KanjiForm } from '../components/organisms/Kanji/Form/KanjiForm';
 
 const tabLabels: KanjiTabLabels[] = ['読み', '単語例', '用例'];
 
@@ -17,6 +18,16 @@ const KanjiView = () => {
   const handleRate = (kanji: string, rating: number) => {
     dispatch(rateKanji({ kanji, rating }));
   };
+
+  const CardFormComponent = (
+    <KanjiForm
+      label="漢字"
+      tabLabels={tabLabels}
+      cardData={kanjiState}
+      cardType="kanji"
+    />
+  );
+
   return (
     <Box width="100%" height="100%">
       <CardsContainerTemplate
@@ -25,6 +36,7 @@ const KanjiView = () => {
         onRate={handleRate}
         tabLabels={tabLabels}
         CardComponent={KanjiCard}
+        CardFormComponent={CardFormComponent}
       />
     </Box>
   );

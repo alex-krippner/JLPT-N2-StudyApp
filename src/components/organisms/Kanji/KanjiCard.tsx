@@ -7,6 +7,7 @@ import Rating from '../../atoms/Rating';
 import CardSection from '../../atoms/Section';
 import Dot from '../../atoms/Dot';
 import * as utils from '../../../utils/utilitiesFunctions';
+import { KanjiForm } from './Form/KanjiForm';
 
 const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
   cardData,
@@ -26,6 +27,16 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
       current.style.transform = '';
     }
   };
+
+  const CardFormComponent = (
+    <KanjiForm
+      label="漢字"
+      tabLabels={tabLabels}
+      cardData={cardData}
+      cardType="kanji"
+      editing
+    />
+  );
   return (
     <FlipCard
       cardRef={cardToFlip}
@@ -52,6 +63,7 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
             label={label}
             tabLabels={tabLabels}
             cardData={cardData}
+            CardFormComponent={CardFormComponent}
           />{' '}
           <Box
             display="flex"

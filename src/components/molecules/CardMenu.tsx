@@ -145,7 +145,7 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
           }}
           className={classes.root}
         >
-          {label === '文法' ? (
+          {label === '文法' || label === '漢字' ? (
             CardFormComponent
           ) : (
             <CardForm

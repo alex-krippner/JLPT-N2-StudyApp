@@ -34,7 +34,8 @@ const CardFormHeader = ({
   styles,
 }: CardFormHeaderProps) => {
   const classes = useStyles();
-
+  console.log(styles);
+  console.log('editing is ', editing);
   return (
     <header style={styles.headerStyles}>
       {editing ? (

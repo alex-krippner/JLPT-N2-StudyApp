@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 
-import CardForm from '../organisms/CardForm';
 import CardsContainer from '../containers/CardsContainer';
 
 interface CardContainerProps<T, K> {
@@ -10,6 +9,7 @@ interface CardContainerProps<T, K> {
   tabLabels: K[];
   onRate: (label: string, ratingIndex: number) => void;
   CardComponent: React.ElementType;
+  CardFormComponent?: any;
 }
 
 const CardsContainerTemplate = <
@@ -21,6 +21,7 @@ const CardsContainerTemplate = <
   tabLabels,
   onRate,
   CardComponent,
+  CardFormComponent,
 }: CardContainerProps<T, K>) => {
   let flipId = '';
   flipId += data.map((x: CardDataType) => x.id).join('');
@@ -28,11 +29,7 @@ const CardsContainerTemplate = <
   return (
     <Flipper flipKey={flipId} spring="stiff">
       <CardsContainer>
-        <CardForm
-          label={label}
-          tabLabels={tabLabels}
-          cardData={data}
-        />
+        {CardFormComponent}
 
         {data.map((el) => (
           <Flipped key={el.id} flipId={el.id}>
