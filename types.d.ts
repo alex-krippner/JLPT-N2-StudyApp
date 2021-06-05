@@ -95,7 +95,7 @@ interface CardProps<T, K> {
     ratingIndex: number,
   ) => void;
   tabLabels: K[];
-  label: CardLabels;
+  label?: CardLabels;
   cardType?: CardType;
 }
 

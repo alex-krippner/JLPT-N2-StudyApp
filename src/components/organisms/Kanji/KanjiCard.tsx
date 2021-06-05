@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Box } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import FlipCard from '../../molecules/FlipCard';
 import CardSide from '../../atoms/CardSide';
 import CardMenu from '../../molecules/CardMenu';
@@ -7,14 +8,15 @@ import Rating from '../../atoms/Rating';
 import CardSection from '../../atoms/Section';
 import Dot from '../../atoms/Dot';
 import * as utils from '../../../utils/utilitiesFunctions';
+import { deleteKanji } from '../../../state-management/redux/kanjiCollection.reducer';
 import { KanjiForm } from './Form/KanjiForm';
 
 const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
-  label,
 }: CardProps<T, K>) => {
+  const dispatch = useDispatch();
   const cardToFlip = useRef(null);
   const handleFlip = (
     cardRef: React.MutableRefObject<any> | null,
@@ -27,6 +29,8 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
       current.style.transform = '';
     }
   };
+  const handleDelete = () =>
+    dispatch(deleteKanji(cardData.mainContent));
 
   const CardFormComponent = (
     <KanjiForm
@@ -37,6 +41,7 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
       editing
     />
   );
+
   return (
     <FlipCard
       cardRef={cardToFlip}
@@ -58,12 +63,9 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
           height="100%"
         >
           <CardMenu
-            front={cardData.mainContent}
             cardId={cardData.id}
-            label={label}
-            tabLabels={tabLabels}
-            cardData={cardData}
             CardFormComponent={CardFormComponent}
+            handleDelete={handleDelete}
           />{' '}
           <Box
             display="flex"

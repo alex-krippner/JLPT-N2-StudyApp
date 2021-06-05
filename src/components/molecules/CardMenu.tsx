@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -12,12 +11,6 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
-import CardForm from '../organisms/CardForm';
-import { deleteGrammar } from '../../state-management/redux/grammarCollection.reducer';
-import { deleteKanji } from '../../state-management/redux/kanjiCollection.reducer';
-import { deleteReading } from '../../state-management/redux/readingCollection.reducer';
-import { deleteVocab } from '../../state-management/redux/vocabCollection.reducer';
 
 const useStyles = makeStyles({
   root: {
@@ -39,30 +32,25 @@ const useStyles = makeStyles({
     cursor: 'pointer',
   },
 });
-
+// TODO: REMOVE UNUSED PROPS
 interface CardMenuProps<T, K> {
   front?: string | number | string[] | (string & string[]);
   cardId: string;
-  label: CardLabels;
-  tabLabels: K[];
-  cardData: T;
+  label?: CardLabels;
+  tabLabels?: K[];
+  cardData?: T;
   CardFormComponent?: any;
+  handleDelete?: () => void;
 }
 // TODO: props can probably be removed if the CardFormComponent is being passed with props
 const CardMenu = <T extends CardDataType, K extends TabLabel>({
-  front,
   cardId,
-  label,
-  tabLabels,
-  cardData,
   CardFormComponent,
+  handleDelete,
 }: CardMenuProps<T, K>) => {
-  const dispatch = useDispatch();
-
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState(null);
   const [anchorPop, setAnchorPop] = useState(null);
-  const [edit, setEdit] = useState(null);
   const openPop = Boolean(anchorPop);
   const openMenu = Boolean(anchorMenu);
   const handleClick = (event: React.MouseEvent) => {
@@ -76,23 +64,8 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
     setAnchorPop(null);
   };
 
-  // TODO: can probably be removed
-  const handleEdit = () => {
-    setEdit(false);
-  };
-
   const handlePopover = () => {
     setAnchorPop(document.getElementById(cardId));
-    setEdit(true);
-  };
-
-  // FIXME: move handleDelete to the card componentes
-  const handleDelete = () => {
-    if (label === '漢字') dispatch(deleteKanji(front));
-    if (label === '語彙') dispatch(deleteVocab(front));
-    if (label === '文法') dispatch(deleteGrammar(front));
-    if (cardData.cardType === 'reading')
-      dispatch(deleteReading({ cardId }));
   };
 
   return (
@@ -134,7 +107,6 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
           open={openPop}
           anchorEl={anchorPop}
           onClose={handleClosePop}
-          onExited={handleEdit}
           anchorOrigin={{
             vertical: 'center',
             horizontal: 'center',
@@ -145,17 +117,7 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
           }}
           className={classes.root}
         >
-          {label === '文法' || label === '漢字' ? (
-            CardFormComponent
-          ) : (
-            <CardForm
-              label={label}
-              tabLabels={tabLabels}
-              cardType={cardData.cardType}
-              editing={edit}
-              cardData={cardData}
-            />
-          )}
+          {CardFormComponent}
         </Popover>
         <MenuItem
           className="delete"

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Grid, Paper, Box } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { useDispatch } from 'react-redux';
 import CardMenu from '../../molecules/CardMenu';
 import Rating from '../../atoms/Rating';
 import Panel from '../../atoms/Panel';
@@ -11,6 +12,7 @@ import AppBarHeader from '../../molecules/AppBarHeader';
 import CardSide from '../../atoms/CardSide';
 import Section from '../../atoms/Section';
 import SubSection from '../../atoms/SubSection';
+import { deleteGrammar } from '../../../state-management/redux/grammarCollection.reducer';
 import { GrammarForm } from './Form/GrammarForm';
 
 const useStyles = makeStyles({
@@ -40,8 +42,13 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
   tabLabels,
   label,
 }: CardProps<T, K>) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [value, setValue] = useState(0);
+
+  const handleDelete = () =>
+    dispatch(deleteGrammar(cardData.mainContent));
+
   const CardFormComponent = (
     <GrammarForm
       label="文法"
@@ -99,6 +106,7 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
                 tabLabels={tabLabels}
                 cardData={cardData}
                 CardFormComponent={CardFormComponent}
+                handleDelete={handleDelete}
               />
             </Grid>
           </Grid>
