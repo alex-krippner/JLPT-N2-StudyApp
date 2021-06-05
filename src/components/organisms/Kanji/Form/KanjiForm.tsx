@@ -2,22 +2,28 @@ import React, { useReducer, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Tab } from '@material-ui/core/';
-import { initCardFormProperties } from '../../../utils/utilitiesFunctions';
-import cardFormReducer from '../../../state-management/cardFormReducer';
+import { Box, Tab } from '@material-ui/core/';
+import cardFormReducer from '../../../../state-management/cardFormReducer';
+
+import CardFormHeader from '../../../atoms/CardFormHeader';
+import CardFormContext from '../../../../context/context';
+import CardFormButtons from '../../../atoms/CardFormButtons';
+import CardFormTabs from '../../../molecules/CardFormTabs';
+import { CardFormInput } from '../../../molecules/CardFormInput';
+import FormTable from '../../../molecules/FormTable';
+import { TabPanel } from '../../../molecules/CardFormPanel';
+import { initCardForm } from '../../../../utils/formUtilFunctions';
 import {
-  addGrammar,
-  editGrammar,
-} from '../../../state-management/redux/grammarCollection.reducer';
-import { CardFormStyled } from '../../../theme/styledComponents';
-import CardFormHeader from '../../atoms/CardFormHeader';
-import CardFormContext from '../../../context/context';
-import CardFormButtons from '../../atoms/CardFormButtons';
-import CardFormTabs from '../../molecules/CardFormTabs';
-import { CardFormInput } from '../../molecules/CardFormInput';
-import FormTable from '../../molecules/FormTable';
-import { TabPanel } from '../../molecules/CardFormPanel';
-import { initCardForm } from '../../../utils/formUtilFunctions';
+  addKanji,
+  editKanji,
+} from '../../../../state-management/redux/kanjiCollection.reducer';
+import {
+  cardFrontStyles,
+  cardTitleStyles,
+  headerStyles,
+  inputContainerStyles,
+  inputStyles,
+} from './styles';
 
 const useStyles = makeStyles({
   root: {
@@ -44,17 +50,6 @@ const useStyles = makeStyles({
     margin: '0 5px',
   },
 });
-
-const inputContainerStyles: Partial<React.CSSProperties> = {
-  fontSize: 'var(--font-size-small)',
-  justifyContent: 'center',
-  marginBottom: '1rem',
-  visibility: 'visible',
-};
-
-const inputStyles: Partial<React.CSSProperties> = {
-  fontSize: 'var(--font-size-small)',
-};
 
 interface CardFormProps<T extends CardDataType, K> {
   label: CardLabels;
@@ -95,7 +90,7 @@ export const GrammarForm = <
     });
   };
   const handleCreateCard = () => {
-    dispatch(addGrammar(cardFormData));
+    dispatch(addKanji(cardFormData));
     dispatchFormAction({
       type: 'RESET',
       payload: initCardForm(editing, cardData, label),
@@ -124,15 +119,25 @@ export const GrammarForm = <
       value: '',
     });
   };
-
   return (
-    <CardFormStyled cardType={cardType}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="flex-start"
+      height="45rem"
+      width="var(--width-cardForm)"
+      style={{ backgroundColor: 'var(--color-white)' }}
+      border="solid 1px #708090"
+      borderRadius="1rem"
+      boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
+    >
       <CardFormHeader
         editing={editing}
         cardFormData={cardFormData}
         cardType={cardType}
         label={label}
         handleChange={handleChange}
+        styles={{ headerStyles, cardTitleStyles, cardFrontStyles }}
       />
       <Grid
         container
@@ -189,9 +194,9 @@ export const GrammarForm = <
         <CardFormButtons
           editing={editing}
           handleCreateCard={handleCreateCard}
-          handleEditCard={() => dispatch(editGrammar(cardFormData))}
+          handleEditCard={() => dispatch(editKanji(cardFormData))}
         />
       </Grid>
-    </CardFormStyled>
+    </Box>
   );
 };

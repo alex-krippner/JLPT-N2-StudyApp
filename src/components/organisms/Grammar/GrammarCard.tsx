@@ -11,6 +11,7 @@ import AppBarHeader from '../../molecules/AppBarHeader';
 import CardSide from '../../atoms/CardSide';
 import Section from '../../atoms/Section';
 import SubSection from '../../atoms/SubSection';
+import { GrammarForm } from './Form/GrammarForm';
 
 const useStyles = makeStyles({
   paper: {
@@ -41,6 +42,15 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
 }: CardProps<T, K>) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const CardFormComponent = (
+    <GrammarForm
+      label="文法"
+      tabLabels={tabLabels}
+      cardData={cardData}
+      cardType="grammar"
+      editing
+    />
+  );
 
   const handleChange = (
     event: React.ChangeEvent<{}>,
@@ -88,6 +98,7 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
                 label={label}
                 tabLabels={tabLabels}
                 cardData={cardData}
+                CardFormComponent={CardFormComponent}
               />
             </Grid>
           </Grid>

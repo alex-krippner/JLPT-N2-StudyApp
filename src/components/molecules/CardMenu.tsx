@@ -46,14 +46,16 @@ interface CardMenuProps<T, K> {
   label: CardLabels;
   tabLabels: K[];
   cardData: T;
+  CardFormComponent?: any;
 }
-
+// TODO: props can probably be removed if the CardFormComponent is being passed with props
 const CardMenu = <T extends CardDataType, K extends TabLabel>({
   front,
   cardId,
   label,
   tabLabels,
   cardData,
+  CardFormComponent,
 }: CardMenuProps<T, K>) => {
   const dispatch = useDispatch();
 
@@ -74,6 +76,7 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
     setAnchorPop(null);
   };
 
+  // TODO: can probably be removed
   const handleEdit = () => {
     setEdit(false);
   };
@@ -82,7 +85,8 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
     setAnchorPop(document.getElementById(cardId));
     setEdit(true);
   };
-  // FIXME: use cardData.cardType for control statement
+
+  // FIXME: move handleDelete to the card componentes
   const handleDelete = () => {
     if (label === '漢字') dispatch(deleteKanji(front));
     if (label === '語彙') dispatch(deleteVocab(front));
@@ -141,13 +145,17 @@ const CardMenu = <T extends CardDataType, K extends TabLabel>({
           }}
           className={classes.root}
         >
-          <CardForm
-            label={label}
-            tabLabels={tabLabels}
-            cardType={cardData.cardType}
-            editing={edit}
-            cardData={cardData}
-          />
+          {label === '文法' ? (
+            CardFormComponent
+          ) : (
+            <CardForm
+              label={label}
+              tabLabels={tabLabels}
+              cardType={cardData.cardType}
+              editing={edit}
+              cardData={cardData}
+            />
+          )}
         </Popover>
         <MenuItem
           className="delete"

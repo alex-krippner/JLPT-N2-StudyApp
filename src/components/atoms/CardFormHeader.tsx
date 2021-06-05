@@ -2,8 +2,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
-import COLORS from '../../theme/styleConstants';
-
 const useStyles = makeStyles({
   root: {
     '& .MuiFormLabel-root': {
@@ -24,6 +22,7 @@ type CardFormHeaderProps = {
   cardType: string;
   label: CardLabels;
   handleChange: (event: React.ChangeEvent) => void;
+  styles?: any;
 };
 
 const CardFormHeader = ({
@@ -32,23 +31,17 @@ const CardFormHeader = ({
   cardType,
   label,
   handleChange,
+  styles,
 }: CardFormHeaderProps) => {
   const classes = useStyles();
 
   return (
-    <header className="header">
+    <header style={styles.headerStyles}>
       {editing ? (
         <>
-          <h2
-            style={{
-              background: `${COLORS.greenSeaMedium}`,
-            }}
-            className="card-title"
-          >
-            Edit Card
-          </h2>
+          <h2 style={styles.cardTitleStyles}>Edit Card</h2>
 
-          <h2 className="card-front">
+          <h2 style={styles.cardFrontStyles}>
             {'mainContent' in cardFormData
               ? cardFormData.mainContent
               : ''}{' '}
@@ -56,7 +49,8 @@ const CardFormHeader = ({
         </>
       ) : (
         <>
-          <h2 className="card-title">New Card</h2>
+          <h2 style={styles.cardTitleStyles}>New Card</h2>
+          {/* TODO: replace cardType with hasTextfield boolean */}
           {cardType === 'reading' ? (
             ''
           ) : (
