@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Box } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import FlipCard from '../../molecules/FlipCard';
 import CardSide from '../../atoms/CardSide';
 import CardMenu from '../../molecules/CardMenu';
@@ -7,13 +8,15 @@ import Rating from '../../atoms/Rating';
 import CardSection from '../../atoms/Section';
 import Dot from '../../atoms/Dot';
 import * as utils from '../../../utils/utilitiesFunctions';
+import { deleteVocab } from '../../../state-management/redux/vocabCollection.reducer';
+import { VocabForm } from './Form/VocabForm';
 
 const VocabCard = <T extends VocabCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
-  label,
 }: CardProps<T, K>) => {
+  const dispatch = useDispatch();
   const cardToFlip = useRef(null);
   const handleFlip = (
     cardRef: React.MutableRefObject<any> | null,
@@ -26,6 +29,19 @@ const VocabCard = <T extends VocabCardData, K extends TabLabel>({
       current.style.transform = '';
     }
   };
+
+  const handleDelete = () =>
+    dispatch(deleteVocab(cardData.mainContent));
+
+  const CardFormComponent = (
+    <VocabForm
+      label="語彙"
+      tabLabels={tabLabels}
+      cardData={cardData}
+      cardType="vocab"
+      editing
+    />
+  );
   return (
     <FlipCard
       cardRef={cardToFlip}
@@ -47,11 +63,9 @@ const VocabCard = <T extends VocabCardData, K extends TabLabel>({
           height="100%"
         >
           <CardMenu
-            front={cardData.mainContent}
             cardId={cardData.id}
-            label={label}
-            tabLabels={tabLabels}
-            cardData={cardData}
+            CardFormComponent={CardFormComponent}
+            handleDelete={handleDelete}
           />{' '}
           <Box
             display="flex"

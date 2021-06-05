@@ -135,12 +135,14 @@ const vocabCollectionSlice = createSlice({
     addVocab(state = {}, action) {
       return {
         ...state,
-        [action.payload.漢字]: {
-          cardType: 'kanji',
+        [action.payload.語彙]: {
+          cardType: 'vocab',
+          mainContent: action.payload.語彙,
+          語彙: action.payload.語彙,
           漢字: action.payload.漢字,
           id: uuidv4(),
-          読み: [...action.payload.読み],
-          単語例: [...action.payload.単語例],
+          語類: [...action.payload.語類],
+          定義: [...action.payload.定義],
           用例: [...action.payload.用例],
           rating: 0,
         },

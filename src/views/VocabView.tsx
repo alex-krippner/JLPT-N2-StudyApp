@@ -6,6 +6,7 @@ import { rateVocab } from '../state-management/redux/vocabCollection.reducer';
 import { RootState } from '../state-management/redux/store';
 import CardsContainerTemplate from '../components/templates/CardsContainerTemplate';
 import VocabCard from '../components/organisms/Vocab/VocabCard';
+import { VocabForm } from '../components/organisms/Vocab/Form/VocabForm';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,6 +24,15 @@ const VocabView = () => {
     dispatch(rateVocab({ vocab, rating }));
   };
 
+  const CardFormComponent = (
+    <VocabForm
+      label="語彙"
+      tabLabels={tabLabels}
+      cardData={vocabState}
+      cardType="kanji"
+    />
+  );
+
   return (
     <Wrapper>
       <CardsContainerTemplate
@@ -31,6 +41,7 @@ const VocabView = () => {
         onRate={handleRate}
         tabLabels={tabLabels}
         CardComponent={VocabCard}
+        CardFormComponent={CardFormComponent}
       />
     </Wrapper>
   );

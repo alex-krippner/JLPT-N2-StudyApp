@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import { Grid, Paper, Box } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
-
 import { useDispatch } from 'react-redux';
 import CardMenu from '../../molecules/CardMenu';
 import Rating from '../../atoms/Rating';
@@ -40,7 +38,6 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
-  label,
 }: CardProps<T, K>) => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -100,11 +97,7 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
             </Grid>
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
-                front={cardData.mainContent}
                 cardId={cardData.id}
-                label={label}
-                tabLabels={tabLabels}
-                cardData={cardData}
                 CardFormComponent={CardFormComponent}
                 handleDelete={handleDelete}
               />
