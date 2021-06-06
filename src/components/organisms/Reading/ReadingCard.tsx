@@ -14,6 +14,7 @@ import AppBarHeader from '../../molecules/AppBarHeader';
 import CardSide from '../../atoms/CardSide';
 import Section from '../../atoms/Section';
 import SubSection from '../../atoms/SubSection';
+import { ReadingForm } from './Form/ReadingForm';
 
 const Bottom = styled.div<StyledProps>`
   flex: 0 0 80%
@@ -77,6 +78,15 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
   const [visible, setVisibility] = useState(false);
   const [blur, setBlur] = useState(false);
 
+  const CardFormComponent = (
+    <ReadingForm
+      tabLabels={tabLabels}
+      cardData={cardData}
+      cardType="reading"
+      editing
+    />
+  );
+
   const handleChange = (
     event: React.MouseEvent,
     newValue: number,
@@ -133,6 +143,7 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
                 label={label}
                 tabLabels={tabLabels}
                 cardData={cardData}
+                CardFormComponent={CardFormComponent}
               />
             </Grid>
           </Grid>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Popover from '@material-ui/core/Popover';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 
-import CardForm from '../organisms/CardForm';
 import ButtonIcon from './ButtonIcon';
 
 type AddCardPopoverProps = {
@@ -14,10 +13,6 @@ type AddCardPopoverProps = {
 };
 
 const AddCardPopover = ({
-  tabLabels,
-  label,
-  cardData,
-  cardType,
   CardFormComponent,
 }: AddCardPopoverProps) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -52,23 +47,7 @@ const AddCardPopover = ({
           horizontal: 'center',
         }}
       >
-        {label === '文法' ? (
-          CardFormComponent
-        ) : (
-          <CardForm
-            label={label}
-            tabLabels={tabLabels}
-            cardData={cardData}
-            cardType={cardType}
-            editing={false}
-          />
-        )}
-        {/* <CardForm */}
-        {/*  label={label} */}
-        {/*  tabLabels={tabLabels} */}
-        {/*  cardData={cardData} */}
-        {/*  cardType={cardType} */}
-        {/* /> */}
+        {CardFormComponent}
       </Popover>
     </>
   );

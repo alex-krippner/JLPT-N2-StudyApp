@@ -6,6 +6,7 @@ import { rateReading } from '../state-management/redux/readingCollection.reducer
 import { RootState } from '../state-management/redux/store';
 import ReadingCard from '../components/organisms/Reading/ReadingCard';
 import SlidesContainerTemplate from '../components/templates/SlidesContainerTemplate';
+import { ReadingForm } from '../components/organisms/Reading/Form/ReadingForm';
 
 const tabLabels: TabLabel[] = [
   'passage',
@@ -23,6 +24,15 @@ const ReadingView = () => {
   const handleRate = (readingId: string, rating: number) => {
     dispatch(rateReading({ readingId, rating }));
   };
+
+  const CardFormComponent = (
+    <ReadingForm
+      tabLabels={tabLabels}
+      cardData={readingState}
+      cardType="reading"
+      editing={false}
+    />
+  );
   return (
     <Box width="100%" height="100%">
       <SlidesContainerTemplate
@@ -32,6 +42,7 @@ const ReadingView = () => {
         tabLabels={tabLabels}
         cardType="reading"
         CardComponent={ReadingCard}
+        CardFormComponent={CardFormComponent}
       />
     </Box>
   );

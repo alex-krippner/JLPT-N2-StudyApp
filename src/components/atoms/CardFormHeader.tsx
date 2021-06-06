@@ -20,8 +20,8 @@ type CardFormHeaderProps = {
   editing: boolean;
   cardFormData: any;
   cardType: string;
-  label: CardLabels;
-  handleChange: (event: React.ChangeEvent) => void;
+  label?: CardLabels;
+  handleChange?: (event: React.ChangeEvent) => void;
   styles?: any;
 };
 
