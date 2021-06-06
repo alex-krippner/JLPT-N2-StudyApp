@@ -4,6 +4,7 @@ import { Grid, Paper, Box } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import CardMenu from '../../molecules/CardMenu';
 import Rating from '../../atoms/Rating';
 import Panel from '../../atoms/Panel';
@@ -14,6 +15,7 @@ import AppBarHeader from '../../molecules/AppBarHeader';
 import CardSide from '../../atoms/CardSide';
 import Section from '../../atoms/Section';
 import SubSection from '../../atoms/SubSection';
+import { deleteReading } from '../../../state-management/redux/readingCollection.reducer';
 import { ReadingForm } from './Form/ReadingForm';
 
 const Bottom = styled.div<StyledProps>`
@@ -71,8 +73,8 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
   cardData,
   onRate,
   tabLabels,
-  label,
 }: CardProps<T, K>) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [visible, setVisibility] = useState(false);
@@ -104,6 +106,8 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
     setVisibility(!visible);
     setBlur(!blur);
   };
+
+  const handleDelete = () => dispatch(deleteReading(cardData.id));
 
   return (
     <CardScene>
@@ -140,10 +144,8 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
             <Grid item container xs={3} justify="flex-end">
               <CardMenu
                 cardId={cardData.id}
-                label={label}
-                tabLabels={tabLabels}
-                cardData={cardData}
                 CardFormComponent={CardFormComponent}
+                handleDelete={handleDelete}
               />
             </Grid>
           </Grid>

@@ -75,7 +75,7 @@ const readingCollectionSlice = createSlice({
     },
     deleteReading(state, action) {
       return state.filter((reading) => {
-        return reading.id !== action.payload.cardId;
+        return reading.id !== action.payload;
       });
     },
   },
