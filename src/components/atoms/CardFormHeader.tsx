@@ -41,7 +41,6 @@ const CardFormHeader = ({
     dispatchFormAction({
       type: 'INPUT_MAIN',
       value,
-      label,
     });
   };
 

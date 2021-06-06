@@ -210,7 +210,7 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
                             <Box
                               display="flex"
                               align-items="center"
-                              key={el}
+                              key={el + i}
                             >
                               <>
                                 <span>{i + 1}.&nbsp;</span>

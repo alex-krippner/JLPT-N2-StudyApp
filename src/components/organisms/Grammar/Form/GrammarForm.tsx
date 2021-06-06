@@ -72,13 +72,13 @@ export const GrammarForm = <
   const [placeholder, setPlaceholder] = useState(tabLabels[0]);
   const [cardFormData, dispatchFormAction] = useReducer(
     cardFormReducer,
-    initCardForm(editing, cardData, label),
+    initCardForm(editing, cardData),
   );
   const handleCreateCard = () => {
     dispatch(addGrammar(cardFormData));
     dispatchFormAction({
       type: 'RESET',
-      payload: initCardForm(editing, cardData, label),
+      payload: initCardForm(editing, cardData),
     });
   };
 

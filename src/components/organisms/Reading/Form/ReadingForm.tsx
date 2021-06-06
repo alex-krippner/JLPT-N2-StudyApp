@@ -64,11 +64,10 @@ const useStyles = makeStyles({
 
 interface CardFormProps<T extends CardDataType, K> {
   tabLabels: K[];
-  cardType?: CardType;
   editing?: boolean;
   cardData: T | T[];
 }
-// TODO: move form actions to the component in which they are triggered
+
 export const ReadingForm = <
   T extends CardDataType,
   K extends TabLabel

@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     minWidth: 'auto',
     overflow: 'auto',
   },
-  tablecell: {
+  tableCell: {
     fontSize: 'var(--font-size-small)',
   },
 });
@@ -38,14 +38,9 @@ type FormTableProps = {
 
 const FormTable = ({ entries, entryKey }: FormTableProps) => {
   const classes = useStyles();
-
-  // LOCAL STATE
   const [editIdx, setEditIdx] = useState(-1);
-
-  // CARD FORM REDUCER
   const { dispatchFormAction } = useContext(CardFormContext);
 
-  // remove entry input from table
   const handleRemove = (key: string, entryIdx: number) => {
     dispatchFormAction({
       type: 'REMOVE_ENTRY',
@@ -53,21 +48,13 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
       entryIdx,
     });
   };
-
-  // initiate edit for targeted entry input / table row
-  // by setting the editIdx to the entry's array index
-
   const startEdit = (entryIndex: number) => {
     setEditIdx(entryIndex);
   };
-
-  // reset editIdx when finished editing entry input / table row
   const endEdit = () => {
     setEditIdx(-1);
   };
 
-  // submit/dispatch edited entry input / table row to card form reducer
-  // FIXME: Don't interact with DOM directly
   const submitEdit = (key: string, entryIdx: number) => {
     const { value } = document.getElementById(
       'table-input',
@@ -86,11 +73,11 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
           {entries.map((entry, entryIdx) => {
             const currentlyEditing = entryIdx === editIdx;
             return (
-              <TableRow key={entry}>
+              <TableRow key={entry + entryIdx}>
                 <TableCell
                   align="center"
                   size="small"
-                  className={classes.tablecell}
+                  className={classes.tableCell}
                 >
                   {currentlyEditing ? (
                     <Input id="table-input" fullWidth />

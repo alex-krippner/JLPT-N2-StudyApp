@@ -3,7 +3,6 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 
 import CardsContainer from '../containers/CardsContainer';
 
-// TODO: correct card form component type after migrating all forms
 interface CardContainerProps<T, K> {
   data: T[];
   label: CardLabels;

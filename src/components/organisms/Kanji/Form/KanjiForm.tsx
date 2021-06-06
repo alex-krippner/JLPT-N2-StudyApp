@@ -74,14 +74,14 @@ export const KanjiForm = <
 
   const [cardFormData, dispatchFormAction] = useReducer(
     cardFormReducer,
-    initCardForm(editing, cardData, label),
+    initCardForm(editing, cardData),
   );
 
   const handleCreateCard = () => {
     dispatch(addKanji(cardFormData));
     dispatchFormAction({
       type: 'RESET',
-      payload: initCardForm(editing, cardData, label),
+      payload: initCardForm(editing, cardData),
     });
   };
   return (

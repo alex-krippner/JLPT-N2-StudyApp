@@ -134,8 +134,12 @@ const VocabCard = <T extends VocabCardData, K extends TabLabel>({
                   fontSize="var(--font-size-small)"
                 >
                   {/* @ts-ignore */}
-                  {cardData[tabLabel].map((el: string) => (
-                    <Box display="flex" alignItems="center" key={el}>
+                  {cardData[tabLabel].map((el: string, i) => (
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      key={el + i}
+                    >
                       <Dot className="dot">&nbsp;</Dot>
                       <div>{el}</div>
                     </Box>

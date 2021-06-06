@@ -29,7 +29,6 @@ const ReadingView = () => {
     <ReadingForm
       tabLabels={tabLabels}
       cardData={readingState}
-      cardType="reading"
       editing={false}
     />
   );
