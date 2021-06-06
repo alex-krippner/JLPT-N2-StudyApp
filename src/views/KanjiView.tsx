@@ -24,7 +24,6 @@ const KanjiView = () => {
       label="漢字"
       tabLabels={tabLabels}
       cardData={kanjiState}
-      cardType="kanji"
     />
   );
 

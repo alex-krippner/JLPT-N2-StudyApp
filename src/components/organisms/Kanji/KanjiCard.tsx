@@ -37,7 +37,6 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
       label="漢字"
       tabLabels={tabLabels}
       cardData={cardData}
-      cardType="kanji"
       editing
     />
   );

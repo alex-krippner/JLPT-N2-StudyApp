@@ -1,23 +1,15 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import * as utils from '../../utils/utilitiesFunctions';
+import CardFormContext from '../../context/context';
 import ButtonIcon from './ButtonIcon';
 
 interface CardFormInputProps {
   inputContainerStyles: Partial<React.CSSProperties>;
   inputStyles: Partial<React.CSSProperties>;
-  handleEntryInput: (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => void;
-  handleAddEntryBtn: (
-    event:
-      | React.MouseEvent<HTMLAnchorElement>
-      | React.MouseEvent<HTMLButtonElement>,
-  ) => void;
-  entryValue: string;
   placeholder: string;
 }
 
@@ -40,12 +32,29 @@ const useStyles = makeStyles({
 
 export const CardFormInput = (props: CardFormInputProps) => {
   const classes = useStyles(props);
-  const {
-    handleEntryInput,
-    handleAddEntryBtn,
-    entryValue,
-    placeholder,
-  } = props;
+  const { placeholder } = props;
+  const { dispatchFormAction } = useContext(CardFormContext);
+  const [entry, setEntry] = useState('');
+
+  const handleEntryInput = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setEntry(event.target.value);
+  };
+
+  const handleAddEntryBtn = (
+    event:
+      | React.MouseEvent<HTMLAnchorElement>
+      | React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
+    dispatchFormAction({
+      type: 'ADD_ENTRY',
+      placeholder,
+      entry,
+    });
+    setEntry('');
+  };
 
   return (
     <Grid
@@ -58,7 +67,7 @@ export const CardFormInput = (props: CardFormInputProps) => {
       <Grid item xs={6}>
         <Input
           fullWidth
-          value={entryValue}
+          value={entry}
           className={classes.input}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             handleEntryInput(event)

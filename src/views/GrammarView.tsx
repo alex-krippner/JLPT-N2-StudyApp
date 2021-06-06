@@ -24,7 +24,6 @@ const GrammarView = () => {
       label="文法"
       tabLabels={tabLabels}
       cardData={grammarState}
-      cardType="grammar"
     />
   );
 

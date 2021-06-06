@@ -53,7 +53,6 @@ const useStyles = makeStyles({
 interface CardFormProps<T extends CardDataType, K> {
   label: CardLabels;
   tabLabels: K[];
-  cardType?: CardType;
   editing?: boolean;
   cardData: T | T[];
 }
@@ -64,7 +63,6 @@ export const GrammarForm = <
 >({
   label,
   tabLabels,
-  cardType,
   editing,
   cardData,
 }: CardFormProps<T, K>) => {
@@ -72,22 +70,10 @@ export const GrammarForm = <
   const dispatch = useDispatch();
   const [tabValue, setTabValue] = useState(0);
   const [placeholder, setPlaceholder] = useState(tabLabels[0]);
-  const [entry, setEntry] = useState({
-    value: '',
-  });
   const [cardFormData, dispatchFormAction] = useReducer(
     cardFormReducer,
     initCardForm(editing, cardData, label),
   );
-
-  const handleChange = (event: React.ChangeEvent) => {
-    const { value } = event.target as HTMLInputElement;
-    dispatchFormAction({
-      type: 'INPUT_MAIN',
-      value,
-      label,
-    });
-  };
   const handleCreateCard = () => {
     dispatch(addGrammar(cardFormData));
     dispatchFormAction({
@@ -95,61 +81,37 @@ export const GrammarForm = <
       payload: initCardForm(editing, cardData, label),
     });
   };
-  const handleEntryInput = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setEntry({
-      value: event.target.value,
-    });
-  };
-  const handleAddEntryBtn = (
-    event:
-      | React.MouseEvent<HTMLAnchorElement>
-      | React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    event.preventDefault();
-    const { value } = entry;
-    dispatchFormAction({
-      type: 'ADD_ENTRY',
-      placeholder,
-      value,
-    });
-    setEntry({
-      value: '',
-    });
-  };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="flex-start"
-      height="75vh"
-      width="75vw"
-      style={{ backgroundColor: 'var(--color-white)' }}
-      border="solid 1px #708090"
-      borderRadius="1rem"
-      boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
+    <CardFormContext.Provider
+      value={{ cardFormData, dispatchFormAction }}
     >
-      <CardFormHeader
-        editing={editing}
-        cardFormData={cardFormData}
-        cardType={cardType}
-        label={label}
-        handleChange={handleChange}
-        styles={{ headerStyles, cardTitleStyles, cardFrontStyles }}
-      />
-      <Grid
-        container
-        className={classes.container}
-        id="form-container"
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        wrap="nowrap"
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-start"
+        height="75vh"
+        width="75vw"
+        style={{ backgroundColor: 'var(--color-white)' }}
+        border="solid 1px #708090"
+        borderRadius="1rem"
+        boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
       >
-        <CardFormContext.Provider
-          value={{ cardFormData, dispatchFormAction }}
+        <CardFormHeader
+          editing={editing}
+          cardFormData={cardFormData}
+          hasTextfield
+          label={label}
+          styles={{ headerStyles, cardTitleStyles, cardFrontStyles }}
+        />
+        <Grid
+          container
+          className={classes.container}
+          id="form-container"
+          direction="column"
+          justify="space-around"
+          alignItems="center"
+          wrap="nowrap"
         >
           <CardFormTabs
             tabValue={tabValue}
@@ -169,10 +131,7 @@ export const GrammarForm = <
           <CardFormInput
             inputContainerStyles={inputContainerStyles}
             inputStyles={inputStyles}
-            handleEntryInput={handleEntryInput}
-            handleAddEntryBtn={handleAddEntryBtn}
             placeholder={placeholder}
-            entryValue={entry.value}
           />
 
           {tabLabels.map((tabLabel, index) => (
@@ -188,15 +147,15 @@ export const GrammarForm = <
               />
             </TabPanel>
           ))}
-        </CardFormContext.Provider>
-      </Grid>
-      <Grid container className={classes.footer}>
-        <CardFormButtons
-          editing={editing}
-          handleCreateCard={handleCreateCard}
-          handleEditCard={() => dispatch(editGrammar(cardFormData))}
-        />
-      </Grid>
-    </Box>
+        </Grid>
+        <Grid container className={classes.footer}>
+          <CardFormButtons
+            editing={editing}
+            handleCreateCard={handleCreateCard}
+            handleEditCard={() => dispatch(editGrammar(cardFormData))}
+          />
+        </Grid>
+      </Box>
+    </CardFormContext.Provider>
   );
 };

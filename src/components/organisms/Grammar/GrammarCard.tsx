@@ -51,7 +51,6 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
       label="文法"
       tabLabels={tabLabels}
       cardData={cardData}
-      cardType="grammar"
       editing
     />
   );

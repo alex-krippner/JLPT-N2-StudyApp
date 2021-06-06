@@ -38,7 +38,6 @@ const VocabCard = <T extends VocabCardData, K extends TabLabel>({
       label="語彙"
       tabLabels={tabLabels}
       cardData={cardData}
-      cardType="vocab"
       editing
     />
   );

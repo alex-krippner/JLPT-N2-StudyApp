@@ -7,6 +7,7 @@ type FormAction = {
   entryIdx?: number;
   resetForm?: () => () => CardDataType;
   payload?: any;
+  entry?: string;
 };
 
 // FIXME: remove any and correctly type CardDataType to allow the spread operator
@@ -25,7 +26,7 @@ const FormReducer = (
         ...state,
         [action.placeholder]: [
           ...state[action.placeholder],
-          action.value,
+          action.entry,
         ],
       };
     case 'ADD_PASSAGE':

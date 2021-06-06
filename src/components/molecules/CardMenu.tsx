@@ -32,22 +32,16 @@ const useStyles = makeStyles({
     cursor: 'pointer',
   },
 });
-// TODO: REMOVE UNUSED PROPS
-interface CardMenuProps<T, K> {
-  front?: string | number | string[] | (string & string[]);
+interface CardMenuProps {
   cardId: string;
-  label?: CardLabels;
-  tabLabels?: K[];
-  cardData?: T;
   CardFormComponent?: any;
   handleDelete?: () => void;
 }
-// TODO: props can probably be removed if the CardFormComponent is being passed with props
-const CardMenu = <T extends CardDataType, K extends TabLabel>({
+const CardMenu = ({
   cardId,
   CardFormComponent,
   handleDelete,
-}: CardMenuProps<T, K>) => {
+}: CardMenuProps) => {
   const classes = useStyles();
   const [anchorMenu, setAnchorMenu] = useState(null);
   const [anchorPop, setAnchorPop] = useState(null);

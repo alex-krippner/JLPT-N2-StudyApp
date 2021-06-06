@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import CardFormContext from '../../context/context';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
 type CardFormHeaderProps = {
   editing: boolean;
   cardFormData: any;
-  cardType: string;
+  hasTextfield?: boolean;
   label?: CardLabels;
   handleChange?: (event: React.ChangeEvent) => void;
   styles?: any;
@@ -28,12 +29,22 @@ type CardFormHeaderProps = {
 const CardFormHeader = ({
   editing,
   cardFormData,
-  cardType,
+  hasTextfield,
   label,
-  handleChange,
   styles,
 }: CardFormHeaderProps) => {
   const classes = useStyles();
+  const { dispatchFormAction } = useContext(CardFormContext);
+
+  const handleChange = (event: React.ChangeEvent) => {
+    const { value } = event.target as HTMLInputElement;
+    dispatchFormAction({
+      type: 'INPUT_MAIN',
+      value,
+      label,
+    });
+  };
+
   return (
     <header style={styles.headerStyles}>
       {editing ? (
@@ -49,10 +60,7 @@ const CardFormHeader = ({
       ) : (
         <>
           <h2 style={styles.cardTitleStyles}>New Card</h2>
-          {/* TODO: replace cardType with hasTextfield boolean */}
-          {cardType === 'reading' ? (
-            ''
-          ) : (
+          {hasTextfield ? (
             <TextField
               key={label}
               id="outlined-basic"
@@ -62,6 +70,8 @@ const CardFormHeader = ({
               className={`${classes.root} ${classes.textfield}`}
               onChange={handleChange}
             />
+          ) : (
+            ''
           )}
         </>
       )}

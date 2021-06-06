@@ -74,7 +74,6 @@ export const ReadingForm = <
   K extends TabLabel
 >({
   tabLabels,
-  cardType,
   editing,
   cardData,
 }: CardFormProps<T, K>) => {
@@ -82,9 +81,6 @@ export const ReadingForm = <
   const dispatch = useDispatch();
   const [tabValue, setTabValue] = useState(0);
   const [placeholder, setPlaceholder] = useState(tabLabels[0]);
-  const [entry, setEntry] = useState({
-    value: '',
-  });
   const [cardFormData, dispatchFormAction] = useReducer(
     cardFormReducer,
     initCardForm(editing, cardData),
@@ -95,29 +91,6 @@ export const ReadingForm = <
     dispatchFormAction({
       type: 'RESET',
       payload: initCardForm(editing, cardData),
-    });
-  };
-  const handleEntryInput = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setEntry({
-      value: event.target.value,
-    });
-  };
-  const handleAddEntryBtn = (
-    event:
-      | React.MouseEvent<HTMLAnchorElement>
-      | React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    event.preventDefault();
-    const { value } = entry;
-    dispatchFormAction({
-      type: 'ADD_ENTRY',
-      placeholder,
-      value,
-    });
-    setEntry({
-      value: '',
     });
   };
 
@@ -132,34 +105,33 @@ export const ReadingForm = <
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="flex-start"
-      height="75vh"
-      width="75vw"
-      style={{ backgroundColor: 'var(--color-white)' }}
-      border="solid 1px #708090"
-      borderRadius="1rem"
-      boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
+    <CardFormContext.Provider
+      value={{ cardFormData, dispatchFormAction }}
     >
-      <CardFormHeader
-        editing={editing}
-        cardFormData={cardFormData}
-        cardType={cardType}
-        styles={{ headerStyles, cardTitleStyles, cardFrontStyles }}
-      />
-      <Grid
-        container
-        className={classes.container}
-        id="form-container"
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        wrap="nowrap"
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-start"
+        height="75vh"
+        width="75vw"
+        style={{ backgroundColor: 'var(--color-white)' }}
+        border="solid 1px #708090"
+        borderRadius="1rem"
+        boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
       >
-        <CardFormContext.Provider
-          value={{ cardFormData, dispatchFormAction }}
+        <CardFormHeader
+          editing={editing}
+          cardFormData={cardFormData}
+          styles={{ headerStyles, cardTitleStyles, cardFrontStyles }}
+        />
+        <Grid
+          container
+          className={classes.container}
+          id="form-container"
+          direction="column"
+          justify="space-around"
+          alignItems="center"
+          wrap="nowrap"
         >
           <CardFormTabs
             tabValue={tabValue}
@@ -182,10 +154,7 @@ export const ReadingForm = <
             <CardFormInput
               inputContainerStyles={inputContainerStyles}
               inputStyles={inputStyles}
-              handleEntryInput={handleEntryInput}
-              handleAddEntryBtn={handleAddEntryBtn}
               placeholder={placeholder}
-              entryValue={entry.value}
             />
           )}
 
@@ -214,15 +183,15 @@ export const ReadingForm = <
               )}
             </TabPanel>
           ))}
-        </CardFormContext.Provider>
-      </Grid>
-      <Grid container className={classes.footer}>
-        <CardFormButtons
-          editing={editing}
-          handleCreateCard={handleCreateCard}
-          handleEditCard={() => dispatch(editReading(cardFormData))}
-        />
-      </Grid>
-    </Box>
+        </Grid>
+        <Grid container className={classes.footer}>
+          <CardFormButtons
+            editing={editing}
+            handleCreateCard={handleCreateCard}
+            handleEditCard={() => dispatch(editReading(cardFormData))}
+          />
+        </Grid>
+      </Box>
+    </CardFormContext.Provider>
   );
 };

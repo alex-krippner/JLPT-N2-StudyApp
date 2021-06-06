@@ -29,7 +29,6 @@ const VocabView = () => {
       label="語彙"
       tabLabels={tabLabels}
       cardData={vocabState}
-      cardType="kanji"
     />
   );
 
