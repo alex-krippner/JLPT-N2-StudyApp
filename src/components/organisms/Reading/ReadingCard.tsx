@@ -81,7 +81,7 @@ const ReadingCard = <T extends ReadingCardData, K extends TabLabel>({
   const [blur, setBlur] = useState(false);
 
   const CardFormComponent = (
-    <ReadingForm tabLabels={tabLabels} cardData={cardData} editing />
+    <ReadingForm cardData={cardData} editing />
   );
 
   const handleChange = (

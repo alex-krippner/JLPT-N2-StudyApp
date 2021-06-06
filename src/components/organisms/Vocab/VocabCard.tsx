@@ -33,14 +33,7 @@ const VocabCard = <T extends VocabCardData, K extends TabLabel>({
   const handleDelete = () =>
     dispatch(deleteVocab(cardData.mainContent));
 
-  const CardFormComponent = (
-    <VocabForm
-      label="語彙"
-      tabLabels={tabLabels}
-      cardData={cardData}
-      editing
-    />
-  );
+  const CardFormComponent = <VocabForm cardData={cardData} editing />;
   return (
     <FlipCard
       cardRef={cardToFlip}

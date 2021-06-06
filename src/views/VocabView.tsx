@@ -24,13 +24,7 @@ const VocabView = () => {
     dispatch(rateVocab({ vocab, rating }));
   };
 
-  const CardFormComponent = (
-    <VocabForm
-      label="語彙"
-      tabLabels={tabLabels}
-      cardData={vocabState}
-    />
-  );
+  const CardFormComponent = <VocabForm cardData={vocabState} />;
 
   return (
     <Wrapper>

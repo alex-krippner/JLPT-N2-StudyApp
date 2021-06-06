@@ -32,14 +32,7 @@ const KanjiCard = <T extends KanjiCardData, K extends TabLabel>({
   const handleDelete = () =>
     dispatch(deleteKanji(cardData.mainContent));
 
-  const CardFormComponent = (
-    <KanjiForm
-      label="漢字"
-      tabLabels={tabLabels}
-      cardData={cardData}
-      editing
-    />
-  );
+  const CardFormComponent = <KanjiForm cardData={cardData} editing />;
 
   return (
     <FlipCard

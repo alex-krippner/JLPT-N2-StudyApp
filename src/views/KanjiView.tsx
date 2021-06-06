@@ -19,13 +19,7 @@ const KanjiView = () => {
     dispatch(rateKanji({ kanji, rating }));
   };
 
-  const CardFormComponent = (
-    <KanjiForm
-      label="漢字"
-      tabLabels={tabLabels}
-      cardData={kanjiState}
-    />
-  );
+  const CardFormComponent = <KanjiForm cardData={kanjiState} />;
 
   return (
     <Box width="100%" height="100%">

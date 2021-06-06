@@ -50,35 +50,35 @@ const useStyles = makeStyles({
   },
 });
 
-interface CardFormProps<T extends CardDataType, K> {
-  label: CardLabels;
-  tabLabels: K[];
+interface CardFormProps<T extends CardDataType> {
   editing?: boolean;
   cardData: T | T[];
 }
 
-export const GrammarForm = <
-  T extends CardDataType,
-  K extends TabLabel
->({
-  label,
-  tabLabels,
+export const GrammarForm = <T extends CardDataType>({
   editing,
   cardData,
-}: CardFormProps<T, K>) => {
+}: CardFormProps<T>) => {
+  const label = '文法';
+  const tabLabels: TabLabel[] = [
+    'variations',
+    '意味',
+    '接続',
+    '用例',
+  ];
   const classes = useStyles();
   const dispatch = useDispatch();
   const [tabValue, setTabValue] = useState(0);
   const [placeholder, setPlaceholder] = useState(tabLabels[0]);
   const [cardFormData, dispatchFormAction] = useReducer(
     cardFormReducer,
-    initCardForm(editing, cardData),
+    initCardForm(editing, cardData, label),
   );
   const handleCreateCard = () => {
     dispatch(addGrammar(cardFormData));
     dispatchFormAction({
       type: 'RESET',
-      payload: initCardForm(editing, cardData),
+      payload: initCardForm(editing, cardData, label),
     });
   };
 

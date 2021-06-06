@@ -19,13 +19,7 @@ const GrammarView = () => {
     dispatch(rateGrammar({ grammar, rating }));
   };
 
-  const CardFormComponent = (
-    <GrammarForm
-      label="文法"
-      tabLabels={tabLabels}
-      cardData={grammarState}
-    />
-  );
+  const CardFormComponent = <GrammarForm cardData={grammarState} />;
 
   return (
     <Box width="100%" height="100%">

@@ -47,12 +47,7 @@ const GrammarCard = <T extends GrammarCardData, K extends TabLabel>({
     dispatch(deleteGrammar(cardData.mainContent));
 
   const CardFormComponent = (
-    <GrammarForm
-      label="文法"
-      tabLabels={tabLabels}
-      cardData={cardData}
-      editing
-    />
+    <GrammarForm cardData={cardData} editing />
   );
 
   const handleChange = (

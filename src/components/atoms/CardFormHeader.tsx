@@ -22,8 +22,7 @@ type CardFormHeaderProps = {
   cardFormData: any;
   hasTextfield?: boolean;
   label?: CardLabels;
-  handleChange?: (event: React.ChangeEvent) => void;
-  styles?: any;
+  styles: any;
 };
 
 const CardFormHeader = ({
@@ -41,6 +40,7 @@ const CardFormHeader = ({
     dispatchFormAction({
       type: 'INPUT_MAIN',
       value,
+      label,
     });
   };
 

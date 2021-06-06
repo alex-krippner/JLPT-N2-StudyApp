@@ -1,6 +1,7 @@
 export const initCardFormProperties = function initCardFormProperties(
   d: any,
   key: any,
+  label: CardLabels,
 ) {
   switch (key) {
     case 'rating':
@@ -17,6 +18,11 @@ export const initCardFormProperties = function initCardFormProperties(
       return {
         ...d,
         mainContent: '',
+      };
+    case label:
+      return {
+        ...d,
+        [label]: '',
       };
     case 'cardType':
       return {
@@ -36,7 +42,11 @@ export const initCardFormProperties = function initCardFormProperties(
   }
 };
 
-export const initCardForm = (editing?: boolean, cardData?: any) => {
+export const initCardForm = (
+  editing?: boolean,
+  cardData?: any,
+  label?: CardLabels,
+) => {
   let initState;
   // CREATE CARD FORM OBJECT WITH CARD DATA OF CURRENTLY EDITING CARD
   if (editing) initState = cardData;
@@ -45,7 +55,7 @@ export const initCardForm = (editing?: boolean, cardData?: any) => {
   // THE FIRST ELEMENT OF THE cardData IS USED AS A TEMPLATE
   if (!editing && Array.isArray(cardData))
     initState = Object.keys(cardData[0]).reduce(
-      (d, key) => initCardFormProperties(d, key),
+      (d, key) => initCardFormProperties(d, key, label),
       {},
     );
   return initState;

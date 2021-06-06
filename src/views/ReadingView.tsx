@@ -26,11 +26,7 @@ const ReadingView = () => {
   };
 
   const CardFormComponent = (
-    <ReadingForm
-      tabLabels={tabLabels}
-      cardData={readingState}
-      editing={false}
-    />
+    <ReadingForm cardData={readingState} editing={false} />
   );
   return (
     <Box width="100%" height="100%">

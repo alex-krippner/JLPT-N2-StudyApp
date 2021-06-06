@@ -62,20 +62,21 @@ const useStyles = makeStyles({
   },
 });
 
-interface CardFormProps<T extends CardDataType, K> {
-  tabLabels: K[];
+interface CardFormProps<T extends CardDataType> {
   editing?: boolean;
   cardData: T | T[];
 }
-
-export const ReadingForm = <
-  T extends CardDataType,
-  K extends TabLabel
->({
-  tabLabels,
+export const ReadingForm = <T extends CardDataType>({
   editing,
   cardData,
-}: CardFormProps<T, K>) => {
+}: CardFormProps<T>) => {
+  const tabLabels: TabLabel[] = [
+    'passage',
+    'question',
+    'choices',
+    'solution',
+  ];
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const [tabValue, setTabValue] = useState(0);
