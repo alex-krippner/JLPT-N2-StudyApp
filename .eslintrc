@@ -13,7 +13,7 @@
     "ecmaVersion": 8
   },
 
-  "plugins": ["prettier", "react-hooks", "@typescript-eslint"],
+  "plugins": ["prettier", "react-hooks", "@typescript-eslint", "testing-library", "jest-dom"],
   /*
    "plugin:prettier/recommended" does three things:
 
