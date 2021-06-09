@@ -2,6 +2,8 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 
 const options = {
   overrideConfigFile: path.resolve(__dirname, '..', '.eslintrc'),
@@ -12,9 +14,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(t|j)sx?$/,
-        use: 'ts-loader',
+        test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
       },
       {
         test: /\.(jpg|png|svg)$/,
@@ -46,7 +57,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts'],
+    extensions: ['.ts','.tsx', '.js', ],
   },
   output: {
     path: path.join(__dirname, '..', '/dist'),
@@ -59,6 +70,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', './src/index.html'),
       favicon: './assets/img/favicon.png',
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      async: false
     }),
   ],
 };
