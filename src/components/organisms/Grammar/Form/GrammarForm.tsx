@@ -10,7 +10,7 @@ import {
 } from '../../../../state-management/redux/grammarCollection.reducer';
 import CardFormHeader from '../../../atoms/CardFormHeader';
 import CardFormContext from '../../../../context/context';
-import CardFormButtons from '../../../atoms/CardFormButtons';
+import CardFormButton from '../../../atoms/CardFormButton';
 import CardFormTabs from '../../../molecules/CardFormTabs';
 import { CardFormInput } from '../../../molecules/CardFormInput';
 import FormTable from '../../../molecules/FormTable';
@@ -149,7 +149,7 @@ export const GrammarForm = <T extends CardDataType>({
           ))}
         </Grid>
         <Grid container className={classes.footer}>
-          <CardFormButtons
+          <CardFormButton
             editing={editing}
             handleCreateCard={handleCreateCard}
             handleEditCard={() => dispatch(editGrammar(cardFormData))}
