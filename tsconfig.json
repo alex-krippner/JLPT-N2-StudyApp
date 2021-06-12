@@ -16,6 +16,7 @@
         },
     "include": [
         "src", "assets", "types.d.ts",
-        ".babelrc", "jest-setup.ts"
+        ".babelrc",
+        "jest-setup.ts"
     ],
 }
