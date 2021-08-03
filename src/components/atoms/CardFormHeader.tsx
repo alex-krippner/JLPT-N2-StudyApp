@@ -48,7 +48,9 @@ const CardFormHeader = ({
     <header style={styles.headerStyles}>
       {editing ? (
         <>
-          <h2 style={styles.cardTitleStyles}>Edit Card</h2>
+          <h2 className="header-title" style={styles.cardTitleStyles}>
+            Edit Card
+          </h2>
 
           <h2 style={styles.cardFrontStyles}>
             {'mainContent' in cardFormData

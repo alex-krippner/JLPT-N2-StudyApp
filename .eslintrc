@@ -20,7 +20,7 @@
       Enables eslint-plugin-prettier.
       Sets the prettier/prettier rule to "error".
       Extends the eslint-config-prettier configuration.
-      
+
   */
   "extends": [
     "airbnb-typescript",
