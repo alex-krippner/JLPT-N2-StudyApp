@@ -28,7 +28,6 @@ const GrammarView = () => {
         label="文法"
         onRate={handleRate}
         tabLabels={tabLabels}
-        cardType="grammar"
         CardComponent={GrammarCard}
         CardFormComponent={CardFormComponent}
       />

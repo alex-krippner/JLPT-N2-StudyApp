@@ -11,7 +11,6 @@ SwiperCore.use([Pagination]);
 
 type SliderContainerProps<T, K> = {
   data: T[];
-  cardType: CardType;
   onRate: (
     label: string[] | string | number | null | (string & string[]),
     ratingIndex: number,
@@ -30,7 +29,6 @@ const SlidesContainerTemplate = <
   onRate,
   tabLabels,
   label,
-  cardType,
   CardComponent,
   CardFormComponent,
 }: SliderContainerProps<T, K>) => {

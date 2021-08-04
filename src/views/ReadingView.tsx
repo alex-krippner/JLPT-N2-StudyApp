@@ -35,7 +35,6 @@ const ReadingView = () => {
         label="reading"
         onRate={handleRate}
         tabLabels={tabLabels}
-        cardType="reading"
         CardComponent={ReadingCard}
         CardFormComponent={CardFormComponent}
       />
