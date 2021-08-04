@@ -1,12 +1,6 @@
 import React, { useReducer } from 'react';
-import {
-  cleanup,
-  fireEvent,
-  render,
-  screen,
-} from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { v4 as uuidv4 } from 'uuid';
-import userEvent from '@testing-library/user-event';
 import CardFormHeader from '../atoms/CardFormHeader';
 import cardFormReducer from '../../state-management/cardFormReducer';
 import { initCardForm } from '../../utils/formUtilFunctions';

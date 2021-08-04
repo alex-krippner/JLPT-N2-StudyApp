@@ -34,17 +34,15 @@ const SlidesContainerTemplate = <
   CardComponent,
   CardFormComponent,
 }: SliderContainerProps<T, K>) => {
+  const anchorTarget = 'main';
   return (
     <SlidesContainer>
       <AddCardPopover
-        tabLabels={tabLabels}
-        cardData={data}
-        label={label}
-        cardType={cardType}
         CardFormComponent={CardFormComponent}
+        anchorTarget={anchorTarget}
       />
       <Swiper
-        id="main"
+        id={anchorTarget}
         pagination={{ clickable: true }}
         spaceBetween={3}
         slidesPerView={1}

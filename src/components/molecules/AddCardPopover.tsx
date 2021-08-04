@@ -5,19 +5,17 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import ButtonIcon from './ButtonIcon';
 
 type AddCardPopoverProps = {
-  tabLabels: TabLabel[];
-  label: CardLabels;
-  cardType: CardType;
-  cardData: CardDataType[];
   CardFormComponent: React.ElementType;
+  anchorTarget: string;
 };
 
 const AddCardPopover = ({
   CardFormComponent,
+  anchorTarget,
 }: AddCardPopoverProps) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = () =>
-    setAnchorEl(document.getElementById('main'));
+    setAnchorEl(document.getElementById(anchorTarget));
   const handleClose = () => setAnchorEl(null);
   const open = Boolean(anchorEl);
 
