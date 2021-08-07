@@ -69,9 +69,7 @@ export const CardFormInput = (props: CardFormInputProps) => {
           fullWidth
           value={entry}
           className={classes.input}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleEntryInput(event)
-          }
+          onChange={handleEntryInput}
           placeholder={utils.capitalizeFirstWord(placeholder)}
           id="entry-input"
         />

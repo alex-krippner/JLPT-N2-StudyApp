@@ -36,7 +36,7 @@ const ButtonIcon = (
   return (
     <IconButton
       className={classes.root}
-      onClick={(e) => clickHandler(e)}
+      onClick={clickHandler}
       color={color}
     >
       <Icon className={classes.icon} />
