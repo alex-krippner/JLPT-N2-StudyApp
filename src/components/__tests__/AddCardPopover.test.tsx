@@ -6,12 +6,16 @@ import userEvent from '@testing-library/user-event';
 import AddCardPopover from '../molecules/AddCardPopover';
 
 const MockComponent = () => <div title="test">Hello</div>;
-const foo: any = <MockComponent />;
+const mockComponent: any = <MockComponent />;
 const MockContainer = () => {
   return (
     <div>
       <h1 id="main">I'm a container </h1>
-      <AddCardPopover CardFormComponent={foo} anchorTarget="main" />,
+      <AddCardPopover
+        CardFormComponent={mockComponent}
+        anchorTarget="main"
+      />
+      ,
     </div>
   );
 };

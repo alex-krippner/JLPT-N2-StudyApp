@@ -35,5 +35,3 @@ test('input value changes', () => {
   userEvent.type(input, 'new input');
   expect(input).toHaveValue('new input');
 });
-
-test('');

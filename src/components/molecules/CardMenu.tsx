@@ -74,6 +74,7 @@ const CardMenu = ({
       </IconButton>
       <Menu
         id="long-menu"
+        data-testid="long-menu"
         anchorEl={anchorMenu}
         keepMounted
         open={openMenu}
@@ -88,6 +89,7 @@ const CardMenu = ({
       >
         <MenuItem
           className="edit"
+          data-testid="edit-menu-item"
           onClick={() => {
             handleClose();
             handlePopover();
@@ -115,6 +117,7 @@ const CardMenu = ({
         </Popover>
         <MenuItem
           className="delete"
+          data-testid="delete-menu-item"
           onClick={() => {
             handleClose();
             handleDelete();
