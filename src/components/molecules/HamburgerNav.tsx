@@ -25,6 +25,7 @@ const HamburgerNav = ({ open, handleOpen }: HamburgerNavProps) => {
       open={open}
       onClose={handleOpen}
       classes={{ paper: classes.navDrawer }}
+      data-testid="drawer"
     >
       <NavLinkList />
     </Drawer>
