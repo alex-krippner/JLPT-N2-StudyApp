@@ -15,13 +15,13 @@ interface CardFormProps<T extends CardDataType> {
   editing?: boolean;
   cardData: T | T[];
   hasTextfield?: boolean;
-  CardFormHeader: React.ReactElement;
+  CardFormHeaderProp: React.ReactElement;
 }
 
 const Form = ({
   editing,
   cardData,
-  CardFormHeader,
+  CardFormHeaderProp,
 }: CardFormProps<any>) => {
   const label = '漢字';
   const [cardFormData, dispatchFormAction] = useReducer(
@@ -32,7 +32,7 @@ const Form = ({
     <CardFormContext.Provider
       value={{ cardFormData, dispatchFormAction }}
     >
-      {CardFormHeader}
+      {CardFormHeaderProp}
     </CardFormContext.Provider>
   );
 };
@@ -56,7 +56,7 @@ describe('Form header when editing', () => {
       <Form
         editing
         cardData={cardData}
-        CardFormHeader={
+        CardFormHeaderProp={
           <CardFormHeader
             editing
             cardFormData={cardData}
@@ -82,7 +82,7 @@ describe('Form header when creating', () => {
       <Form
         cardData={cardData}
         editing={false}
-        CardFormHeader={
+        CardFormHeaderProp={
           <CardFormHeader
             editing={false}
             cardFormData={cardData}

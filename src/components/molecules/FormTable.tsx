@@ -80,7 +80,11 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
                   className={classes.tableCell}
                 >
                   {currentlyEditing ? (
-                    <Input id="table-input" fullWidth />
+                    <Input
+                      data-testid="edit-entry-input"
+                      id="table-input"
+                      fullWidth
+                    />
                   ) : (
                     entry
                   )}
@@ -89,6 +93,7 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
                 {currentlyEditing ? (
                   <TableCell align="right" size="small">
                     <IconButton
+                      data-testid="edit-entry-done"
                       edge="end"
                       onClick={() => {
                         submitEdit(entryKey, entryIdx);
@@ -98,6 +103,7 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
                       <DoneIcon fontSize="large" />
                     </IconButton>
                     <IconButton
+                      data-testid="edit-entry-cancel"
                       edge="end"
                       onClick={() => {
                         endEdit();
@@ -109,6 +115,7 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
                 ) : (
                   <TableCell align="right" size="small">
                     <IconButton
+                      data-testid="edit-entry"
                       edge="end"
                       onClick={() => startEdit(entryIdx)}
                     >
@@ -119,6 +126,7 @@ const FormTable = ({ entries, entryKey }: FormTableProps) => {
 
                 <TableCell align="right" size="small">
                   <IconButton
+                    data-testid="delete-entry"
                     edge="end"
                     onClick={() => handleRemove(entryKey, entryIdx)}
                   >
