@@ -6,7 +6,10 @@ const commonConfig = require('./webpack.common.js');
 // allows for dynamically requiring webpack config file
 // to merge with a common config file
 module.exports = (env) => {
-  const envConfig = require(`./webpack.${env}.js`);
+  let envConfig;
+  if (env.dev) {
+     envConfig = require(`./webpack.dev.js`);
+  }
 
   return merge(commonConfig, envConfig);
 };

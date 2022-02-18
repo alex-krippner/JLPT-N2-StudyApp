@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'eval-source-map',
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
-    contentBase: './dist',
+    static: './dist',
     hot: true,
     host: 'localhost',
     port: 8080,
