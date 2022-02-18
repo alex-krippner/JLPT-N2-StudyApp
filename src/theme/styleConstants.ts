@@ -4,6 +4,9 @@ const COLORS = {
   blueMedium: '#3f51b5',
   blueDark: '#32587C',
   greenSeaMedium: '#3CB371',
+  white: '#ffffff',
+  whiteMedium: '#fffafa',
+  whiteDark: '#f5f5f5',
 };
 
 export default COLORS;

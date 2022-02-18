@@ -5,15 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import {
-  createMuiTheme,
-  ThemeProvider,
-} from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider as StyledComponentsProvider } from 'styled-components';
 
+import { createMuiTheme } from '@material-ui/core';
 import { store, persistor } from './state-management/redux/store';
 
 import App from './App';
 import './theme/swiper-styles.css';
+import monTheme from './theme/monDefaultTheme';
 
 const theme = createMuiTheme({
   typography: {
@@ -25,9 +25,11 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <PersistGate persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <StyledComponentsProvider theme={monTheme}>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </StyledComponentsProvider>
       </PersistGate>
     </BrowserRouter>
   </Provider>,

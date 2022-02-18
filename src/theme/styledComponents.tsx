@@ -29,7 +29,7 @@ export const CardFormStyled = styled.div.attrs(
   justify-content: flex-start;
   height: ${(props) => props.height};
   width: ${(props) => props.width};
-  background-color: var(--color-white);
+  background-color: ${(props) => props.theme.colorOf.primaryLight};
   border: solid 1px #708090;
   border-radius: 1rem;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
