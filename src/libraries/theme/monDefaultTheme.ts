@@ -1,5 +1,5 @@
-import { ColorTheme, SizeTheme } from './Theme';
-import COLORS from './styleConstants';
+import { ColorTheme, SizeTheme } from "./Theme";
+import COLORS from "./styleConstants";
 
 export const colorTheme: ColorTheme = {
   primaryLight: COLORS.blueLight,
@@ -13,14 +13,18 @@ export const colorTheme: ColorTheme = {
 };
 
 export const sizeTheme: SizeTheme = {
-  cardFormWidth: '35rem',
-  cardTitleLeft: '-1rem',
-  cardTitleTop: '35rem',
-  fontSmall: '1.75rem',
-  fontMedium: '2.5rem',
-  fontLarge: '3.5rem',
-  fontHuge: '15rem',
-  paddingLarge: '3rem',
+  cardFormWidth: "35rem",
+  cardTitleLeft: "-1rem",
+  cardTitleTop: "35rem",
+  fontSmall: "1.75rem",
+  fontMedium: "2.5rem",
+  fontLarge: "3.5rem",
+  fontHuge: "15rem",
+  inputHeight: "2rem",
+  inputWidth: "5rem",
+  paddingLarge: "3rem",
+  textSmall: "1rem",
+  textMedium: "1.5rem",
 };
 
 const monTheme = {

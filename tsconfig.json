@@ -13,6 +13,12 @@
         "outDir": "./dist/",
         "noImplicitAny": true, 
         "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@mon-assets/*": ["assets/*"],
+            "@mon-theme/*": ["src/libraries/theme/*"],
+            "@mon-ui-kit/*": ["src/libraries/ui-kit/*"],
+        }
         },
     "include": [
         "src", "assets", "types.d.ts"
