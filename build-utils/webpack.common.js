@@ -4,11 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 const options = {
-  overrideConfigFile: path.resolve(__dirname, '..', '.eslintrc'),
+  overrideConfigFile: path.resolve(__dirname, '../.eslintrc'),
 };
 
 module.exports = {
-  entry: path.resolve(__dirname, '..', './src/index.tsx'),
+  entry: path.resolve(__dirname, '../src/index.tsx'),
   module: {
     rules: [
       {
@@ -47,6 +47,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
+    alias: {
+      '@mon-assets': path.resolve(__dirname, '../assets/'),
+      '@mon-theme': path.resolve(__dirname, '../src/libraries/theme/'),
+      '@mon-ui-kit': path.resolve(__dirname, '../src/libraries/ui-kit/'),
+    }
   },
   output: {
     path: path.join(__dirname, '..', '/dist'),

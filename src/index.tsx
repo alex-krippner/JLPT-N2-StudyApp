@@ -1,23 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import { ThemeProvider } from '@material-ui/core/styles';
-import { ThemeProvider as StyledComponentsProvider } from 'styled-components';
+import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider as StyledComponentsProvider } from "styled-components";
 
-import { createMuiTheme } from '@material-ui/core';
-import { store, persistor } from './state-management/redux/store';
+import { createMuiTheme } from "@material-ui/core";
+import monTheme from "@mon-theme/monDefaultTheme";
+import { store, persistor } from "./state-management/redux/store";
 
-import App from './App';
-import './theme/swiper-styles.css';
-import monTheme from './theme/monDefaultTheme';
+import App from "./App";
+import "@mon-theme/swiper-styles.css";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ['Roboto Mono', 'monospace'].join(','),
+    fontFamily: ["Roboto Mono", "monospace"].join(","),
   },
 });
 
@@ -33,7 +33,7 @@ ReactDOM.render(
       </PersistGate>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById("root"),
 );
 
 // @ts-ignore

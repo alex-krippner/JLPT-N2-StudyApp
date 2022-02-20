@@ -32,6 +32,14 @@ export interface SizeTheme {
   fontLarge: string;
   /** the huge font size */
   fontHuge: string;
+  /** the default height of the ui-kit's basic input */
+  inputHeight: string;
+  /** the default width of the ui-kit's basic input */
+  inputWidth: string;
   /** the large padding size */
   paddingLarge: string;
+  /** the font size of small text */
+  textSmall: string;
+  /** the font size of medium text */
+  textMedium: string;
 }
