@@ -1,10 +1,16 @@
 export interface ColorTheme {
+  /** the default black color */
+  black: string;
+  /** the color of the button background when\ hovered */
+  buttonHover: string;
   /** light shade of the primary color */
   primaryLight: string;
   /** medium shade of the primary color */
   primaryMedium: string;
   /** dark shade of the primary color */
   primaryDark: string;
+  /** default red color */
+  red: string;
   /** color of the scrollbar */
   scrollbar: string;
   /** medium shade of the secondary color */

@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import Main from './layouts/main.component';
-import Sidebar from './layouts/sidebar.component';
-import FlyingCharsBackground from './components/organisms/BackgroundAnimation';
-import GlobalStyle from './theme/globalStyle';
+import GlobalStyle from "@mon-theme/globalStyle";
+import hero from "@mon-assets/img/hero.svg";
+import Main from "./layouts/main.component";
+import FlyingCharsBackground from "./components/organisms/BackgroundAnimation";
 
-import hero from '../assets/img/hero.svg';
-import Hamburger from './components/atoms/Hamburger';
-import HamburgerNav from './components/molecules/HamburgerNav';
+import Hamburger from "./components/atoms/Hamburger";
+import HamburgerNav from "./components/molecules/HamburgerNav";
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,7 +29,6 @@ const App = () => {
     <Wrapper>
       <FlyingCharsBackground iconSize="5rem" />
       <GlobalStyle />
-      <Sidebar />
       <Hamburger handleOpen={handleOpen} />
       <HamburgerNav open={open} handleOpen={handleOpen} />
       <Main />
