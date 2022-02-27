@@ -27,4 +27,5 @@ const Button = (props: ButtonProps) => {
   const { testId, ...other } = props;
   return <BaseButton data-test-id={testId} {...other} />;
 };
+
 export default Button;

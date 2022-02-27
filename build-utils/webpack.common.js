@@ -51,6 +51,7 @@ module.exports = {
       '@mon-assets': path.resolve(__dirname, '../assets/'),
       '@mon-theme': path.resolve(__dirname, '../src/libraries/theme/'),
       '@mon-ui-kit': path.resolve(__dirname, '../src/libraries/ui-kit/'),
+      '@mon-utils': path.resolve(__dirname, '../src/libraries/utilities/')
     }
   },
   output: {

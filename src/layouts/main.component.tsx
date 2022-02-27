@@ -1,19 +1,21 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import styled from "styled-components";
 
-import HomeView from '../views/HomeView';
-import KanjiView from '../views/KanjiView';
-import VocabView from '../views/VocabView';
-import GrammarView from '../views/GrammarView';
-import ReadingView from '../views/ReadingView';
+import HomeView from "../views/HomeView";
+import KanjiView from "../views/KanjiView";
+import VocabView from "../views/VocabView";
+import GrammarView from "../views/GrammarView";
+import ReadingView from "../views/ReadingView";
+import Login from "../modules/account/components/Login";
+import Sidebar from "./sidebar.component";
 
 const WrapperMain = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 100%;
   padding: 2rem;
   border-radius: 1rem;
@@ -27,14 +29,18 @@ const WrapperMain = styled.div`
 `;
 
 const Main = () => (
-  <WrapperMain>
-    <Switch>
-      <Route exact path="/" component={HomeView} />
-      <Route path="/kanji" component={KanjiView} />
-      <Route path="/vocab" component={VocabView} />
-      <Route path="/grammar" component={GrammarView} />
-      <Route path="/reading" component={ReadingView} />
-    </Switch>
-  </WrapperMain>
+  <>
+    <Sidebar />
+    <WrapperMain>
+      <Switch>
+        <Route exact path="/" component={HomeView} />
+        <Route path="/kanji" component={KanjiView} />
+        <Route path="/vocab" component={VocabView} />
+        <Route path="/grammar" component={GrammarView} />
+        <Route path="/reading" component={ReadingView} />
+        <Route path="/login" component={Login} />
+      </Switch>
+    </WrapperMain>
+  </>
 );
 export default Main;

@@ -18,6 +18,7 @@
             "@mon-assets/*": ["assets/*"],
             "@mon-theme/*": ["src/libraries/theme/*"],
             "@mon-ui-kit/*": ["src/libraries/ui-kit/*"],
+            "@mon-utils/*": ["src/libraries/utilities/*"]
         }
         },
     "include": [

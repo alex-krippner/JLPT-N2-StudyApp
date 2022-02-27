@@ -2,9 +2,12 @@ import { ColorTheme, SizeTheme } from "./Theme";
 import COLORS from "./styleConstants";
 
 export const colorTheme: ColorTheme = {
+  black: COLORS.black,
+  buttonHover: COLORS.greyLight,
   primaryLight: COLORS.blueLight,
   primaryMedium: COLORS.blueMedium,
   primaryDark: COLORS.blueDark,
+  red: COLORS.red,
   scrollbar: COLORS.blueCadet,
   secondaryMedium: COLORS.greenSeaMedium,
   white: COLORS.white,
