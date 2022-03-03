@@ -1,5 +1,5 @@
 import { createSlice, Dispatch } from "@reduxjs/toolkit";
-import accountService, { Account } from "./accountService";
+import accountService, { Account } from "../services/accountService";
 
 const accountSlice = createSlice({
   name: "accounts",

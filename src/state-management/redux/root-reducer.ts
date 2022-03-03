@@ -2,8 +2,9 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import accountsReducer from "../../modules/account/accountReducer";
-import loginFormReducer from "../../modules/account/loginFormReducer";
+import accountsReducer from "../../modules/account/reducers/accountReducer";
+import loginFormReducer from "../../modules/account/reducers/loginFormReducer";
+import signUpFormReducer from "../../modules/account/reducers/signUpFormReducer";
 import kanjiCollectionReducer from "./kanjiCollection.reducer";
 import vocabCollectionReducer from "./vocabCollection.reducer";
 import grammarCollectionReducer from "./grammarCollection.reducer";
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   readingCollection: readingCollectionReducer,
   accounts: accountsReducer,
   loginForm: loginFormReducer,
+  signUpForm: signUpFormReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
