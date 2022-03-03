@@ -17,6 +17,21 @@ export const withEmailValidation = (o: any) => {
   };
 };
 
+export const withUsernameValidation = (o: any) => {
+  return {
+    ...o,
+    checkUsernameValidity() {
+      const MIN_LENGTH = 4;
+      const MAX_LENGTH = 40;
+      const VALID_USERNAME_REGEX = new RegExp(
+        `^(?=.{${MIN_LENGTH},${MAX_LENGTH}}$)[A-Za-z0-9_-]+$`,
+      );
+      this.hasValidUsername = VALID_USERNAME_REGEX.test(o.username);
+      return this;
+    },
+  };
+};
+
 const createForm = <F>(
   mixins: Array<FormMixins>,
   startingObject: Partial<F>,
