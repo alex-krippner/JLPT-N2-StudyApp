@@ -12,14 +12,11 @@ const BaseText = styled.p({
   margin: 0,
 });
 
-export interface TextProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   testId?: string;
 }
 
-const Text = (props: TextProps) => {
+export const Text = (props: TextProps) => {
   const { testId, ...other } = props;
   return <BaseText data-test-id={testId} {...other} />;
 };
-
-export default Text;

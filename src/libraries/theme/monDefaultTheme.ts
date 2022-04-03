@@ -16,6 +16,7 @@ export const colorTheme: ColorTheme = {
 };
 
 export const sizeTheme: SizeTheme = {
+  borderRadiusContainer: "5px",
   cardFormWidth: "35rem",
   cardTitleLeft: "-1rem",
   cardTitleTop: "35rem",

@@ -1,27 +1,26 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node",
-        "target": "ES5",
-        "lib": ["ES5", "DOM"],
-        // this project is bundled with webpack, for which
-        // webpack docs and programming literature suggests 
-        // setting module to 'ES2015'
-        "module": "es6",
-        "allowJs": true,
-        "jsx": "react",
-        "sourceMap": true,
-        "outDir": "./dist/",
-        "noImplicitAny": true, 
-        "esModuleInterop": true,
-        "baseUrl": ".",
-        "paths": {
-            "@mon-assets/*": ["assets/*"],
-            "@mon-theme/*": ["src/libraries/theme/*"],
-            "@mon-ui-kit/*": ["src/libraries/ui-kit/*"],
-            "@mon-utils/*": ["src/libraries/utilities/*"]
-        }
-        },
-    "include": [
-        "src", "assets", "types.d.ts"
-    ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ES5",
+    "lib": ["ES5", "DOM"],
+    // this project is bundled with webpack, for which
+    // webpack docs and programming literature suggests
+    // setting module to 'ES2015'
+    "module": "es6",
+    "allowJs": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mon-assets/*": ["assets/*"],
+      "@mon-theme/*": ["src/libraries/theme/*"],
+      "@mon-ui-kit/*": ["src/libraries/ui-kit/*"],
+      "@mon-utils/*": ["src/libraries/utilities/*"],
+      "@mon-modules/*": ["src/modules/*"]
+    }
+  },
+  "include": ["src", "assets", "types.d.ts"]
 }

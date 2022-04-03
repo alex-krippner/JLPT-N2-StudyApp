@@ -7,9 +7,7 @@ import KanjiView from "../views/KanjiView";
 import VocabView from "../views/VocabView";
 import GrammarView from "../views/GrammarView";
 import ReadingView from "../views/ReadingView";
-import Login from "../modules/account/ views/Login";
-import SignUp from "../modules/account/ views/SignUp";
-// import Sidebar from "./sidebar.component";
+import Sidebar from "./sidebar.component";
 
 const WrapperMain = styled.div`
   position: relative;
@@ -29,20 +27,21 @@ const WrapperMain = styled.div`
   }
 `;
 
-const Main = () => (
-  <>
-    {/* <Sidebar /> */}
-    <WrapperMain>
-      <Switch>
-        <Route exact path="/" component={HomeView} />
-        <Route path="/kanji" component={KanjiView} />
-        <Route path="/vocab" component={VocabView} />
-        <Route path="/grammar" component={GrammarView} />
-        <Route path="/reading" component={ReadingView} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
-      </Switch>
-    </WrapperMain>
-  </>
-);
+const Main = () => {
+  return (
+    <>
+      <Sidebar />
+      <WrapperMain>
+        <Switch>
+          <Route exact path="/" component={HomeView} />
+
+          <Route path="/kanji" component={KanjiView} />
+          <Route path="/vocab" component={VocabView} />
+          <Route path="/grammar" component={GrammarView} />
+          <Route path="/reading" component={ReadingView} />
+        </Switch>
+      </WrapperMain>
+    </>
+  );
+};
 export default Main;

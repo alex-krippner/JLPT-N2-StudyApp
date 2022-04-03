@@ -1,49 +1,52 @@
-import React from 'react';
+import React from "react";
 
-import { Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-import MonLogo from '../../assets/img/LogoMonIcon';
+import { useAuth0 } from "@auth0/auth0-react";
+import MonLogo from "../../assets/img/LogoMonIcon";
 
 const useStyles = makeStyles(() => ({
   container: {
-    height: '100%',
+    height: "100%",
   },
   headerContainer: {
-    position: 'relative',
-    height: '40%',
+    position: "relative",
+    height: "40%",
     flexBasis: 0,
   },
   header: {
-    position: 'relative',
-    color: 'var(--color-primary-dark)',
-    fontSize: '15rem',
+    position: "relative",
+    color: "var(--color-primary-dark)",
+    fontSize: "15rem",
   },
   monLogo: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
   },
 
   welcomeHeader: {
-    fontSize: '4rem',
-    marginBottom: '4rem',
-    color: 'var(--color-primary-dark)',
+    fontSize: "4rem",
+    marginBottom: "4rem",
+    color: "var(--color-primary-dark)",
   },
 
   intro: {
-    width: '50%',
-    alignSelf: 'center',
-    margin: '4rem',
+    width: "50%",
+    alignSelf: "center",
+    margin: "4rem",
   },
 
   paragraph: {
-    fontSize: '1.5rem',
-    color: 'var(--color-primary-dark)',
+    fontSize: "1.5rem",
+    color: "var(--color-primary-dark)",
   },
 }));
 
 const HomeView = () => {
   const classes = useStyles();
+  const { user } = useAuth0();
+  const auth0Namespace = "https://mon.com";
 
   return (
     <Grid
@@ -75,53 +78,29 @@ const HomeView = () => {
         alignItems="flex-start"
         className={classes.intro}
       >
-        <Typography
-          variant="h2"
-          gutterBottom
-          className={classes.welcomeHeader}
-        >
-          Welcome!
+        <Typography variant="h2" gutterBottom className={classes.welcomeHeader}>
+          Welcome! {user[`${auth0Namespace}/current_username`] || user.nickname}
         </Typography>
-        <Typography
-          variant="body1"
-          gutterBottom
-          className={classes.paragraph}
-        >
-          Mon allows you to create and collect custom flash cards to
-          help you prepare for the JLPT N2 exam.
+        <Typography variant="body1" gutterBottom className={classes.paragraph}>
+          Mon allows you to create and collect custom flash cards to help you
+          prepare for the JLPT N2 exam.
         </Typography>
-        <Typography
-          variant="body1"
-          gutterBottom
-          className={classes.paragraph}
-        >
-          The format of the flash cards is based on the Shin Kanzen
-          Master Books.
+        <Typography variant="body1" gutterBottom className={classes.paragraph}>
+          The format of the flash cards is based on the Shin Kanzen Master
+          Books.
         </Typography>
-        <Typography
-          variant="body1"
-          gutterBottom
-          className={classes.paragraph}
-        >
-          You can create, edit, and delete cards. By clicking the
-          daruma icon (the little dude) on the bottom of card you can
-          rate how familiar you are with the card&apos;s material.
+        <Typography variant="body1" gutterBottom className={classes.paragraph}>
+          You can create, edit, and delete cards. By clicking the daruma icon
+          (the little dude) on the bottom of card you can rate how familiar you
+          are with the card&apos;s material.
         </Typography>
-        <Typography
-          variant="body1"
-          gutterBottom
-          className={classes.paragraph}
-        >
-          At the moment, the flash cards will be saved to your
-          browser&apos;s local storage.
+        <Typography variant="body1" gutterBottom className={classes.paragraph}>
+          At the moment, the flash cards will be saved to your browser&apos;s
+          local storage.
         </Typography>
-        <Typography
-          variant="body1"
-          gutterBottom
-          className={classes.paragraph}
-        >
-          I am planning to develop more features, but hope that this
-          app can already help you in your studies.
+        <Typography variant="body1" gutterBottom className={classes.paragraph}>
+          I am planning to develop more features, but hope that this app can
+          already help you in your studies.
         </Typography>
       </Grid>
     </Grid>
