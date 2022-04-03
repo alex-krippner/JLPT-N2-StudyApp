@@ -1,38 +1,25 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import GlobalStyle from "@mon-theme/globalStyle";
-import hero from "@mon-assets/img/hero.svg";
-import Main from "./layouts/main.component";
-import FlyingCharsBackground from "./components/organisms/BackgroundAnimation";
+import { FullScreenLoadingIndicator } from "@mon-ui-kit/components";
 
-import Hamburger from "./components/atoms/Hamburger";
-import HamburgerNav from "./components/molecules/HamburgerNav";
+import { AuthenticatedAppView } from "./views/AuthenticatedAppView";
+import { UnauthenticatedAppView } from "./views/UnauthenticatedAppView";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  width: 100vw;
-  padding: var(--padding-large);
-  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
-  background-image: url(${hero});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-`;
 const App = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(!open);
+  const { isAuthenticated, isLoading } = useAuth0();
+  const render = () => {
+    if (isLoading) return <FullScreenLoadingIndicator />;
+    if (isAuthenticated) return <AuthenticatedAppView />;
+    if (!isAuthenticated) return <UnauthenticatedAppView />;
+  };
 
   return (
-    <Wrapper>
-      <FlyingCharsBackground iconSize="5rem" />
+    <>
       <GlobalStyle />
-      <Hamburger handleOpen={handleOpen} />
-      <HamburgerNav open={open} handleOpen={handleOpen} />
-      <Main />
-    </Wrapper>
+      {render()}
+    </>
   );
 };
 

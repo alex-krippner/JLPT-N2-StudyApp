@@ -48,4 +48,6 @@ export interface SizeTheme {
   textSmall: string;
   /** the font size of medium text */
   textMedium: string;
+  /** the border radius size of containers */
+  borderRadiusContainer: string;
 }
