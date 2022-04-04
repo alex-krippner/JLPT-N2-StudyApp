@@ -35,7 +35,7 @@ const NavLinkList = () => {
 
   return (
     <List className={classes.navLinkList} aria-label="main mailbox folders">
-      {!isAuthenticated && (
+      {isAuthenticated && (
         <Button onClick={() => logout({ returnTo: window.location.origin })}>
           Log out
         </Button>
