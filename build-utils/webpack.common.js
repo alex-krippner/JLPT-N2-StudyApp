@@ -48,10 +48,11 @@ module.exports = {
     extensions: [".js", ".jsx", ".tsx", ".ts"],
     alias: {
       "@mon-assets": path.resolve(__dirname, "../assets/"),
+      "@mon-hooks": path.resolve(__dirname, "../src/hooks/"),
+      "@mon-modules": path.resolve(__dirname, "../src/modules/"),
       "@mon-theme": path.resolve(__dirname, "../src/libraries/theme/"),
       "@mon-ui-kit": path.resolve(__dirname, "../src/libraries/ui-kit/"),
       "@mon-utils": path.resolve(__dirname, "../src/libraries/utilities/"),
-      "@mon-modules": path.resolve(__dirname, "../src/modules/"),
     },
   },
   output: {

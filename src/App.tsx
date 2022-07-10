@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import GlobalStyle from "@mon-theme/globalStyle";
 import { FullScreenLoadingIndicator } from "@mon-ui-kit/components";
@@ -19,6 +20,7 @@ const App = () => {
     <>
       <GlobalStyle />
       {render()}
+      <ReactQueryDevtools initialIsOpen={false} />
     </>
   );
 };

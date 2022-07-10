@@ -1,9 +1,9 @@
-declare module '*.png' {
+declare module "*.png" {
   const value: any;
   export = value;
 }
 
-declare module '*.svg' {
+declare module "*.svg" {
   const value: any;
   export = value;
 }
@@ -12,19 +12,24 @@ interface CardDataBaseDefinition {
   id: string;
   mainContent: string;
   rating: null | number;
-  'new entry'?: string;
+  "new entry"?: string;
+}
+
+interface Readings {
+  kunReading: string;
+  onReading: string;
 }
 
 interface KanjiCardData extends CardDataBaseDefinition {
-  cardType: 'kanji' | string;
+  cardType: "kanji" | string;
   単語例: string[];
   漢字: string;
   用例: string[];
-  読み: string[];
+  読み: any; // TODO: Change to Readings
 }
 
 interface VocabCardData extends CardDataBaseDefinition {
-  cardType: 'vocab' | string;
+  cardType: "vocab" | string;
   定義: string[];
   漢字: string[];
   用例: string[];
@@ -33,7 +38,7 @@ interface VocabCardData extends CardDataBaseDefinition {
 }
 
 interface GrammarCardData extends CardDataBaseDefinition {
-  cardType: 'grammar' | string;
+  cardType: "grammar" | string;
   variations: string[];
   意味: string[];
   接続: string[];
@@ -41,9 +46,8 @@ interface GrammarCardData extends CardDataBaseDefinition {
   用例: string[];
 }
 
-interface ReadingCardData
-  extends Omit<CardDataBaseDefinition, 'mainContent'> {
-  cardType: 'reading' | string;
+interface ReadingCardData extends Omit<CardDataBaseDefinition, "mainContent"> {
+  cardType: "reading" | string;
   choices: string[];
   passage: string[];
   question: string[];
@@ -62,31 +66,31 @@ type CardDataKeys =
   | keyof GrammarCardData
   | keyof ReadingCardData;
 
-type CardLabels = '語彙' | '文法' | '漢字' | 'reading';
+type CardLabels = "語彙" | "文法" | "漢字" | "reading";
 
-type KanjiTabLabels = '読み' | '単語例' | '用例';
+type KanjiTabLabels = "読み" | "単語例" | "用例";
 
-type VocabTabLabels = '漢字' | '語類' | '定義' | '用例';
+type VocabTabLabels = "漢字" | "語類" | "定義" | "用例";
 
-type GrammarTabLabels = 'variations' | '意味' | '接続' | '用例';
+type GrammarTabLabels = "variations" | "意味" | "接続" | "用例";
 
 type TabLabel =
-  | '単語例'
-  | '読み'
-  | '定義'
-  | '漢字'
-  | '用例'
-  | '語彙'
-  | '語類'
-  | 'variations'
-  | '意味'
-  | '接続'
-  | 'question'
-  | 'solution'
-  | 'choices'
-  | 'passage';
+  | "単語例"
+  | "読み"
+  | "定義"
+  | "漢字"
+  | "用例"
+  | "語彙"
+  | "語類"
+  | "variations"
+  | "意味"
+  | "接続"
+  | "question"
+  | "solution"
+  | "choices"
+  | "passage";
 
-type CardType = string | 'kanji' | 'vocab' | 'grammar' | 'reading';
+type CardType = string | "kanji" | "vocab" | "grammar" | "reading";
 
 interface CardProps<T, K> {
   cardData: T;

@@ -16,10 +16,11 @@
     "baseUrl": ".",
     "paths": {
       "@mon-assets/*": ["assets/*"],
+      "@mon-hooks/*": ["src/hooks/*"],
+      "@mon-modules/*": ["src/modules/*"],
       "@mon-theme/*": ["src/libraries/theme/*"],
       "@mon-ui-kit/*": ["src/libraries/ui-kit/*"],
-      "@mon-utils/*": ["src/libraries/utilities/*"],
-      "@mon-modules/*": ["src/modules/*"]
+      "@mon-utils/*": ["src/libraries/utilities/*"]
     }
   },
   "include": ["src", "assets", "types.d.ts"]

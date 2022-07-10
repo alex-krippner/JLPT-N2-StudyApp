@@ -8,12 +8,18 @@
     "document": false
   },
   "parser": "@typescript-eslint/parser",
-  "parserOptions": { 
+  "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaVersion": 8
   },
 
-  "plugins": ["prettier", "react-hooks", "@typescript-eslint", "testing-library", "jest-dom"],
+  "plugins": [
+    "prettier",
+    "react-hooks",
+    "@typescript-eslint",
+    "testing-library",
+    "jest-dom"
+  ],
   /*
    "plugin:prettier/recommended" does three things:
 
@@ -46,10 +52,31 @@
     "react/no-array-index-key": 0,
     "react/jsx-props-no-spreading": 0,
     "react/destructuring-assignment": 0,
-    "import/order": ["error", {"groups": ["builtin", "external", "parent", "sibling", "index"]}],
+    "import/order": [
+      "error",
+      { "groups": ["builtin", "external", "parent", "sibling", "index"] }
+    ],
     "import/prefer-default-export": 0,
     "no-underscore-dangle": 0,
     "import/no-cycle": 0,
-    "prefer-object-spread": 0
+    "prefer-object-spread": 0,
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "parameter",
+        "format": ["camelCase", "snake_case"],
+        "leadingUnderscore": "allow"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      1,
+      {
+        "vars": "all",
+        "args": "after-used",
+        "argsIgnorePattern": "_",
+        "varsIgnorePattern": "_",
+        "ignoreRestSiblings": true
+      }
+    ]
   }
 }

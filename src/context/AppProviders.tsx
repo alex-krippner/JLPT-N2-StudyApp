@@ -8,6 +8,7 @@ import { ThemeProvider as StyledComponentsProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 
 import monTheme from "@mon-theme/monDefaultTheme";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { store, persistor } from "../state-management/redux/store";
 
 const theme = createMuiTheme({
@@ -16,22 +17,26 @@ const theme = createMuiTheme({
   },
 });
 
+const queryClient = new QueryClient();
+
 const AppProviders = ({ children }: { children: React.ReactNode }) => (
-  <Auth0Provider
-    domain="dev-o4abqsf2.eu.auth0.com"
-    clientId="CnE3o6QEErrkwiCh1nuV6QcFPQonlTsX"
-    redirectUri={window.location.origin}
-  >
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <StyledComponentsProvider theme={monTheme}>
-          <ThemeProvider theme={theme}>
-            <BrowserRouter>{children}</BrowserRouter>
-          </ThemeProvider>
-        </StyledComponentsProvider>
-      </PersistGate>
-    </Provider>
-  </Auth0Provider>
+  <QueryClientProvider client={queryClient}>
+    <Auth0Provider
+      domain="dev-o4abqsf2.eu.auth0.com"
+      clientId="CnE3o6QEErrkwiCh1nuV6QcFPQonlTsX"
+      redirectUri={window.location.origin}
+    >
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <StyledComponentsProvider theme={monTheme}>
+            <ThemeProvider theme={theme}>
+              <BrowserRouter>{children}</BrowserRouter>
+            </ThemeProvider>
+          </StyledComponentsProvider>
+        </PersistGate>
+      </Provider>
+    </Auth0Provider>
+  </QueryClientProvider>
 );
 
 export default AppProviders;
