@@ -7,7 +7,7 @@ const COLORS = {
   greenSeaMedium: "#3CB371",
   greyLight: "#DEDEDEFF",
   red: "#ca0c0c",
-  white: "#ffffff",
+  white: "#FFFFFF",
   whiteMedium: "#fffafa",
   whiteDark: "#f5f5f5",
 };

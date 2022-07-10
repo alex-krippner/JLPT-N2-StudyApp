@@ -47,6 +47,12 @@ const NavLinkList = () => {
             primary="home"
             icon={<MonLogo color="black" />}
           />
+
+          <ListItemLink
+            to="/new-kanji"
+            primary="new kanji"
+            icon={<KanjiIcon />}
+          />
           <ListItemLink to="/kanji" primary="kanji" icon={<KanjiIcon />} />
           <ListItemLink to="/vocab" primary="vocab" icon={<VocabIcon />} />
           <ListItemLink

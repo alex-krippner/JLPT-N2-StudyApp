@@ -24,20 +24,26 @@ export interface ColorTheme {
 }
 
 export interface SizeTheme {
+  /** the border radius size of containers */
+  borderRadiusContainer: string;
   /** the width of the kanji and vocab card form */
   cardFormWidth: string;
   /** the left absolute position of the card title in the kanji and vocab cards */
   cardTitleLeft: string;
   /** the top absolute position of the card title in the kanji and vocab cards */
   cardTitleTop: string;
-  /** the small font size */
-  fontSmall: string;
-  /** the medium font size */
-  fontMedium: string;
-  /** the large font size */
-  fontLarge: string;
   /** the huge font size */
   fontHuge: string;
+  /** the large font size */
+  fontLarge: string;
+  /** the larger font size */
+  fontLarger: string;
+  /** the medium font size */
+  fontMedium: string;
+  /** the small font size */
+  fontSmall: string;
+  /** the smaller than small font size */
+  fontSmaller: string;
   /** the default height of the ui-kit's basic input */
   inputHeight: string;
   /** the default width of the ui-kit's basic input */
@@ -48,6 +54,4 @@ export interface SizeTheme {
   textSmall: string;
   /** the font size of medium text */
   textMedium: string;
-  /** the border radius size of containers */
-  borderRadiusContainer: string;
 }
