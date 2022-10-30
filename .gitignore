@@ -9,3 +9,6 @@ lib/
 package-lock.json
 *.tsbuildinfo
 gen/
+*.log
+lib/
+!yarn.lock

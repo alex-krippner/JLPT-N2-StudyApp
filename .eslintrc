@@ -8,8 +8,9 @@
     "document": false
   },
   "parser": "@typescript-eslint/parser",
+  //   FIXME: this is causing some issue in linting the src and packages src; removing causes webpack to error out when making changes in package files
   "parserOptions": {
-    "project": "./tsconfig.json",
+    "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
     "ecmaVersion": 8
   },
 
@@ -21,20 +22,14 @@
     "jest-dom"
   ],
   /*
-   "plugin:prettier/recommended" does three things:
-
-      Enables eslint-plugin-prettier.
-      Sets the prettier/prettier rule to "error".
-      Extends the eslint-config-prettier configuration.
-      
-  */
-  "extends": [
-    "airbnb-typescript",
-    "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
-  ],
+     "plugin:prettier/recommended" does three things:
+  
+        Enables eslint-plugin-prettier.
+        Sets the prettier/prettier rule to "error".
+        Extends the eslint-config-prettier configuration.
+        
+    */
+  "extends": ["airbnb-typescript", "plugin:prettier/recommended"],
   "rules": {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
@@ -57,12 +52,6 @@
       { "groups": ["builtin", "external", "parent", "sibling", "index"] }
     ],
     "import/prefer-default-export": 0,
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDepencies": ["**/*.spec.ts"]
-      }
-    ],
     "no-underscore-dangle": 0,
     "import/no-cycle": 0,
     "prefer-object-spread": 0,
@@ -83,6 +72,7 @@
         "varsIgnorePattern": "_",
         "ignoreRestSiblings": true
       }
-    ]
+    ],
+    "@typescript-eslint/no-empty-function": ["warn"]
   }
 }

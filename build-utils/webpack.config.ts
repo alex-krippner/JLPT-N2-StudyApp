@@ -1,15 +1,18 @@
-const { merge } = require('webpack-merge');
+import { merge } from "webpack-merge";
 
-const commonConfig = require('./webpack.common.js');
+import commonConfig from "./webpack.common";
+import devConfigs from "./webpack.dev";
 
 // 'env' environment flag from npm script passed as parameter
 // allows for dynamically requiring webpack config file
 // to merge with a common config file
-module.exports = (env) => {
+const configs = (env) => {
   let envConfig;
   if (env.dev) {
-     envConfig = require(`./webpack.dev.js`);
+    envConfig = devConfigs;
   }
 
   return merge(commonConfig, envConfig);
 };
+
+export default configs;

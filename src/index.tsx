@@ -1,17 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
-import "@mon-theme/swiper-styles.css";
+import * as ReactDom from "react-dom/client";
 
 import App from "./App";
-import AppProviders from "./context/AppProviders";
+import AppProviders from "./core/context/AppProviders";
 
-ReactDOM.render(
+const rootNode = document.getElementById("root");
+ReactDom.createRoot(rootNode).render(
   <AppProviders>
     <App />
-  </AppProviders>,
-  document.getElementById("root"),
+  </AppProviders>
 );
-
-// @ts-ignore
-module.hot.accept();

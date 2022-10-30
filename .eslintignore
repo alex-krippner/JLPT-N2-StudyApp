@@ -2,3 +2,5 @@ node_modules
 dist
 build-utils
 notes
+unused
+lib

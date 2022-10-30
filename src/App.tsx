@@ -1,26 +1,20 @@
 import React from "react";
+import { AuthenticatedApp } from "./core/components/AuthenticatedApp";
 import { useAuth0 } from "@auth0/auth0-react";
+import { UnauthenticatedApp } from "./core/components/UnauthenticatedApp";
 import { ReactQueryDevtools } from "react-query/devtools";
-
-import GlobalStyle from "@mon-theme/globalStyle";
-import { FullScreenLoadingIndicator } from "@mon-ui-kit/components";
-
-import { AuthenticatedAppView } from "./views/AuthenticatedAppView";
-import { UnauthenticatedAppView } from "./views/UnauthenticatedAppView";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth0();
   const render = () => {
-    if (isLoading) return <FullScreenLoadingIndicator />;
-    if (isAuthenticated) return <AuthenticatedAppView />;
-    if (!isAuthenticated) return <UnauthenticatedAppView />;
-  };
+    // if (isLoading) return <FullScreenLoadingIndicator />;
+    if (isAuthenticated) return <AuthenticatedApp />;
 
+    if (!isAuthenticated) return <UnauthenticatedApp />;
+  };
   return (
     <>
-      <GlobalStyle />
-      {render()}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {render()} <ReactQueryDevtools initialIsOpen={false} />
     </>
   );
 };
