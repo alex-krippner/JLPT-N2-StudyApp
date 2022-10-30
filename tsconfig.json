@@ -1,27 +1,14 @@
 {
-  "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "ES5",
-    "lib": ["ES5", "DOM"],
-    // this project is bundled with webpack, for which
-    // webpack docs and programming literature suggests
-    // setting module to 'ES2015'
-    "module": "es6",
-    "allowJs": true,
-    "jsx": "react",
-    "sourceMap": true,
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "@mon-assets/*": ["assets/*"],
-      "@mon-hooks/*": ["src/hooks/*"],
-      "@mon-modules/*": ["src/modules/*"],
-      "@mon-theme/*": ["src/libraries/theme/*"],
-      "@mon-ui-kit/*": ["src/libraries/ui-kit/*"],
-      "@mon-utils/*": ["src/libraries/utilities/*"]
+  "extends": "./tsconfig-base.json",
+  "references": [
+    {
+      "path": "./packages/theme"
+    },
+    {
+      "path": "./packages/ui-kit"
+    },
+    {
+      "path": "./tools/svg-converter"
     }
-  },
-  "include": ["src", "assets", "types.d.ts"]
+  ]
 }

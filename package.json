@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "tools/*"
+  ],
   "scripts": {
     "start": "webpack-dev-server --config build-utils/webpack.config.js --env dev",
     "build": "webpack --config build-utils/webpack.config.js --env prod",

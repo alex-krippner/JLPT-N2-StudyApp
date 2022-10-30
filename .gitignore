@@ -5,3 +5,7 @@ dist/
 assets/
 notes/
 .idea/
+lib/
+package-lock.json
+*.tsbuildinfo
+gen/

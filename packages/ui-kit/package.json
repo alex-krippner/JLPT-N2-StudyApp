@@ -1,0 +1,27 @@
+{
+  "name": "@mon/mon-ui-kit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "directories": {
+    "lib": "src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "build:generate": "ts-node scripts/generateAssets.ts"
+  },
+  "dependencies": {
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "typescript": "^4.7.4",
+    "@mon/mon-svg-converter": "1.0.0"
+  }
+}

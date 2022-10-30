@@ -57,6 +57,12 @@
       { "groups": ["builtin", "external", "parent", "sibling", "index"] }
     ],
     "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDepencies": ["**/*.spec.ts"]
+      }
+    ],
     "no-underscore-dangle": 0,
     "import/no-cycle": 0,
     "prefer-object-spread": 0,
