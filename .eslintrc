@@ -9,10 +9,10 @@
   },
   "parser": "@typescript-eslint/parser",
   //   FIXME: this is causing some issue in linting the src and packages src; removing causes webpack to error out when making changes in package files
-  "parserOptions": {
-    "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
-    "ecmaVersion": 8
-  },
+  //  "parserOptions": {
+  //    "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
+  //    "ecmaVersion": 8
+  //  },
 
   "plugins": [
     "prettier",
@@ -73,6 +73,7 @@
         "ignoreRestSiblings": true
       }
     ],
+    "@typescript-eslint/no-unsafe-argument": "error",
     "@typescript-eslint/no-empty-function": ["warn"]
   }
 }
