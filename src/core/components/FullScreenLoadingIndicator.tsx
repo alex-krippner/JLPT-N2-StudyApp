@@ -1,9 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styled, { useTheme } from "styled-components";
-
-import MonLogo from "@mon-assets/img/LogoMonIcon";
-import { Box, Text } from "@mon-ui-kit/components";
+import { Box, MonLogo, Text } from "@mon/mon-ui-kit";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -49,7 +47,7 @@ export const FullScreenLoadingIndicator = () => {
             repeat: Infinity,
           }}
         >
-          <MonLogo color={theme.colorOf.black} size="6em" />
+          <MonLogo />
         </SpinningContainer>
         <LoadingText>Loading...</LoadingText>
       </ContentContainer>
