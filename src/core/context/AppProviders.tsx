@@ -1,8 +1,7 @@
 import React from "react";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter } from "react-router-dom";
-
 import { monTheme, GlobalStyle } from "@mon/mon-theme";
 
 import { QueryClient, QueryClientProvider } from "react-query";

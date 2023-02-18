@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const CardScene = styled.div<any>`
   height: ${(props) => props.height};

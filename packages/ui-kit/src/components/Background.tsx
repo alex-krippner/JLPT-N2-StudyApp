@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-
+import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
 import hero from "../../assets/hero.svg";
 
 const Wrapper = styled.div(({ theme }) => ({
@@ -20,6 +20,7 @@ interface BackgroundHeroProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Background = (props: BackgroundHeroProps) => {
+  const theme = useTheme();
   const { testId, ...other } = props;
   return (
     <Wrapper data-test-id={testId} {...other}>

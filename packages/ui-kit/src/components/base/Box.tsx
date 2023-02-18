@@ -1,6 +1,5 @@
+import styled from "@emotion/styled";
 import React from "react";
-import styled from "styled-components";
-
 type FlexDirection = "row" | "column";
 
 const BaseBox = styled.div<BoxProps>((props) => ({

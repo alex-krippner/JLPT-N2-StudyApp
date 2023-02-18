@@ -1,5 +1,5 @@
+import { Grid } from "@mon/mon-ui-kit";
 import React, { useState } from "react";
-import { Grid } from "@mon-ui-kit/components";
 import { useAllKanji } from "../hooks";
 import KanjiCard from "./Card/KanjiCard";
 

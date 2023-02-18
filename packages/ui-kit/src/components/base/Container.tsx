@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 // TODO: Extend with themed breakpoints
 const BaseContainer = styled.div<ContainerProps>((props) => ({

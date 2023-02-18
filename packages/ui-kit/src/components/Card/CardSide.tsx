@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const BaseCardSide = styled.div<any>`
   top: ${(props) => props.top || "0"};

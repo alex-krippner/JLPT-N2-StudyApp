@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { motion } from "framer-motion";
-import { bem } from "@mon-ui-kit/utils";
+import styled from "@emotion/styled";
+import { bem } from "@mon/mon-ui-kit";
 import { KanjiCardData } from "../../hooks";
 import KanjiDetails from "./KanjiDetails";
 

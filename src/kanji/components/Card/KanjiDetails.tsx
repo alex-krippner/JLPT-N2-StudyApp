@@ -1,10 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import { Box, Text } from "@mon-ui-kit/components";
-
-import { bem } from "@mon-ui-kit/utils";
+import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-
+import { bem, Box, Text } from "@mon/mon-ui-kit";
 import { KanjiCardData } from "../../hooks";
 
 const Container = styled(motion.ul)({
@@ -75,13 +72,8 @@ interface KanjiDetailsProps {
 }
 
 const KanjiDetails = (props: KanjiDetailsProps) => {
-  const {
-    meanings,
-    kunReading,
-    onReading,
-    exampleWords,
-    exampleSentences,
-  } = props.data;
+  const { meanings, kunReading, onReading, exampleWords, exampleSentences } =
+    props.data;
 
   const [, element] = bem("kanji-card");
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Button, Text } from "@mon/mon-ui-kit/src";
-import styled, { useTheme } from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
 
 const Container = styled(Box)(({ theme }) => ({
   height: theme.sizeOf.cardFormWidth,

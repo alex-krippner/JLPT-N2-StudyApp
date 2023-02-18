@@ -34,7 +34,12 @@ export const sizeTheme: SizeTheme = {
   textMedium: "1.5rem",
 };
 
-export const monTheme = {
+export const monTheme: MonDefaultTheme = {
   sizeOf: sizeTheme,
   colorOf: colorTheme,
 };
+
+export interface MonDefaultTheme {
+  sizeOf: SizeTheme;
+  colorOf: ColorTheme;
+}
