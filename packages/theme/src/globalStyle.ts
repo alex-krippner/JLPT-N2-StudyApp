@@ -1,6 +1,4 @@
-import { createGlobalStyle } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
+export const globalStyles = `
   * {
   
   /* The emerging W3C standard
@@ -45,7 +43,6 @@ export const GlobalStyle = createGlobalStyle`
 
   :root {
       font-size: 62.5%;
-    
       --font-family-main: 'Roboto Mono', monospace;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -66,6 +63,7 @@ export const GlobalStyle = createGlobalStyle`
   #root{
     display: flex;
     justify-content: center;
+    height: 100%;
 
   }
   
@@ -99,10 +97,6 @@ export const GlobalStyle = createGlobalStyle`
   @media only screen and (max-width: 770px){
     :root {
       font-size: 45%;
-      --left-cardTitle: 25%;
-      --padding-large: 2rem;
-      --top-cardTitle: -2rem;
-      --width-cardForm: 55rem;
     }
   }
 `;

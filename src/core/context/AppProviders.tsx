@@ -4,7 +4,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ThemeProvider } from "@emotion/react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/system";
-import { monTheme, GlobalStyle } from "@mon/mon-theme";
+import { monTheme, globalStyles } from "@mon/mon-theme";
+import { GlobalStyles } from "@mui/material";
 import { theme } from "./theme/theme";
 
 const queryClient = new QueryClient();
@@ -16,7 +17,7 @@ const AppProviders = ({ children }: { children: React.ReactNode }) => {
         clientId="CnE3o6QEErrkwiCh1nuV6QcFPQonlTsX"
         redirectUri={window.location.origin}
       >
-        <GlobalStyle />
+        <GlobalStyles styles={{ globalStyles }} />
         <MuiThemeProvider theme={theme}>
           <ThemeProvider theme={monTheme}>
             <ReactQueryDevtools initialIsOpen={false} />

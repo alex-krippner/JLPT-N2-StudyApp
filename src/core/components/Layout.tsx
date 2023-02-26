@@ -1,13 +1,13 @@
 import * as React from "react";
+import { Outlet } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Outlet } from "react-router-dom";
-import { Container, Drawer, List } from "@mui/material";
-import { ListItemLink } from "./ListItemLink";
+import { Drawer, List } from "@mui/material";
 import { MonLogo, KanjiIcon } from "@mon/mon-ui-kit";
+import { ListItemLink } from "./ListItemLink";
 
 export const Layout = React.forwardRef(() => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -24,6 +24,9 @@ export const Layout = React.forwardRef(() => {
     { text: "Home", icon: <MonLogo />, to: "/" },
     { text: "Kanji", icon: <KanjiIcon />, to: "/kanji" },
   ];
+
+  const DRAWER_WIDTH = 125;
+  const APP_BAR_HEIGHT = 50;
 
   const drawer = (
     <>
@@ -47,12 +50,13 @@ export const Layout = React.forwardRef(() => {
     setMobileOpen(!mobileOpen);
   };
   return (
-    <Container sx={{ padding: 0 }}>
+    <Box sx={{ display: "flex", width: "100%", height: "100%" }}>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           backgroundColor: "white",
           display: { sm: `none` },
+          height: APP_BAR_HEIGHT,
         }}
       >
         <Toolbar>
@@ -67,7 +71,10 @@ export const Layout = React.forwardRef(() => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Box component="nav" sx={{ width: { flexShrink: { sm: 0 } } }}>
+      <Box
+        component="nav"
+        sx={{ width: { sm: DRAWER_WIDTH, flexShrink: { sm: 0 } } }}
+      >
         <Drawer
           variant="temporary"
           open={mobileOpen}
@@ -79,34 +86,39 @@ export const Layout = React.forwardRef(() => {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
+              width: DRAWER_WIDTH,
             },
           }}
         >
           {drawer}
-        </Drawer>{" "}
+        </Drawer>
         <Drawer
           variant="permanent"
           sx={{
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
+              width: DRAWER_WIDTH,
             },
           }}
           open
         >
           {drawer}
         </Drawer>
-      </Box>{" "}
+      </Box>
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
+          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
+          height: `calc(100% - ${APP_BAR_HEIGHT}px)`,
+          mt: { xs: `${APP_BAR_HEIGHT}px`, sm: 0 },
         }}
       >
-        <Outlet />{" "}
+        <Outlet />
       </Box>
-    </Container>
+    </Box>
   );
 });
 Layout.displayName = "Layout";
