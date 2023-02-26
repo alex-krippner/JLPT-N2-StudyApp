@@ -1,10 +1,11 @@
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ThemeProvider } from "@emotion/react";
-import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider as MuiThemeProvider } from "@mui/system";
 import { monTheme, GlobalStyle } from "@mon/mon-theme";
-
-import { QueryClient, QueryClientProvider } from "react-query";
+import { theme } from "./theme/theme";
 
 const queryClient = new QueryClient();
 const AppProviders = ({ children }: { children: React.ReactNode }) => {
@@ -16,9 +17,12 @@ const AppProviders = ({ children }: { children: React.ReactNode }) => {
         redirectUri={window.location.origin}
       >
         <GlobalStyle />
-        <ThemeProvider theme={monTheme}>
-          <BrowserRouter>{children}</BrowserRouter>
-        </ThemeProvider>
+        <MuiThemeProvider theme={theme}>
+          <ThemeProvider theme={monTheme}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            {children}
+          </ThemeProvider>
+        </MuiThemeProvider>
       </Auth0Provider>
     </QueryClientProvider>
   );

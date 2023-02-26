@@ -5,7 +5,7 @@ import { SizeTheme } from "./Theme";
 export const colorTheme: ColorTheme = {
   black: COLORS.black,
   buttonHover: COLORS.greyLight,
-  primaryLight: COLORS.blueLight,
+  primaryLight: COLORS.uranianBlue,
   primaryMedium: COLORS.blueMedium,
   primaryDark: COLORS.blueDark,
   red: COLORS.red,
