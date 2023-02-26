@@ -1,16 +1,17 @@
 const COLORS = {
   black: "#424242",
-  blueCadet: "#5f9ea0",
+  blueCadet: "#5F9EA0",
   blueLight: "#508DC6",
-  blueMedium: "#3f51b5",
+  blueMedium: "#3F51B5",
   blueDark: "#32587C",
   greenSeaMedium: "#3CB371",
   greyLight: "#DEDEDEFF",
-  red: "#ca0c0c",
+  red: "#CA0C0C",
   uranianBlue: "#C2DCFE",
   white: "#FFFFFF",
-  whiteMedium: "#fffafa",
-  whiteDark: "#f5f5f5",
+  whiteMedium: "#FFFAFA",
+  whiteDark: "#F5F5F5",
+  whiteGhost: "#F3F6FC",
 };
 
 export default COLORS;

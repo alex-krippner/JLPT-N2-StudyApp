@@ -14,6 +14,7 @@ export const colorTheme: ColorTheme = {
   white: COLORS.white,
   whiteMedium: COLORS.whiteMedium,
   whiteDark: COLORS.whiteDark,
+  surface: COLORS.whiteGhost,
 };
 
 export const sizeTheme: SizeTheme = {

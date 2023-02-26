@@ -1,5 +1,11 @@
 import { monTheme } from "@mon/mon-theme";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material";
+
+interface CustomThemeOptions extends ThemeOptions {
+  status: {
+    danger: React.CSSProperties["color"];
+  };
+}
 
 export const theme = createTheme({
   components: {
@@ -48,6 +54,9 @@ export const theme = createTheme({
       light: monTheme.colorOf.primaryLight,
       main: monTheme.colorOf.primaryMedium,
       dark: monTheme.colorOf.primaryDark,
+    },
+    surface: {
+      main: monTheme.colorOf.surface,
     },
   },
   spacing: 4,

@@ -21,6 +21,8 @@ export interface ColorTheme {
   whiteMedium: string;
   /** a dark shade of white */
   whiteDark: string;
+  /** a color for backgrounds/surfaces */
+  surface: string;
 }
 
 export interface SizeTheme {
