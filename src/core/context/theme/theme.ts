@@ -1,11 +1,5 @@
-import { monTheme } from "@mon/mon-theme";
 import { createTheme, ThemeOptions } from "@mui/material";
-
-interface CustomThemeOptions extends ThemeOptions {
-  status: {
-    danger: React.CSSProperties["color"];
-  };
-}
+import { monTheme } from "@mon/mon-theme";
 
 export const theme = createTheme({
   components: {

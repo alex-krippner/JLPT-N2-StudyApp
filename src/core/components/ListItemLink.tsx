@@ -1,26 +1,21 @@
 import * as React from "react";
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
 import { Link, LinkProps } from "react-router-dom";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 interface ListItemLinkProps {
+  handleListItemClick: (index: number) => void;
   icon: JSX.Element;
-  text: string;
-  to: string;
-  handleListItemClick: (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-  ) => void;
   index: number;
   selectedIndex: number;
+  text: string;
+  to: string;
 }
 
-export function ListItemLink(props: ListItemLinkProps) {
-  const { icon, text, to, handleListItemClick, index, selectedIndex } = props;
+export const ListItemLink = (props: ListItemLinkProps) => {
+  const { handleListItemClick, icon, index, selectedIndex, text, to } = props;
   const CustomLink = React.useMemo(
     () =>
       React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "to">>(
@@ -34,22 +29,22 @@ export function ListItemLink(props: ListItemLinkProps) {
   return (
     <ListItem key={text} disablePadding component={CustomLink}>
       <ListItemButton
+        disableRipple
+        onClick={() => handleListItemClick(index)}
         sx={{
-          flexDirection: "column",
           alignItems: "center",
+          flexDirection: "column",
           p: "8 2",
         }}
-        onClick={(event) => handleListItemClick(event, index)}
-        disableRipple
       >
         <ListItemIcon
           sx={{
-            p: 2,
-            flexDirection: "column",
             alignItems: "center",
             borderRadius: 4,
             backgroundColor:
               selectedIndex === index ? "primary.light" : "transparent",
+            flexDirection: "column",
+            p: 2,
           }}
         >
           {icon}
@@ -58,4 +53,4 @@ export function ListItemLink(props: ListItemLinkProps) {
       </ListItemButton>
     </ListItem>
   );
-}
+};

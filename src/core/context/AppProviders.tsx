@@ -3,9 +3,9 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ThemeProvider } from "@emotion/react";
-import { ThemeProvider as MuiThemeProvider } from "@mui/system";
+import MuiThemeProvider from "@mui/system/ThemeProvider";
+import GlobalStyles from "@mui/material/GlobalStyles";
 import { monTheme, globalStyles } from "@mon/mon-theme";
-import { GlobalStyles } from "@mui/material";
 import { theme } from "./theme/theme";
 
 const queryClient = new QueryClient();

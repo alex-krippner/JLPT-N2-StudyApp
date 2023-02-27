@@ -5,47 +5,22 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Drawer, List, useTheme } from "@mui/material";
+import Drawer from "@mui/material/Drawer";
+import { useTheme } from "@mui/material/styles/";
 import { MonLogo, KanjiIcon } from "@mon/mon-ui-kit";
-import { ListItemLink } from "./ListItemLink";
+import { NavListItemData, NavList } from "./NavList";
 
 export const Layout = React.forwardRef(() => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const theme = useTheme();
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-  ) => {
-    setSelectedIndex(index);
-  };
 
-  const listItems = [
+  const listItems: NavListItemData[] = [
     { text: "Home", icon: <MonLogo />, to: "/" },
     { text: "Kanji", icon: <KanjiIcon />, to: "/kanji" },
   ];
 
-  //FIXME: Should these be themed?
   const DRAWER_WIDTH = 125;
   const APP_BAR_HEIGHT = 50;
-
-  const drawer = (
-    <>
-      <List>
-        {listItems.map(({ text, icon, to }, index) => (
-          <ListItemLink
-            key={text}
-            text={text}
-            icon={icon}
-            to={to}
-            index={index}
-            handleListItemClick={handleListItemClick}
-            selectedIndex={selectedIndex}
-          />
-        ))}
-      </List>
-    </>
-  );
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -91,7 +66,7 @@ export const Layout = React.forwardRef(() => {
             backgroundColor: theme.palette.surface.main,
           }}
         >
-          {drawer}
+          <NavList listItems={listItems} />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -106,7 +81,7 @@ export const Layout = React.forwardRef(() => {
           }}
           open
         >
-          {drawer}
+          <NavList listItems={listItems} />
         </Drawer>
       </Box>
       <Box
