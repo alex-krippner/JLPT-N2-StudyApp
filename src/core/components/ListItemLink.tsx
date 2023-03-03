@@ -4,6 +4,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 
 interface ListItemLinkProps {
   handleListItemClick: (index: number) => void;
@@ -49,7 +50,7 @@ export const ListItemLink = (props: ListItemLinkProps) => {
         >
           {icon}
         </ListItemIcon>
-        <ListItemText primary={text} />
+        <ListItemText primary={<Typography variant="h4">{text}</Typography>} />
       </ListItemButton>
     </ListItem>
   );

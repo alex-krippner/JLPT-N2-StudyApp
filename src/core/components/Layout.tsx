@@ -71,7 +71,11 @@ export const Layout = React.forwardRef(() => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: {
+              xs: "none",
+              sm: "flex",
+              alignItems: "center",
+            },
             "& .MuiDrawer-paper": {
               backgroundColor: "surface.main",
               border: "none",

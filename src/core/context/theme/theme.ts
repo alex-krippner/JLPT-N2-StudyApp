@@ -3,6 +3,15 @@ import { monTheme } from "@mon/mon-theme";
 
 export const theme = createTheme({
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          ":hover": {
+            backgroundColor: monTheme.colorOf.buttonHover,
+          },
+        },
+      },
+    },
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -39,6 +48,10 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: "Roboto Mono",
+    h4: { color: monTheme.colorOf.black },
+    h5: {
+      color: monTheme.colorOf.black,
+    },
     h6: {
       color: monTheme.colorOf.black,
     },
