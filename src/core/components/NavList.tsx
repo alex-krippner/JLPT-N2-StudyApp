@@ -15,28 +15,27 @@ interface NavListProps {
   listItems: NavListItemData[];
 }
 
-export const NavList = ({ listItems }: NavListProps) => {
+export function NavList({ listItems }: NavListProps) {
   const { isAuthenticated } = useAuth0();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const handleListItemClick = (index: number) => {
     setSelectedIndex(index);
   };
+
   return (
-    <>
-      <List sx={{ display: "flex", flexDirection: "column" }}>
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-        {listItems.map(({ text, icon, to }, index) => (
-          <ListItemLink
-            key={text}
-            text={text}
-            icon={icon}
-            to={to}
-            index={index}
-            handleListItemClick={handleListItemClick}
-            selectedIndex={selectedIndex}
-          />
-        ))}
-      </List>
-    </>
+    <List sx={{ display: "flex", flexDirection: "column" }}>
+      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+      {listItems.map(({ text, icon, to }, index) => (
+        <ListItemLink
+          key={text}
+          text={text}
+          icon={icon}
+          to={to}
+          index={index}
+          handleListItemClick={handleListItemClick}
+          selectedIndex={selectedIndex}
+        />
+      ))}
+    </List>
   );
-};
+}

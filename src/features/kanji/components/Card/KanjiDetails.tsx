@@ -1,3 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
+// FIXME: Replace mon ui kit with material
 import React from "react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
@@ -71,7 +74,7 @@ interface KanjiDetailsProps {
   data: KanjiCardData;
 }
 
-const KanjiDetails = (props: KanjiDetailsProps) => {
+function KanjiDetails(props: KanjiDetailsProps) {
   const { meanings, kunReading, onReading, exampleWords, exampleSentences } =
     props.data;
 
@@ -115,6 +118,6 @@ const KanjiDetails = (props: KanjiDetailsProps) => {
       </KanjiDetail>
     </Container>
   );
-};
+}
 
 export default KanjiDetails;

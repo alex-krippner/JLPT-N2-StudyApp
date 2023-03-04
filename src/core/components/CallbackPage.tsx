@@ -1,3 +1,5 @@
 import * as React from "react";
 
-export const CallbackPage = () => <div>Mon calllback page</div>;
+export function CallbackPage() {
+  return <div>Mon calllback page</div>;
+}

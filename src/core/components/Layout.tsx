@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import { useTheme } from "@mui/material/styles/";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { MonLogo, KanjiIcon } from "@mon/mon-ui-kit";
 import { NavListItemData, NavList } from "./NavList";
 

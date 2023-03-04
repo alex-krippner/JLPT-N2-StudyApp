@@ -4,11 +4,12 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { ThemeProvider } from "@emotion/react";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import MuiThemeProvider from "@mui/system/ThemeProvider";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { monTheme, globalStyles } from "@mon/mon-theme";
 import { theme } from "./theme/theme";
 
 const queryClient = new QueryClient();
-const AppProviders = ({ children }: { children: React.ReactNode }) => {
+function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles styles={{ globalStyles }} />
@@ -20,6 +21,6 @@ const AppProviders = ({ children }: { children: React.ReactNode }) => {
       </MuiThemeProvider>
     </QueryClientProvider>
   );
-};
+}
 
 export default AppProviders;

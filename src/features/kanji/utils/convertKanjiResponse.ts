@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { KanjiCardData, KanjiResponse } from "../hooks";
 
 export function convertKanjiResponse(

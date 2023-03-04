@@ -17,7 +17,12 @@ export const monRouter = createBrowserRouter(
       <Route path="/callback" element={<CallbackPage />} />
       <Route
         path="kanji"
-        element={<AuthenticationGuard component={KanjiView} />}
+        element={
+          <AuthenticationGuard
+            component={KanjiView}
+            redirectComponent={() => <div>Loading...</div>}
+          />
+        }
       />
     </Route>,
   ),

@@ -8,13 +8,13 @@
     "document": false
   },
   "parser": "@typescript-eslint/parser",
-  //   FIXME: this is causing some issue in linting the src and packages src; removing causes webpack to error out when making changes in package files
-  //  "parserOptions": {
-  //    "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
-  //    "ecmaVersion": 8
-  //  },
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
+    "ecmaVersion": 8
+  },
 
   "plugins": [
+    "import",
     "prettier",
     "react-hooks",
     "@typescript-eslint",
@@ -29,32 +29,14 @@
         Extends the eslint-config-prettier configuration.
         
     */
-  "extends": ["airbnb-typescript", "plugin:prettier/recommended"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
+  ],
   "rules": {
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
-    "react/jsx-curly-newline": "off",
-    "react/jsx-one-expression-per-line": 0,
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".tsx"] }
-    ],
-    "react/prop-types": 0,
-    "no-nested-ternary": 0,
     "@typescript-eslint/comma-dangle": 0,
-    "default-case": 0,
-    "consistent-return": 0,
-    "react/no-array-index-key": 0,
-    "react/jsx-props-no-spreading": 0,
-    "react/destructuring-assignment": 0,
-    "import/order": [
-      "error",
-      { "groups": ["builtin", "external", "parent", "sibling", "index"] }
-    ],
-    "import/prefer-default-export": 0,
-    "no-underscore-dangle": 0,
-    "import/no-cycle": 0,
-    "prefer-object-spread": 0,
     "@typescript-eslint/naming-convention": [
       "warn",
       {
@@ -74,6 +56,32 @@
       }
     ],
     "@typescript-eslint/no-unsafe-argument": "error",
-    "@typescript-eslint/no-empty-function": ["warn"]
+    "@typescript-eslint/no-empty-function": ["warn"],
+    "consistent-return": 0,
+    "default-case": 0,
+    "import/default": 1,
+    "import/first": 1,
+    "import/no-cycle": 0,
+    "import/order": [
+      "error",
+      { "groups": ["builtin", "external", "parent", "sibling", "index"] }
+    ],
+    "import/prefer-default-export": 0,
+    "no-nested-ternary": 0,
+    "no-underscore-dangle": 0,
+    "prefer-object-spread": 0,
+    "react/destructuring-assignment": 0,
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react/jsx-curly-newline": "off",
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".tsx"] }
+    ],
+    "react/no-array-index-key": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/no-explicit-any": "error"
   }
 }

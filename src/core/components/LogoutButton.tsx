@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export const LogoutButton = () => {
+export function LogoutButton() {
   const { logout } = useAuth0();
 
   const handleLogout = () => {
@@ -17,4 +17,4 @@ export const LogoutButton = () => {
       <Typography variant="h5">Log out</Typography>
     </Button>
   );
-};
+}

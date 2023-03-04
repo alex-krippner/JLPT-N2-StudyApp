@@ -2,7 +2,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { AppState, Auth0Provider } from "@auth0/auth0-react";
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   const domain = "dev-o4abqsf2.eu.auth0.com";
@@ -27,4 +27,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </Auth0Provider>
   );
-};
+}
