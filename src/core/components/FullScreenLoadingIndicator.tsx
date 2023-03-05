@@ -1,56 +1,76 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styled, { useTheme } from "styled-components";
-import { Box, MonLogo, Text } from "@mon/mon-ui-kit";
-
-const Wrapper = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "row",
-  height: "100vh",
-  width: "100vw",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: theme.colorOf.whiteMedium,
-  textAlign: "center",
-}));
+import styled from "@emotion/styled";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { MonLogo } from "@mon/mon-ui-kit";
 
 const SpinningContainer = styled(motion.div)`
   display: flex;
+  height: 100px;
+  width: 100px;
 `;
 
-const ContentContainer = styled(Box)({
-  position: "relative",
-  display: "flex",
-  width: "25%",
-  height: "max-content",
-});
-
-const LoadingText = styled(Text)(({ theme }) => ({
-  position: "absolute",
-  top: "25%",
-  left: "30%",
-  fontSize: theme.sizeOf.fontMedium,
-}));
-
-export const FullScreenLoadingIndicator = () => {
-  const theme = useTheme();
+export function FullScreenLoadingIndicator() {
   return (
-    <Wrapper>
-      <ContentContainer>
-        <SpinningContainer
-          animate={{
-            rotate: 360,
-          }}
-          transition={{
-            ease: "linear",
-            duration: 5,
-            repeat: Infinity,
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <SpinningContainer
+        animate={{
+          rotate: 360,
+        }}
+        transition={{
+          ease: "linear",
+          duration: 5,
+          repeat: Infinity,
+        }}
+      >
+        <MonLogo />
+      </SpinningContainer>
+      <Typography variant="h3" sx={{ display: "flex", mt: 6 }}>
+        Loading
+        <Typography
+          variant="h3"
+          sx={{
+            position: "relative",
+
+            "&::after": {
+              position: "absolute",
+              content: '""',
+              top: 0,
+              right: 0,
+              height: "100%",
+              backgroundColor: "white",
+              animation: "reveal 2.5s infinite",
+            },
+            "@keyframes reveal": {
+              "0%": {
+                width: "100%",
+              },
+              "25%": {
+                width: "100%",
+              },
+              "50%": {
+                width: "100%",
+              },
+              "75%": {
+                width: 0,
+              },
+            },
           }}
         >
-          <MonLogo />
-        </SpinningContainer>
-        <LoadingText>Loading...</LoadingText>
-      </ContentContainer>
-    </Wrapper>
+          ...
+        </Typography>
+      </Typography>
+    </Box>
   );
-};
+}
