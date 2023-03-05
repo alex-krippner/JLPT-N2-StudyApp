@@ -53,8 +53,9 @@ async function fetchAllKanji() {
 }
 
 export function useAllKanji(options: Options) {
-  const { data, status } = useQuery(["kanjiAll", options.filter], () =>
-    fetchAllKanji(),
+  const { data, status } = useQuery<KanjiResponse[]>(
+    ["kanjiAll", options.filter],
+    () => fetchAllKanji(),
   );
   return { data: convertKanjiResponse(data), status };
 }

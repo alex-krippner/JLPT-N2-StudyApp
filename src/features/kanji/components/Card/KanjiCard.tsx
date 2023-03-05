@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { bem } from "@mon/mon-ui-kit";
 import { KanjiCardData } from "../../hooks";
 import KanjiDetails from "./KanjiDetails";
@@ -38,7 +39,7 @@ const Kanji = styled(motion.div)(({ theme }) => ({
   width: "100%",
 }));
 
-const KanjiCard = (props: KanjiCardProps) => {
+function KanjiCard(props: KanjiCardProps) {
   const { kanji, id } = props.data;
 
   const kanjiVariant = {
@@ -71,6 +72,6 @@ const KanjiCard = (props: KanjiCardProps) => {
       </Card>
     );
   }
-};
+}
 
 export default KanjiCard;

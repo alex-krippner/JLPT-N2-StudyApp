@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Link, LinkProps } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import { useCustomLink } from "../hooks/useCustomLink";
 
 interface ListItemLinkProps {
   handleListItemClick: (index: number) => void;
@@ -15,17 +15,10 @@ interface ListItemLinkProps {
   to: string;
 }
 
-export const ListItemLink = (props: ListItemLinkProps) => {
+export function ListItemLink(props: ListItemLinkProps) {
   const { handleListItemClick, icon, index, selectedIndex, text, to } = props;
-  const CustomLink = React.useMemo(
-    () =>
-      React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "to">>(
-        (linkProps, ref) => {
-          return <Link ref={ref} to={to} {...linkProps} />;
-        },
-      ),
-    [to],
-  );
+
+  const CustomLink = useCustomLink(to);
 
   return (
     <ListItem key={text} disablePadding component={CustomLink}>
@@ -54,4 +47,4 @@ export const ListItemLink = (props: ListItemLinkProps) => {
       </ListItemButton>
     </ListItem>
   );
-};
+}

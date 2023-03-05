@@ -3,14 +3,16 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 interface AuthenticationGuardProps {
   component: React.ComponentType<object>;
+  redirectComponent: () => JSX.Element;
 }
-
-export const AuthenticationGuard = ({
+// FIXME: Revisit the redirect component
+export function AuthenticationGuard({
   component,
-}: AuthenticationGuardProps) => {
+  redirectComponent,
+}: AuthenticationGuardProps) {
   const Component = withAuthenticationRequired(component, {
-    onRedirecting: () => <div>Loading...</div>,
+    onRedirecting: redirectComponent,
   });
 
   return <Component />;
-};
+}

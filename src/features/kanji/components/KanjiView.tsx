@@ -1,5 +1,5 @@
-import { Grid } from "@mon/mon-ui-kit";
 import React, { useState } from "react";
+import Grid from "@mui/material/Grid";
 import { useAllKanji } from "../hooks";
 import KanjiCard from "./Card/KanjiCard";
 
@@ -8,7 +8,7 @@ interface Options {
   filter: Filter;
 }
 
-const KanjiView = () => {
+function KanjiView() {
   const [options, _] = useState<Options>({ filter: "all" });
   const { data } = useAllKanji(options);
 
@@ -19,6 +19,6 @@ const KanjiView = () => {
       ))}
     </Grid>
   );
-};
+}
 
 export default KanjiView;

@@ -8,6 +8,7 @@ import ReactRefreshTypeScript from "react-refresh-typescript";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const options = {
+  extensions: ["js", "jsx", "ts", "tsx"],
   overrideConfigFile: path.resolve(__dirname, "../.eslintrc"),
 };
 
@@ -23,7 +24,7 @@ const commonConfigs = {
             projectReferences: true,
             getCustomTransformers: () => ({
               before: [isDevelopment && ReactRefreshTypeScript()].filter(
-                Boolean
+                Boolean,
               ),
             }),
             transpileOnly: isDevelopment,

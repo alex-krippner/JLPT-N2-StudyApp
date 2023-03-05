@@ -1,4 +1,5 @@
-import { createTheme, ThemeOptions } from "@mui/material";
+import createTheme from "@mui/material/styles/createTheme";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { monTheme } from "@mon/mon-theme";
 
 export const theme = createTheme({

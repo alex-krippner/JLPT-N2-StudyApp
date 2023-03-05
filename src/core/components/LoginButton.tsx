@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export const LoginButton = () => {
+export function LoginButton() {
   const { loginWithRedirect } = useAuth0();
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -18,4 +18,4 @@ export const LoginButton = () => {
       <Typography variant="h5">Log In</Typography>
     </Button>
   );
-};
+}
