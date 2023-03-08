@@ -46,6 +46,12 @@ export interface SizeTheme {
   fontSmall: string;
   /** the smaller than small font size */
   fontSmaller: string;
+  /** the small icon font size*/
+  iconSmall: string;
+  /** the medium icon font size*/
+  iconMedium: string;
+  /** the large icon font size*/
+  iconLarge: string;
   /** the default height of the ui-kit's basic input */
   inputHeight: string;
   /** the default width of the ui-kit's basic input */

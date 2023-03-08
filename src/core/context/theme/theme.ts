@@ -13,6 +13,17 @@ export const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          ".MuiSvgIcon-fontSizeLarge": { fontSize: monTheme.sizeOf.iconLarge },
+          ".MuiSvgIcon-fontSizeMedium": {
+            fontSize: monTheme.sizeOf.iconMedium,
+          },
+          ".MuiSvgIcon-fontSizeSmall": { fontSize: monTheme.sizeOf.iconSmall },
+        },
+      },
+    },
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -26,9 +37,6 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           flex: 1,
-          ".MuiSvgIcon-root": {
-            fontSize: "3rem",
-          },
           ":hover": {
             backgroundColor: monTheme.colorOf.buttonHover,
           },
