@@ -1,24 +1,16 @@
 import * as React from "react";
+import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
-
 import { randomId } from "@mui/x-data-grid-generator";
+import Typography from "@mui/material/Typography";
 import {
   DataGrid,
+  GridColDef,
   GridRowModes,
   GridRowModesModel,
   GridRowsProp,
   GridToolbarContainer,
 } from "@mui/x-data-grid";
-import AddIcon from "@mui/icons-material/Add";
-
-const columns = [
-  { field: "Kanji" },
-  { field: "Meaning", minWidth: 150 },
-  { field: "Kun reading", minWidth: 150 },
-  { field: "On reading", minWidth: 150 },
-  { field: "Example words", width: 150 },
-  { field: "Example sentences", width: 150 },
-];
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -26,7 +18,7 @@ interface EditToolbarProps {
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 function EditToolbar(props: EditToolbarProps) {
   const { setRows, setRowModesModel } = props;
 
@@ -35,6 +27,7 @@ function EditToolbar(props: EditToolbarProps) {
     setRows((oldRows) => [
       ...oldRows,
       {
+        id,
         kanji: "",
         meaning: "",
         kunReading: "",
@@ -51,17 +44,22 @@ function EditToolbar(props: EditToolbarProps) {
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add kanji
+        <Typography variant="h5" color="primary.main">
+          Add kanji
+        </Typography>
       </Button>
     </GridToolbarContainer>
   );
 }
-
-export function MonDataGrid() {
+interface MonDataGridProps<D> {
+  data: GridRowsProp<D>;
+  columns: GridColDef[];
+}
+export function MonDataGrid<D>({ data, columns }: MonDataGridProps<D>) {
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {},
   );
-  const [rows, setRows] = React.useState([]);
+  const [rows, setRows] = React.useState(data);
   return (
     <DataGrid
       rowModesModel={rowModesModel}

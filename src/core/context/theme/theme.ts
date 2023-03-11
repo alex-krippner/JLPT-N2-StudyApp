@@ -1,5 +1,7 @@
 import createTheme from "@mui/material/styles/createTheme";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import type {} from "@mui/x-data-grid/themeAugmentation";
+import type {} from "@mui/x-data-grid-pro/themeAugmentation";
+import type {} from "@mui/x-data-grid-premium/themeAugmentation";
 import { monTheme } from "@mon/mon-theme";
 
 export const theme = createTheme({
@@ -10,6 +12,35 @@ export const theme = createTheme({
           ":hover": {
             backgroundColor: monTheme.colorOf.buttonHover,
           },
+        },
+      },
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          ".MuiDataGrid-columnHeaderTitle": {
+            fontWeight: "bold",
+          },
+          ".MuiSvgIcon-fontSizeSmall": { fontSize: monTheme.sizeOf.iconSmall },
+          ".MuiSvgIcon-fontSizeMedium": {
+            fontSize: monTheme.sizeOf.iconMedium,
+          },
+          ".MuiSvgIcon-fontSizeLarge": { fontSize: monTheme.sizeOf.iconLarge },
+          ".MuiTablePagination-displayedRows": {
+            fontSize: monTheme.sizeOf.fontSmaller,
+          },
+          ".MuiTablePagination-selectLabel": {
+            fontSize: monTheme.sizeOf.fontSmaller,
+          },
+          ".MuiTablePagination-toolbar": {
+            fontSize: monTheme.sizeOf.fontSmaller,
+          },
+        },
+        columnHeader: {
+          fontSize: monTheme.sizeOf.fontSmall,
+        },
+        row: {
+          fontSize: monTheme.sizeOf.fontSmaller,
         },
       },
     },

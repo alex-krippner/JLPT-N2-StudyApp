@@ -19,6 +19,7 @@
     "@auth0/auth0-react": "^1.12.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.6",
+    "@mon/mon-theme": "1.0.0",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.11",
     "@mui/system": "^5.11.11",
