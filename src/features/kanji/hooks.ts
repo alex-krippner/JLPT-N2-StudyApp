@@ -1,25 +1,25 @@
+/* eslint-disable no-console */
 import axios from "axios";
-import { useQuery } from "react-query";
-import { convertKanjiResponse } from "./utils";
+import { useMutation, useQuery } from "react-query";
 
 type Filter = "all" | "rating";
 interface Options {
   filter: Filter;
 }
 
-interface ExampleSentence {
+export interface ExampleSentence {
   exampleSentence: string;
   id: string;
   kanjiId: string;
 }
 
-interface ExampleWord {
+export interface ExampleWord {
   exampleWord: string;
   id: string;
   kanjiId: string;
 }
 
-interface Meaning {
+export interface Meaning {
   kanjiId: string;
   meaning: string;
 }
@@ -47,8 +47,25 @@ export interface KanjiCardData {
   onReading: string;
 }
 
+export interface AddKanjiRequest {
+  kanji: string;
+  exampleWords: Omit<ExampleWord, "id" | "kanjiId">[];
+  exampleSentences: Omit<ExampleSentence, "id" | "kanjiId">[];
+  meanings: Omit<Meaning, "kanjiId">[];
+  onReading: string;
+  kunReading: string;
+  kanjiRating: number;
+  username: string;
+}
+
+interface UpdateKanjiRequest extends AddKanjiRequest {
+  id: string;
+}
+
+const KANJI_URL = "http://localhost:3000/api/kanji";
+
 async function fetchAllKanji() {
-  const { data } = await axios.get("http://localhost:3000/api/kanji");
+  const { data } = await axios.get(KANJI_URL);
   return data;
 }
 
@@ -57,5 +74,34 @@ export function useAllKanji(options: Options) {
     ["kanjiAll", options.filter],
     () => fetchAllKanji(),
   );
-  return { data: convertKanjiResponse(data), status };
+  return { data: data || [], status };
+}
+
+export function useAddKanji() {
+  const mutation = useMutation<KanjiResponse[], unknown, AddKanjiRequest>({
+    mutationFn: (newKanji) => {
+      return axios.post(KANJI_URL, newKanji);
+    },
+  });
+  return mutation;
+}
+
+export function useDeleteKanji() {
+  const mutation = useMutation<unknown, unknown, string>({
+    mutationFn: (kanjiId) => {
+      return axios.delete(`${KANJI_URL}/${kanjiId}`);
+    },
+  });
+
+  return mutation;
+}
+
+export function useUpdateKanji() {
+  const mutation = useMutation<KanjiResponse[], unknown, UpdateKanjiRequest>({
+    mutationFn: (newKanji) => {
+      return axios.patch(KANJI_URL, newKanji);
+    },
+  });
+
+  return mutation;
 }
