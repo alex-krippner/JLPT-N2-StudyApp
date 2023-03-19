@@ -119,9 +119,9 @@ function KanjiDetails(props: KanjiDetailsProps) {
       </KanjiDetail>
       <KanjiDetail variants={kanjiDetailVariant}>
         <Header>Example sentences</Header>
-        {exampleSentences.map((s) => (
-          <DataText key={`ExampleSentence_${s}`}>{s}</DataText>
-        ))}
+        <DataText key={`ExampleSentence_${exampleSentences}`}>
+          {exampleSentences}
+        </DataText>
       </KanjiDetail>
     </Container>
   );
