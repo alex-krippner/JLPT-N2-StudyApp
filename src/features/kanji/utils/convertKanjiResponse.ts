@@ -19,7 +19,7 @@ export function convertKanjiResponse(
     id: k.id,
     kanji: k.kanji,
     kanjiRating: k.kanjiRating,
-    exampleWords: k.exampleWords?.map((e) => e.exampleWord) || [],
+    exampleWords: k.exampleWords.exampleWord,
     exampleSentences: k.exampleSentences.exampleSentence,
     kunReading: k.kunReading,
     meanings: k.meanings?.map((m) => m.meaning) || [],

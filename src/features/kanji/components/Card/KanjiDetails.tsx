@@ -111,11 +111,12 @@ function KanjiDetails(props: KanjiDetailsProps) {
       </KanjiDetail>
       <KanjiDetail variants={kanjiDetailVariant}>
         <Header>Example words</Header>
-        {exampleWords.map((w) => (
-          <DataText testId={`ExampleWord_testId_${w}`} key={`ExampleWord_${w}`}>
-            {w}
-          </DataText>
-        ))}
+        <DataText
+          testId={`ExampleWord_testId_${exampleWords}`}
+          key={`ExampleWord_${exampleWords}`}
+        >
+          {exampleWords}
+        </DataText>
       </KanjiDetail>
       <KanjiDetail variants={kanjiDetailVariant}>
         <Header>Example sentences</Header>

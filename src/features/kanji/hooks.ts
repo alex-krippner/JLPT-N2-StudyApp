@@ -26,7 +26,7 @@ export interface Meaning {
 
 export interface KanjiResponse {
   exampleSentences: ExampleSentence;
-  exampleWords: ExampleWord[];
+  exampleWords: ExampleWord;
   id: string;
   kanji: string;
   kanjiRating: number;
@@ -38,7 +38,7 @@ export interface KanjiResponse {
 
 export interface KanjiCardData {
   exampleSentences: string;
-  exampleWords: string[];
+  exampleWords: string;
   id: string;
   kanji: string;
   kanjiRating: number;
@@ -49,7 +49,7 @@ export interface KanjiCardData {
 
 export interface AddKanjiRequest {
   kanji: string;
-  exampleWords: Omit<ExampleWord, "id" | "kanjiId">[];
+  exampleWords: Omit<ExampleWord, "id" | "kanjiId">;
   exampleSentences: Omit<ExampleSentence, "id" | "kanjiId">;
   meanings: Omit<Meaning, "kanjiId">[];
   onReading: string;
