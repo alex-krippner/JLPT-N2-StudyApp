@@ -332,21 +332,20 @@ function KanjiView() {
         };
       },
       valueGetter: (
-        params: GridValueGetterParams<KanjiRowData, ExampleWord[]>,
+        params: GridValueGetterParams<KanjiRowData, ExampleWord>,
       ) => {
         if (params.value) {
-          return params.value.reduce((all, current) => {
-            return all.concat(` ${current.exampleWord}`).trimStart();
-          }, " ");
+          return params.value.exampleWord;
         }
 
         return "";
       },
       valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
         if (typeof params.value === "string") {
-          const exampleWords = params.value
-            .split(" ")
-            .map((m) => ({ kanjiId: params.row.id, exampleWord: m }));
+          const exampleWords = {
+            kanjiId: params.row.exampleWords.id,
+            exampleWord: params.value,
+          };
 
           return { ...params.row, exampleWords };
         }
@@ -394,7 +393,7 @@ function KanjiView() {
       valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
         if (typeof params.value === "string") {
           const exampleSentences = {
-            kanjiId: params.row.id,
+            kanjiId: params.row.exampleWords.id,
             exampleSentence: params.value,
           };
 
