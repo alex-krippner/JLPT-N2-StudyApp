@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
+import { useTheme } from "@emotion/react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,6 +14,7 @@ const SpinningContainer = styled(motion.div)`
 `;
 
 export function FullScreenLoadingIndicator() {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -39,10 +41,11 @@ export function FullScreenLoadingIndicator() {
       <Typography variant="h3" sx={{ display: "flex", mt: 6 }}>
         Loading
         <Typography
-          variant="h3"
           sx={{
             position: "relative",
-
+            display: "flex",
+            alignItems: "flex-end",
+            fontSize: theme.sizeOf.fontSmall,
             "&::after": {
               position: "absolute",
               content: '""',

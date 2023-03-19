@@ -91,7 +91,12 @@ function KanjiDetails(props: KanjiDetailsProps) {
           <Header className={element("header", "meaning")}>Meaning</Header>
           <Box fxDirection="row">
             {meanings.map((m, i) => (
-              <DataText className={element(`meaning_${i}`)}>{m}</DataText>
+              <DataText
+                className={element(`meaning_${i}`)}
+                key={`meaning_${m}`}
+              >
+                {m}
+              </DataText>
             ))}
           </Box>
         </KanjiDetail>
@@ -107,13 +112,15 @@ function KanjiDetails(props: KanjiDetailsProps) {
       <KanjiDetail variants={kanjiDetailVariant}>
         <Header>Example words</Header>
         {exampleWords.map((w) => (
-          <DataText testId={`ExampleWord_testId_${w}`}>{w}</DataText>
+          <DataText testId={`ExampleWord_testId_${w}`} key={`ExampleWord_${w}`}>
+            {w}
+          </DataText>
         ))}
       </KanjiDetail>
       <KanjiDetail variants={kanjiDetailVariant}>
         <Header>Example sentences</Header>
         {exampleSentences.map((s) => (
-          <DataText>{s}</DataText>
+          <DataText key={`ExampleSentence_${s}`}>{s}</DataText>
         ))}
       </KanjiDetail>
     </Container>

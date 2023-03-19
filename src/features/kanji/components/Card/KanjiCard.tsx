@@ -55,7 +55,7 @@ function KanjiCard(props: KanjiCardProps) {
     return (
       <Card
         animate={isShown ? "show" : "hide"}
-        key={id}
+        key={`${id}_${kanji}`}
         onClick={() => show((visibility) => !visibility)}
         className={block()}
         isShown={isShown}

@@ -85,6 +85,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: monTheme.sizeOf.fontSmaller,
+        },
+      },
+    },
   },
   typography: {
     fontFamily: "Roboto Mono",
