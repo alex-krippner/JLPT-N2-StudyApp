@@ -13,7 +13,6 @@ export function convertKanjiResponse(
     console.warn("Kanji response is undefined");
     return [];
   }
-  console.log("🚀 ~ file: convertKanjiResponse.ts:16 ~ response:", response);
 
   // FIXME: If exampleWords can be null or undefined than correct typing. Or ensure that they are not null
   return response.map((k) => ({
@@ -21,7 +20,7 @@ export function convertKanjiResponse(
     kanji: k.kanji,
     kanjiRating: k.kanjiRating,
     exampleWords: k.exampleWords?.map((e) => e.exampleWord) || [],
-    exampleSentences: k.exampleSentences?.map((e) => e.exampleSentence) || [],
+    exampleSentences: k.exampleSentences.exampleSentence,
     kunReading: k.kunReading,
     meanings: k.meanings?.map((m) => m.meaning) || [],
     onReading: k.onReading,

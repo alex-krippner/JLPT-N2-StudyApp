@@ -110,7 +110,7 @@ function KanjiView() {
   const [rows, setRows] = React.useState(tableData);
 
   React.useEffect(() => {
-    if (!rows.length) {
+    if (!rows.length && !!tableData.length) {
       setRows(tableData);
     }
   }, [tableData, rows]);
@@ -384,20 +384,19 @@ function KanjiView() {
         };
       },
       valueGetter: (
-        params: GridValueGetterParams<KanjiRowData, ExampleSentence[]>,
+        params: GridValueGetterParams<KanjiRowData, ExampleSentence>,
       ) => {
         if (params.value) {
-          return params.value.reduce((all, current) => {
-            return all.concat(` ${current.exampleSentence}`).trimStart();
-          }, " ");
+          return params.value.exampleSentence;
         }
         return "";
       },
       valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
         if (typeof params.value === "string") {
-          const exampleSentences = params.value
-            .split(" ")
-            .map((m) => ({ kanjiId: params.row.id, exampleSentence: m }));
+          const exampleSentences = {
+            kanjiId: params.row.id,
+            exampleSentence: params.value,
+          };
 
           return { ...params.row, exampleSentences };
         }
