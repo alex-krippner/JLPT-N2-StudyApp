@@ -1,11 +1,6 @@
 /* eslint-disable no-console */
-import axios from "axios";
-import { useMutation, useQuery } from "react-query";
-
-type Filter = "all" | "rating";
-interface Options {
-  filter: Filter;
-}
+import axios, { AxiosResponse } from "axios";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export interface ExampleSentence {
   exampleSentence: string;
@@ -69,10 +64,9 @@ async function fetchAllKanji() {
   return data;
 }
 
-export function useAllKanji(options: Options) {
-  const { data, status } = useQuery<KanjiResponse[]>(
-    ["kanjiAll", options.filter],
-    () => fetchAllKanji(),
+export function useAllKanji() {
+  const { data, status } = useQuery<KanjiResponse[]>(["kanjiAll"], () =>
+    fetchAllKanji(),
   );
   return { data: data || [], status };
 }
@@ -97,9 +91,17 @@ export function useDeleteKanji() {
 }
 
 export function useUpdateKanji() {
-  const mutation = useMutation<KanjiResponse[], unknown, UpdateKanjiRequest>({
-    mutationFn: (newKanji) => {
-      return axios.patch(KANJI_URL, newKanji);
+  const queryClient = useQueryClient();
+  const mutation = useMutation<
+    AxiosResponse<KanjiResponse, string>,
+    unknown,
+    UpdateKanjiRequest
+  >((newKanji) => axios.patch(KANJI_URL, newKanji), {
+    onSuccess: (response) => {
+      const { data } = response;
+      queryClient.setQueryData(["kanjiAll"], (oldData: KanjiResponse[]) => {
+        return oldData.map((kanji) => (kanji.id === data.id ? data : kanji));
+      });
     },
   });
 

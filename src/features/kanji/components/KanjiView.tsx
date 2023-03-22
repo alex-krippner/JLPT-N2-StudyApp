@@ -55,11 +55,6 @@ const HKD_REGEX = /^[\u30FB\u3040-\u309F\u30A0-\u30FF\s]+$/;
  */
 const KHKD_REGEX = /^[\u30FB\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\s]+$/;
 
-type Filter = "all" | "rating";
-interface Options {
-  filter: Filter;
-}
-
 interface KanjiRowData extends KanjiResponse {
   isNew: boolean;
 }
@@ -93,8 +88,7 @@ function renderEditKanjiCell(params: GridRenderEditCellParams) {
 }
 
 function KanjiView() {
-  const [options, _] = useState<Options>({ filter: "all" });
-  const { data } = useAllKanji(options);
+  const { data } = useAllKanji();
   const addMutation = useAddKanji();
   const deleteMutation = useDeleteKanji();
   const updateMutation = useUpdateKanji();
@@ -103,17 +97,15 @@ function KanjiView() {
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {},
   );
-  const tableData = data.map((d) => ({
-    ...d,
-    isNew: false,
-  }));
-  const [rows, setRows] = React.useState(tableData);
+  const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
-    if (!rows.length && !!tableData.length) {
-      setRows(tableData);
-    }
-  }, [tableData, rows]);
+    const tableData = data.map((d) => ({
+      ...d,
+      isNew: false,
+    }));
+    setRows(tableData);
+  }, [data]);
 
   const handleCancelClick = (id: GridRowId) => () => {
     setRowModesModel({
@@ -343,8 +335,9 @@ function KanjiView() {
       valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
         if (typeof params.value === "string") {
           const exampleWords = {
-            kanjiId: params.row.exampleWords.id,
+            kanjiId: params.row.id,
             exampleWord: params.value,
+            id: params.row.exampleWords.id,
           };
 
           return { ...params.row, exampleWords };
@@ -393,8 +386,9 @@ function KanjiView() {
       valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
         if (typeof params.value === "string") {
           const exampleSentences = {
-            kanjiId: params.row.exampleWords.id,
+            kanjiId: params.row.id,
             exampleSentence: params.value,
+            id: params.row.exampleSentences.id,
           };
 
           return { ...params.row, exampleSentences };
