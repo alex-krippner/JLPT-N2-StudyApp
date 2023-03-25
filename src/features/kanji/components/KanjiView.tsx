@@ -13,8 +13,6 @@ import {
   GridPreProcessEditCellProps,
   GridEditInputCell,
   GridRenderEditCellParams,
-  GridValueSetterParams,
-  GridValueGetterParams,
 } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 
@@ -29,16 +27,12 @@ import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@emotion/react";
 import {
   AddKanjiRequest,
-  ExampleSentence,
-  ExampleWord,
-  KanjiResponse,
-  Meaning,
+  Kanji,
   useAddKanji,
   useAllKanji,
   useDeleteKanji,
   useUpdateKanji,
 } from "../hooks";
-import { convertKanjiResponse } from "../utils";
 import KanjiCard from "./Card/KanjiCard";
 import { KanjiDataGridToolbar } from "./KanjiDataGridToolbar";
 
@@ -55,7 +49,7 @@ const HKD_REGEX = /^[\u30FB\u3040-\u309F\u30A0-\u30FF\s]+$/;
  */
 const KHKD_REGEX = /^[\u30FB\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\s]+$/;
 
-interface KanjiRowData extends KanjiResponse {
+interface KanjiRowData extends Kanji {
   isNew: boolean;
 }
 
@@ -216,26 +210,6 @@ function KanjiView() {
           error,
         };
       },
-      valueGetter: (params: GridValueGetterParams<KanjiRowData, Meaning[]>) => {
-        if (params.value) {
-          return params.value.reduce((all, current) => {
-            return all.concat(` ${current.meaning}`).trimStart();
-          }, " ");
-        }
-
-        return "";
-      },
-      valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
-        if (typeof params.value === "string") {
-          const meanings = params.value
-            .split(" ")
-            .map((m) => ({ kanjiId: params.row.id, meaning: m }));
-
-          return { ...params.row, meanings };
-        }
-
-        return params.row;
-      },
     },
     {
       field: "kunReading",
@@ -323,28 +297,6 @@ function KanjiView() {
           error,
         };
       },
-      valueGetter: (
-        params: GridValueGetterParams<KanjiRowData, ExampleWord>,
-      ) => {
-        if (params.value) {
-          return params.value.exampleWord;
-        }
-
-        return "";
-      },
-      valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
-        if (typeof params.value === "string") {
-          const exampleWords = {
-            kanjiId: params.row.id,
-            exampleWord: params.value,
-            id: params.row.exampleWords.id,
-          };
-
-          return { ...params.row, exampleWords };
-        }
-
-        return params.row;
-      },
     },
     {
       field: "exampleSentences",
@@ -374,27 +326,6 @@ function KanjiView() {
           ...params.props,
           error,
         };
-      },
-      valueGetter: (
-        params: GridValueGetterParams<KanjiRowData, ExampleSentence>,
-      ) => {
-        if (params.value) {
-          return params.value.exampleSentence;
-        }
-        return "";
-      },
-      valueSetter: (params: GridValueSetterParams<KanjiRowData, string>) => {
-        if (typeof params.value === "string") {
-          const exampleSentences = {
-            kanjiId: params.row.id,
-            exampleSentence: params.value,
-            id: params.row.exampleSentences.id,
-          };
-
-          return { ...params.row, exampleSentences };
-        }
-
-        return params.row;
       },
     },
     {
@@ -477,10 +408,12 @@ function KanjiView() {
           />
         </Box>
       ) : (
-        <Grid padding={0}>
+        <Grid container spacing={5} overflow="auto">
           {data ? (
-            convertKanjiResponse(data).map((d) => (
-              <KanjiCard data={d} key={`${d.id}_${d.kanji}`} />
+            data.map((d) => (
+              <Grid item key={`KanjiGridItem_${d.id}`}>
+                <KanjiCard data={d} key={`${d.id}_${d.kanji}`} />
+              </Grid>
             ))
           ) : (
             <Typography variant="h5">

@@ -2,51 +2,23 @@
 import axios, { AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export interface ExampleSentence {
-  exampleSentence: string;
-  id: string;
-  kanjiId: string;
-}
-
-export interface ExampleWord {
-  exampleWord: string;
-  id: string;
-  kanjiId: string;
-}
-
-export interface Meaning {
-  kanjiId: string;
-  meaning: string;
-}
-
-export interface KanjiResponse {
-  exampleSentences: ExampleSentence;
-  exampleWords: ExampleWord;
-  id: string;
-  kanji: string;
-  kanjiRating: number;
-  kunReading: string;
-  meanings: Meaning[];
-  onReading: string;
-  username: string;
-}
-
-export interface KanjiCardData {
+export interface Kanji {
   exampleSentences: string;
   exampleWords: string;
   id: string;
   kanji: string;
   kanjiRating: number;
   kunReading: string;
-  meanings: string[];
+  meanings: string;
   onReading: string;
+  username: string;
 }
 
 export interface AddKanjiRequest {
   kanji: string;
-  exampleWords: Omit<ExampleWord, "id" | "kanjiId">;
-  exampleSentences: Omit<ExampleSentence, "id" | "kanjiId">;
-  meanings: Omit<Meaning, "kanjiId">[];
+  exampleWords: string;
+  exampleSentences: string;
+  meanings: string;
   onReading: string;
   kunReading: string;
   kanjiRating: number;
@@ -54,6 +26,10 @@ export interface AddKanjiRequest {
 }
 
 interface UpdateKanjiRequest extends AddKanjiRequest {
+  id: string;
+}
+
+interface DeleteResponse {
   id: string;
 }
 
@@ -65,25 +41,48 @@ async function fetchAllKanji() {
 }
 
 export function useAllKanji() {
-  const { data, status } = useQuery<KanjiResponse[]>(["kanjiAll"], () =>
+  const { data, status } = useQuery<Kanji[]>(["kanjiAll"], () =>
     fetchAllKanji(),
   );
   return { data: data || [], status };
 }
 
 export function useAddKanji() {
-  const mutation = useMutation<KanjiResponse[], unknown, AddKanjiRequest>({
+  const queryClient = useQueryClient();
+  const mutation = useMutation<
+    AxiosResponse<Kanji, AddKanjiRequest>,
+    unknown,
+    AddKanjiRequest
+  >({
     mutationFn: (newKanji) => {
       return axios.post(KANJI_URL, newKanji);
+    },
+    onSuccess: (response) => {
+      const { data } = response;
+      queryClient.setQueryData<Kanji[]>(["kanjiAll"], (oldData) => [
+        ...oldData,
+        data,
+      ]);
     },
   });
   return mutation;
 }
 
 export function useDeleteKanji() {
-  const mutation = useMutation<unknown, unknown, string>({
+  const queryClient = useQueryClient();
+  const mutation = useMutation<
+    AxiosResponse<DeleteResponse, string>,
+    unknown,
+    string
+  >({
     mutationFn: (kanjiId) => {
       return axios.delete(`${KANJI_URL}/${kanjiId}`);
+    },
+    onSuccess: (response) => {
+      const { data } = response;
+      queryClient.setQueryData(["kanjiAll"], (oldData: Kanji[]) =>
+        oldData.filter((d) => d.id !== data.id),
+      );
     },
   });
 
@@ -93,14 +92,18 @@ export function useDeleteKanji() {
 export function useUpdateKanji() {
   const queryClient = useQueryClient();
   const mutation = useMutation<
-    AxiosResponse<KanjiResponse, string>,
+    AxiosResponse<Kanji, string>,
     unknown,
     UpdateKanjiRequest
   >((newKanji) => axios.patch(KANJI_URL, newKanji), {
     onSuccess: (response) => {
       const { data } = response;
-      queryClient.setQueryData(["kanjiAll"], (oldData: KanjiResponse[]) => {
-        return oldData.map((kanji) => (kanji.id === data.id ? data : kanji));
+      queryClient.setQueryData(["kanjiAll"], (oldData: Kanji[]) => {
+        const updated = oldData.map((kanji) =>
+          kanji.id === data.id ? data : kanji,
+        );
+
+        return updated;
       });
     },
   });
