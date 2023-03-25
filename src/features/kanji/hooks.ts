@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios, { AxiosResponse } from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
