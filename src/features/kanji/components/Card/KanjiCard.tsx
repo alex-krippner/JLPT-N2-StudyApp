@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { bem } from "@mon/mon-ui-kit";
-import { KanjiCardData } from "../../hooks";
+import { Kanji } from "../../hooks";
 import KanjiDetails from "./KanjiDetails";
 
 interface KanjiCardProps {
-  data: KanjiCardData;
+  data: Kanji;
 }
 
 interface Props {
@@ -26,7 +26,7 @@ const Card = styled(motion.div)<Props>(({ isShown, theme }) => ({
   color: theme.colorOf.black,
 }));
 
-const Kanji = styled(motion.div)(({ theme }) => ({
+const KanjiStyled = styled(motion.div)(({ theme }) => ({
   position: "absolute",
   color: theme.colorOf.primaryLight,
   display: "flex",
@@ -60,14 +60,14 @@ function KanjiCard(props: KanjiCardProps) {
         className={block()}
         isShown={isShown}
       >
-        <Kanji
+        <KanjiStyled
           variants={kanjiVariant}
           transition={{ duration: 0.5 }}
           initial={false}
           className={element("kanji")}
         >
           {kanji}
-        </Kanji>
+        </KanjiStyled>
         <KanjiDetails data={props.data} />
       </Card>
     );
