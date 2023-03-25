@@ -2,7 +2,6 @@
 import * as React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
-import { randomId } from "@mui/x-data-grid-generator";
 import Typography from "@mui/material/Typography";
 import {
   GridRowModes,
@@ -10,6 +9,7 @@ import {
   GridRowsProp,
   GridToolbarContainer,
 } from "@mui/x-data-grid";
+import { randomId } from "@mui/x-data-grid-generator";
 
 interface KanjiDataGridToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;

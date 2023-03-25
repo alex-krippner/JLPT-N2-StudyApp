@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import {
   DataGrid,
@@ -11,11 +10,9 @@ import {
   GridRowId,
   GridRowParams,
   GridPreProcessEditCellProps,
-  GridEditInputCell,
   GridRenderEditCellParams,
 } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
-
 import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -23,7 +20,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import TableViewIcon from "@mui/icons-material/TableView";
 import Typography from "@mui/material/Typography";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@emotion/react";
 import {
   AddKanjiRequest,
@@ -35,6 +31,7 @@ import {
 } from "../hooks";
 import KanjiCard from "./Card/KanjiCard";
 import { KanjiDataGridToolbar } from "./KanjiDataGridToolbar";
+import { KanjiEditCell } from "./KanjiEditCell";
 
 const MEANINGS_MAX_LENGTH = 55;
 const EXAMPLE_WORDS_MAX_LENGTH = 75;
@@ -51,30 +48,6 @@ const KHKD_REGEX = /^[\u30FB\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\s]+$/;
 
 interface KanjiRowData extends Kanji {
   isNew: boolean;
-}
-
-function KanjiEditCell(props: GridRenderEditCellParams) {
-  const { error } = props;
-
-  return (
-    <Tooltip
-      open={!!error}
-      title={error}
-      componentsProps={{
-        tooltip: {
-          sx: {
-            bgcolor: "error.main",
-            color: "error.contrastText",
-            marginTop: "23px !important",
-          },
-        },
-      }}
-      TransitionComponent={Fade}
-      TransitionProps={{ timeout: 600 }}
-    >
-      <GridEditInputCell {...props} />
-    </Tooltip>
-  );
 }
 
 function renderEditKanjiCell(params: GridRenderEditCellParams) {
