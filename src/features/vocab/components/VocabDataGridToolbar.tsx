@@ -10,13 +10,13 @@ import {
 } from "@mui/x-data-grid";
 import { randomId } from "@mui/x-data-grid-generator";
 
-interface KanjiDataGridToolbarProps {
+interface VocabDataGridToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
 }
-export function KanjiDataGridToolbar(props: KanjiDataGridToolbarProps) {
+export function VocabDataGridToolbar(props: VocabDataGridToolbarProps) {
   const { setRows, setRowModesModel } = props;
 
   const addRow = () => {
@@ -26,25 +26,25 @@ export function KanjiDataGridToolbar(props: KanjiDataGridToolbarProps) {
         ...oldRows,
         {
           id,
+          vocab: "",
           kanji: "",
-          kunReading: "",
-          onReading: "",
-          exampleWords: "",
+          definitions: "",
           exampleSentences: "",
+          partsOfSpeech: "",
           isNew: true,
         },
       ];
     });
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: "kanji" },
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: "vocab" },
     }));
   };
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={addRow}>
         <Typography variant="h5" color="primary.main">
-          Add kanji
+          Add vocab
         </Typography>
       </Button>
     </GridToolbarContainer>

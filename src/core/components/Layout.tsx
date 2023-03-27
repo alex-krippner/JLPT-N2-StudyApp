@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import { useTheme } from "@mui/material/styles/";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { MonLogo, KanjiIcon } from "@mon/mon-ui-kit";
+import { MonLogo, KanjiIcon, VocabIcon } from "@mon/mon-ui-kit";
 import { NavListItemData, NavList } from "./NavList";
 
 export const Layout = React.forwardRef(() => {
@@ -18,6 +18,7 @@ export const Layout = React.forwardRef(() => {
   const listItems: NavListItemData[] = [
     { text: "Home", icon: <MonLogo />, to: "/" },
     { text: "Kanji", icon: <KanjiIcon />, to: "/kanji" },
+    { text: "Vocab", icon: <VocabIcon />, to: "/vocab" },
   ];
 
   const DRAWER_WIDTH = 125;
