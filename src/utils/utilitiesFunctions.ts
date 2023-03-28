@@ -1,50 +1,13 @@
-export const capitalizeFirstLetter = (string: string) => {
-  if (typeof string !== 'string') return '';
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+export function camelCaseToWords(camelCaseString: string) {
+  // Use a regular expression to split the string at every capital letter
+  const words = camelCaseString.split(/(?=[A-Z])/);
+  // Return early with a single capitalized word
+  if (words.length === 1) return words[0][0].toUpperCase() + words[0].slice(1);
+  // Capitalize the first word and convert the rest to lowercase
+  words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1).toLowerCase();
+  for (let i = 1; i < words.length; i++) {
+    words[i] = words[i].toLowerCase();
+  }
 
-export function capitalizeFirstWord(string: string) {
-  return string
-    .split(' ')
-    .map((word, idx) =>
-      idx === 0 ? capitalizeFirstLetter(word) : word,
-    )
-    .join(' ');
+  return words.join(" ");
 }
-
-export const compareProps = function compareProps(
-  prevProps: any,
-  nextProps: any,
-) {
-  const prevCardDataKeys = Object.keys(prevProps.cardData);
-  const comparePropsArray: any[] = [];
-
-  prevCardDataKeys.forEach((k) => {
-    const previousCardDataValue = prevProps.cardData[k];
-    const nextCardDataValue = nextProps.cardData[k];
-
-    // If the value of a cardData property is an array than compare each array element
-    if (Array.isArray(previousCardDataValue)) {
-      const arrayDeepEquality = nextCardDataValue.every(
-        (el: any, idx: number) => {
-          if (
-            previousCardDataValue.length !== nextCardDataValue.length
-          ) {
-            return false;
-          }
-          return el === previousCardDataValue[idx];
-        },
-      );
-
-      comparePropsArray.push(arrayDeepEquality);
-      return;
-    }
-
-    // If the object value is not an array simply compare the previous and new values
-    comparePropsArray.push(
-      previousCardDataValue === nextCardDataValue,
-    );
-  });
-
-  return comparePropsArray.every((e) => e === true);
-};

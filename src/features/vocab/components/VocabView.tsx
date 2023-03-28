@@ -20,7 +20,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
+import Typography from "@mui/material/Typography";
 import { useTheme } from "@emotion/react";
+import { camelCaseToWords } from "../../../utils/utilitiesFunctions";
+import { Card } from "../../../core/components/Card/Card";
 import {
   AddVocabRequest,
   useAddVocab,
@@ -212,7 +215,7 @@ export function VocabView() {
       headerName: "Parts of speech",
       minWidth: 50,
       editable: true,
-      flex: 1,
+      flex: 2,
       renderEditCell: renderVocabEditCell,
       preProcessEditCellProps: (params: GridPreProcessEditCellProps) => {
         const alphaSpaceDashRegex = /^[a-zA-Z\s-]+$/;
@@ -312,6 +315,7 @@ export function VocabView() {
       },
     },
   ];
+
   return (
     <Box sx={{ display: "flex", height: "100%", flexDirection: "column" }}>
       <Box>
@@ -347,7 +351,38 @@ export function VocabView() {
           />
         </Box>
       ) : (
-        <Grid>Vocab Cards</Grid>
+        <Grid container spacing={5} overflow="auto">
+          {data ? (
+            data.map((vocab) => {
+              const { definitions, kanji, partsOfSpeech, exampleSentences } =
+                vocab;
+              const cardDetails: CardDetail[] = Object.entries({
+                definitions,
+                kanji,
+                partsOfSpeech,
+                exampleSentences,
+              }).map(([header, dataText]) => ({
+                header: camelCaseToWords(header),
+                dataText,
+              }));
+
+              return (
+                <Grid item key={`VocabGridItem_${vocab.id}`}>
+                  <Card
+                    mainContent={vocab.vocab}
+                    data={cardDetails}
+                    id={vocab.id}
+                    key={vocab.id}
+                  />
+                </Grid>
+              );
+            })
+          ) : (
+            <Typography variant="h5">
+              Looks like there is no data {"\uD83D\uDE22"}
+            </Typography>
+          )}
+        </Grid>
       )}
     </Box>
   );
