@@ -9,6 +9,7 @@ import { AuthLayout } from "../components/AuthLayout";
 import { FullScreenLoadingIndicator } from "../components/FullScreenLoadingIndicator";
 import { Home } from "../components/HomeView";
 import KanjiView from "../../features/kanji/components/KanjiView";
+import { VocabView } from "../../features/vocab/components/VocabView";
 
 export const monRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,15 @@ export const monRouter = createBrowserRouter(
         element={
           <AuthenticationGuard
             component={KanjiView}
+            redirectComponent={() => <FullScreenLoadingIndicator />}
+          />
+        }
+      />
+      <Route
+        path="vocab"
+        element={
+          <AuthenticationGuard
+            component={VocabView}
             redirectComponent={() => <FullScreenLoadingIndicator />}
           />
         }

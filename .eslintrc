@@ -68,6 +68,7 @@
     ],
     "import/prefer-default-export": 0,
     "no-nested-ternary": 0,
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-underscore-dangle": 0,
     "prefer-object-spread": 0,
     "react/destructuring-assignment": 0,
