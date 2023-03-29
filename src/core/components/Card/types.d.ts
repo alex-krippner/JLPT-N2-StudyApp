@@ -1,6 +1,6 @@
 interface CardDetail {
-  header: string;
   dataText: string;
+  header: string;
 }
 
 interface CardDetailsProps {

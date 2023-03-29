@@ -16,6 +16,16 @@ interface VocabDataGridToolbarProps {
     newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
 }
+
+const DEFAULT_ROW_VALUES = {
+  vocab: "",
+  kanji: "",
+  definitions: "",
+  exampleSentences: "",
+  partsOfSpeech: "",
+  isNew: true,
+};
+
 export function VocabDataGridToolbar(props: VocabDataGridToolbarProps) {
   const { setRows, setRowModesModel } = props;
 
@@ -26,12 +36,7 @@ export function VocabDataGridToolbar(props: VocabDataGridToolbarProps) {
         ...oldRows,
         {
           id,
-          vocab: "",
-          kanji: "",
-          definitions: "",
-          exampleSentences: "",
-          partsOfSpeech: "",
-          isNew: true,
+          ...DEFAULT_ROW_VALUES,
         },
       ];
     });

@@ -7,8 +7,8 @@ import { CardDetails } from "./CardDetails";
 
 interface CardProps {
   data: CardDetail[];
-  mainContent: string;
   id: string;
+  mainContent: string;
 }
 interface CardStyledProps {
   isShown: boolean;
@@ -30,28 +30,26 @@ const CardStyled = styled(motion.div)<CardStyledProps>(
 
 const MainContent = styled(motion.div)(({ theme }) => ({
   position: "absolute",
-  color: theme.colorOf.primaryLight,
+  height: "100%",
+  width: "100%",
   display: "flex",
+  justifyContent: "center",
   flexDirection: "column",
   alignItems: "center",
   fontSize: theme.sizeOf.fontLarger,
-  height: "100%",
-  justifyContent: "center",
+  color: theme.colorOf.primaryLight,
   cursor: "pointer",
-  width: "100%",
 }));
 
 export function Card(props: CardProps) {
   const { mainContent, id, data } = props;
+  const [block, element] = bem("card");
+  const [isShown, show] = useState(false);
 
   const mainContentVariant = {
     show: { scale: 0.45, y: "-45%" },
     hide: { scale: 1, y: 0 },
   };
-
-  const [block, element] = bem("card");
-
-  const [isShown, show] = useState(false);
 
   if (data) {
     return (

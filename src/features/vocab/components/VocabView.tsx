@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import TableViewIcon from "@mui/icons-material/TableView";
@@ -84,6 +83,7 @@ export function VocabView() {
       setRows(rows.filter((row) => row.id !== id));
     }
   };
+
   const handleDeleteClick = (id: GridRowId) => () => {
     const vocabId = typeof id === "number" ? id.toString() : id;
     deleteMutation.mutate(vocabId);
@@ -98,22 +98,18 @@ export function VocabView() {
 
   const processRowUpdate = (newVocab: VocabRowData) => {
     const updatedRow = { ...newVocab, isNew: false, username: "" };
+    const { id, isNew, ...addVocabRequest } = newVocab;
     const vocabPostRequest: AddVocabRequest = {
-      exampleSentences: newVocab.exampleSentences,
-      kanji: newVocab.kanji,
-      vocab: newVocab.vocab,
-      definitions: newVocab.definitions,
-      partsOfSpeech: newVocab.partsOfSpeech,
-      vocabRating: newVocab.vocabRating || 0,
+      ...addVocabRequest,
       username: "",
     };
 
-    if (newVocab.isNew) {
+    if (isNew) {
       addMutation.mutate(vocabPostRequest);
     }
 
-    if (!newVocab.isNew) {
-      updateMutation.mutate({ ...vocabPostRequest, id: newVocab.id });
+    if (!isNew) {
+      updateMutation.mutate({ ...vocabPostRequest, id });
     }
 
     return updatedRow;
