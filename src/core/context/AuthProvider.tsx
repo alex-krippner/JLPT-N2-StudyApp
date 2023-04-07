@@ -22,8 +22,9 @@ export function AuthProvider({ children }) {
       domain={domain}
       clientId={clientId}
       onRedirectCallback={onRedirectCallback}
-      redirectUri={window.location.origin}
-    >
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}>
       {children}
     </Auth0Provider>
   );

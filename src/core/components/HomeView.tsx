@@ -1,13 +1,5 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import React from "react";
 
-export function Home() {
-  return (
-    <Box>
-      <Typography variant="h1" component="div">
-        Mon
-      </Typography>
-    </Box>
-  );
+export function HomeView() {
+  return <div>Home</div>;
 }

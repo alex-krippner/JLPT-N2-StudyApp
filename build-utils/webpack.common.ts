@@ -9,7 +9,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 
 const options = {
   extensions: ["js", "jsx", "ts", "tsx"],
-  overrideConfigFile: path.resolve(__dirname, "../.eslintrc"),
+  overrideConfigFile: path.resolve(__dirname, "../.eslintrc.cjs"),
 };
 
 const commonConfigs = {

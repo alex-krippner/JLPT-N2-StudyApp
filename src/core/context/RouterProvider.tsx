@@ -7,14 +7,14 @@ import {
 import { AuthenticationGuard } from "../components/AuthenticationGuard";
 import { AuthLayout } from "../components/AuthLayout";
 import { FullScreenLoadingIndicator } from "../components/FullScreenLoadingIndicator";
-import { Home } from "../components/HomeView";
-import KanjiView from "../../features/kanji/components/KanjiView";
+import { HomeView } from "../components/HomeView";
+import { KanjiView } from "../../features/kanji/components/KanjiView";
 import { VocabView } from "../../features/vocab/components/VocabView";
 
 export const monRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<AuthLayout />}>
-      <Route index element={<Home />} />
+      <Route index element={<HomeView />} />
       <Route path="/callback" element={<FullScreenLoadingIndicator />} />
       <Route
         path="kanji"
