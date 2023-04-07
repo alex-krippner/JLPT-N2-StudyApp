@@ -206,6 +206,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mon/mon-ui-kit@workspace:^, @mon/mon-ui-kit@workspace:packages/ui-kit":
+  version: 0.0.0-use.local
+  resolution: "@mon/mon-ui-kit@workspace:packages/ui-kit"
+  dependencies:
+    "@types/react": ^18
+    react: ^18.2.0
+  languageName: unknown
+  linkType: soft
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -3386,6 +3395,7 @@ __metadata:
   resolution: "mon@workspace:."
   dependencies:
     "@auth0/auth0-react": ^2.0.1
+    "@mon/mon-ui-kit": "workspace:^"
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.10
     "@types/eslint": ^8
     "@types/node": ^18.15.11

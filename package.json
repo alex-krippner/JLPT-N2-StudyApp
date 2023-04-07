@@ -1,6 +1,9 @@
 {
   "name": "mon",
   "packageManager": "yarn@3.5.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start": "NODE_ENV=development yarn webpack-dev-server --config build-utils/webpack.config.ts --env dev"
   },
@@ -32,6 +35,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.0.1",
+    "@mon/mon-ui-kit": "workspace:^",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0"

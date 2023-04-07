@@ -1,0 +1,15 @@
+{
+  "name": "@mon/mon-ui-kit",
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "src"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18"
+  }
+}

@@ -15,5 +15,10 @@
     "jsx": "react",
     "baseUrl": ".",
     "outDir": "./dist/"
-  }
+  },
+  "references": [
+    {
+      "path": "./packages/ui-kit"
+    }
+  ]
 }
