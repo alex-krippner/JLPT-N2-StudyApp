@@ -1,16 +1,12 @@
 {
-  // extend your base config to share compilerOptions, etc
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    // ensure that nobody can accidentally use this config for a build
-    "noEmit": true,
     "types": ["@types/node"]
   },
   "include": [
-    // whatever paths you intend to lint
     "./src/**/*.ts*",
     ".eslintrc.cjs",
     "test",
-    "tools"
+    "./mui.d.ts",
+    "./emotion.d.ts"
   ]
 }

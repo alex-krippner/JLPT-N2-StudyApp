@@ -10,7 +10,8 @@ export function AuthenticationGuard({
   component,
   redirectComponent,
 }: AuthenticationGuardProps) {
-  const Component = withAuthenticationRequired(component, {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const Component: React.FC<object> = withAuthenticationRequired(component, {
     onRedirecting: redirectComponent,
   });
 

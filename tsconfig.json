@@ -11,14 +11,16 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "composite": true,
     "jsx": "react",
     "baseUrl": ".",
     "outDir": "./dist/"
   },
+  "extends": "./tsconfig.eslint.json",
   "references": [
     {
       "path": "./packages/ui-kit"
-    }
+    },
+    { "path": "./packages/theme" },
+    { "path": "./packages/tools" }
   ]
 }
