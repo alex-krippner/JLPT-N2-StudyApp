@@ -1,0 +1,13 @@
+{
+  "name": "@mon/mon-theme",
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "src"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  }
+}
