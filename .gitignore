@@ -3,6 +3,7 @@ unused/
 archive/
 dist/
 assets/
+!packages/ui-kit/src/assets
 notes/
 .idea/
 lib/

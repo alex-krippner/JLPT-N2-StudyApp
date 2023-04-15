@@ -19,6 +19,9 @@
   "references": [
     {
       "path": "./packages/theme"
+    },
+    {
+      "path": "./packages/tools"
     }
   ]
 }

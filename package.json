@@ -9,6 +9,9 @@
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@svgr/plugin-jsx": "^7.0.0",
+    "@svgr/plugin-prettier": "^7.0.0",
+    "@svgr/plugin-svgo": "^7.0.0",
     "@types/eslint": "^8",
     "@types/node": "^18.15.11",
     "@types/prettier": "^2",
