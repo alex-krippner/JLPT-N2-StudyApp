@@ -3,6 +3,8 @@ export * from "./AppBar";
 export * from "./Box";
 export * from "./Button";
 export * from "./CancelIcon";
+export * from "./Card";
+export * from "./CardDetails";
 export * from "./DeleteIcon";
 export * from "./Drawer";
 export * from "./EditIcon";
