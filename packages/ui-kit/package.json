@@ -16,6 +16,9 @@
     "@mon/tools": "workspace:^",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
+    "@mui/system": "^5.12.0",
+    "@mui/x-data-grid": "^6.2.0",
+    "@mui/x-data-grid-generator": "^6.2.0",
     "framer-motion": "^10.12.2",
     "react": "^18.2.0",
     "typescript": "^5.0.4"
