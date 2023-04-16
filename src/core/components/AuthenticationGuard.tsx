@@ -10,6 +10,7 @@ export function AuthenticationGuard({
   component,
   redirectComponent,
 }: AuthenticationGuardProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const Component = withAuthenticationRequired(component, {
     onRedirecting: redirectComponent,
   });
