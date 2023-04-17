@@ -39,6 +39,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.0.1",
     "@mon/mon-ui-kit": "workspace:^",
+    "axios": "^1.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
