@@ -2,13 +2,5 @@
   "compilerOptions": {
     "types": ["@types/node"]
   },
-  "include": [
-    // whatever paths you intend to lint
-    "./src/**/*.ts*",
-    ".eslintrc.cjs",
-    "test",
-    "tools",
-    "./emotion.d.ts",
-    "./mui.d.ts"
-  ]
+  "include": ["./src/**/*.ts*", ".eslintrc.cjs", "./emotion.d.ts", "./mui.d.ts"]
 }
