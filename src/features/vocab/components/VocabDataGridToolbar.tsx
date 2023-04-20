@@ -8,7 +8,6 @@ import {
   Button,
   AddIcon,
 } from "@mon/mon-ui-kit";
-import { randomUUID } from "crypto";
 
 interface VocabDataGridToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -29,7 +28,7 @@ const DEFAULT_ROW_VALUES = {
 export function VocabDataGridToolbar(props: VocabDataGridToolbarProps) {
   const { setRows, setRowModesModel } = props;
   const addRow = () => {
-    const id = randomUUID();
+    const id = window.crypto.randomUUID();
     setRows((oldRows) => {
       return [
         ...oldRows,

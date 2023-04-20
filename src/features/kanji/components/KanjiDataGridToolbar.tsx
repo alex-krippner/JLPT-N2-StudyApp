@@ -1,4 +1,3 @@
-import { randomUUID } from "crypto";
 import React from "react";
 import {
   Button,
@@ -20,7 +19,7 @@ export function KanjiDataGridToolbar(props: KanjiDataGridToolbarProps) {
   const { setRows, setRowModesModel } = props;
 
   const addRow = () => {
-    const id = randomUUID();
+    const id = window.crypto.randomUUID();
     setRows((oldRows) => {
       return [
         ...oldRows,
