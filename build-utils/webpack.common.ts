@@ -4,12 +4,13 @@ import ESLintPlugin from "eslint-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const options = {
   extensions: ["js", "jsx", "ts", "tsx"],
-  overrideConfigFile: path.resolve(__dirname, "../.eslintrc"),
+  overrideConfigFile: path.resolve(__dirname, "../.eslintrc.cjs"),
 };
 
 const commonConfigs = {
@@ -54,6 +55,7 @@ const commonConfigs = {
     }),
     new TsconfigPathsPlugin({}),
     isDevelopment && new ReactRefreshWebpackPlugin(),
+    new NodePolyfillPlugin(),
   ],
 };
 

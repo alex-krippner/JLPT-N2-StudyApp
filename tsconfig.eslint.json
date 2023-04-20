@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "types": ["@types/node"]
+  },
+  "include": ["./src/**/*.ts*", ".eslintrc.cjs", "./emotion.d.ts", "./mui.d.ts"]
+}

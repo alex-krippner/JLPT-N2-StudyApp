@@ -1,14 +1,30 @@
 {
-  "extends": "./tsconfig-base.json",
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "outDir": "./dist/"
+  },
+  "extends": "./tsconfig.eslint.json",
   "references": [
     {
       "path": "./packages/theme"
     },
     {
-      "path": "./packages/ui-kit"
+      "path": "./packages/tools"
     },
     {
-      "path": "./tools/svg-converter"
+      "path": "./packages/ui-kit"
     }
   ]
 }

@@ -35,7 +35,7 @@ interface DeleteResponse {
 const KANJI_URL = "http://localhost:3000/api/kanji";
 
 async function fetchAllKanji() {
-  const { data } = await axios.get(KANJI_URL);
+  const { data } = await axios.get<Kanji[]>(KANJI_URL);
   return data;
 }
 

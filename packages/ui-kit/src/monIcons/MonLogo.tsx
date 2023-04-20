@@ -1,6 +1,6 @@
 import React from "react";
 import { LogoMon } from "../gen/logoMon";
 
-export const MonLogo = () => {
+export function MonLogo() {
   return <LogoMon />;
-};
+}

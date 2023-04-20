@@ -22,7 +22,7 @@ const VOCAB_URL = "http://localhost:3000/api/vocab";
 
 export function useAllVocab() {
   const { data, status } = useQuery<Vocab[]>(["vocabAll"], async () => {
-    const response = await axios.get(VOCAB_URL);
+    const response = await axios.get<Vocab[]>(VOCAB_URL);
     return response.data;
   });
 

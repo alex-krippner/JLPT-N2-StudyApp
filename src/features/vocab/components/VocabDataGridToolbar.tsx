@@ -1,14 +1,14 @@
-import * as React from "react";
-import AddIcon from "@mui/icons-material/Add";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import React from "react";
 import {
   GridRowModes,
   GridRowModesModel,
   GridRowsProp,
   GridToolbarContainer,
-} from "@mui/x-data-grid";
-import { randomId } from "@mui/x-data-grid-generator";
+  Typography,
+  Button,
+  AddIcon,
+} from "@mon/mon-ui-kit";
+import { randomUUID } from "crypto";
 
 interface VocabDataGridToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -28,9 +28,8 @@ const DEFAULT_ROW_VALUES = {
 
 export function VocabDataGridToolbar(props: VocabDataGridToolbarProps) {
   const { setRows, setRowModesModel } = props;
-
   const addRow = () => {
-    const id = randomId();
+    const id = randomUUID();
     setRows((oldRows) => {
       return [
         ...oldRows,

@@ -1,20 +1,13 @@
 {
   "name": "@mon/mon-theme",
   "version": "1.0.0",
-  "description": "",
+  "license": "ISC",
   "main": "lib/index.js",
-  "module": "lib/index.js",
-  "files": [
-    "lib/"
-  ],
   "directories": {
     "lib": "src"
   },
-  "keywords": [],
-  "author": "Alex Krippner",
-  "license": "ISC",
   "dependencies": {
-    "@types/node": "^18.11.7",
-    "typescript": "^4.8.4"
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
   }
 }

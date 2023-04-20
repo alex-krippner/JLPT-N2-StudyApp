@@ -1,32 +1,30 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import { useTheme } from "@mui/material/styles/";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { MonLogo, KanjiIcon, VocabIcon } from "@mon/mon-ui-kit";
-import { NavListItemData, NavList } from "./NavList";
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  MenuIcon,
+  Toolbar,
+  MonLogo,
+  KanjiIcon,
+  VocabIcon,
+} from "@mon/mon-ui-kit";
+import { NavList, NavListItemData } from "./NavList";
 
-export const Layout = React.forwardRef(() => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const theme = useTheme();
-
+export function Layout() {
+  const APP_BAR_HEIGHT = 50;
+  const DRAWER_WIDTH = 125;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
   const listItems: NavListItemData[] = [
     { text: "Home", icon: <MonLogo />, to: "/" },
     { text: "Kanji", icon: <KanjiIcon />, to: "/kanji" },
     { text: "Vocab", icon: <VocabIcon />, to: "/vocab" },
   ];
-
-  const DRAWER_WIDTH = 125;
-  const APP_BAR_HEIGHT = 50;
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
   return (
     <Box sx={{ display: "flex", width: "100%", height: "100%" }}>
       <AppBar
@@ -65,7 +63,7 @@ export const Layout = React.forwardRef(() => {
               boxSizing: "border-box",
               width: DRAWER_WIDTH,
             },
-            backgroundColor: theme.palette.surface.main,
+            backgroundColor: "surface.main",
           }}
         >
           <NavList listItems={listItems} />
@@ -104,5 +102,4 @@ export const Layout = React.forwardRef(() => {
       </Box>
     </Box>
   );
-});
-Layout.displayName = "Layout";
+}

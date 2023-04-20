@@ -1,14 +1,14 @@
-import * as React from "react";
-import AddIcon from "@mui/icons-material/Add";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { randomUUID } from "crypto";
+import React from "react";
 import {
+  Button,
+  Typography,
+  AddIcon,
   GridRowModes,
   GridRowModesModel,
   GridRowsProp,
   GridToolbarContainer,
-} from "@mui/x-data-grid";
-import { randomId } from "@mui/x-data-grid-generator";
+} from "@mon/mon-ui-kit";
 
 interface KanjiDataGridToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -20,7 +20,7 @@ export function KanjiDataGridToolbar(props: KanjiDataGridToolbarProps) {
   const { setRows, setRowModesModel } = props;
 
   const addRow = () => {
-    const id = randomId();
+    const id = randomUUID();
     setRows((oldRows) => {
       return [
         ...oldRows,

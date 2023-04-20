@@ -1,6 +1,5 @@
-import { ColorTheme } from "./Theme";
-import COLORS from "./styleConstants";
-import { SizeTheme } from "./Theme";
+import { ColorTheme, SizeTheme } from "./Theme";
+import { COLORS } from "./styleConstants";
 
 export const colorTheme: ColorTheme = {
   black: COLORS.black,

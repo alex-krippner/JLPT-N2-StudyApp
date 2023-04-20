@@ -1,29 +1,32 @@
 {
   "name": "@mon/mon-ui-kit",
   "version": "1.0.0",
-  "description": "",
+  "license": "ISC",
   "main": "lib/index.js",
-  "module": "lib/index.js",
-  "files": [
-    "lib/"
-  ],
   "directories": {
     "lib": "src"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "scripts": {
-    "build:generate": "ts-node scripts/generateAssets.ts"
+    "build:generate": "ts-node ./src/scripts/generateAssets.ts"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "styled-components": "^5.3.5"
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mon/mon-theme": "workspace:^",
+    "@mon/tools": "workspace:^",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.0",
+    "@mui/system": "^5.12.0",
+    "@mui/x-data-grid": "^6.2.0",
+    "framer-motion": "^10.12.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@mon/mon-svg-converter": "1.0.0",
-    "@types/node": "^18.0.3",
-    "typescript": "^4.7.4"
+    "@types/node": "^18.15.11",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "ts-node": "^10.9.1"
   }
 }

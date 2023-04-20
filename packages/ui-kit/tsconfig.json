@@ -1,8 +1,9 @@
 {
-  "extends": "../../tsconfig-base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "outDir": "./lib",
     "rootDir": "src"
   },
-  "include": ["./src/**/*.ts*", "types.d.ts", "./emotion.d.ts"]
+  "include": ["./src/**/*.ts*", "./emotion.d.ts", "./mui.d.ts"]
 }

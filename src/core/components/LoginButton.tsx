@@ -1,7 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Button, Typography } from "@mon/mon-ui-kit";
 
 export function LoginButton() {
   const { loginWithRedirect } = useAuth0();
@@ -10,11 +9,16 @@ export function LoginButton() {
       appState: {
         returnTo: "/",
       },
-      redirectUri: "http://localhost:8081/callback",
     });
   };
   return (
-    <Button className="button__login" onClick={handleLogin}>
+    <Button
+      className="button__login"
+      onClick={() => {
+        // eslint-disable-next-line no-console
+        handleLogin().catch((e) => console.error(e));
+      }}
+    >
       <Typography variant="h5">Log In</Typography>
     </Button>
   );

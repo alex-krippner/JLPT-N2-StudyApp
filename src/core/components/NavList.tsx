@@ -1,9 +1,9 @@
-import * as React from "react";
-import List from "@mui/material/List";
+import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { List } from "@mon/mon-ui-kit";
 import { ListItemLink } from "./ListItemLink";
-import { LoginButton } from "./LoginButton";
 import { LogoutButton } from "./LogoutButton";
+import { LoginButton } from "./LoginButton";
 
 export interface NavListItemData {
   text: string;
@@ -17,7 +17,7 @@ interface NavListProps {
 
 export function NavList({ listItems }: NavListProps) {
   const { isAuthenticated } = useAuth0();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (index: number) => {
     setSelectedIndex(index);
   };
