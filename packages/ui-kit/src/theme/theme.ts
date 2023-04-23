@@ -4,12 +4,27 @@ import { monTheme } from "@mon/mon-theme";
 
 export const theme = createTheme({
   components: {
+    MuiAlert: {
+      styleOverrides: {
+        message: {
+          fontSize: monTheme.sizeOf.fontSmaller,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
           ":hover": {
             backgroundColor: monTheme.colorOf.buttonHover,
+            borderColor: "transparent",
           },
+          "&.MuiButton-sizeSmall": { fontSize: monTheme.sizeOf.fontSmall },
+          "&.MuiButton-sizeMedium": { fontSize: monTheme.sizeOf.fontMedium },
+          "&.MuiButton-sizeLarge": { fontSize: monTheme.sizeOf.fontLarge },
+        },
+        outlined: {
+          color: monTheme.colorOf.black,
+          border: `solid 1px ${monTheme.colorOf.black}`,
         },
       },
     },
