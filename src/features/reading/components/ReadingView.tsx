@@ -59,6 +59,14 @@ export function ReadingView() {
     setTitle(current.title);
   }
 
+  if (!current && selectedReadingId) {
+    setTitle("");
+    setSelectedReadingId("");
+    setJapanese(DEFAULT_JAPANESE);
+    setReadingTranslation(DEFAULT_TRANSLATION);
+    setEditMode(false);
+  }
+
   useEffect(() => {
     const isTranslationMissing =
       !readingTranslation || readingTranslation === DEFAULT_TRANSLATION;

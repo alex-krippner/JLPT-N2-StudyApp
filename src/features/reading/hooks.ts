@@ -9,6 +9,9 @@ export interface Reading {
 }
 
 export type AddReadingRequest = Omit<Reading, "id">;
+interface DeleteResponse {
+  id: string;
+}
 
 const READING_URL = "http://localhost:3000/api/reading";
 
@@ -58,5 +61,26 @@ export function useUpdateReading() {
       });
     },
   });
+  return mutation;
+}
+
+export function useDeleteReading() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<
+    AxiosResponse<DeleteResponse, string>,
+    unknown,
+    string
+  >({
+    mutationFn: (readingId) => {
+      return axios.delete(`${READING_URL}/${readingId}`);
+    },
+    onSuccess: (response) => {
+      const { data } = response;
+      queryClient.setQueryData(["readingAll"], (oldData: Reading[]) =>
+        oldData.filter((d) => d.id !== data.id),
+      );
+    },
+  });
+
   return mutation;
 }

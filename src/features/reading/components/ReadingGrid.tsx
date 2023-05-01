@@ -16,7 +16,7 @@ import {
   SaveIcon,
 } from "@mon/mon-ui-kit";
 import { useTheme } from "@emotion/react";
-import { Reading, useUpdateReading } from "../hooks";
+import { Reading, useDeleteReading, useUpdateReading } from "../hooks";
 
 function renderReadingEditCell(params: GridRenderEditCellParams) {
   return <EditCell {...params} />;
@@ -34,6 +34,7 @@ interface ReadingGridProps {
 export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
   const theme = useTheme();
   const updateMutation = useUpdateReading();
+  const deleteMutation = useDeleteReading();
   const [rows, setRows] = useState<ReadingRowData[]>([]);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -52,6 +53,8 @@ export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
     }
   };
   const handleDeleteClick = (id: GridRowId) => () => {
+    const readingId = typeof id === "number" ? id.toString() : id;
+    deleteMutation.mutate(readingId);
     setRows(rows.filter((row) => row.id !== id));
   };
   const handleEditClick = (id: GridRowId) => () => {
