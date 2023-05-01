@@ -114,7 +114,13 @@ export function ReadingView() {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100%", flexDirection: "column" }}>
+    <Box
+      sx={{
+        display: "flex",
+        height: "100%",
+        flexDirection: "column",
+      }}
+    >
       <Box>
         <IconButton
           sx={{ mb: 4 }}
@@ -167,89 +173,87 @@ export function ReadingView() {
               display: "flex",
               flexDirection: "row",
               height: "100%",
+              overflow: "auto",
             }}
           >
-            <Box sx={{ width: "100%" }}>
-              {!isJapaneseEditMode ? (
-                <Typography
-                  sx={{
-                    flex: 1,
-                    height: "100%",
-                    width: "100%",
-                    border: "solid 1px",
-                    borderColor: "rgba(0, 0, 0, 0.23)",
-                    borderRadius: 1,
-                    padding: "1em",
-                    cursor: "pointer",
-                  }}
-                  onDoubleClick={() => {
-                    setJapaneseEditMode(true);
-                  }}
-                >
-                  {japaneseReading}
-                </Typography>
-              ) : (
-                <Box sx={{ height: "100%" }}>
-                  <textarea
-                    style={{
-                      height: "100%",
-                      width: "100%",
-                      padding: "1em",
-                      resize: "none",
-                    }}
-                    value={japaneseReading}
-                    placeholder={DEFAULT_JAPANESE}
-                    onChange={(v) => {
-                      setJapanese(v.target.value);
-                    }}
-                    onBlur={() => {
-                      setJapaneseEditMode(false);
-                    }}
-                  />
-                </Box>
-              )}
-            </Box>
-            <Box sx={{ width: "100%", marginLeft: 2 }}>
-              {!isTranslationEditMode ? (
-                <Typography
-                  sx={{
-                    flex: 1,
-                    height: "100%",
-                    width: "100%",
-                    border: "solid 1px",
-                    borderColor: "rgba(0, 0, 0, 0.23)",
-                    borderRadius: 1,
-                    padding: "1em",
-                    marginLeft: 2,
-                    cursor: "pointer",
-                  }}
-                  onDoubleClick={() => {
-                    setTranlsationEditMode(true);
-                  }}
-                >
-                  {readingTranslation}
-                </Typography>
-              ) : (
-                <Box sx={{ height: "100%" }}>
-                  <textarea
-                    style={{
-                      height: "100%",
-                      width: "100%",
-                      padding: "1em",
-                      resize: "none",
-                    }}
-                    value={readingTranslation}
-                    placeholder={DEFAULT_TRANSLATION}
-                    onChange={(v) => {
-                      setReadingTranslation(v.target.value);
-                    }}
-                    onBlur={() => {
-                      setTranlsationEditMode(false);
-                    }}
-                  />
-                </Box>
-              )}
-            </Box>
+            {!isJapaneseEditMode ? (
+              <Typography
+                sx={{
+                  flex: 1,
+                  height: "100%",
+                  width: "100%",
+                  border: "solid 1px",
+                  borderColor: "rgba(0, 0, 0, 0.23)",
+                  borderRadius: 1,
+                  padding: "1em",
+                  cursor: "pointer",
+                  overflow: "auto",
+                }}
+                onDoubleClick={() => {
+                  setJapaneseEditMode(true);
+                }}
+              >
+                {japaneseReading}
+              </Typography>
+            ) : (
+              <textarea
+                style={{
+                  flex: 1,
+                  height: "100%",
+                  width: "100%",
+                  padding: "1em",
+                  resize: "none",
+                }}
+                value={japaneseReading}
+                placeholder={DEFAULT_JAPANESE}
+                onChange={(v) => {
+                  setJapanese(v.target.value);
+                }}
+                onBlur={() => {
+                  setJapaneseEditMode(false);
+                }}
+              />
+            )}
+            {!isTranslationEditMode ? (
+              <Typography
+                sx={{
+                  flex: 1,
+                  height: "100%",
+                  width: "100%",
+                  border: "solid 1px",
+                  borderColor: "rgba(0, 0, 0, 0.23)",
+                  borderRadius: 1,
+                  padding: "1em",
+                  marginLeft: "1em",
+                  cursor: "pointer",
+                  overflow: "auto",
+                }}
+                onDoubleClick={() => {
+                  setTranlsationEditMode(true);
+                }}
+              >
+                {readingTranslation}
+              </Typography>
+            ) : (
+              <textarea
+                style={{
+                  flex: 1,
+                  height: "100%",
+                  width: "100%",
+                  padding: "1em",
+                  marginLeft: "1em",
+                  resize: "none",
+                }}
+                value={readingTranslation}
+                placeholder={DEFAULT_TRANSLATION}
+                onChange={(v) => {
+                  setReadingTranslation(v.target.value);
+                }}
+                onBlur={() => {
+                  setTranlsationEditMode(false);
+                }}
+              />
+            )}
           </Box>
           {(isEditMode || isJapaneseEditMode || isTranslationEditMode) && (
             <ButtonGroup sx={{ justifyContent: "center", marginTop: 2 }}>
