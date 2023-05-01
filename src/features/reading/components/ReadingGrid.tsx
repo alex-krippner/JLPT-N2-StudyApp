@@ -29,14 +29,9 @@ interface ReadingRowData extends Reading {
 interface ReadingGridProps {
   data: Reading[];
   onCellDoubleClick: (id: string) => void;
-  updateTitle: (id: string, title: string) => void;
 }
 
-export function ReadingGrid({
-  data,
-  updateTitle,
-  onCellDoubleClick,
-}: ReadingGridProps) {
+export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
   const theme = useTheme();
   const updateMutation = useUpdateReading();
   const [rows, setRows] = useState<ReadingRowData[]>([]);
@@ -72,7 +67,6 @@ export function ReadingGrid({
 
     if (!reading.isNew) {
       updateMutation.mutate(updateReadingRequest);
-      updateTitle(reading.id, reading.title);
     }
 
     return updatedRow;
