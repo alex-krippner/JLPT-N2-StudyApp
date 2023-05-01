@@ -16,7 +16,7 @@ import {
   SaveIcon,
 } from "@mon/mon-ui-kit";
 import { useTheme } from "@emotion/react";
-import { Reading } from "../hooks";
+import { Reading, useUpdateReading } from "../hooks";
 
 function renderReadingEditCell(params: GridRenderEditCellParams) {
   return <EditCell {...params} />;
@@ -29,10 +29,16 @@ interface ReadingRowData extends Reading {
 interface ReadingGridProps {
   data: Reading[];
   onCellDoubleClick: (id: string) => void;
+  updateTitle: (id: string, title: string) => void;
 }
 
-export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
+export function ReadingGrid({
+  data,
+  updateTitle,
+  onCellDoubleClick,
+}: ReadingGridProps) {
   const theme = useTheme();
+  const updateMutation = useUpdateReading();
   const [rows, setRows] = useState<ReadingRowData[]>([]);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -55,6 +61,21 @@ export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
   };
   const handleEditClick = (id: GridRowId) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+  };
+
+  const processRowUpdate = (reading: ReadingRowData) => {
+    const updatedRow = { ...reading, isNew: false };
+    const updateReadingRequest: Reading = {
+      ...reading,
+      title: reading.title,
+    };
+
+    if (!reading.isNew) {
+      updateMutation.mutate(updateReadingRequest);
+      updateTitle(reading.id, reading.title);
+    }
+
+    return updatedRow;
   };
 
   useEffect(() => {
@@ -135,6 +156,7 @@ export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
             fontSize: theme.sizeOf.fontSmaller,
           },
         }}
+        processRowUpdate={processRowUpdate}
         onCellDoubleClick={({ id }) => {
           onCellDoubleClick(`${id}`);
         }}

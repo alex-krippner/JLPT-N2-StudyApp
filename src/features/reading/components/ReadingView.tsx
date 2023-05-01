@@ -51,6 +51,11 @@ export function ReadingView() {
     setTranlsationEditMode(true);
     setJapaneseEditMode(true);
   };
+  const updateTitle = (id: string, title: string) => {
+    if (id === selectedReadingId && readingTitle !== title) {
+      setTitle(title);
+    }
+  };
 
   useEffect(() => {
     const isTranslationMissing =
@@ -115,7 +120,11 @@ export function ReadingView() {
         <AddReadingButton onClick={onAdd} />
       </Box>
       {isTableView ? (
-        <ReadingGrid data={data} onCellDoubleClick={onCellDoubleClick} />
+        <ReadingGrid
+          data={data}
+          onCellDoubleClick={onCellDoubleClick}
+          updateTitle={updateTitle}
+        />
       ) : (
         <>
           <Box sx={{ display: "flex", mb: 2 }}>
