@@ -50,6 +50,7 @@ export function ReadingView() {
     setEditMode(true);
     setTranlsationEditMode(true);
     setJapaneseEditMode(true);
+    setSelectedReadingId("");
   };
   const updateTitle = (id: string, title: string) => {
     if (id === selectedReadingId && readingTitle !== title) {
