@@ -115,6 +115,9 @@ export const theme = createTheme({
     h6: {
       color: monTheme.colorOf.black,
     },
+    body1: {
+      fontSize: monTheme.sizeOf.fontSmall,
+    },
   },
   palette: {
     primary: {

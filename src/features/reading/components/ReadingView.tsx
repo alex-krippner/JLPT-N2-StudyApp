@@ -142,7 +142,7 @@ export function ReadingView() {
           <Box sx={{ display: "flex", mb: 2 }}>
             <Textfield
               label={
-                <Typography mb="12px" fontSize="1.5em">
+                <Typography mb="12px" fontSize="1em">
                   Title
                 </Typography>
               }
