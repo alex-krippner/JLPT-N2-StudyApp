@@ -32,6 +32,7 @@ export function ReadingView() {
   const [isEditMode, setEditMode] = useState(false);
   const [isTableView, setTableView] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const onCellDoubleClick = (id: string) => {
     setEditMode(true);
     setTableView(false);
@@ -41,7 +42,6 @@ export function ReadingView() {
     setTitle(title);
     setSelectedReadingId(id);
   };
-  const [errorMessage, setErrorMessage] = useState("");
   const onAdd = () => {
     setTitle("");
     setTableView(false);
@@ -53,19 +53,21 @@ export function ReadingView() {
     setSelectedReadingId("");
   };
 
-  const current = data.find((r) => r.id === selectedReadingId);
+  const onUpdateTitle = (id: string, title: string) => {
+    if (id === selectedReadingId && readingTitle !== title) {
+      setTitle(title);
+    }
+  };
 
-  if (current && current.title !== readingTitle) {
-    setTitle(current.title);
-  }
-
-  if (!current && selectedReadingId) {
-    setTitle("");
-    setSelectedReadingId("");
-    setJapanese(DEFAULT_JAPANESE);
-    setReadingTranslation(DEFAULT_TRANSLATION);
-    setEditMode(false);
-  }
+  const onDeleteReading = (id: string) => {
+    if (selectedReadingId === id) {
+      setTitle("");
+      setSelectedReadingId("");
+      setJapanese(DEFAULT_JAPANESE);
+      setReadingTranslation(DEFAULT_TRANSLATION);
+      setEditMode(false);
+    }
+  };
 
   useEffect(() => {
     const isTranslationMissing =
@@ -112,7 +114,6 @@ export function ReadingView() {
     }
     addMutation.mutate(newReading);
   };
-
   return (
     <Box
       sx={{
@@ -136,7 +137,12 @@ export function ReadingView() {
         <AddReadingButton onClick={onAdd} />
       </Box>
       {isTableView ? (
-        <ReadingGrid data={data} onCellDoubleClick={onCellDoubleClick} />
+        <ReadingGrid
+          data={data}
+          onCellDoubleClick={onCellDoubleClick}
+          onDeleteReading={onDeleteReading}
+          onUpdateTitle={onUpdateTitle}
+        />
       ) : (
         <>
           <Box sx={{ display: "flex", mb: 2 }}>

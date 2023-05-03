@@ -29,9 +29,16 @@ interface ReadingRowData extends Reading {
 interface ReadingGridProps {
   data: Reading[];
   onCellDoubleClick: (id: string) => void;
+  onDeleteReading: (id: string) => void;
+  onUpdateTitle: (id: string, title: string) => void;
 }
 
-export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
+export function ReadingGrid({
+  data,
+  onCellDoubleClick,
+  onDeleteReading,
+  onUpdateTitle,
+}: ReadingGridProps) {
   const theme = useTheme();
   const updateMutation = useUpdateReading();
   const deleteMutation = useDeleteReading();
@@ -56,6 +63,7 @@ export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
     const readingId = typeof id === "number" ? id.toString() : id;
     deleteMutation.mutate(readingId);
     setRows(rows.filter((row) => row.id !== id));
+    onDeleteReading(readingId);
   };
   const handleEditClick = (id: GridRowId) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
@@ -70,6 +78,7 @@ export function ReadingGrid({ data, onCellDoubleClick }: ReadingGridProps) {
 
     if (!reading.isNew) {
       updateMutation.mutate(updateReadingRequest);
+      onUpdateTitle(reading.id, reading.title);
     }
 
     return updatedRow;
