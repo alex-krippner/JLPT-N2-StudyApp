@@ -6,9 +6,12 @@ export {
   DataGrid,
   GridColDef,
   GridRenderEditCellParams,
+  GridRowEditStopParams,
+  GridRowEditStopReasons,
   GridPreProcessEditCellProps,
   GridRowParams,
   GridActionsCellItem,
   GridRowId,
   GridEditInputCell,
+  MuiEvent,
 } from "@mui/x-data-grid";

@@ -9,10 +9,13 @@ import {
   GridActionsCellItem,
   GridColDef,
   GridRenderEditCellParams,
+  GridRowEditStopParams,
+  GridRowEditStopReasons,
   GridRowId,
   GridRowModes,
   GridRowModesModel,
   GridRowParams,
+  MuiEvent,
   SaveIcon,
 } from "@mon/mon-ui-kit";
 import { useTheme } from "@emotion/react";
@@ -165,6 +168,12 @@ export function ReadingGrid({
         processRowUpdate={processRowUpdate}
         onCellDoubleClick={({ id }) => {
           onCellDoubleClick(`${id}`);
+        }}
+        onRowEditStop={(params: GridRowEditStopParams, event: MuiEvent) => {
+          if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+            // eslint-disable-next-line no-param-reassign
+            event.defaultMuiPrevented = true;
+          }
         }}
       />
     </Box>
