@@ -114,6 +114,7 @@ export function ReadingView() {
     }
     addMutation.mutate(newReading);
   };
+
   return (
     <Box
       sx={{
@@ -148,7 +149,7 @@ export function ReadingView() {
           <Box sx={{ display: "flex", mb: 2 }}>
             <Textfield
               label={
-                <Typography mb="12px" fontSize="1em">
+                <Typography mb={2} fontSize="1em">
                   Title
                 </Typography>
               }
@@ -159,9 +160,13 @@ export function ReadingView() {
                 setEditMode(true);
               }}
               sx={{
-                width: "25%",
-                fontSize: "15px",
+                fontSize: "1em",
+                flex: 1,
+                "& .MuiInputBase-input": {
+                  textOverflow: "ellipsis",
+                },
               }}
+              fullWidth
             />
             <Fade
               in={
@@ -169,7 +174,10 @@ export function ReadingView() {
                 isError
               }
             >
-              <Alert severity="error" sx={{ ml: 2 }}>
+              <Alert
+                severity="error"
+                sx={{ flex: isError ? 2 : 1, ml: 2, alignItems: "center" }}
+              >
                 {errorMessage}
               </Alert>
             </Fade>
@@ -194,6 +202,7 @@ export function ReadingView() {
                   padding: "1em",
                   cursor: "pointer",
                   overflow: "auto",
+                  lineHeight: 2,
                 }}
                 onDoubleClick={() => {
                   setJapaneseEditMode(true);
