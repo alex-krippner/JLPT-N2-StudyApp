@@ -10,6 +10,7 @@ import {
   MonLogo,
   KanjiIcon,
   VocabIcon,
+  ReadingIcon,
 } from "@mon/mon-ui-kit";
 import { NavList, NavListItemData } from "./NavList";
 
@@ -24,6 +25,7 @@ export function Layout() {
     { text: "Home", icon: <MonLogo />, to: "/" },
     { text: "Kanji", icon: <KanjiIcon />, to: "/kanji" },
     { text: "Vocab", icon: <VocabIcon />, to: "/vocab" },
+    { text: "Reading", icon: <ReadingIcon />, to: "/reading" },
   ];
   return (
     <Box sx={{ display: "flex", width: "100%", height: "100%" }}>

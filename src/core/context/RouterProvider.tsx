@@ -10,6 +10,7 @@ import { FullScreenLoadingIndicator } from "../components/FullScreenLoadingIndic
 import { HomeView } from "../components/HomeView";
 import { KanjiView } from "../../features/kanji/components/KanjiView";
 import { VocabView } from "../../features/vocab/components/VocabView";
+import { ReadingView } from "../../features/reading/components/ReadingView";
 
 export const monRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,15 @@ export const monRouter = createBrowserRouter(
         element={
           <AuthenticationGuard
             component={VocabView}
+            redirectComponent={() => <FullScreenLoadingIndicator />}
+          />
+        }
+      />
+      <Route
+        path="reading"
+        element={
+          <AuthenticationGuard
+            component={ReadingView}
             redirectComponent={() => <FullScreenLoadingIndicator />}
           />
         }
